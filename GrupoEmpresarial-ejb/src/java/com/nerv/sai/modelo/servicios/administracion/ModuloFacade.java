@@ -13,7 +13,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Stateless(name = "EJBServicioModulo")
 public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacadeLocal {

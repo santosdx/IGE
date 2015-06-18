@@ -8,7 +8,7 @@ import org.primefaces.context.RequestContext;
 
 /**
  * Clase que administra los métodos y propiedades de una ventana modal.
- * @author santosdx
+ * @author srojasm
  */ 
 @ManagedBean(name = "dfView")
 public class Ventana implements Serializable{

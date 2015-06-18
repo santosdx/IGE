@@ -11,7 +11,7 @@ import javax.faces.convert.FacesConverter;
 
 /**
  * Clase que implementa Converter, para el manejo de los objetos en el componente de UnicaSeleccion.
- * @author santosdx
+ * @author srojasm
  */
 @FacesConverter(value ="unicaSeleccionConverter")
 public class UnicaSeleccionConvertidor implements Converter{

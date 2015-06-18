@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Stateless(name = "EJBServicioPerfil")
 public class PerfilFacade extends AbstractFacade<Perfil> implements PerfilFacadeLocal {

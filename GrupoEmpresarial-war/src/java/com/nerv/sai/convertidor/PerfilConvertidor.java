@@ -13,7 +13,7 @@ import javax.faces.convert.FacesConverter;
 
 /**
  * Clase que implementa Converter, para el manejo de los objetos en el componente de Perfil.
- * @author santosdx
+ * @author srojasm
  */
 @FacesConverter(value ="perfilConverter")
 public class PerfilConvertidor implements Converter{

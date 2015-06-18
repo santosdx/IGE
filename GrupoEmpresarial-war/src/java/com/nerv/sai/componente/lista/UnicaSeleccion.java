@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Clase que administra la implementación del un componente de unica seleccion.
- * @author santosdx
+ * @author srojasm
  */
 @FacesComponent (value = "ListaUnicaSeleccion")
 public class UnicaSeleccion extends UINamingContainer{

@@ -28,7 +28,7 @@ import org.primefaces.model.menu.MenuModel;
 
 /**
  * Clase de acceso.
- * @author Santiago
+ * @author srojasm
  */
 @SessionScoped
 public class Login implements Serializable{

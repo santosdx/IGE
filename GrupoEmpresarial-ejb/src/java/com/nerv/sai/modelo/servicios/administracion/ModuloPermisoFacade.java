@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Stateless
 public class ModuloPermisoFacade extends AbstractFacade<ModuloPermiso> implements ModuloPermisoFacadeLocal {

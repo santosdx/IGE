@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Clase que maneja la entidad Perfil y la Vista de administración de Perfil.
- * @author santosdx
+ * @author srojasm
  */
 @ManagedBean(name = "MbAdministrarPerfil")
 @ViewScoped

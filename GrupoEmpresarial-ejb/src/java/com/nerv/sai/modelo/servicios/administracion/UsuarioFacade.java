@@ -13,7 +13,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Stateless(name = "EJBServicioUsuario")
 public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFacadeLocal {

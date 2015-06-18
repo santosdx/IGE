@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Stateless
 public class PerfilPermisoFacade extends AbstractFacade<PerfilPermiso> implements PerfilPermisoFacadeLocal {

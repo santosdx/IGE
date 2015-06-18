@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Clase de practica para el manejo del componente de lista unica seleccion.
- * @author santosdx
+ * @author srojasm
  */
 @ManagedBean
 @SessionScoped

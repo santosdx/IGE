@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Entity
 @Table(name = "ige_sistema_info")

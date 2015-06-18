@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Clase que maneja la entidad Modulo y la Vista de administración de Modulo.
- * @author santosdx
+ * @author srojasm
  */
 @ManagedBean(name = "MbAdministrarModulo")
 @ViewScoped

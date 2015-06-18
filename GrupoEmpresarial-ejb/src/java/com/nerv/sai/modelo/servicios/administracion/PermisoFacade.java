@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Stateless(name = "EJBServicioPermiso")
 public class PermisoFacade extends AbstractFacade<Permiso> implements PermisoFacadeLocal {

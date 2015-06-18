@@ -2,7 +2,7 @@ package com.nerv.sai.dto;
 
 /**
  * Clase que representa un objeto para el componente de UnicaSeleccion.
- * @author santosdx
+ * @author srojasm
  */
 public class ObjListaUnicaSeleccion {
     

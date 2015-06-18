@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Entity
 @Table(name = "ige_usuario_perfil")

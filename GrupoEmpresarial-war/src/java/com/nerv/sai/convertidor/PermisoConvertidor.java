@@ -13,7 +13,7 @@ import javax.faces.convert.FacesConverter;
 
 /**
  * Clase que implementa Converter, para el manejo de los objetos en el componente de Permiso.
- * @author santosdx
+ * @author srojasm
  */
 @FacesConverter(value ="permisoConverter")
 public class PermisoConvertidor implements Converter{

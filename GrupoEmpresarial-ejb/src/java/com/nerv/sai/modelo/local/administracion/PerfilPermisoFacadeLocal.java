@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nerv.sai.modelo.local.administracion;
 
 import com.nerv.sai.modelo.entidad.PerfilPermiso;
@@ -11,7 +6,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Local
 public interface PerfilPermisoFacadeLocal {

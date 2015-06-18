@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Clase que maneja la entidad Usuario y la Vista de administración de usuarios.
- * @author santosdx
+ * @author srojasm
  */
 @ManagedBean(name = "MbAdministrarUsuario")
 @ViewScoped

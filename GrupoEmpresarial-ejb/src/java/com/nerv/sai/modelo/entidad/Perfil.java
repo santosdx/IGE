@@ -22,7 +22,7 @@ import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Entity
 @Table(name = "ige_perfil")

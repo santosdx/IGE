@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Clase que maneja la entidad Permiso y la Vista de administración de Permiso.
- * @author santosdx
+ * @author srojasm
  */
 @ManagedBean(name = "MbAdministrarPermiso")
 @ViewScoped

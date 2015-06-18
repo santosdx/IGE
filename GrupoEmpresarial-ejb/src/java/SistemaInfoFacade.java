@@ -1,5 +1,3 @@
-
-
 import com.nerv.sai.modelo.local.administracion.SistemaInfoFacadeLocal;
 import com.nerv.sai.modelo.entidad.SistemaInfo;
 import com.nerv.sai.modelo.fachada.AbstractFacade;
@@ -12,7 +10,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Stateless(name = "EJBServicioSistemaInfo")
 public class SistemaInfoFacade extends AbstractFacade<SistemaInfo> implements SistemaInfoFacadeLocal {

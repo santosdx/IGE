@@ -6,7 +6,7 @@ import javax.faces.context.FacesContext;
 /**
  * Clase que permite administrar los métodos de utilidad para el manejo de 
  * mensajes.
- * @author santosdx
+ * @author srojasm
  */
 public class Mensaje {
 

@@ -8,7 +8,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Local
 public interface SistemaInfoFacadeLocal {

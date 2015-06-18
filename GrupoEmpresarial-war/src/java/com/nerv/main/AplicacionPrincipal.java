@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 
 /**
  * Clase que administra el bean de la ventana principal de la aplicación.
- * @author santosdx
+ * @author srojasm
  */
 @ManagedBean(name="aplicacionPrincipal")
 @ApplicationScoped

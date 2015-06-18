@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +22,7 @@ import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *
- * @author santosdx
+ * @author srojasm
  */
 @Entity
 @Table(name = "ige_modulo")
