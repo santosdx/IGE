@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>   
+        <ui:composition>
+            <h:form id="frmMenu">
+            <p:growl id="messagesMenu" showDetail="false"/>
+            <!--p:menu toggleable="true">                
+                <p:menuitem value="Inicio" icon="ui-icon-home" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/index.xhtml" />
+                <p:submenu label="Administrar">
+                    <p:menuitem value="Usuarios" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/usuario/itz-administrar-usuario.xhtml" />
+                    <p:menuitem value="Perfiles" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/perfil/itz-administrar-perfil.xhtml" />
+                    <p:menuitem value="Módulos" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/modulo/itz-administrar-modulo.xhtml" />
+                    <p:menuitem value="Permisos" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/permiso/itz-administrar-permiso.xhtml" />                    
+                </p:submenu>
+                <p:submenu label="Otros"> 
+                    <p:menuitem value="Pruebas" url="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/interfaz/pruebas/itz-pruebas.xhtml" />
+                    <p:menuitem value="Salir" actionListener="#{MbLogin.logout}"/>
+                </p:submenu>
+            </p:menu-->
+                
+            <p:menu model="#{MbLogin.modeloMenu}" toggleable="true" />
+            </h:form>                
+        </ui:composition>
+    </h:body>
+</html>

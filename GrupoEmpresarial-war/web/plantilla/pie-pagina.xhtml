@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>   
+        <ui:composition>   
+        <center>
+            <p:panel style="border: none; padding:0px;">
+                <h:panelGrid columns="1" >
+                    <h:outputText value="#{aplicacionPrincipal.sistemaInfo.sistema} V.(#{aplicacionPrincipal.sistemaInfo.version})" style="text-align: center; width: 100%; display: block;"/>
+                    <h:outputText value="#{nerv['footer.copyright']}" style="text-align: center; width: 100%; display: block;"/>                    
+                </h:panelGrid>            
+            </p:panel>
+            
+        </center>
+        </ui:composition>
+    </h:body>
+</html>
