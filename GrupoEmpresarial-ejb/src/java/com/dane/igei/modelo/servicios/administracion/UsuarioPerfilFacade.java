@@ -16,6 +16,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implements UsuarioPerfilFacadeLocal {
+
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
 
@@ -31,12 +32,13 @@ public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implement
     /**
      * Método que permite buscar una asiganación de perfil a usuario, retornando
      * el objeto de la relación, o en caso de no encontrar nada un null
+     *
      * @param idUsuario
      * @param idPerfil
-     * @return 
+     * @return
      */
     @Override
-    public UsuarioPerfil buscarAsignacionUsuarioPerfil(int idUsuario, int idPerfil) {        
+    public UsuarioPerfil buscarAsignacionUsuarioPerfil(int idUsuario, int idPerfil) {
         UsuarioPerfil resultado = null;
         try {
             Query query = em.createNamedQuery(UsuarioPerfil.FINE_BYE_IDUSUARIO_IDPERFIL);
@@ -49,10 +51,10 @@ public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implement
                 resultado = null;
             } else {
                 resultado = listaResultado.get(0);
-            }            
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
+        }
         return resultado;
     }
 }

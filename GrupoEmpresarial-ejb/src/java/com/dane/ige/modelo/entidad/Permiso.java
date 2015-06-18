@@ -30,8 +30,8 @@ public class Permiso implements Serializable {
     public static final String FINE_BYE_PERMISO = "Permiso.findByPermiso";
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-    @SequenceGenerator(name = "SEQ", sequenceName = "seq_id_ige_permiso")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PERMISO")
+    @SequenceGenerator(name = "SEQ_PERMISO", sequenceName = "seq_id_ige_permiso", allocationSize = 1)
     @Column(name = "id_ige_permiso", unique = true, nullable = false)
     private Integer id;
     @Column(name = "permiso")

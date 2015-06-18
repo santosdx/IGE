@@ -38,8 +38,8 @@ public class Perfil implements Serializable {
     public static final String FINE_BYE_PERFIL = "Perfil.findByPerfil";
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-    @SequenceGenerator(name = "SEQ", sequenceName = "seq_id_ige_perfil")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PERFIL")
+    @SequenceGenerator(name = "SEQ_PERFIL", sequenceName = "seq_id_ige_perfil", allocationSize = 1)
     @Column(name = "id_ige_perfil", unique = true, nullable = false)
     private Integer id;
     @Column(name = "perfil")

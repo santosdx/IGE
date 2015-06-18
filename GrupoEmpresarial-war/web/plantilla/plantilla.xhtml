@@ -15,25 +15,25 @@
         </h:head>
 
         <h:body>
-        <ui:debug/>
+            <ui:debug/>
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
                     <ui:include src="encabezado.xhtml" />
                 </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="200" header="#{nerv['menu.title']}" collapsible="true">
+                <p:layoutUnit position="west" size="250" header="#{nerv['menu.title']}" collapsible="true">
                     <ui:include src="menu.xhtml" />
                 </p:layoutUnit>
 
-                <p:layoutUnit position="center">                    
+                <p:layoutUnit position="center">
                     <ui:insert name="content" />
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="50" closable="true" collapsible="true" styleClass="cajaPiePagina">
-                   <ui:include src="pie-pagina.xhtml" />
+                    <ui:include src="pie-pagina.xhtml" />
                 </p:layoutUnit>
-                
+
             </p:layout>
 
         </h:body>

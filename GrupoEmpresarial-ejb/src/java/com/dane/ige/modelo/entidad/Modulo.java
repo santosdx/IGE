@@ -37,15 +37,20 @@ public class Modulo implements Serializable {
     public static final String FINE_BYE_MODULO = "Modulo.findByModulo";
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-    @SequenceGenerator(name = "SEQ", sequenceName = "seq_id_ige_modulo")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO")
+    @SequenceGenerator(name = "SEQ_MODULO", sequenceName = "seq_id_ige_modulo", allocationSize = 1)
     @Column(name = "id_ige_modulo", unique = true, nullable = false, scale = 0)
     private Integer id;
     @Column(name = "modulo")
     private String modulo;
     @Column(name = "descripcion")
     private String descripcion;
-    
+    @Column(name = "orden")
+    private Integer orden;
+    @Column(name = "visible")
+    private Boolean visible;
+
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "ige_modulo_permiso",
@@ -94,6 +99,22 @@ public class Modulo implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
+
+    public Boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
     }
 
     public List<Permiso> getPermisos() {

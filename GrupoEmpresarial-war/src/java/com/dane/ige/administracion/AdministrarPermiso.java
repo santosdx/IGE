@@ -62,9 +62,9 @@ public class AdministrarPermiso {
     /**
      * Metodo que permite crear un nuevo permiso.
      */
-    public void nuevoPermiso(){        
+    public void nuevoPermiso(){
         if(getPermisoSeleccionado().getPermiso() != null){
-            if(geteJBServicioPermiso().buscarPermisoByPermiso(getPermisoSeleccionado().getPermiso()) == null){                
+            if(geteJBServicioPermiso().buscarPermisoByPermiso(getPermisoSeleccionado().getPermiso()) == null){
                 geteJBServicioPermiso().create(getPermisoSeleccionado());
                 inicializarVariables();
                 //LOGGER.info("nuevo Permiso");
@@ -103,8 +103,8 @@ public class AdministrarPermiso {
         geteJBServicioPerfilPermiso().eliminarPermisosPerfil(idPerfil);
         
         if(lista.size()>0){
-            for (Permiso item : lista) {                
-                geteJBServicioPerfilPermiso().create(new PerfilPermiso(item.getId(), idPerfil));                
+            for (Permiso item : lista) {
+                geteJBServicioPerfilPermiso().create(new PerfilPermiso(item.getId(), idPerfil));
             }
         }
     }
@@ -116,10 +116,10 @@ public class AdministrarPermiso {
      */    
     public void adicionarPermisosModulo(Integer idModulo, List<Permiso> lista){
         geteJBServicioModuloPermiso().eliminarModuloPermiso(idModulo);
-        
+
         if(lista.size()>0){
-            for (Permiso item : lista) {                
-                geteJBServicioModuloPermiso().create(new ModuloPermiso(idModulo,item.getId()));               
+            for (Permiso item : lista) {
+                geteJBServicioModuloPermiso().create(new ModuloPermiso(idModulo,item.getId()));
             }
         }
     }    

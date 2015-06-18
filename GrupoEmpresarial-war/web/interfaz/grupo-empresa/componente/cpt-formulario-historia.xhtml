@@ -1,0 +1,27 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:panel header="Información historia">
+        <p:messages />
+        <h:panelGrid columns="2" columnClasses="label, value">
+            <h:outputText value="Fecha de configuración: " />
+            <p:inputText />
+
+            <h:outputText value="Fecha de cierre: " />
+            <p:inputText />
+
+            <h:outputText value="Fecha de liquidación: " />
+            <p:inputText />
+
+            <h:outputText value="Fecha de cambio demográfico: " />
+            <p:inputText />
+
+            <h:outputText value="Tipo de evento demográfico: " />
+            <p:inputText />
+        </h:panelGrid>
+    </p:panel>
+</ui:composition>

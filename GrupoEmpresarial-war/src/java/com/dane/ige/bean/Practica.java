@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.apache.log4j.Logger;
+import org.primefaces.event.FlowEvent;
 
 /**
  * Clase de practica para el manejo del componente de lista unica seleccion.
@@ -83,7 +84,25 @@ public class Practica {
             LOGGER.info("Debe seleccionar un item.");
         }  */      
     }
-
+    private boolean skip;
+    public boolean isSkip() {
+        return skip;
+    }
+ 
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
+     
+    public String onFlowProcess(FlowEvent event) {
+        if(skip) {
+            skip = false;   //reset in case user goes back
+            return "confirm";
+        }
+        else {
+            return event.getNewStep();
+        }
+    }
+    
     public UnicaSeleccion getCboFrutas() {
         return cboFrutas;
     }

@@ -17,6 +17,7 @@ import javax.persistence.Query;
  */
 @Stateless(name = "EJBServicioModulo")
 public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacadeLocal {
+
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
 
@@ -30,14 +31,15 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
     }
 
     /**
-     * Método que permite crear un registro en la entidad modulo y retorna el
-     * id o llave con el cual se ingreso a la base de datos ese registro.
-     * En caso de error, u otra inconsistencia, retornara -1.
+     * Método que permite crear un registro en la entidad modulo y retorna el id
+     * o llave con el cual se ingreso a la base de datos ese registro. En caso
+     * de error, u otra inconsistencia, retornara -1.
+     *
      * @param modulo
-     * @return 
+     * @return
      */
     @Override
-    public Integer createAndGetKey(Modulo modulo) {        
+    public Integer createAndGetKey(Modulo modulo) {
         Integer resultado = -1;
         try {
             em.persist(modulo);
@@ -45,12 +47,12 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
             resultado = modulo.getId();
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
+        }
         return resultado;
     }
-    
+
     @Override
-    public Modulo buscarModuloByModulo(String modulo) {        
+    public Modulo buscarModuloByModulo(String modulo) {
         Modulo resultado = null;
         try {
             Query query = em.createNamedQuery(Modulo.FINE_BYE_MODULO);
@@ -62,41 +64,40 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
                 return null;
             } else {
                 resultado = listaResultado.get(0);
-            }            
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
+        }
         return resultado;
-    }    
+    }
 
     @Override
     public List<Modulo> getModulesPerfilByIdPerfil(int idPerfil) {
-            List<Modulo> resultado = new ArrayList<Modulo>();
+        List<Modulo> resultado = new ArrayList<Modulo>();
         try {
             //Query query = em.createNamedQuery(Modulo.FINE_MODLE_BYE_IDPERFIL);
-                        
-            String sql= "SELECT DISTINCT m.* " +
-                        "FROM ige_modulo m " +
-                        "JOIN ige_modulo_permiso mp ON (m.id_ige_modulo = mp.id_ige_modulo) " +
-                        "JOIN ige_perfil_permiso pp ON (pp.id_ige_perfil = mp.id_ige_modulo) " +
-                        "JOIN ige_permiso pe        ON (pe.id_ige_permiso = pp.id_ige_perfil) " +
-                        "WHERE pp.id_ige_perfil = ?";
-            
-            Query query = em.createNativeQuery(sql,Modulo.class);
+
+            String sql = "SELECT DISTINCT m.* "
+                    + "FROM ige_modulo m "
+                    + "JOIN ige_modulo_permiso mp ON (m.id_ige_modulo = mp.id_ige_modulo) "
+                    + "JOIN ige_perfil_permiso pp ON (pp.id_ige_permiso = mp.id_ige_permiso) "
+                    + "JOIN ige_permiso pe        ON (pe.id_ige_permiso = pp.id_ige_permiso) "
+                    + "WHERE pp.id_ige_perfil = ? ORDER BY m.orden ASC";
+
+            Query query = em.createNativeQuery(sql, Modulo.class);
             query.setParameter(1, idPerfil);
-            
+
             List<Modulo> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
             if (listaResultado.isEmpty()) {
                 return null;
             } else {
                 resultado = listaResultado;
-            }            
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
+        }
         return resultado;
     }
-    
-    
+
 }

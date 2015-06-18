@@ -10,13 +10,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-
 /**
  *
  * @author srojasm
  */
 @Stateless(name = "EJBServicioUsuario")
 public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFacadeLocal {
+
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
 
@@ -31,13 +31,14 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
 
     /**
      * Método que permite crear un registro en la entidad Usuario y retorna el
-     * id o llave con el cual se ingreso a la base de datos ese registro.
-     * En caso de error, u otra inconsistencia, retornara -1.
+     * id o llave con el cual se ingreso a la base de datos ese registro. En
+     * caso de error, u otra inconsistencia, retornara -1.
+     *
      * @param usuario
-     * @return 
+     * @return
      */
     @Override
-    public Integer createAndGetKey(Usuario usuario) {        
+    public Integer createAndGetKey(Usuario usuario) {
         Integer resultado = -1;
         try {
             em.persist(usuario);
@@ -45,18 +46,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
             resultado = usuario.getId();
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
+        }
         return resultado;
     }
-    
+
     /**
      * Método que permite buscar y obtener un registro de usuario de la entidad
      * usuarios, pasando como parametro el nickname.
+     *
      * @param nickname
-     * @return 
+     * @return
      */
     @Override
-    public Usuario buscarUsuarioByNickname(String nickname) {        
+    public Usuario buscarUsuarioByNickname(String nickname) {
         Usuario resultado = null;
         try {
             Query query = em.createNamedQuery(Usuario.FINE_BYE_NICKNAME);
@@ -68,19 +70,20 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
                 return null;
             } else {
                 resultado = listaResultado.get(0);
-            }            
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
+        }
         return resultado;
     }
 
     /**
      * Método que permite obtener un usuario de la entidad usuario, pasando como
      * parametro el nickname (alias) y contraseña.
+     *
      * @param nickname
      * @param password
-     * @return 
+     * @return
      */
     @Override
     public Usuario buscarUsuarioByNicknamePassword(String nickname, String password) {
@@ -96,12 +99,11 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
                 return null;
             } else {
                 resultado = listaResultado.get(0);
-            }            
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
-        return resultado;        
+        }
+        return resultado;
     }
-    
-    
+
 }

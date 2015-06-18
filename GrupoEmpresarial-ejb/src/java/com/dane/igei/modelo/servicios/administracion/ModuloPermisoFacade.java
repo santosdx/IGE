@@ -16,6 +16,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class ModuloPermisoFacade extends AbstractFacade<ModuloPermiso> implements ModuloPermisoFacadeLocal {
+
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
 
@@ -30,7 +31,7 @@ public class ModuloPermisoFacade extends AbstractFacade<ModuloPermiso> implement
 
     @Override
     public ModuloPermiso buscarAsignacionModuloPermiso(int idModulo, int idPermiso) {
-      ModuloPermiso resultado = null;
+        ModuloPermiso resultado = null;
         try {
             Query query = em.createNamedQuery(ModuloPermiso.FINE_BYE_IDMODULO_IDPERMISO);
             query.setParameter("idModulo", idModulo);
@@ -42,24 +43,24 @@ public class ModuloPermisoFacade extends AbstractFacade<ModuloPermiso> implement
                 resultado = null;
             } else {
                 resultado = listaResultado.get(0);
-            }            
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
-        return resultado;        
+        }
+        return resultado;
     }
 
     @Override
     public int eliminarModuloPermiso(int idModulo) {
-        int resultado=0;
+        int resultado = 0;
         try {
-            Query query = em.createNamedQuery(ModuloPermiso.DELETE_ALL_MODULO_PERMISOS_BY_IDMODULO);            
+            Query query = em.createNamedQuery(ModuloPermiso.DELETE_ALL_MODULO_PERMISOS_BY_IDMODULO);
             query.setParameter("idModulo", idModulo);
             resultado = query.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
-        return resultado;        
+        return resultado;
     }
-    
+
 }

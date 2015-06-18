@@ -30,8 +30,8 @@ public class PerfilPermiso implements Serializable {
     public static final String DELETE_ALL_PERMISOS_PERFIL_BY_IDPERFIL = "PerfilPermiso.deleteAllPermisoPerfilByIdPerfil";
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-    @SequenceGenerator(name = "SEQ", sequenceName = "seq_id_ige_perfil_permiso")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PERFIL_PERMISO")
+    @SequenceGenerator(name = "SEQ_PERFIL_PERMISO", sequenceName = "seq_id_ige_perfil_permiso", allocationSize = 1)
     @Column(name = "id_ige_perfil_permiso", unique = true, nullable = false)
     private Integer id;
     @Column(name = "id_ige_permiso")

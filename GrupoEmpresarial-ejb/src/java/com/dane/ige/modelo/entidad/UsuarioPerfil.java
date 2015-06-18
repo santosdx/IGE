@@ -29,12 +29,12 @@ public class UsuarioPerfil implements Serializable {
     public static final String FINE_BYE_IDUSUARIO_IDPERFIL = "UsuarioPerfil.findByIdUsuarioIdPerfil";
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-    @SequenceGenerator(name = "SEQ", sequenceName = "seq_id_ige_usuario_perfil")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUARIO_PERFIL")
+    @SequenceGenerator(name = "SEQ_USUARIO_PERFIL", sequenceName = "seq_id_ige_usuario_perfil", allocationSize = 1)
     @Column(name = "id_ige_usuario_perfil", unique = true, nullable = false)
     private Integer id;
     @Column(name = "id_ige_usuario")
-    private int idUsuario;    
+    private int idUsuario;
     @Column(name = "id_ige_perfil")
     private int idPerfil;
 

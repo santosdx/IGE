@@ -29,8 +29,8 @@ public class ModuloPermiso implements Serializable {
     public static final String DELETE_ALL_MODULO_PERMISOS_BY_IDMODULO = "ModuloPermiso.deleteAllModuloPermisoByIdModulo";
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-    @SequenceGenerator(name = "SEQ", sequenceName = "seq_id_ige_modulo_permiso")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO_PERMISO")
+    @SequenceGenerator(name = "SEQ_MODULO_PERMISO", sequenceName = "seq_id_ige_modulo_permiso", allocationSize = 1)
     @Column(name = "id_ige_modulo_permiso", unique = true, nullable = false)
     private Integer id;
     @Column(name = "id_ige_modulo")

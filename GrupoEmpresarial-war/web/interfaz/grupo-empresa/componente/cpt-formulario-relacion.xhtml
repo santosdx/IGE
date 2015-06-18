@@ -1,0 +1,43 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:panel header="Información de relación">
+        <p:messages />
+        <h:panelGrid columns="2" columnClasses="label, value">
+            <h:outputText value="Tipo de grupo: " styleClass="etiquetaFormulario"/>
+            <p:inputText />
+
+            <h:outputText value="Situación de control: " styleClass="etiquetaFormulario"/>
+            <p:inputText />
+
+            <h:outputText value="Tipo de control: " styleClass="etiquetaFormulario"/>
+            <p:inputText />
+
+            <h:outputText value="Tipo de empresa (controlante): " styleClass="etiquetaFormulario"/>
+            <p:inputText />
+
+            <h:outputText value="NIT de la controlante: " styleClass="etiquetaFormulario"/>
+            <p:inputText />
+
+            <h:outputText value="Nombre de la controlante: " styleClass="etiquetaFormulario"/>
+            <p:inputText />
+
+            <h:outputText value="País de la controlante: " styleClass="etiquetaFormulario"/>
+            <p:inputText />
+
+            <h:outputText value="Sucursales en el extranjero: " styleClass="etiquetaFormulario"/>
+            <p:inputText />
+
+            <h:outputText value="Consorcios - Uniones temporales: " styleClass="etiquetaFormulario"/>
+            <p:inputText />
+
+            <!--h:outputText value="Saltar siguiente: " />
+            <h:selectBooleanCheckbox value="#{practica.skip}" /-->
+        </h:panelGrid>
+    </p:panel>
+
+</ui:composition>

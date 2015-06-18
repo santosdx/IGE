@@ -16,6 +16,7 @@ import javax.persistence.Query;
  */
 @Stateless(name = "EJBServicioPermiso")
 public class PermisoFacade extends AbstractFacade<Permiso> implements PermisoFacadeLocal {
+
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
 
@@ -29,7 +30,7 @@ public class PermisoFacade extends AbstractFacade<Permiso> implements PermisoFac
     }
 
     @Override
-    public Permiso buscarPermisoByPermiso(String permiso) {        
+    public Permiso buscarPermisoByPermiso(String permiso) {
         Permiso resultado = null;
         try {
             Query query = em.createNamedQuery(Permiso.FINE_BYE_PERMISO);
@@ -41,25 +42,25 @@ public class PermisoFacade extends AbstractFacade<Permiso> implements PermisoFac
                 return null;
             } else {
                 resultado = listaResultado.get(0);
-            }            
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
+        }
         return resultado;
     }
 
     @Override
-    public List<Permiso> buscarPermisosUsuarioByidPerfil(Integer idPerfil) {        
+    public List<Permiso> buscarPermisosUsuarioByidPerfil(Integer idPerfil) {
         List<Permiso> resultado = null;
         try {
-            String sql= "SELECT DISTINCT pe.* " +
-                        "FROM modulo m " +
-                        "JOIN modulo_permiso mp ON (m.id = mp.id_modulo) " +
-                        "JOIN perfil_permiso pp ON (pp.id_permiso = mp.id_permiso) " +
-                        "JOIN permiso pe        ON (pe.id =pp.id_permiso) " +
-                        "WHERE pp.id_perfil = ?";
-            
-            Query query = em.createNativeQuery(sql,Permiso.class);
+            String sql = "SELECT DISTINCT pe.* "
+                    + "FROM ige_modulo m "
+                    + "JOIN ige_modulo_permiso mp ON (m.id_ige_modulo = mp.id_ige_modulo) "
+                    + "JOIN ige_perfil_permiso pp ON (pp.id_ige_permiso = mp.id_ige_permiso) "
+                    + "JOIN ige_permiso pe        ON (pe.id_ige_permiso =pp.id_ige_permiso) "
+                    + "WHERE pp.id_ige_perfil = ?";
+
+            Query query = em.createNativeQuery(sql, Permiso.class);
             query.setParameter(1, idPerfil);
 
             List<Permiso> listaResultado = Collections.EMPTY_LIST;
@@ -68,10 +69,10 @@ public class PermisoFacade extends AbstractFacade<Permiso> implements PermisoFac
                 return null;
             } else {
                 resultado = listaResultado;
-            }            
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } 
+        }
         return resultado;
-    }     
+    }
 }

@@ -28,22 +28,23 @@ import org.primefaces.model.menu.MenuModel;
 
 /**
  * Clase de acceso.
+ *
  * @author srojasm
  */
 @SessionScoped
-public class Login implements Serializable{
+public class Login implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @EJB
     private UsuarioFacadeLocal eJBServicioUsuario;
-    
+
     @EJB
     private ModuloFacadeLocal eJBServicioModulo;
 
     @EJB
     private ModuloPermisoFacadeLocal eJBServicioModuloPermiso;
-    
+
     private final String pathSistema = "#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}";
     private Usuario usuarioLogueado;
     private String username;
@@ -51,13 +52,14 @@ public class Login implements Serializable{
     private boolean loggedIn;
     private List<Modulo> listaModulos;
     private MenuModel modeloMenu;
-    
-    public Login(){
-    
+
+    public Login() {
+
     }
 
     /**
      * Metodo que permite iniciar una sesion para el usuario en la aplicacion.
+     *
      * @param event
      */
     public void login(ActionEvent event) {
@@ -70,59 +72,59 @@ public class Login implements Serializable{
         FacesMessage message = null;
 
         setUsuarioLogueado(geteJBServicioUsuario().buscarUsuarioByNicknamePassword(username, password));
-        
-        if(usuarioLogueado != null) {
-            if(getUsuarioLogueado().getPerfil() == null){    
-                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención","El usuario no tiene asignado un persil");
-            }else{
+
+        if (usuarioLogueado != null) {
+            if (getUsuarioLogueado().getPerfil() == null) {
+                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un persil");
+            } else {
                 setLoggedIn(true);
                 setListaModulos(geteJBServicioModulo().getModulesPerfilByIdPerfil(getUsuarioLogueado().getPerfil().getId()));
 
-                if(getListaModulos() != null && getListaModulos().size()>0){
+                if (getListaModulos() != null && getListaModulos().size() > 0) {
                     setModeloMenu(new DefaultMenuModel());
 
-                     DefaultMenuItem itemHome = new DefaultMenuItem("Inicio");
-                     itemHome.setUrl("/index.xhtml");
-                     itemHome.setIcon("ui-icon-home");
-                     getModeloMenu().addElement(itemHome);     
+                    DefaultMenuItem itemHome = new DefaultMenuItem("Inicio");
+                    itemHome.setUrl("/index.xhtml");
+                    itemHome.setIcon("ui-icon-home");
+                    getModeloMenu().addElement(itemHome);
 
-                     for (Modulo modulo : getListaModulos()) {
+                    for (Modulo modulo : getListaModulos()) {
                         //First submenu
-                         DefaultSubMenu submenu = new DefaultSubMenu(modulo.getModulo());
+                        DefaultSubMenu submenu = new DefaultSubMenu(modulo.getModulo());
 
-                         for (Permiso permiso : getUsuarioLogueado().getPerfil().getPermisos()) {
-                             if(geteJBServicioModuloPermiso().buscarAsignacionModuloPermiso(modulo.getId(), permiso.getId()) != null){
-                                 DefaultMenuItem item = new DefaultMenuItem(permiso.getPermiso());
-                                 if(permiso.getUrl() != null){
-                                     item.setUrl(permiso.getUrl());
-                                 }
-                                 if(permiso.getComando()!= null && !StringUtils.isEmpty(permiso.getComando())){
-                                     item.setCommand(permiso.getComando());
-                                     item.setUrl(null);
-                                 }
-                                 if(permiso.getActualizar()!=null){
-                                     item.setUpdate(permiso.getActualizar());    
-                                 }
+                        for (Permiso permiso : getUsuarioLogueado().getPerfil().getPermisos()) {
+                            if (geteJBServicioModuloPermiso().buscarAsignacionModuloPermiso(modulo.getId(), permiso.getId()) != null) {
+                                DefaultMenuItem item = new DefaultMenuItem(permiso.getPermiso());
+                                if (permiso.getUrl() != null) {
+                                    item.setUrl(permiso.getUrl());
+                                }
+                                if (permiso.getComando() != null && !StringUtils.isEmpty(permiso.getComando())) {
+                                    item.setCommand(permiso.getComando());
+                                    item.setUrl(null);
+                                }
+                                if (permiso.getActualizar() != null) {
+                                    item.setUpdate(permiso.getActualizar());
+                                }
 
-                                 item.setAjax((permiso.getAjax() != 0));
-                                 //item.setIcon("ui-icon-home");
-                                 submenu.addElement(item);                         
-                             }                   
-                         }
-                         getModeloMenu().addElement(submenu);
-                     }
-                     /*
+                                item.setAjax((permiso.getAjax() != 0));
+                                //item.setIcon("ui-icon-home");
+                                submenu.addElement(item);
+                            }
+                        }
+                        getModeloMenu().addElement(submenu);
+                    }
+                    /*
                      DefaultSubMenu submenuPerfil = new DefaultSubMenu("Perfil2");
-                         DefaultMenuItem itemSalir = new DefaultMenuItem("Salir2");
-                         //itemSalir.setUrl(pathSistema+"/index.xhtml");
-                         itemSalir.setCommand("#{MbLogin.logout}");
-                         itemSalir.setIcon("fa-sign-out");
-                         submenuPerfil.addElement(itemSalir);
+                     DefaultMenuItem itemSalir = new DefaultMenuItem("Salir2");
+                     //itemSalir.setUrl(pathSistema+"/index.xhtml");
+                     itemSalir.setCommand("#{MbLogin.logout}");
+                     itemSalir.setIcon("fa-sign-out");
+                     submenuPerfil.addElement(itemSalir);
                      getModeloMenu().addElement(submenuPerfil); 
                      */
 
                     message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuarioLogueado.getNombres());
-                }else{
+                } else {
                     setLoggedIn(false);
                     message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Ateción", "El perfil no tiene asignado módulos");
                 }
@@ -132,12 +134,12 @@ public class Login implements Serializable{
             context.addCallbackParam("loggedIn", isLoggedIn());
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de acceso", "Credenciales invalidas");
         }
-        
+
         context.addCallbackParam("loggedIn", isLoggedIn());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        
-        if (isLoggedIn()){
-            context.addCallbackParam("view", ctxPath+"/index.xhtml");
+
+        if (isLoggedIn()) {
+            context.addCallbackParam("view", ctxPath + "/index.xhtml");
         }
     }
 
@@ -150,7 +152,7 @@ public class Login implements Serializable{
         setLoggedIn(false);
         FacesContext contex = FacesContext.getCurrentInstance();
         try {
-            contex.getExternalContext().redirect("login.xhtml" );
+            contex.getExternalContext().redirect("login.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -162,7 +164,7 @@ public class Login implements Serializable{
 
     public void seteJBServicioUsuario(UsuarioFacadeLocal eJBServicioUsuario) {
         this.eJBServicioUsuario = eJBServicioUsuario;
-    }   
+    }
 
     public ModuloFacadeLocal geteJBServicioModulo() {
         return eJBServicioModulo;
@@ -180,8 +182,6 @@ public class Login implements Serializable{
         this.eJBServicioModuloPermiso = eJBServicioModuloPermiso;
     }
 
-    
-    
     /**
      * @return the username
      */
@@ -195,7 +195,7 @@ public class Login implements Serializable{
     public void setUsername(String username) {
         this.username = username;
     }
- 
+
     /**
      * @return the password
      */
@@ -209,7 +209,6 @@ public class Login implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-    
 
     /**
      * @return the loggedIn
@@ -248,6 +247,5 @@ public class Login implements Serializable{
     public void setModeloMenu(MenuModel modeloMenu) {
         this.modeloMenu = modeloMenu;
     }
-        
-    
+
 }

@@ -33,8 +33,8 @@ public class SistemaInfo implements Serializable {
     public static final String FIND_BY_FECHA_VIGENCIA_NULL = "SistemaInfo.findByFechaVigenciaNull";
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-    @SequenceGenerator(name = "SEQ", sequenceName = "seq_id_ige_sistema_info")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_SISTEMA_INFO")
+    @SequenceGenerator(name = "SEQ_SISTEMA_INFO", sequenceName = "seq_id_ige_sistema_info", allocationSize = 1)
     @Column(name = "id_ige_sistema_info", unique = true, nullable = false)
     private Integer id;
     @Column(name = "sistema")

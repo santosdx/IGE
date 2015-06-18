@@ -83,7 +83,7 @@ public class AdministrarModulo {
      */
     public void actualziarModulo(){
         if(getModuloSeleccionado().getId() != null){
-            if(getServicioPermiso().getListaPermisosSeleccionados() != null){                
+            if(getServicioPermiso().getListaPermisosSeleccionados() != null){
                 getServicioPermiso().adicionarPermisosModulo(getModuloSeleccionado().getId(), getServicioPermiso().getListaPermisosSeleccionados());                
             }            
             geteJBServicioModulo().edit(getModuloSeleccionado());

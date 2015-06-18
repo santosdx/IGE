@@ -38,33 +38,39 @@ public class Usuario implements Serializable {
     public static final String FINE_BYE_NICKNAME_PASSWORD = "Usuario.findByNicknamePassword";
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
-    @SequenceGenerator(name = "SEQ", sequenceName = "seq_id_ige_usuario")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUARIO")
+    @SequenceGenerator(name = "SEQ_USUARIO", sequenceName = "seq_id_ige_usuario", allocationSize = 1)
     @Column(name = "id_ige_usuario", unique = true, nullable = false)
     private Integer id;
     @Column(name = "nickname")
     private String nickname;
     @Column(name = "password")
-    private String password;    
+    private String password;
     @Column(name = "nombres")
     private String nombres;
     @Column(name = "apellidos")
     private String apellidos;
     @Column(name = "correo")
     private String correo;
-    
+    /*
+    @OneToOne
+    @JoinColumn(name = "id_ige_usuario", referencedColumnName = "id_ige_usuario", insertable = false, updatable = false)
+     private Perfil perfil;
+    */
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "ige_usuario_perfil",
             joinColumns = @JoinColumn(name = "id_ige_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_ige_perfil")
     )
-    private Perfil perfil;    
-    
+    private Perfil perfil;
+
+
     public Usuario() {
     }
 
-    public Usuario(String nickname, String nombres, String apellidos, String correo) {        
+    public Usuario(String nickname, String nombres, String apellidos, String correo) {
         this.nickname=nickname;
         this.nombres=nombres;
         this.apellidos=apellidos;

@@ -62,14 +62,14 @@ public class AdministrarUsuario {
     public void nuevoUsuario(){
         if(getUsuarioSeleccionado().getNickname() != null){
             if(geteJBServicioUsuario().buscarUsuarioByNickname(getUsuarioSeleccionado().getNickname()) == null){
-                                     
+
                 Integer idUsuario = geteJBServicioUsuario().createAndGetKey(getUsuarioSeleccionado());
-                Integer idPerfil = getServicioPerfil().getPerfilSeleccionado().getId();                         
-                   
+                Integer idPerfil = getServicioPerfil().getPerfilSeleccionado().getId();
+
                 geteJBServicioUsuarioPerfil().create(new UsuarioPerfil(idUsuario, idPerfil));
-     
+
                 inicializarVariables();
-                
+
                 //LOGGER.info("Id usuario:"+idUsuario);
                 //LOGGER.info("Id perfil:"+idPerfil);
                 //LOGGER.info("nuevo usuario");
