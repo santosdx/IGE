@@ -6,13 +6,13 @@
  <managed-bean>
   <description>Bean que se encarga del validar el usuario y crear la session.</description>
   <managed-bean-name>MbLogin</managed-bean-name>
-  <managed-bean-class>com.nerv.sai.seguridad.Login</managed-bean-class>
-  <managed-bean-scope>session</managed-bean-scope>
- </managed-bean>
+  <managed-bean-class>com.dane.ige.seguridad.Login</managed-bean-class>
+ 
+  <managed-bean-scope>session</managed-bean-scope></managed-bean>
  
 <application> 
     <resource-bundle>
-        <base-name>com.nerv.main.sistema</base-name>
+        <base-name>com.dane.main.sistema</base-name>
         <var>nerv</var>
      </resource-bundle>
     <action-listener>org.primefaces.application.DialogActionListener</action-listener>
