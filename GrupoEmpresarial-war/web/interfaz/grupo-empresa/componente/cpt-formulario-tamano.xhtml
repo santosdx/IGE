@@ -4,46 +4,69 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
- 
-        <p:panel header="Información tamaño">
-            <p:messages />
-            <h:panelGrid columns="2" columnClasses="label, value">
-                <h:outputText value="Vigencia financiera: " />
-                <p:inputText />
 
-                <h:outputText value="Personal ocupado: " />
-                <p:inputText />
+    <p:panel header="Información tamaño">
+        <p:messages />
+        <h:panelGrid columns="2" columnClasses="label, value">
 
-                <h:outputText value="Número de hombres ocupados: " />
-                <p:inputText />
+            <h:outputText value="Vigencia financiera: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-                <h:outputText value="Número de mujeres ocupados: " />
-                <p:inputText />
+            <h:outputText value="Personal ocupado: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-                <h:outputText value="Ingresos : " />
-                <p:inputText />
+            <h:outputText value="Número de hombres ocupados: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-                <h:outputText value="Utilidad neta: " />
-                <p:inputText />
+            <h:outputText value="Número de mujeres ocupados: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-                <h:outputText value="Activo: " />
-                <p:inputText />
+            <h:outputText value="Ingresos operacionales: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-                <h:outputText value="Pasivo: " />
-                <p:inputText />
+            <h:outputText value="Fuente de ingresos operacionales: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-                <h:outputText value="Patrimonio: " />
-                <p:inputText />
+            <h:outputText value="Utilidad neta: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-                <h:outputText value="EBITDA: *" />
-                <p:inputText />
+            <h:outputText value="Fuente utilidad neta: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-                <h:outputText value="Gastos operacionales: " />
-                <p:inputText />
+            <h:outputText value="Activo: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-                <h:outputText value="Observaciones: " />
-                <p:inputText />
-            </h:panelGrid>
-        </p:panel>
+            <h:outputText value="Fuente activo: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Pasivo: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fuente pasivo: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Patrimonio: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fuente patrimonio: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="EBITDA: *" styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fuente EBIDATA " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Gastos operacionales: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fuente gastos operacionales " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Observaciones: " styleClass="etiquetaFormulario"/>
+            <p:inputTextarea rows="6" cols="50" />
+
+        </h:panelGrid>
+    </p:panel>
 
 </ui:composition>

@@ -9,31 +9,56 @@
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value">
             <h:outputText value="Tipo de grupo: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Grupo..." itemValue="" />
+                <f:selectItem itemLabel="Grupo a" itemValue="Grupo a" />
+                <f:selectItem itemLabel="Grupo b" itemValue="Grupo a" />
+                <f:selectItem itemLabel="Grupo c" itemValue="Grupo a" />
+            </p:selectOneMenu>
 
             <h:outputText value="Situación de control: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Situación..." itemValue="" />
+                <f:selectItem itemLabel="Situación a" itemValue="Situación a" />
+                <f:selectItem itemLabel="Situación b" itemValue="Situación a" />
+                <f:selectItem itemLabel="Situación c" itemValue="Situación a" />
+            </p:selectOneMenu>
 
             <h:outputText value="Tipo de control: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Control..." itemValue="" />
+                <f:selectItem itemLabel="Control a" itemValue="Control a" />
+                <f:selectItem itemLabel="Control b" itemValue="Control a" />
+                <f:selectItem itemLabel="Control c" itemValue="Control a" />
+            </p:selectOneMenu>
 
             <h:outputText value="Tipo de empresa (controlante): " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Empresa..." itemValue="" />
+                <f:selectItem itemLabel="Empresa a" itemValue="Empresa a" />
+                <f:selectItem itemLabel="Empresa b" itemValue="Empresa a" />
+                <f:selectItem itemLabel="Empresa c" itemValue="Empresa a" />
+            </p:selectOneMenu>
 
             <h:outputText value="NIT de la controlante: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Nombre de la controlante: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="País de la controlante: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="País..." itemValue="" />
+                <f:selectItem itemLabel="Colombia" itemValue="Colombia" />
+                <f:selectItem itemLabel="Brasil" itemValue="Brasil" />
+                <f:selectItem itemLabel="Argentina" itemValue="Argentina" />
+            </p:selectOneMenu>
 
             <h:outputText value="Sucursales en el extranjero: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:inputSwitch onLabel="Si" offLabel="No"/>
 
             <h:outputText value="Consorcios - Uniones temporales: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:inputSwitch onLabel="Si" offLabel="No"/>
 
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{practica.skip}" /-->

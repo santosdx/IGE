@@ -8,20 +8,35 @@
     <p:panel header="Información historia">
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value">
-            <h:outputText value="Fecha de configuración: " />
-            <p:inputText />
 
-            <h:outputText value="Fecha de cierre: " />
-            <p:inputText />
+            <h:outputText value="Estado: "  styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Estado..." itemValue="" />
+                <f:selectItem itemLabel="Estado a" itemValue="Estado a" />
+                <f:selectItem itemLabel="Estado b" itemValue="Estado b" />
+                <f:selectItem itemLabel="Estado c" itemValue="Estado c" />
+            </p:selectOneMenu>
 
-            <h:outputText value="Fecha de liquidación: " />
-            <p:inputText />
+            <h:outputText value="Fecha de configuración: " styleClass="etiquetaFormulario"/>
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fecha de cierre: " styleClass="etiquetaFormulario"/>
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fecha de liquidación: " styleClass="etiquetaFormulario"/>
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Fecha de cambio demográfico: " />
-            <p:inputText />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Tipo de evento demográfico: " />
-            <p:inputText />
+            <h:outputText value="Tipo de evento demográfico: "  styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Evento..." itemValue="" />
+                <f:selectItem itemLabel="Evento a" itemValue="Evento a" />
+                <f:selectItem itemLabel="Evento b" itemValue="Evento b" />
+                <f:selectItem itemLabel="Evento c" itemValue="Evento c" />
+            </p:selectOneMenu>
+
         </h:panelGrid>
     </p:panel>
 </ui:composition>
