@@ -9,41 +9,62 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <f:facet name="first">
-                <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
         </f:facet>
         <!--link type="image/vnd.microsoft.icon" rel="shortcut icon" href="resources/imagenes/dane.ico"/-->
         <h:outputStylesheet library="css" name="general.css" />
+        <h:outputStylesheet library="css" name="titulos.css" />
+        <h:outputStylesheet library="css" name="componentes.css" />
         <title>#{nerv['sistema.title']}</title>
     </h:head>
-    
+
     <h:body>
-        <center>
-        <h:form>
-             <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
-            <h:panelGrid id="pnlLogin" columns="2" cellpadding="5">
-                <h:outputLabel for="username" value="Usuario:" />
-                <p:inputText id="username" value="#{MbLogin.username}" 
-                                    required="true" label="username" requiredMessage="Usuario requerido"/>
 
-                <h:outputLabel for="password" value="Contraseña:" />
-                <p:password id="password" value="#{MbLogin.password}" 
-                                    required="true" label="password" requiredMessage="Contraseña requerida" />
-                
-                <p:spacer width="10"/>
-                <p:commandButton value="Ingresar" update="growl" actionListener="#{MbLogin.login}" oncomplete="manejarLogin(xhr, status, args)"/>                
-            </h:panelGrid>
-            <p:spotlight target="pnlLogin" widgetVar="spot"/>
-        </h:form>
-        </center>
-        <script type="text/javascript">
-          function manejarLogin(xhr, status, args) {
-            if (args.loggedIn) {
-              setTimeout(function() {
-                window.location = args.view;
-              }, 500);
-            }
-          }
-        </script>
+
+        <ui:debug/>
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                <ui:include src="/plantilla/encabezado.xhtml" />
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" >
+
+                <h:form >
+                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                    <div align="center" style="vertical-align: middle" > 
+                        <h:panelGrid id="pnlLogin" columns="2" cellpadding="5" ">
+                            <h:outputLabel for="username" value="Usuario:" />
+                            <p:inputText id="username" value="#{MbLogin.username}" 
+                                         required="true" label="username" requiredMessage="Usuario requerido"/>
+
+                            <h:outputLabel for="password" value="Contraseña:" />
+                            <p:password id="password" value="#{MbLogin.password}" 
+                                        required="true" label="password" requiredMessage="Contraseña requerida" />
+
+                            <p:spacer width="10"/>
+                            <p:commandButton value="Ingresar" update="growl" actionListener="#{MbLogin.login}" oncomplete="manejarLogin(xhr, status, args)"/>                
+                        </h:panelGrid>
+                    </div>
+                    <p:spotlight target="pnlLogin" widgetVar="spot" />
+                </h:form>
+
+                <script type="text/javascript">
+                    function manejarLogin(xhr, status, args) {
+                        if (args.loggedIn) {
+                            setTimeout(function () {
+                                window.location = args.view;
+                            }, 500);
+                        }
+                    }
+                </script>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="50" closable="true" collapsible="true" styleClass="cajaPiePagina">
+                <ui:include src="/plantilla/pie-pagina.xhtml" />
+            </p:layoutUnit>
+
+        </p:layout>
     </h:body>
 </html>

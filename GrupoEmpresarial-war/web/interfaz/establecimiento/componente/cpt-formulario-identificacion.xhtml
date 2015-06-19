@@ -1,0 +1,82 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:panel header="Información de identificación">
+        <p:messages />
+        <h:panelGrid columns="2" columnClasses="label, value" >
+
+            <h:outputText value="ID_GRUPO: " styleClass="etiquetaFormulario"/>
+            <h:outputText value="" />
+
+            <h:outputText value="ID UL: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="ID de establecimiento: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Nombre del establecimiento: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Martícula mercantil del establecimiento: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Tipo de establecimiento: " styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Tipo..." itemValue="" />
+                <f:selectItem itemLabel="A" itemValue="Bogotá" />
+                <f:selectItem itemLabel="B" itemValue="Huila" />
+                <f:selectItem itemLabel="C" itemValue="Tolima" />
+            </p:selectOneMenu>
+
+            <h:outputText value="Departamento: " styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Departamento..." itemValue="" />
+                <f:selectItem itemLabel="Bogotá" itemValue="Bogotá" />
+                <f:selectItem itemLabel="Huila" itemValue="Huila" />
+                <f:selectItem itemLabel="Tolima" itemValue="Tolima" />
+            </p:selectOneMenu>
+
+            <h:outputText value="Municipio: " styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Municipio..." itemValue="" />
+                <f:selectItem itemLabel="A" itemValue="Bogotá" />
+                <f:selectItem itemLabel="B" itemValue="Huila" />
+                <f:selectItem itemLabel="C" itemValue="Tolima" />
+            </p:selectOneMenu>
+
+            <h:outputText value="Dirección del establecimiento: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Teléfono: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Estado: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Código de la actividad económica: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="¿es una actividad auxiliar?: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Otras actividades: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Es unidad auxiliar: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Código de la actividad económica secundaria: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Código de la actividad económica adicional: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <!--h:outputText value="Saltar siguiente: " />
+            <h:selectBooleanCheckbox value="#{practica.skip}" /-->
+        </h:panelGrid>
+    </p:panel>
+
+</ui:composition>

@@ -1,0 +1,35 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:panel header="Información historia">
+        <p:messages />
+        <h:panelGrid columns="2" columnClasses="label, value">
+
+            <h:outputText value="Fecha matrícula: " styleClass="etiquetaFormulario"/>
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Estado matrícula: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Ultimo año renovado: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fecha de creación: " styleClass="etiquetaFormulario"/>
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fecha de inicio de actividades: " />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fecha de cierre de actividades: " />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Observaciones: " styleClass="etiquetaFormulario"/>
+            <p:inputTextarea rows="6" cols="50" />
+
+        </h:panelGrid>
+    </p:panel>
+</ui:composition>

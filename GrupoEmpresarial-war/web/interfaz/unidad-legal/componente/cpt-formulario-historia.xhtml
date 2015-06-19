@@ -9,34 +9,39 @@
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value">
             <h:outputText value="Fecha de configuración de control: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Estado de matricula: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Ultimo año renovado: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Fecha de creación: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Fecha de inicio de actividades: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
             
             <h:outputText value="Fecha de inicio de actividades: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
             
             <h:outputText value="Fecha de cierre de actividades: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
             
             <h:outputText value="Fecha de liquidación: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
             
             <h:outputText value="Fecha de evento demográfico: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
             
             <h:outputText value="Tipo de evento demográfico: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Evento..." itemValue="" />
+                <f:selectItem itemLabel="Evento a" itemValue="Evento a" />
+                <f:selectItem itemLabel="Evento b" itemValue="Evento b" />
+                <f:selectItem itemLabel="Evento c" itemValue="Evento c" />
+            </p:selectOneMenu>
         </h:panelGrid>
     </p:panel>
 </ui:composition>

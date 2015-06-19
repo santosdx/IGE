@@ -6,12 +6,32 @@
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
-                <h3>FORMULARIO DE PERFILAMIENTO DE LOS ESTABLECIMIENTOS</h3>
-
+                <h3 style="text-align: center;">FORMULARIO DE PERFILAMIENTO DE ESTABLECIMIENTOS</h3>
                 <h:form>
+                    <p:wizard flowListener="#{practica.onFlowProcess}" backLabel="anterior" nextLabel="siguiente">
+                        <p:tab id="identificacion" title="Identificación">
+                            <ui:include src="componente/cpt-formulario-identificacion.xhtml"/>
+                        </p:tab>
 
+                        <p:tab id="relacion" title="Relación">
+                            <ui:include src="componente/cpt-formulario-relacion.xhtml"/>
+                        </p:tab>
+
+                        <p:tab id="historia" title="Historia">
+                            <ui:include src="componente/cpt-formulario-historia.xhtml"/>
+                        </p:tab>
+
+                        <p:tab id="tamano" title="Tamaño">
+                            <ui:include src="componente/cpt-formulario-tamano.xhtml"/>
+                        </p:tab>
+                        <p:tab id="confirm" title="Confirmar">
+                            <p:panel header="Confirmar información">
+                                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:tab>
+                    </p:wizard>
                 </h:form>
-
             </ui:define>
         </ui:composition>
     </h:body>

@@ -9,61 +9,86 @@
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value">
             <h:outputText value="ID_GRUPO: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="ID UL: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Tipo de unidad: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Unidad..." itemValue="" />
+                <f:selectItem itemLabel="Unidad a" itemValue="Control a" />
+                <f:selectItem itemLabel="Unidad b" itemValue="Control a" />
+                <f:selectItem itemLabel="Unidad c" itemValue="Control a" />
+            </p:selectOneMenu>
 
             <h:outputText value="Nombre: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="NIT de la Unidad Legal: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="País: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="País..." itemValue="" />
+                <f:selectItem itemLabel="Colombia" itemValue="Bogotá" />
+                <f:selectItem itemLabel="Argentina" itemValue="Huila" />
+                <f:selectItem itemLabel="Peru" itemValue="Tolima" />
+            </p:selectOneMenu>
 
             <h:outputText value="Departamento: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Departamento..." itemValue="" />
+                <f:selectItem itemLabel="Bogotá" itemValue="Bogotá" />
+                <f:selectItem itemLabel="Huila" itemValue="Huila" />
+                <f:selectItem itemLabel="Tolima" itemValue="Tolima" />
+            </p:selectOneMenu>
 
             <h:outputText value="Municipio: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Municipio..." itemValue="" />
+                <f:selectItem itemLabel="A" itemValue="Bogotá" />
+                <f:selectItem itemLabel="B" itemValue="Huila" />
+                <f:selectItem itemLabel="C" itemValue="Tolima" />
+            </p:selectOneMenu>
 
             <h:outputText value="Dirección: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Teléfono: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Correo electrónico: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Tipo de organización: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Organización..." itemValue="" />
+                <f:selectItem itemLabel="Organización a" itemValue="Control a" />
+                <f:selectItem itemLabel="Organización b" itemValue="Control a" />
+                <f:selectItem itemLabel="Organización c" itemValue="Control a" />
+            </p:selectOneMenu>
 
             <h:outputText value="Es unidad auxiliar: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputSwitch onLabel="Si" offLabel="No"/>
 
             <h:outputText value="Nombre de contacto: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
             
             <h:outputText value="Cargo: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
             
             <h:outputText value="Teléfono de contacto: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
             
             <h:outputText value="Correo electrónico de contacto: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
             
             <h:outputText value="Orientada al mercado: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputSwitch onLabel="Si" offLabel="No"/>
             
             <h:outputText value="Encuestas: " styleClass="etiquetaFormulario" />
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{practica.skip}" /-->

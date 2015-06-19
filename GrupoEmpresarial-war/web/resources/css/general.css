@@ -15,3 +15,19 @@ body{
 .ui-wizard-step-title{
     font-size: 1.0em !important;
 }
+
+#top {
+    position: relative;
+    background-color: #ffffff;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+#bottom {
+    position: center;
+    background-color: #a91155;
+    color: white;
+    padding: 5px;
+    margin: 100px 0px 0px 0px;
+}

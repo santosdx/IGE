@@ -10,19 +10,24 @@
         <h:panelGrid columns="2" columnClasses="label, value">
 
             <h:outputText value="Situación de control: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Tipo de relación: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Relación..." itemValue="" />
+                <f:selectItem itemLabel="Relación a" itemValue="Grupo a" />
+                <f:selectItem itemLabel="Relación b" itemValue="Grupo a" />
+                <f:selectItem itemLabel="Relación c" itemValue="Grupo a" />
+            </p:selectOneMenu>
 
             <h:outputText value="NIT de la controlante: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Nombre de la controlante: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Porcentaje de participación de la controlante directa: " styleClass="etiquetaFormulario"/>
-            <p:inputText />
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{practica.skip}" /-->
