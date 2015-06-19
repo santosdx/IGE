@@ -4,15 +4,16 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:body>   
-        <ui:composition>   
+        <ui:composition>
             <p:graphicImage value="/resources/imagen/dane.png" />
             <center>
                 <!--h:outputText value="#{nerv['header.title']}" /--> 
                 <div>
                     <!--p:commandButton value="Login" icon="ui-icon-extlink" actionListener="#{dfView.visualizarVentanaParametrizada('/interfaz/usuario/ventana/vta-acceso-sistema',true,true,false,130,320)}"/-->
-                    <p:outputLabel value="Bienvenido, #{MbLogin.usuarioLogueado.nombres}"/>
+                    <p:outputLabel value="Bienvenido, #{MbLogin.usuarioLogueado.nombres}" style="display: block; width: 100%; text-align: right;"
+                                   rendered="#{MbLogin.loggedIn}"/>
                 </div>
-            </center>          
+            </center>
         </ui:composition>
     </h:body>
 </html>
