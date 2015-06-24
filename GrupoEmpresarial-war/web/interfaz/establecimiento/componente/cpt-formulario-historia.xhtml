@@ -13,7 +13,11 @@
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Estado matrícula: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Estado..." itemValue="" />
+                <f:selectItem itemLabel="Activa" itemValue="Activa" />
+                <f:selectItem itemLabel="Inactiva" itemValue="Inactiva" />
+            </p:selectOneMenu>
 
             <h:outputText value="Ultimo año renovado: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
@@ -24,12 +28,27 @@
             <h:outputText value="Fecha de inicio de actividades: " />
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Fecha de cierre de actividades: " />
+            <h:outputText value="Tipo de novedad " styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Novedad..." itemValue="" />
+                <f:selectItem itemLabel="Venta" itemValue="Venta" />
+                <f:selectItem itemLabel="Compra" itemValue="Compra" />
+                <f:selectItem itemLabel="Cierre" itemValue="Cierre" />
+                <f:selectItem itemLabel="Fusión total" itemValue="Fusión total" /> 
+                <f:selectItem itemLabel="Cambio de NIT" itemValue="Cambio de NIT" />
+                <f:selectItem itemLabel="Escisión total" itemValue="Escisión total" />
+                <f:selectItem itemLabel="Fusión absorción" itemValue="Fusión absorción" />
+                <f:selectItem itemLabel="Escisión parcial" itemValue="Escisión parcial" />
+            </p:selectOneMenu>
+
+            <h:outputText value="Fecha de novedad: " />
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Observaciones: " styleClass="etiquetaFormulario"/>
-            <p:inputTextarea rows="6" cols="50" />
+            <h:outputText value="NIT de la unidad legal involucrada: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
+            <h:outputText value="Fecha de cierre de actividades: " />
+            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
         </h:panelGrid>
     </p:panel>
 </ui:composition>
