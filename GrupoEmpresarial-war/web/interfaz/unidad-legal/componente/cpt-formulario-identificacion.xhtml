@@ -8,18 +8,13 @@
     <p:panel header="Información de identificación">
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value">
-            <h:outputText value="ID_GRUPO: " styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-
-            <h:outputText value="ID UL: " styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Tipo de unidad: " styleClass="etiquetaFormulario" />
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Unidad..." itemValue="" />
-                <f:selectItem itemLabel="Unidad a" itemValue="Control a" />
-                <f:selectItem itemLabel="Unidad b" itemValue="Control a" />
-                <f:selectItem itemLabel="Unidad c" itemValue="Control a" />
+                <f:selectItem itemLabel="Consorcio" itemValue="Consorcio" />
+                <f:selectItem itemLabel="Unidad legal" itemValue="Unidad legal" />
+                <f:selectItem itemLabel="Unión temporal" itemValue="Unión temporal" />
             </p:selectOneMenu>
 
             <h:outputText value="Nombre: " styleClass="etiquetaFormulario" />
@@ -31,9 +26,9 @@
             <h:outputText value="País: " styleClass="etiquetaFormulario" />
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="País..." itemValue="" />
-                <f:selectItem itemLabel="Colombia" itemValue="Bogotá" />
-                <f:selectItem itemLabel="Argentina" itemValue="Huila" />
-                <f:selectItem itemLabel="Peru" itemValue="Tolima" />
+                <f:selectItem itemLabel="Colombia" itemValue="Colombia" />
+                <f:selectItem itemLabel="Argentina" itemValue="Argentina" />
+                <f:selectItem itemLabel="Peru" itemValue="Peru" />
             </p:selectOneMenu>
 
             <h:outputText value="Departamento: " styleClass="etiquetaFormulario" />
@@ -47,9 +42,9 @@
             <h:outputText value="Municipio: " styleClass="etiquetaFormulario" />
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Municipio..." itemValue="" />
-                <f:selectItem itemLabel="A" itemValue="Bogotá" />
-                <f:selectItem itemLabel="B" itemValue="Huila" />
-                <f:selectItem itemLabel="C" itemValue="Tolima" />
+                <f:selectItem itemLabel="A" itemValue="A" />
+                <f:selectItem itemLabel="B" itemValue="B" />
+                <f:selectItem itemLabel="C" itemValue="C" />
             </p:selectOneMenu>
 
             <h:outputText value="Dirección: " styleClass="etiquetaFormulario" />
@@ -64,9 +59,13 @@
             <h:outputText value="Tipo de organización: " styleClass="etiquetaFormulario" />
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Organización..." itemValue="" />
-                <f:selectItem itemLabel="Organización a" itemValue="Control a" />
-                <f:selectItem itemLabel="Organización b" itemValue="Control a" />
-                <f:selectItem itemLabel="Organización c" itemValue="Control a" />
+                <f:selectItem itemLabel="Sociedad anonima" itemValue="Sociedad anonima" />
+                <f:selectItem itemLabel="Sociedad limitada" itemValue="Sociedad limitada" />
+                <f:selectItem itemLabel="Sociedad extranjera" itemValue="Sociedad extranjera" />
+                <f:selectItem itemLabel="Sociedad en comandita simple" itemValue="Sociedad en comandita simple" />
+                <f:selectItem itemLabel="Sociedad en comandita por acciones" itemValue="Sociedad en comandita por acciones" />
+                <f:selectItem itemLabel="Sociedad por acciones simplificadas SAS" itemValue="Sociedad por acciones simplificadas SAS" />
+                <f:selectItem itemLabel="Otra" itemValue="Otra" />
             </p:selectOneMenu>
 
             <h:outputText value="Es unidad auxiliar: " styleClass="etiquetaFormulario" />
@@ -74,21 +73,43 @@
 
             <h:outputText value="Nombre de contacto: " styleClass="etiquetaFormulario" />
             <p:inputText styleClass="valorEtiquetaFormulario"/>
-            
+
             <h:outputText value="Cargo: " styleClass="etiquetaFormulario" />
             <p:inputText styleClass="valorEtiquetaFormulario"/>
-            
+
             <h:outputText value="Teléfono de contacto: " styleClass="etiquetaFormulario" />
             <p:inputText styleClass="valorEtiquetaFormulario"/>
-            
+
             <h:outputText value="Correo electrónico de contacto: " styleClass="etiquetaFormulario" />
             <p:inputText styleClass="valorEtiquetaFormulario"/>
-            
+
+            <h:outputText value="Sector institucional: " styleClass="etiquetaFormulario" />
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Sector..." itemValue="" />
+                <f:selectItem itemLabel="Sector hogar" itemValue="Sector hogar" />
+                <f:selectItem itemLabel="Sector gobierno" itemValue="Sector gobierno" />
+                <f:selectItem itemLabel="Sector comercio" itemValue="Sector comercio" />
+                <f:selectItem itemLabel="Sector servicios" itemValue="Sector servicios" />
+                <f:selectItem itemLabel="Sector industria" itemValue="Sector industria" />
+                <f:selectItem itemLabel="Sector financiero" itemValue="Sector financiero" />
+                <f:selectItem itemLabel="Sector sin ánimo de lucro" itemValue="Sector sin ánimo de lucro" />
+                <f:selectItem itemLabel="Otro " itemValue="Otro" />
+            </p:selectOneMenu>
+
             <h:outputText value="Orientada al mercado: " styleClass="etiquetaFormulario" />
             <p:inputSwitch onLabel="Si" offLabel="No"/>
-            
+
             <h:outputText value="Encuestas: " styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Organización..." itemValue="" />
+                <f:selectItem itemLabel="EAC" itemValue="EAC" />
+                <f:selectItem itemLabel="EAS" itemValue="EAS" />
+                <f:selectItem itemLabel="EAM" itemValue="EAM" />
+                <f:selectItem itemLabel="EAC, EAS" itemValue="EAC, EAS" />
+                <f:selectItem itemLabel="EAC, EAM" itemValue="EAC, EAM" />
+                <f:selectItem itemLabel="EAS, EAM" itemValue="EAS,EAM" />
+                <f:selectItem itemLabel="EAC, EAM, EAS" itemValue="EAC, EAM, EAS" />
+            </p:selectOneMenu>
 
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{practica.skip}" /-->

@@ -9,15 +9,6 @@
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value" >
 
-            <h:outputText value="ID_GRUPO: " styleClass="etiquetaFormulario"/>
-            <h:outputText value="" />
-
-            <h:outputText value="ID UL: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-
-            <h:outputText value="ID de establecimiento: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-
             <h:outputText value="Nombre del establecimiento: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
@@ -25,12 +16,7 @@
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Tipo de establecimiento: " styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
-                <f:selectItem itemLabel="Tipo..." itemValue="" />
-                <f:selectItem itemLabel="A" itemValue="Bogotá" />
-                <f:selectItem itemLabel="B" itemValue="Huila" />
-                <f:selectItem itemLabel="C" itemValue="Tolima" />
-            </p:selectOneMenu>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Departamento: " styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
@@ -43,9 +29,9 @@
             <h:outputText value="Municipio: " styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Municipio..." itemValue="" />
-                <f:selectItem itemLabel="A" itemValue="Bogotá" />
-                <f:selectItem itemLabel="B" itemValue="Huila" />
-                <f:selectItem itemLabel="C" itemValue="Tolima" />
+                <f:selectItem itemLabel="A" itemValue="A" />
+                <f:selectItem itemLabel="B" itemValue="B" />
+                <f:selectItem itemLabel="C" itemValue="C" />
             </p:selectOneMenu>
 
             <h:outputText value="Dirección del establecimiento: " styleClass="etiquetaFormulario"/>
@@ -55,25 +41,24 @@
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Estado: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Estado..." itemValue="" />
+                <f:selectItem itemLabel="Activa" itemValue="Activa" />
+                <f:selectItem itemLabel="Cancelada" itemValue="Cancelada" />
+            </p:selectOneMenu>
 
             <h:outputText value="Código de la actividad económica: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="¿es una actividad auxiliar?: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <h:outputText value="¿Es una actividad auxiliar?: " styleClass="etiquetaFormulario"/>
+            <p:inputSwitch onLabel="Si" offLabel="No"/>
 
             <h:outputText value="Otras actividades: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Es unidad auxiliar: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputSwitch onLabel="Si" offLabel="No"/>
 
-            <h:outputText value="Código de la actividad económica secundaria: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-
-            <h:outputText value="Código de la actividad económica adicional: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{practica.skip}" /-->
         </h:panelGrid>

@@ -9,9 +9,6 @@
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value" >
 
-            <h:outputText value="ID_GRUPO: " styleClass="etiquetaFormulario"/>
-            <h:outputText value="2038" />
-
             <h:outputText value="Nombre comercial: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
@@ -39,6 +36,28 @@
             <h:outputText value="Correo electrónico contacto 1: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
+            <h:outputText value="Departamento sede principal: " styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Departamento..." itemValue="" />
+                <f:selectItem itemLabel="Bogotá" itemValue="Bogotá" />
+                <f:selectItem itemLabel="Huila" itemValue="Huila" />
+                <f:selectItem itemLabel="Tolima" itemValue="Tolima" />
+            </p:selectOneMenu>
+
+            <h:outputText value="Ciudad sede principal: " styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu style="width:330px">
+                <f:selectItem itemLabel="Ciudad..." itemValue="" />
+                <f:selectItem itemLabel="Aipe" itemValue="Aipe" />
+                <f:selectItem itemLabel="Algeciras" itemValue="Algeciras" />
+                <f:selectItem itemLabel="Baraya" itemValue="Baraya" />
+            </p:selectOneMenu>
+
+            <h:outputText value="Dirección sede principal: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Teléfono sede principal: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+
             <h:outputText value="Nombre contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
@@ -61,28 +80,6 @@
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Correo electrónico contacto 3: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-
-            <h:outputText value="Departamento sede principal: " styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
-                <f:selectItem itemLabel="Departamento..." itemValue="" />
-                <f:selectItem itemLabel="Bogotá" itemValue="Bogotá" />
-                <f:selectItem itemLabel="Huila" itemValue="Huila" />
-                <f:selectItem itemLabel="Tolima" itemValue="Tolima" />
-            </p:selectOneMenu>
-
-            <h:outputText value="Ciudad sede principal: " styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
-                <f:selectItem itemLabel="Ciudad..." itemValue="" />
-                <f:selectItem itemLabel="Aipe" itemValue="Aipe" />
-                <f:selectItem itemLabel="Algeciras" itemValue="Algeciras" />
-                <f:selectItem itemLabel="Baraya" itemValue="Baraya" />
-            </p:selectOneMenu>
-
-            <h:outputText value="Dirección sede principal: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-
-            <h:outputText value="Teléfono sede principal: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <!--h:outputText value="Saltar siguiente: " />
