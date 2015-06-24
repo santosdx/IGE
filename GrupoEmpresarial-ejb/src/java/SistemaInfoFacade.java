@@ -1,6 +1,6 @@
 import com.dane.ige.modelo.local.administracion.SistemaInfoFacadeLocal;
 import com.dane.ige.modelo.entidad.SistemaInfo;
-import com.dane.igei.modelo.fachada.AbstractFacade;
+import com.dane.ige.modelo.fachada.AbstractFacade;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;

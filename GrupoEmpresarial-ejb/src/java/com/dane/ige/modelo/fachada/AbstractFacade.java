@@ -1,4 +1,4 @@
-package com.dane.igei.modelo.fachada;
+package com.dane.ige.modelo.fachada;
 
 import java.util.List;
 import javax.persistence.EntityManager;

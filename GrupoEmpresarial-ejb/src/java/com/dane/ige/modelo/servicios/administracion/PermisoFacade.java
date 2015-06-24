@@ -1,8 +1,8 @@
-package com.dane.igei.modelo.servicios.administracion;
+package com.dane.ige.modelo.servicios.administracion;
 
 import com.dane.ige.modelo.local.administracion.PermisoFacadeLocal;
 import com.dane.ige.modelo.entidad.Permiso;
-import com.dane.igei.modelo.fachada.AbstractFacade;
+import com.dane.ige.modelo.fachada.AbstractFacade;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
