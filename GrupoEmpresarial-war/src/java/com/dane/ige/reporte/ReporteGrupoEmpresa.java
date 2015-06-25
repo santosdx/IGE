@@ -41,12 +41,6 @@ public class ReporteGrupoEmpresa{
     public ReporteGrupoEmpresa() {
     }
 
-    @PostConstruct
-    public void init(){
-        //setContenido(new DefaultStreamedContent());
-        LOGGER.info(":P");
-    }
-
     public void generarReportePdf(String urlArchivo, String nombreArchivo) {
 
         LOGGER.info(urlArchivo);
@@ -68,7 +62,9 @@ public class ReporteGrupoEmpresa{
             exporter.exportReport();
 
             setContenido(new DefaultStreamedContent(new FileInputStream(temp), "application/pdf"));
-            //temp.deleteOnExit();
+            temp.delete();
+            temp.deleteOnExit();
+            LOGGER.info("setContenido");
         } catch (JRException e) {
             LOGGER.warn(e);
             throw new RuntimeException("It's not possible to generate the pdf report.", e);

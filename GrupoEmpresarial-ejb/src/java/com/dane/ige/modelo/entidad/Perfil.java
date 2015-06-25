@@ -32,11 +32,11 @@ import org.apache.commons.lang3.text.WordUtils;
     @NamedQuery(name = "Perfil.findByPerfil", query = "SELECT p FROM Perfil p WHERE p.perfil = :perfil"),
     @NamedQuery(name = "Perfil.findByDescripcion", query = "SELECT p FROM Perfil p WHERE p.descripcion = :descripcion")})
 public class Perfil implements Serializable {
-        
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final String FINE_BYE_PERFIL = "Perfil.findByPerfil";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PERFIL")
     @SequenceGenerator(name = "SEQ_PERFIL", sequenceName = "seq_id_ige_perfil", allocationSize = 1)
@@ -46,14 +46,14 @@ public class Perfil implements Serializable {
     private String perfil;
     @Column(name = "descripcion")
     private String descripcion;
-    
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "ige_perfil_permiso",
             joinColumns = @JoinColumn(name = "id_ige_perfil"),
             inverseJoinColumns = @JoinColumn(name = "id_ige_permiso")
     )
-    private List<Permiso> permisos;    
+    private List<Permiso> permisos;
 
     public Perfil() {
     }
@@ -61,10 +61,10 @@ public class Perfil implements Serializable {
     public Perfil(Integer id) {
         this.id = id;
     }
-        
+
     public Perfil(String perfil, String descripcion) {
-        this.perfil=perfil;
-        this.descripcion=descripcion;
+        this.perfil = perfil;
+        this.descripcion = descripcion;
     }
 
     public Perfil(Integer id, String perfil, String descripcion) {
@@ -99,15 +99,13 @@ public class Perfil implements Serializable {
 
     public List<Permiso> getPermisos() {
         List<Permiso> lista = new ArrayList<Permiso>(permisos);
-        Collections.copy(lista, permisos);       
+        Collections.copy(lista, permisos);
         return lista;
     }
 
     public void setPermisos(List<Permiso> permisos) {
         this.permisos = permisos;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -133,5 +131,5 @@ public class Perfil implements Serializable {
     public String toString() {
         return "com.nerv.sai.modelo.entidad.Perfil[ id=" + id + " ]";
     }
-    
+
 }

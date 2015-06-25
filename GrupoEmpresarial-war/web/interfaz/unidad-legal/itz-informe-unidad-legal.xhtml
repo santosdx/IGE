@@ -6,8 +6,16 @@
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
-                <h3>REPORTE DE PERFILAMIENTO DE LAS UNIDADES LEGALES</h3>
-                <iframe src="../../resources/pdf/file.pdf" width="99%" height="90%" scrolling="no"></iframe>
+                <h3 class="titulo-center-h3">REPORTE DE PERFILAMIENTO DE LAS UNIDADES LEGALES</h3>
+                <h:form style="height: 88%;" >
+                    <p:commandButton id="btnGenerarReporte" value="Generar reporte" update="@form"
+                                     actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.grupoEmpresarial.path'], nerv['reporte.grupoEmpresarial.archivo'])}"/>
+                    <p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="100%" height="100%" player="pdf"/>
+                    <p:blockUI block="@form" trigger="btnGenerarReporte" >
+                        Generando reporte...<br />
+                        <p:graphicImage name="imagen/ajax-loading.gif"/>
+                    </p:blockUI>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

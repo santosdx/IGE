@@ -100,4 +100,31 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
         return resultado;
     }
 
+    @Override
+    public List<Modulo> getModulesPerfil() {
+        List<Modulo> resultado = new ArrayList<Modulo>();
+        try {
+            //Query query = em.createNamedQuery(Modulo.FINE_MODLE_BYE_IDPERFIL);
+
+            String sql = "SELECT DISTINCT m.* "
+                    + "FROM ige_modulo m "
+                    + "JOIN ige_modulo_permiso mp ON (m.id_ige_modulo = mp.id_ige_modulo) "
+                    + "JOIN ige_perfil_permiso pp ON (pp.id_ige_permiso = mp.id_ige_permiso) "
+                    + "JOIN ige_permiso pe        ON (pe.id_ige_permiso = pp.id_ige_permiso) "
+                    + "ORDER BY m.orden ASC";
+
+            Query query = em.createNativeQuery(sql, Modulo.class);
+
+            List<Modulo> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+        return resultado;
+    }
 }

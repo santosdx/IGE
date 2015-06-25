@@ -1,17 +1,37 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
     <p:panel style="border: none; padding:0px;">
-        <h:panelGrid columns="2" >
-            <p:outputLabel value="Usuario:"/>
-            <p:inputText />
-            <p:outputLabel value="Contraseña:"/>
-            <p:password feedback="true" promptLabel="Porfavor ingrese la contraseña." strongLabel="Excelente" weakLabel="Debil" goodLabel="Fuerte"/>
-            <p:spacer width="10"/>
-            <p:commandButton value="Ingresar" />
-        </h:panelGrid>
+        <h:form >
+            <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+            <div align="center" style="height: 100px; margin: 0 auto; padding: 10% 0; position: relative;" > 
+                <h:panelGrid id="pnlLogin" columns="2" cellpadding="5" >
+                    <h:outputLabel for="username" value="Usuario:" styleClass="etiquetaFormulario"/>
+                    <p:inputText id="username" value="#{MbLogin.username}" 
+                                 required="true" label="username" requiredMessage="Usuario requerido"/>
+
+                    <h:outputLabel for="password" value="Contraseña:" styleClass="etiquetaFormulario"/>
+                    <p:password id="password" value="#{MbLogin.password}" 
+                                required="true" label="password" requiredMessage="Contraseña requerida" />
+                    <p:spacer width="10"/>
+                    <p:commandButton value="Ingresar" update="growl" actionListener="#{MbLogin.login}" 
+                                     oncomplete="manejarLogin(xhr, status, args)"/>
+                </h:panelGrid>
+                <!--p:separator style="width: 260px;"/-->
+            </div>
+            <p:spotlight target="pnlLogin" widgetVar="spot" />
+        </h:form>
+
+        <script type="text/javascript">
+            function manejarLogin(xhr, status, args) {
+                if (args.loggedIn) {
+                    setTimeout(function() {
+                        window.location = args.view;
+                    }, 500);
+                }
+            }
+        </script>
     </p:panel>
 </ui:composition>

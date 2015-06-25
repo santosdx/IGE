@@ -29,37 +29,33 @@
                 <ui:include src="/plantilla/encabezado.xhtml" />
             </p:layoutUnit>
 
+            <p:layoutUnit position="west" size="250" header="#{nerv['menu.title']}" collapsible="true">
+                <ui:include src="/plantilla/menu.xhtml" />
+            </p:layoutUnit>
+
             <p:layoutUnit position="center" >
-
-                <h:form >
-                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-                    <div align="center" style="height: 100px; margin: 0 auto; padding: 10% 0; position: relative;" > 
-                        <h:panelGrid id="pnlLogin" columns="2" cellpadding="5" >
-                            <h:outputLabel for="username" value="Usuario:" styleClass="etiquetaFormulario"/>
-                            <p:inputText id="username" value="#{MbLogin.username}" 
-                                         required="true" label="username" requiredMessage="Usuario requerido"/>
-
-                            <h:outputLabel for="password" value="Contraseña:" styleClass="etiquetaFormulario"/>
-                            <p:password id="password" value="#{MbLogin.password}" 
-                                        required="true" label="password" requiredMessage="Contraseña requerida" />
-                            <p:spacer width="10"/>
-                            <p:commandButton value="Ingresar" update="growl" actionListener="#{MbLogin.login}" 
-                                             oncomplete="manejarLogin(xhr, status, args)"/>
-                        </h:panelGrid>
-                            <p:separator style="width: 260px;"/>
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2"></div>
+                        <div class="ui-grid-col-3" style="text-align: right;">
+                            <p:graphicImage value="/resources/imagen/acceso.png" width="180" height="180"/>
+                        </div>
+                        <div class="ui-grid-col-4" style="text-align: left;">
+                            <ui:include src="interfaz/usuario/componente/cpt-acceso-sistema.xhtml"/>
+                        </div>
+                        <div class="ui-grid-col-3"></div>
                     </div>
-                    <p:spotlight target="pnlLogin" widgetVar="spot" />
-                </h:form>
-
-                <script type="text/javascript">
-                    function manejarLogin(xhr, status, args) {
-                        if (args.loggedIn) {
-                            setTimeout(function () {
-                                window.location = args.view;
-                            }, 500);
-                        }
-                    }
-                </script>
+                </div>
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3"></div>
+                        <div class="ui-grid-col-6">
+                            <h3 class="titulo-left-h3">Atención</h3>
+                            <p>El este contenido está restringido por reserva del propietario del servicio; Si usted es un usuario autorizado, por favor ingrese los datos de usuario y contraseña asignados en sus las credenciales. </p>
+                        </div>
+                        <div class="ui-grid-col-3"></div>
+                    </div>
+                </div>
             </p:layoutUnit>
 
             <p:layoutUnit position="south" closable="true" collapsible="true" styleClass="cajaPiePagina">

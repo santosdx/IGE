@@ -1,72 +1,80 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
-    
-<h:form id="formCptFormUsuario">
-    <p:panel id="ccFormUsuarioId">
-    <f:facet name="header">
-        Información del Usuario
-    </f:facet>
-    
-    <p:growl showDetail="true"  life="3000"/>
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-        <div class="ui-grid ui-grid-responsive">
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                    <p:outputLabel for="txtNickname" value="Usuario:" styleClass="etiquetaFormulario"/>
-                </div>
-                <div class="ui-grid-col-9">
-                    <p:inputText id="txtNickname" value="#{MbLogin.usuarioLogueado.nickname}" disabled="true" style="width: 90%;"/>
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                    <p:outputLabel for="txtPassword" value="Contraseña:" styleClass="etiquetaFormulario"/>
-                </div>
-                <div class="ui-grid-col-9">
-                    <p:password id="txtPassword" value="#{MbLogin.usuarioLogueado.password}"  redisplay="true"
-                                goodLabel="Media!" strongLabel="Fuerte!" weakLabel="Debil!" requiredMessage="Contraseña requerida." promptLabel="Porfavor, ingrese la contraseña."
-                                feedback="true" required="true" style="width: 90%;"/>
-                </div>
-            </div>            
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                    <p:outputLabel for="txtNombres" value="Nombres:" styleClass="etiquetaFormulario"/>
-                </div>
-                <div class="ui-grid-col-9">
-                    <p:inputText id="txtNombres" value="#{MbLogin.usuarioLogueado.nombres}"  required="true" style="width: 90%;"/>        
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                    <p:outputLabel for="txtApellidos" value="Apellidos:" styleClass="etiquetaFormulario"/>
-                </div>
-                <div class="ui-grid-col-9">
-                    <p:inputText id="txtApellidos" value="#{MbLogin.usuarioLogueado.apellidos}" required="true" style="width: 90%;"/>        
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                    <p:outputLabel for="txtCorreo" value="Correo:" styleClass="etiquetaFormulario"/>
-                </div>
-                <div class="ui-grid-col-9">
-                    <p:inputText id="txtCorreo" value="#{MbLogin.usuarioLogueado.correo}" required="true"  style="width: 90%;"/>                    
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                   <p:outputLabel value="" styleClass="etiquetaFormulario"/>
-                </div>
-                <div class="ui-grid-col-9">
-                    <p:commandButton value="Actualizar" update="formCptFormUsuario:ccFormUsuarioId,#{ccLstUsuarioId}" 
-                                    actionListener="#{MbAdministrarUsuario.actualziarUsuarioPerfil(MbLogin.usuarioLogueado)}"/>
-                </div>
-            </div>      
-        </div>
+    <h:form id="formCptFormUsuario">
+        <p:panel id="ccFormUsuarioId">
+            <f:facet name="header">
+                Información del Usuario
+            </f:facet>
 
-    </p:panel>  
-</h:form>    
+            <p:growl showDetail="true"  life="3000"/>
+
+            <div class="ui-grid ui-grid-responsive">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                        <p:outputLabel value="Perfil" styleClass="etiquetaFormulario"/>
+                    </div>
+                    <div class="ui-grid-col-9">
+                        <p:inputText id="txtPerfil" value="#{MbLogin.usuarioLogueado.perfil.perfil}" disabled="true" style="width: 90%;"/>
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                        <p:outputLabel for="txtNickname" value="Usuario:" styleClass="etiquetaFormulario"/>
+                    </div>
+                    <div class="ui-grid-col-9">
+                        <p:inputText id="txtNickname" value="#{MbLogin.usuarioLogueado.nickname}" disabled="true" style="width: 90%;"/>
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                        <p:outputLabel for="txtPassword" value="Contraseña:" styleClass="etiquetaFormulario"/>
+                    </div>
+                    <div class="ui-grid-col-9">
+                        <p:password id="txtPassword" value="#{MbLogin.usuarioLogueado.password}"  redisplay="true"
+                                    goodLabel="Media!" strongLabel="Fuerte!" weakLabel="Debil!" requiredMessage="Contraseña requerida." promptLabel="Porfavor, ingrese la contraseña."
+                                    feedback="true" required="true" style="width: 90%;"/>
+                    </div>
+                </div>            
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                        <p:outputLabel for="txtNombres" value="Nombres:" styleClass="etiquetaFormulario"/>
+                    </div>
+                    <div class="ui-grid-col-9">
+                        <p:inputText id="txtNombres" value="#{MbLogin.usuarioLogueado.nombres}"  required="true" style="width: 90%;"/>
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                        <p:outputLabel for="txtApellidos" value="Apellidos:" styleClass="etiquetaFormulario"/>
+                    </div>
+                    <div class="ui-grid-col-9">
+                        <p:inputText id="txtApellidos" value="#{MbLogin.usuarioLogueado.apellidos}" required="true" style="width: 90%;"/>
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                        <p:outputLabel for="txtCorreo" value="Correo:" styleClass="etiquetaFormulario"/>
+                    </div>
+                    <div class="ui-grid-col-9">
+                        <p:inputText id="txtCorreo" value="#{MbLogin.usuarioLogueado.correo}" required="true"  style="width: 90%;"/>
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                        <p:outputLabel value="" styleClass="etiquetaFormulario"/>
+                    </div>
+                    <div class="ui-grid-col-9">
+                        <p:commandButton value="Actualizar" update="formCptFormUsuario:ccFormUsuarioId,#{ccLstUsuarioId}" 
+                                         actionListener="#{MbAdministrarUsuario.actualziarUsuarioPerfil(MbLogin.usuarioLogueado)}"/>
+                    </div>
+                </div>      
+            </div>
+
+        </p:panel>  
+    </h:form>    
 </ui:composition>

@@ -6,9 +6,11 @@ import com.dane.ige.modelo.entidad.Usuario;
 import com.dane.ige.modelo.local.administracion.ModuloFacadeLocal;
 import com.dane.ige.modelo.local.administracion.ModuloPermisoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.UsuarioFacadeLocal;
+import com.dane.ige.utilidad.Ventana;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 import javax.faces.application.FacesMessage;
@@ -32,6 +34,7 @@ import org.primefaces.model.menu.MenuModel;
  *
  * @author srojasm
  */
+
 @SessionScoped
 public class Login implements Serializable {
 
@@ -58,6 +61,10 @@ public class Login implements Serializable {
 
     }
 
+    @PostConstruct
+    public void init(){
+        construirMenuInicial();
+    }
     /**
      * Metodo que permite iniciar una sesion para el usuario en la aplicacion.
      *
@@ -79,56 +86,7 @@ public class Login implements Serializable {
                 message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un persil");
             } else {
                 setLoggedIn(true);
-                setListaModulos(geteJBServicioModulo().getModulesPerfilByIdPerfil(getUsuarioLogueado().getPerfil().getId()));
-
-                if (getListaModulos() != null && getListaModulos().size() > 0) {
-                    setModeloMenu(new DefaultMenuModel());
-
-                    DefaultMenuItem itemHome = new DefaultMenuItem("Inicio");
-                    itemHome.setUrl("/index.xhtml");
-                    itemHome.setIcon("ui-icon-home");
-                    getModeloMenu().addElement(itemHome);
-
-                    for (Modulo modulo : getListaModulos()) {
-                        //First submenu
-                        DefaultSubMenu submenu = new DefaultSubMenu(modulo.getModulo());
-
-                        for (Permiso permiso : getUsuarioLogueado().getPerfil().getPermisos()) {
-                            if (geteJBServicioModuloPermiso().buscarAsignacionModuloPermiso(modulo.getId(), permiso.getId()) != null) {
-                                DefaultMenuItem item = new DefaultMenuItem(permiso.getPermiso());
-                                if (permiso.getUrl() != null) {
-                                    item.setUrl(permiso.getUrl());
-                                }
-                                if (permiso.getComando() != null && !StringUtils.isEmpty(permiso.getComando())) {
-                                    item.setCommand(permiso.getComando());
-                                    item.setUrl(null);
-                                }
-                                if (permiso.getActualizar() != null) {
-                                    item.setUpdate(permiso.getActualizar());
-                                }
-
-                                item.setAjax((permiso.getAjax() != 0));
-                                //item.setIcon("ui-icon-home");
-                                submenu.addElement(item);
-                            }
-                        }
-                        getModeloMenu().addElement(submenu);
-                    }
-                    /*
-                     DefaultSubMenu submenuPerfil = new DefaultSubMenu("Perfil2");
-                     DefaultMenuItem itemSalir = new DefaultMenuItem("Salir2");
-                     //itemSalir.setUrl(pathSistema+"/index.xhtml");
-                     itemSalir.setCommand("#{MbLogin.logout}");
-                     itemSalir.setIcon("fa-sign-out");
-                     submenuPerfil.addElement(itemSalir);
-                     getModeloMenu().addElement(submenuPerfil); 
-                     */
-
-                    message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuarioLogueado.getNombres());
-                } else {
-                    setLoggedIn(false);
-                    message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Ateción", "El perfil no tiene asignado módulos");
-                }
+                message = construirMenuLogin();
             }
         } else {
             setLoggedIn(false);
@@ -145,6 +103,104 @@ public class Login implements Serializable {
     }
 
     /**
+     * Método que permite contruir dinamicamente el menú principal del aplicativo,
+     * con la asignación de modulos y permisos del usuario de acuerdo a su perfil.
+     * @return 
+     */
+    private FacesMessage construirMenuLogin() {
+        FacesMessage message = null;
+        setListaModulos(geteJBServicioModulo().getModulesPerfilByIdPerfil(getUsuarioLogueado().getPerfil().getId()));
+
+        if (getListaModulos() != null && getListaModulos().size() > 0) {
+            setModeloMenu(new DefaultMenuModel());
+
+            DefaultMenuItem itemHome = new DefaultMenuItem("Inicio");
+            itemHome.setUrl("/index.xhtml");
+            itemHome.setIcon("ui-icon-home");
+            getModeloMenu().addElement(itemHome);
+
+            for (Modulo modulo : getListaModulos()) {
+                //First submenu
+                DefaultSubMenu submenu = new DefaultSubMenu(modulo.getModulo());
+
+                for (Permiso permiso : getUsuarioLogueado().getPerfil().getPermisos()) {
+                    if (geteJBServicioModuloPermiso().buscarAsignacionModuloPermiso(modulo.getId(), permiso.getId()) != null) {
+                        DefaultMenuItem item = new DefaultMenuItem(permiso.getPermiso());
+                        if (permiso.getUrl() != null) {
+                            item.setUrl(permiso.getUrl());
+                        }
+                        if (permiso.getComando() != null && !StringUtils.isEmpty(permiso.getComando())) {
+                            item.setCommand(permiso.getComando());
+                            item.setUrl(null);
+                        }
+                        if (permiso.getActualizar() != null) {
+                            item.setUpdate(permiso.getActualizar());
+                        }
+
+                        item.setAjax((permiso.getAjax() != 0));
+                        //item.setIcon("ui-icon-home");
+                        submenu.addElement(item);
+                    }
+                }
+                getModeloMenu().addElement(submenu);
+            }
+            /*
+             DefaultSubMenu submenuPerfil = new DefaultSubMenu("Perfil2");
+             DefaultMenuItem itemSalir = new DefaultMenuItem("Salir2");
+             //itemSalir.setUrl(pathSistema+"/index.xhtml");
+             itemSalir.setCommand("#{MbLogin.logout}");
+             itemSalir.setIcon("fa-sign-out");
+             submenuPerfil.addElement(itemSalir);
+             getModeloMenu().addElement(submenuPerfil); 
+             */
+
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuarioLogueado.getNombres());
+        } else {
+            setLoggedIn(false);
+            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Ateción", "El perfil no tiene asignado módulos");
+        }
+        return message;
+    }
+
+    /**
+     * Método que permite construir el menú inicial del aplicativo.
+     */
+    private void construirMenuInicial() {
+
+        FacesMessage message = null;
+
+        setListaModulos(geteJBServicioModulo().getModulesPerfil());
+
+        if (getListaModulos() != null && getListaModulos().size() > 0) {
+            setModeloMenu(new DefaultMenuModel());
+
+            DefaultMenuItem itemHome = new DefaultMenuItem("Inicio");
+            itemHome.setUrl("/index.xhtml");
+            itemHome.setIcon("ui-icon-home");
+            getModeloMenu().addElement(itemHome);
+
+            for (Modulo modulo : getListaModulos()) {
+                //First submenu
+                //DefaultSubMenu submenu = new DefaultSubMenu(modulo.getModulo());
+                
+                DefaultMenuItem itemSalir = new DefaultMenuItem(modulo.getModulo());
+                itemSalir.setUrl("/login.xhtml");
+                //itemSalir.setCommand("#{MbLogin.ventanaLogin}");
+                //itemSalir.setCommand("#{dfView.visualizarVentanaParametrizada('/interfaz/usuario/ventana/vta-acceso-sistema',true,true,false,130,320)}");
+                //itemSalir.setIcon("fa-sign-out");
+                //submenu.addElement(itemSalir);
+
+                getModeloMenu().addElement(itemSalir);
+            }
+
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido","");
+        } else {
+            setLoggedIn(false);
+            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Ateción", "El perfil no tiene asignado módulos");
+        }
+    }
+
+    /**
      * Metodo que permite cerrar la sesion del usuario.
      */
     public void logout() {
@@ -153,12 +209,23 @@ public class Login implements Serializable {
         setLoggedIn(false);
         FacesContext contex = FacesContext.getCurrentInstance();
         try {
-            contex.getExternalContext().redirect("login.xhtml");
+            contex.getExternalContext().redirect("index.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Metodo que permite abrir una ventana con el componente login, para el inicio de session.
+     * @deprecated 
+     */
+    public void ventanaLogin(){
+        Ventana acceso = new Ventana();
+        acceso.visualizarVentanaParametrizada("/interfaz/usuario/ventana/vta-acceso-sistema",true,true,false,130L,320L);
+        System.out.println("sii..");
+    }
+
+    //Lista métodos Set y Get de la clase
     public UsuarioFacadeLocal geteJBServicioUsuario() {
         return eJBServicioUsuario;
     }

@@ -29,4 +29,5 @@ public interface ModuloFacadeLocal {
     
     public Modulo buscarModuloByModulo(String modulo);
     public List<Modulo> getModulesPerfilByIdPerfil(int idPerfil);
+    public List<Modulo> getModulesPerfil();
 }

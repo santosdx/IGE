@@ -3,21 +3,21 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
- <managed-bean>
-  <description>Bean que se encarga del validar el usuario y crear la session.</description>
-  <managed-bean-name>MbLogin</managed-bean-name>
-  <managed-bean-class>com.dane.ige.seguridad.Login</managed-bean-class>
+    <managed-bean>
+        <description>Bean que se encarga del validar el usuario y crear la session.</description>
+        <managed-bean-name>MbLogin</managed-bean-name>
+        <managed-bean-class>com.dane.ige.seguridad.Login</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
  
-  <managed-bean-scope>session</managed-bean-scope></managed-bean>
- 
-<application> 
-    <resource-bundle>
-        <base-name>com.dane.main.sistema</base-name>
-        <var>nerv</var>
-     </resource-bundle>
-    <action-listener>org.primefaces.application.DialogActionListener</action-listener>
-    <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
-    <view-handler>org.primefaces.application.DialogViewHandler</view-handler>   
-</application>
+    <application> 
+        <resource-bundle>
+            <base-name>com.dane.main.sistema</base-name>
+            <var>nerv</var>
+        </resource-bundle>
+        <action-listener>org.primefaces.application.DialogActionListener</action-listener>
+        <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+        <view-handler>org.primefaces.application.DialogViewHandler</view-handler>   
+    </application>
 
 </faces-config>
