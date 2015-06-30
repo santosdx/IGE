@@ -4,34 +4,46 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <!--param-value>Development</param-value-->
-        <param-value>Production</param-value>
-    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <!--param-value>Development</param-value-->
+        <param-value>Production</param-value>
+    </context-param>
     <!-- Definir este parámetro es más cómodo y más visual que usar el <ui:remove> de Facelets. -->
     <context-param>
         <description>Do not render comments in facelets (xhtml) pages. Default is false.</description>
         <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
         <param-value>true</param-value>
     </context-param>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>
     </context-param>
+
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+    <context-param>
+        <param-name>primefaces.UPLOADER</param-name>
+        <param-value>commons</param-value>
+    </context-param>
+
     <filter>
         <filter-name>Filtro</filter-name>
         <filter-class>com.dane.ige.seguridad.Filtro</filter-class>
@@ -40,4 +52,5 @@
         <filter-name>Filtro</filter-name>
         <url-pattern>/interfaz/*</url-pattern>
     </filter-mapping>
+    
 </web-app>

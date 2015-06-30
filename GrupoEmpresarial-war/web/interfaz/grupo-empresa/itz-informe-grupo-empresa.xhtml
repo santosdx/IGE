@@ -8,8 +8,15 @@
             <ui:define name="content">
                 <h3 class="titulo-center-h3">REPORTE DE PERFILAMIENTO DEL GRUPO EMPRESARIAL</h3>
                 <h:form style="height: 88%;" >
+                    <p:growl id="msnInforGruEmp" showDetail="true" />
                     <p:commandButton id="btnGenerarReporte" value="Generar reporte" update="@form"
                                      actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.grupoEmpresarial.path'], nerv['reporte.grupoEmpresarial.archivo'])}"/>
+
+                    <p:fileUpload fileUploadListener="#{MbAdministrarArchivo.subirArchivo}" multiple="false" fileLimitMessage="Número de archivos permitidos 1."
+                                  mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
+                                  invalidFileMessage="Tipo de archivo no soportado" 
+                               update="msnInforGruEmp" fileLimit="1" allowTypes="/(\.|\/)(xls)$/" />
+
                     <p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="100%" height="100%" player="pdf"/>
                     <p:blockUI block="@form" trigger="btnGenerarReporte" >
                         Generando reporte...<br />
