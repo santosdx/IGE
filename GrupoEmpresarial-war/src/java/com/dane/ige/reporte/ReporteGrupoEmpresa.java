@@ -1,5 +1,6 @@
 package com.dane.ige.reporte;
 
+import com.dane.ige.excel.excel;
 import com.dane.ige.modelo.connection.ConexionBd;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import jxl.read.biff.BiffException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -79,6 +81,13 @@ public class ReporteGrupoEmpresa{
         LOGGER.info("Fin");
     }
 
+    public void descargarArchivo() throws IOException, BiffException{
+        excel myExcel = new excel();
+        myExcel.leer();
+    }
+    
+    //Métodos Set y Get de la clase
+    
     public StreamedContent getContenido() {
         return contenido;
     }
