@@ -81,7 +81,7 @@ public class ReporteGrupoEmpresa{
         LOGGER.info("Fin");
     }
 
-    public void descargarArchivo() throws IOException, BiffException{
+    public void descargarArchivo(String urlArchivo, String nombreArchivo) throws IOException, BiffException{
         excel myExcel = new excel();
         myExcel.leer();
     }

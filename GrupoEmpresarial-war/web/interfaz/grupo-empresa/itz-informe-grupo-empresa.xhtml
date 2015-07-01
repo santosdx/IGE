@@ -6,16 +6,25 @@
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
+                <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+                    <p:graphicImage name="imagen/ajax-donwload.gif" />
+                </p:dialog>
                 <h3 class="titulo-center-h3">REPORTE DE PERFILAMIENTO DEL GRUPO EMPRESARIAL</h3>
                 <h:form style="height: 88%;" >
                     <p:growl id="msnInforGruEmp" showDetail="true" />
                     <p:commandButton id="btnGenerarReporte" value="Generar reporte" update="@form"
                                      actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.grupoEmpresarial.path'], nerv['reporte.grupoEmpresarial.archivo'])}"/>
 
-                    <p:fileUpload fileUploadListener="#{MbAdministrarArchivo.subirArchivo}" multiple="false" fileLimitMessage="Número de archivos permitidos 1."
+                    <p:fileUpload fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" multiple="false" fileLimitMessage="Número de archivos permitidos 1."
                                   mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
                                   invalidFileMessage="Tipo de archivo no soportado" 
-                               update="msnInforGruEmp" fileLimit="1" allowTypes="/(\.|\/)(xlsm)(xls)$/" />
+                                  update="msnInforGruEmp" fileLimit="1" allowTypes="/(\.|\/)(xls)$/" />
+
+                    <p:commandButton id="btnGenerarXlsGrupoEmpresa" value="Generar Excel" ajax="false" 
+                                     actionListener="#{MbEscribirExcel.generarArchivoXlsGrupoEmpresarial(nerv['plantilla.grupoEmpresarial.path'], nerv['plantilla.grupoEmpresarial.archivo'])}"
+                                     onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                        <p:fileDownload value="#{MbEscribirExcel.file}" />
+                    </p:commandButton>
 
                     <p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="100%" height="100%" player="pdf"/>
                     <p:blockUI block="@form" trigger="btnGenerarReporte" >
@@ -23,6 +32,15 @@
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>
                 </h:form>
+                <script type="text/javascript">
+                    function start() {
+                        PF('statusDialog').show();
+                    }
+
+                    function stop() {
+                        PF('statusDialog').hide();
+                    }
+                </script>
             </ui:define>
         </ui:composition>
     </h:body>
