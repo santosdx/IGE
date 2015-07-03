@@ -72,11 +72,14 @@ public class EscribirExcel {
 
         Workbook libroTemp = ingresarDatosIdentificacionGrupoEmpresa(libro);
         libroTemp = ingresarDatosRelacionGrupoEmpresa(libroTemp);
-/*
-        LeerExcel excel = new LeerExcel();
-        excel.visualizarDatosXls(excel.obtenerListaDatosHojaXls(libroTemp.getSheetAt(1)));
-        excel.visualizarDatosXls(excel.obtenerListaDatosHojaXls(libroTemp.getSheetAt(2)));
-*/
+        ingresarDatosRelacionGrupoEmpresa(libroTemp);
+        ingresarDatosEventosGrupoEmpresa(libroTemp);
+        ingresarDatosTamanoGrupoEmpresa(libroTemp);
+        /*
+         LeerExcel excel = new LeerExcel();
+         excel.visualizarDatosXls(excel.obtenerListaDatosHojaXls(libroTemp.getSheetAt(1)));
+         excel.visualizarDatosXls(excel.obtenerListaDatosHojaXls(libroTemp.getSheetAt(2)));
+         */
         try {
             File temp = File.createTempFile("TEMP_PLANTILLA_GRUPO_EMPRESA", ".xls");
             FileOutputStream elFichero = new FileOutputStream(temp);
@@ -133,20 +136,79 @@ public class EscribirExcel {
      */
     private Workbook ingresarDatosRelacionGrupoEmpresa(Workbook libro) {
         //La hoja 2 es la hoja de los datos de relación
+        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("RELACIÓN");
         Sheet hoja = libro.getSheetAt(2);
-        Row fila = hoja.createRow(2);
-        Cell celda1 = fila.createCell(0);
-        celda1.setCellStyle(estiloBordeCompletoCedaEditable(libro, true));
-        celda1.setCellValue(0);
+        hoja.protectSheet("123");
 
-        Cell celda2 = fila.createCell(5);
-        celda2.setCellStyle(estiloBordeCompletoCedaEditable(libro, true));
-        celda2.setCellValue(900010);
+        Row encabezadoXsl = hoja.getRow(1);
+        Iterator cells = encabezadoXsl.cellIterator();
+        int indiceColumna = 0;
+        Row fila = hoja.getRow(2);
+        while (cells.hasNext()) {
+            Cell cell = (Cell) cells.next();
+            for (VariableIge variableIge : columnas) {
+                if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
+                    Cell celda = fila.getCell(indiceColumna);
+                    celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                    celda.setCellValue(variableIge.getColumna() + indiceColumna);
+                    break;
+                }
+            }
+            indiceColumna++;
+        }
 
-        Cell celda3 = fila.createCell(6);
-        celda3.setCellStyle(estiloBordeCompletoCedaEditable(libro, true));
-        HSSFRichTextString texto3 = new HSSFRichTextString("EMPRESA TEMPORAL");
-        celda3.setCellValue(texto3);
+        return libro;
+    }
+
+    private Workbook ingresarDatosEventosGrupoEmpresa(Workbook libro) {
+        //La hoja 3 es la hoja de los datos de eventos
+        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("EVENTOS");
+        Sheet hoja = libro.getSheetAt(3);
+        hoja.protectSheet("123");
+
+        Row encabezadoXsl = hoja.getRow(1);
+        Iterator cells = encabezadoXsl.cellIterator();
+        int indiceColumna = 0;
+        Row fila = hoja.getRow(2);
+        while (cells.hasNext()) {
+            Cell cell = (Cell) cells.next();
+            for (VariableIge variableIge : columnas) {
+                if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
+                    Cell celda = fila.getCell(indiceColumna);
+                    celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                    celda.setCellValue(variableIge.getColumna() + indiceColumna);
+                    break;
+                }
+            }
+            indiceColumna++;
+        }
+
+        return libro;
+    }
+
+    private Workbook ingresarDatosTamanoGrupoEmpresa(Workbook libro) {
+        //La hoja 3 es la hoja de los datos de tamaño
+        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("TAMAÑO");
+        Sheet hoja = libro.getSheetAt(4);
+        hoja.protectSheet("123");
+
+        Row encabezadoXsl = hoja.getRow(1);
+        Iterator cells = encabezadoXsl.cellIterator();
+        int indiceColumna = 0;
+        Row fila = hoja.getRow(2);
+        while (cells.hasNext()) {
+            Cell cell = (Cell) cells.next();
+            for (VariableIge variableIge : columnas) {
+                if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
+                    Cell celda = fila.getCell(indiceColumna);
+                    celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                    celda.setCellValue(variableIge.getColumna() + indiceColumna);
+                    break;
+                }
+            }
+            indiceColumna++;
+        }
+
         return libro;
     }
 
