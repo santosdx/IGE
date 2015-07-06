@@ -67,6 +67,7 @@ public class LeerExcel {
             Sheet sheet = workbook.getSheetAt(indexHoja);
 
             Iterator rows = sheet.rowIterator();
+            rows.hasNext();
             while (rows.hasNext()) {
                 Row row = (Row) rows.next();
                 Iterator cells = row.cellIterator();

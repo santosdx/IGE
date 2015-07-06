@@ -1,6 +1,5 @@
 package com.dane.ige.reporte;
 
-import com.dane.ige.excel.excel;
 import com.dane.ige.modelo.connection.ConexionBd;
 import java.io.File;
 import java.io.FileInputStream;
@@ -81,10 +80,6 @@ public class ReporteGrupoEmpresa{
         LOGGER.info("Fin");
     }
 
-    public void descargarArchivo(String urlArchivo, String nombreArchivo) throws IOException, BiffException{
-        excel myExcel = new excel();
-        myExcel.leer();
-    }
     
     //Métodos Set y Get de la clase
     

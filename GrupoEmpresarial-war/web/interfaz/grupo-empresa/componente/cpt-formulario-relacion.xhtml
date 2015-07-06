@@ -8,14 +8,15 @@
     <p:panel header="Información de relación">
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value">
-            <h:outputText value="Tipo de grupo: " styleClass="etiquetaFormulario"/>
+            
+            <h:outputText value="Tipo de conglomerado: " styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
-                <f:selectItem itemLabel="Tipo de grupo..." itemValue="" />
+                <f:selectItem itemLabel="Conglomerado..." itemValue="" />
                 <f:selectItem itemLabel="Grupo" itemValue="Grupo" />
                 <f:selectItem itemLabel="Situación de control" itemValue="Situación de control" />
                 <f:selectItem itemLabel="Grupo y situación de control" itemValue="Grupo y situación de control" />
             </p:selectOneMenu>
-
+            
             <h:outputText value="Situación de control: " styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Situación..." itemValue="" />
@@ -40,6 +41,9 @@
             </p:selectOneMenu>
 
             <h:outputText value="NIT de la controlante: " styleClass="etiquetaFormulario"/>
+            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            
+            <h:outputText value="Dígito de verificación: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Nombre de la controlante: " styleClass="etiquetaFormulario"/>
