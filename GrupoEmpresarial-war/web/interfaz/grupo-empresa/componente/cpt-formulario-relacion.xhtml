@@ -8,16 +8,16 @@
     <p:panel header="Información de relación">
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value">
-            
-            <h:outputText value="Tipo de conglomerado: " styleClass="etiquetaFormulario"/>
+
+            <h:outputText value="Tipo de conglomerado: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Conglomerado..." itemValue="" />
                 <f:selectItem itemLabel="Grupo" itemValue="Grupo" />
                 <f:selectItem itemLabel="Situación de control" itemValue="Situación de control" />
                 <f:selectItem itemLabel="Grupo y situación de control" itemValue="Grupo y situación de control" />
             </p:selectOneMenu>
-            
-            <h:outputText value="Situación de control: " styleClass="etiquetaFormulario"/>
+
+            <h:outputText value="Situación de control: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Situación..." itemValue="" />
                 <f:selectItem itemLabel="Controlante" itemValue="Controlante" />
@@ -25,14 +25,14 @@
                 <f:selectItem itemLabel="Ninguna" itemValue="Ninguna" />
             </p:selectOneMenu>
 
-            <h:outputText value="Tipo de control: " styleClass="etiquetaFormulario"/>
+            <h:outputText value="Tipo de control: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Control..." itemValue="" />
                 <f:selectItem itemLabel="Nacional" itemValue="Nacional" />
                 <f:selectItem itemLabel="Extranjera" itemValue="Extranjera" />
             </p:selectOneMenu>
 
-            <h:outputText value="Tipo de empresa (controlante): " styleClass="etiquetaFormulario"/>
+            <h:outputText value="Tipo de empresa (controlante): *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Empresa..." itemValue="" />
                 <f:selectItem itemLabel="Privada" itemValue="Privada" />
@@ -40,16 +40,18 @@
                 <f:selectItem itemLabel="Mixta" itemValue="Mixta" />
             </p:selectOneMenu>
 
-            <h:outputText value="NIT de la controlante: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <!-- <h:outputText value="NIT de la controlante: " styleClass="etiquetaFormulario"/>
+             <p:inputText styleClass="valorEtiquetaFormulario"/>
+             
+             <h:outputText value="Dígito de verificación de la controlante: " styleClass="etiquetaFormulario"/>
+             <p:inputText styleClass="valorEtiquetaFormulario"/> 
             
-            <h:outputText value="Dígito de verificación: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+ 
+             <h:outputText value="Nombre de la controlante: " styleClass="etiquetaFormulario"/>
+             <p:inputText styleClass="valorEtiquetaFormulario"/>
+            -->
 
-            <h:outputText value="Nombre de la controlante: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-
-            <h:outputText value="País de la controlante: " styleClass="etiquetaFormulario"/>
+            <h:outputText value="País de la controlante: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="País..." itemValue="" />
                 <f:selectItem itemLabel="Colombia" itemValue="Colombia" />
@@ -57,7 +59,7 @@
                 <f:selectItem itemLabel="Argentina" itemValue="Argentina" />
             </p:selectOneMenu>
 
-            <h:outputText value="Sucursales en el extranjero: " styleClass="etiquetaFormulario"/>
+            <h:outputText value="Sucursales en el extranjero: *" styleClass="etiquetaFormulario"/>
             <p:inputSwitch onLabel="Si" offLabel="No"/>
 
             <h:outputText value="Consorcios - Uniones temporales: " styleClass="etiquetaFormulario"/>

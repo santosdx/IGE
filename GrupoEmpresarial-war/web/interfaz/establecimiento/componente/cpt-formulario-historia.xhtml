@@ -9,25 +9,25 @@
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value">
 
-            <h:outputText value="Fecha matrícula: " styleClass="etiquetaFormulario"/>
+            <h:outputText value="Fecha matrícula: *" styleClass="etiquetaFormulario"/>
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Estado matrícula: " styleClass="etiquetaFormulario"/>
+            <h:outputText value="Estado matrícula: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Estado..." itemValue="" />
                 <f:selectItem itemLabel="Activa" itemValue="Activa" />
                 <f:selectItem itemLabel="Inactiva" itemValue="Inactiva" />
             </p:selectOneMenu>
 
-            <h:outputText value="Ultimo año renovado: " styleClass="etiquetaFormulario"/>
+            <h:outputText value="Ultimo año renovado: *" styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Fecha de creación: " styleClass="etiquetaFormulario"/>
+            <h:outputText value="Fecha de creación: *" styleClass="etiquetaFormulario"/>
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Fecha de inicio de actividades: " styleClass="etiquetaFormulario"/>
+            <h:outputText value="Fecha de inicio de actividades: *" styleClass="etiquetaFormulario"/>
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
-
+            <!--
             <h:outputText value="Tipo de novedad " styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Novedad..." itemValue="" />
@@ -52,6 +52,7 @@
 
             <h:outputText value="Fecha de cierre de actividades: " styleClass="etiquetaFormulario"/>
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
-        </h:panelGrid>
+            -->
+            </h:panelGrid>
     </p:panel>
 </ui:composition>
