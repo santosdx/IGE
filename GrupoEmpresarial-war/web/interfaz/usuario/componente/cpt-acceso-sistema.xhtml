@@ -4,10 +4,10 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <p:panel style="border: none; padding:0px;">
-        <h:form >
+        <h:form style="margin: 0px; padding: 0px;">
             <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-            <div align="center" style="height: 100px; margin: 0 auto; padding: 10% 0; position: relative;" > 
-                <h:panelGrid id="pnlLogin" columns="2" cellpadding="5" >
+            <div align="center" style="height: 100px; margin: 0 auto; padding: 0; position: relative;" > 
+                <h:panelGrid id="pnlLogin" columns="2" cellpadding="5" style="margin: 0px; padding: 0px;">
                     <h:outputLabel for="username" value="Usuario:" styleClass="etiquetaFormulario"/>
                     <p:inputText id="username" value="#{MbLogin.username}" 
                                  required="true" label="username" requiredMessage="Usuario requerido"/>
@@ -15,9 +15,11 @@
                     <h:outputLabel for="password" value="Contraseña:" styleClass="etiquetaFormulario"/>
                     <p:password id="password" value="#{MbLogin.password}" 
                                 required="true" label="password" requiredMessage="Contraseña requerida" />
-                    <p:spacer width="10"/>
+                    <!--p:spacer width="10"/-->
+                    <p:remoteCommand name="rc" actionListener="#{MbLogin.cerrarVentanaLogin}" oncomplete="manejarLogin(xhr, status, args)"/>
                     <p:commandButton value="Ingresar" update="growl" actionListener="#{MbLogin.login}" 
-                                     oncomplete="manejarLogin(xhr, status, args)"/>
+                                     oncomplete="rc()" />
+
                 </h:panelGrid>
                 <!--p:separator style="width: 260px;"/-->
             </div>
@@ -29,6 +31,9 @@
                 if (args.loggedIn) {
                     setTimeout(function() {
                         window.location = args.view;
+                        //window.location.href = args.view;
+                        //window.location.assign(args.view);
+                        //window.location.replace(args.view);
                     }, 500);
                 }
             }

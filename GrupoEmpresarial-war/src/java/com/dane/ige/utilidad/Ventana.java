@@ -44,4 +44,7 @@ public class Ventana implements Serializable {
         RequestContext.getCurrentInstance().openDialog(componente, options, null);
     }
 
+    public void cerrarCentanaParametrizada(String componente){
+        RequestContext.getCurrentInstance().closeDialog(componente);
+    }
 }

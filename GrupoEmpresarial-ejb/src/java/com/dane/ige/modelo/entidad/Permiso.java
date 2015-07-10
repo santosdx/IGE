@@ -24,11 +24,11 @@ import org.apache.commons.lang3.text.WordUtils;
     @NamedQuery(name = "Permiso.findByPermiso", query = "SELECT p FROM Permiso p WHERE p.permiso = :permiso"),
     @NamedQuery(name = "Permiso.findByDescripcion", query = "SELECT p FROM Permiso p WHERE p.descripcion = :descripcion")})
 public class Permiso implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final String FINE_BYE_PERMISO = "Permiso.findByPermiso";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PERMISO")
     @SequenceGenerator(name = "SEQ_PERMISO", sequenceName = "seq_id_ige_permiso", allocationSize = 1)
@@ -45,8 +45,12 @@ public class Permiso implements Serializable {
     @Column(name = "actualizar")
     private String actualizar;
     @Column(name = "ajax")
-    private int ajax;
-    
+    private Integer ajax;
+    @Column(name = "orden")
+    private Integer orden;
+    @Column(name = "visible")
+    private Integer visible;
+
     public Permiso() {
     }
 
@@ -54,11 +58,11 @@ public class Permiso implements Serializable {
         this.id = id;
     }
 
-    public Permiso(String permiso, String descripcion) {        
+    public Permiso(String permiso, String descripcion) {
         this.permiso = permiso;
         this.descripcion = descripcion;
     }
-    
+
     public Permiso(Integer id, String permiso, String descripcion) {
         this.id = id;
         this.permiso = permiso;
@@ -77,7 +81,7 @@ public class Permiso implements Serializable {
         return permiso;
     }
 
-    public void setPermiso(String permiso) {        
+    public void setPermiso(String permiso) {
         this.permiso = WordUtils.capitalize(permiso.trim());
     }
 
@@ -113,14 +117,30 @@ public class Permiso implements Serializable {
         this.actualizar = actualizar;
     }
 
-    public int getAjax() {
+    public Integer getAjax() {
         return ajax;
     }
 
-    public void setAjax(int ajax) {
+    public void setAjax(Integer ajax) {
         this.ajax = ajax;
-    }    
-    
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
+
+    public Integer getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Integer visible) {
+        this.visible = visible;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -144,6 +164,6 @@ public class Permiso implements Serializable {
     @Override
     public String toString() {
         return "com.nerv.sai.modelo.entidad.Permiso[ id=" + id + " ]";
-    }    
+    }
 
 }

@@ -6,32 +6,67 @@
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
-                <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
-                    <p:graphicImage name="imagen/ajax-donwload.gif" />
-                </p:dialog>
-                <h3 class="titulo-center-h3">REPORTE DE PERFILAMIENTO DEL GRUPO EMPRESARIAL</h3>
+
                 <h:form style="height: 88%;" >
                     <p:growl id="msnInforGruEmp" showDetail="true" />
-                    <p:commandButton id="btnGenerarReporte" value="Generar reporte" update="@form"
-                                     actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.grupoEmpresarial.path'], nerv['reporte.grupoEmpresarial.archivo'])}"/>
+                    <h3 class="titulo-center-h3">REPORTE DE PERFILAMIENTO DEL GRUPO EMPRESARIAL</h3>
+                    <div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-12">
+                                <h4 class="titulo-left-h3">Generación de Reporte</h4>
+                                <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos los datos del grupo empresarial.</p>
+                                <p:commandButton id="btnGenerarReporte" value="Generar reporte" update="dlgReportePdf" oncomplete="PF('dlg').show();"
+                                                 actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.grupoEmpresarial.path'], nerv['reporte.grupoEmpresarial.archivo'])}"/>
+                                <!--p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="100%" height="90%" player="pdf"/-->
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-12">
+                                <h4 class="titulo-left-h3">Actualizar información desde formulario</h4>
+                                <p>En esta sección el usuario puede actualizar los datos en linea directamente desde un formulario electronico, el cual
+                                    presenta los datos del grupo empresarial prediligenciados.</p>
+                                <p:commandButton value="Fromulario" action="/interfaz/grupo-empresa/itz-formulario-grupo-empresa.xhtml" />
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-12">
+                                <h4 class="titulo-left-h3">Actualizar información desde archivo XLS</h4>
+                                <p>En esta sección el usuario puede descargar un archivo XLS, que contiene la información del grupo empresarial, la cual podra
+                                actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
+                                <p:commandButton id="btnGenerarXlsGrupoEmpresa" value="Generar Excel" ajax="false" 
+                                                 actionListener="#{MbEscribirExcel.generarArchivoXlsGrupoEmpresarial(nerv['plantilla.grupoEmpresarial.path'], nerv['plantilla.grupoEmpresarial.archivo'])}"
+                                                 onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                    <p:fileDownload value="#{MbEscribirExcel.file}" />
+                                </p:commandButton>
+                                <p>Subir el archivo con la ifnromación del grupo empresarial diligenciada para actualizar los datos.</p>
+                                <p:fileUpload fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"
+                                              multiple="false" fileLimitMessage="Número de archivos permitidos 1."
+                                              mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
+                                              invalidFileMessage="Tipo de archivo no soportado" 
+                                              update="msnInforGruEmp" fileLimit="1" allowTypes="/(\.|\/)(xls)$/" />
+                            </div>
+                        </div>
+                    </div>
 
-                    <p:fileUpload fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" multiple="false" fileLimitMessage="Número de archivos permitidos 1."
-                                  mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
-                                  invalidFileMessage="Tipo de archivo no soportado" 
-                                  update="msnInforGruEmp" fileLimit="1" allowTypes="/(\.|\/)(xls)$/" />
+                    <p:dialog id="dlgReportePdf" header="Reporte Grupo Empresa" widgetVar="dlg" 
+                              resizable="false" modal="false" width="800" height="550">
+                        <!--p:panelGrid id="pnlReportePdf" columns="1" style="width: 100%; height: 100%">
+                            </p:panelGrid-->
+                        <p:outputPanel deferred="true">
+                            <p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="756" height="550" player="pdf"/>
+                        </p:outputPanel>
+                    </p:dialog>
 
-                    <p:commandButton id="btnGenerarXlsGrupoEmpresa" value="Generar Excel" ajax="false" 
-                                     actionListener="#{MbEscribirExcel.generarArchivoXlsGrupoEmpresarial(nerv['plantilla.grupoEmpresarial.path'], nerv['plantilla.grupoEmpresarial.archivo'])}"
-                                     onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                        <p:fileDownload value="#{MbEscribirExcel.file}" />
-                    </p:commandButton>
-
-                    <p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="100%" height="100%" player="pdf"/>
                     <p:blockUI block="@form" trigger="btnGenerarReporte" >
                         Generando reporte...<br />
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>
                 </h:form>
+
+                <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+                    <p:graphicImage name="imagen/ajax-donwload.gif" />
+                </p:dialog>
+
                 <script type="text/javascript">
                     function start() {
                         PF('statusDialog').show();
@@ -41,6 +76,7 @@
                         PF('statusDialog').hide();
                     }
                 </script>
+
             </ui:define>
         </ui:composition>
     </h:body>

@@ -20,8 +20,6 @@
 
     <h:body>
 
-
-
         <ui:debug/>
         <p:layout fullPage="true">
 
@@ -29,16 +27,16 @@
                 <ui:include src="/plantilla/encabezado.xhtml" />
             </p:layoutUnit>
 
-            <p:layoutUnit position="west" size="250" header="#{nerv['menu.title']}" collapsible="true">
+            <!--p:layoutUnit position="west" size="250" header="#{nerv['menu.title']}" collapsible="true">
                 <ui:include src="/plantilla/menu.xhtml" />
-            </p:layoutUnit>
+            </p:layoutUnit-->
 
             <p:layoutUnit position="center" >
-                <div class="ui-grid ui-grid-responsive">
+                <!--div class="ui-grid ui-grid-responsive">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2"></div>
                         <div class="ui-grid-col-3" style="text-align: right;">
-                            <p:graphicImage value="/resources/imagen/acceso.png" width="180" height="180"/>
+                            <p:graphicImage value="/resources/imagen/acceso.png" width="160" height="160"/>
                         </div>
                         <div class="ui-grid-col-4" style="text-align: left;">
                             <ui:include src="interfaz/usuario/componente/cpt-acceso-sistema.xhtml"/>
@@ -55,7 +53,54 @@
                         </div>
                         <div class="ui-grid-col-3"></div>
                     </div>
-                </div>
+                </div-->
+                <h:form>
+                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                    <div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2"></div>
+                            <div class="ui-grid-col-8">
+                                <p:outputLabel value="#{aplicacionPrincipal.sistemaInfo.textoBienvenida}" escape="false"/>
+                                <h:outputLink id="btnIngresar" value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+                                    ingresar
+                                </h:outputLink>
+                                <p:tooltip for="btnIngresar" value="Acceder a la plataforma." />
+                                <!--p:commandButton value="Ingresar" icon="ui-icon-extlink" actionListener="#{MbLogin.abrirVentanaLogin}"/-->
+                            </div>
+                            <div class="ui-grid-col-2"></div>
+                        </div>
+                    </div>
+
+                    <p:dialog header="Credenciales de acceso" widgetVar="dlg" resizable="false" modal="false">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel for="username" value="Usuario:" styleClass="etiquetaFormulario"/>
+                            <p:inputText id="username" value="#{MbLogin.username}" 
+                                         required="true" label="username" requiredMessage="Usuario requerido"/>
+
+                            <h:outputLabel for="password" value="Contraseña:" styleClass="etiquetaFormulario"/>
+                            <p:password id="password" value="#{MbLogin.password}" 
+                                        required="true" label="password" requiredMessage="Contraseña requerida" />
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Aceptar" update="growl" actionListener="#{MbLogin.login}" 
+                                                 oncomplete="manejarLogin(xhr, status, args)" 
+                                                 style="float: right;"/>
+                            </f:facet>  
+                        </h:panelGrid>
+                    </p:dialog>
+
+                    <script type="text/javascript">
+                        function manejarLogin(xhr, status, args) {
+                            if (args.loggedIn) {
+                                PF('dlg').hide();
+                                setTimeout(function() {
+                                    window.location = args.view;
+                                }, 500);
+                            }
+                        }
+                    </script>
+
+                </h:form>
             </p:layoutUnit>
 
             <p:layoutUnit position="south" closable="true" collapsible="true" styleClass="cajaPiePagina">

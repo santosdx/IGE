@@ -14,7 +14,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -34,7 +33,6 @@ import org.primefaces.model.menu.MenuModel;
  *
  * @author srojasm
  */
-
 @SessionScoped
 public class Login implements Serializable {
 
@@ -62,9 +60,10 @@ public class Login implements Serializable {
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         construirMenuInicial();
     }
+
     /**
      * Metodo que permite iniciar una sesion para el usuario en la aplicacion.
      *
@@ -103,9 +102,11 @@ public class Login implements Serializable {
     }
 
     /**
-     * Método que permite contruir dinamicamente el menú principal del aplicativo,
-     * con la asignación de modulos y permisos del usuario de acuerdo a su perfil.
-     * @return 
+     * Método que permite contruir dinamicamente el menú principal del
+     * aplicativo, con la asignación de modulos y permisos del usuario de
+     * acuerdo a su perfil.
+     *
+     * @return
      */
     private FacesMessage construirMenuLogin() {
         FacesMessage message = null;
@@ -118,6 +119,11 @@ public class Login implements Serializable {
             itemHome.setUrl("/index.xhtml");
             itemHome.setIcon("ui-icon-home");
             getModeloMenu().addElement(itemHome);
+
+            DefaultMenuItem itemGuia = new DefaultMenuItem("Guía De Usuario");
+            itemGuia.setUrl("/interfaz/usuario/itz-guial-usuario.xhtml");
+            itemGuia.setIcon("fa fa-book");
+            getModeloMenu().addElement(itemGuia);
 
             for (Modulo modulo : getListaModulos()) {
                 //First submenu
@@ -139,6 +145,9 @@ public class Login implements Serializable {
 
                         item.setAjax((permiso.getAjax() != 0));
                         //item.setIcon("ui-icon-home");
+                        if(permiso.getVisible()==0){
+                            item.setDisabled(true);
+                        }
                         submenu.addElement(item);
                     }
                 }
@@ -182,7 +191,7 @@ public class Login implements Serializable {
             for (Modulo modulo : getListaModulos()) {
                 //First submenu
                 //DefaultSubMenu submenu = new DefaultSubMenu(modulo.getModulo());
-                
+
                 DefaultMenuItem itemSalir = new DefaultMenuItem(modulo.getModulo());
                 itemSalir.setUrl("/login.xhtml");
                 //itemSalir.setCommand("#{MbLogin.ventanaLogin}");
@@ -193,7 +202,7 @@ public class Login implements Serializable {
                 getModeloMenu().addElement(itemSalir);
             }
 
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido","");
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", "");
         } else {
             setLoggedIn(false);
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Ateción", "El perfil no tiene asignado módulos");
@@ -209,20 +218,31 @@ public class Login implements Serializable {
         setLoggedIn(false);
         FacesContext contex = FacesContext.getCurrentInstance();
         try {
-            contex.getExternalContext().redirect("index.xhtml");
+            //contex.getExternalContext().redirect("index.xhtml");
+            contex.getExternalContext().redirect("login.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Metodo que permite abrir una ventana con el componente login, para el inicio de session.
-     * @deprecated 
+     * Metodo que permite abrir una ventana con el componente login, para el
+     * inicio de session.
+     *
+     * @param componente
      */
-    public void ventanaLogin(){
+    public void abrirVentanaLogin() {
         Ventana acceso = new Ventana();
-        acceso.visualizarVentanaParametrizada("/interfaz/usuario/ventana/vta-acceso-sistema",true,true,false,130L,320L);
+        acceso.visualizarVentanaParametrizada("/interfaz/usuario/ventana/vta-acceso-sistema", true, true, false, 140L, 320L);
         System.out.println("sii..");
+    }
+
+    /**
+     * Método que permite cerrar la ventana del componente login.
+     */
+    public void cerrarVentanaLogin() {
+        Ventana acceso = new Ventana();
+        acceso.cerrarCentanaParametrizada("/interfaz/usuario/ventana/vta-acceso-sistema");
     }
 
     //Lista métodos Set y Get de la clase

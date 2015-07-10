@@ -28,10 +28,11 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "SistemaInfo.findByFechaVigencia", query = "SELECT s FROM SistemaInfo s WHERE s.fechaVigencia = :fechaVigencia"),
     @NamedQuery(name = "SistemaInfo.findByFechaVigenciaNull", query = "SELECT s FROM SistemaInfo s WHERE s.fechaVigencia is null")})
 public class SistemaInfo implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final String FIND_BY_FECHA_VIGENCIA_NULL = "SistemaInfo.findByFechaVigenciaNull";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_SISTEMA_INFO")
     @SequenceGenerator(name = "SEQ_SISTEMA_INFO", sequenceName = "seq_id_ige_sistema_info", allocationSize = 1)
@@ -44,6 +45,8 @@ public class SistemaInfo implements Serializable {
     @Column(name = "fecha_vigencia")
     @Temporal(TemporalType.DATE)
     private Date fechaVigencia;
+    @Column(name = "texto_bienvenida")
+    private String textoBienvenida;
 
     public SistemaInfo() {
     }
@@ -84,6 +87,14 @@ public class SistemaInfo implements Serializable {
         this.fechaVigencia = fechaVigencia;
     }
 
+    public String getTextoBienvenida() {
+        return textoBienvenida;
+    }
+
+    public void setTextoBienvenida(String textoBienvenida) {
+        this.textoBienvenida = textoBienvenida;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -108,5 +119,5 @@ public class SistemaInfo implements Serializable {
     public String toString() {
         return "com.nerv.sai.negocio.entidad.SistemaInfo[ id=" + id + " ]";
     }
-    
+
 }

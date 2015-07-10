@@ -87,14 +87,14 @@ public class Filtro implements Filter {
         if (loginBean != null) {
             if (loginBean.isLoggedIn() == false) {
                 System.out.println("El usuario no está logueado Caso-A");
-                //res.sendRedirect(req.getContextPath() + "/login.xhtml");
-                res.sendRedirect(req.getContextPath() + "/index.xhtml");
+                res.sendRedirect(req.getContextPath() + "/login.xhtml");
+                //res.sendRedirect(req.getContextPath() + "/index.xhtml");
                 return;
             }
         } else {
             System.out.println("El usuario no está logueado Caso-B");
-            //res.sendRedirect(req.getContextPath() + "/login.xhtml");
-            res.sendRedirect(req.getContextPath() + "/index.xhtml");
+            res.sendRedirect(req.getContextPath() + "/login.xhtml");
+            //res.sendRedirect(req.getContextPath() + "/index.xhtml");
             return;
         }
         //El recurso requiere protección, pero el usuario ya está logueado.

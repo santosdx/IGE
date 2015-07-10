@@ -1,43 +1,18 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-        </f:facet>
-        <!--link type="image/vnd.microsoft.icon" rel="shortcut icon" href="resources/imagenes/dane.ico"/-->
-        <h:outputStylesheet library="css" name="general.css" />
-        <h:outputStylesheet library="css" name="titulos.css" />
-        <h:outputStylesheet library="css" name="componentes.css" />
-        <title>#{nerv['sistema.title']}</title>
-    </h:head>
-
-    <h:body>
-        <ui:debug/>
-        <p:layout fullPage="true">
-
-            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                <ui:include src="/plantilla/encabezado.xhtml" />
-            </p:layoutUnit>
-
-            <p:layoutUnit position="west" size="250" header="#{nerv['menu.title']}" collapsible="true">
-                <ui:include src="/plantilla/menu.xhtml" />
-            </p:layoutUnit>
-
-            <p:layoutUnit position="center">
-                <ui:include src="/welcome.xhtml" />
-            </p:layoutUnit>
-
-            <p:layoutUnit position="south" closable="true" collapsible="true" styleClass="cajaPiePagina">
-                <ui:include src="/plantilla/pie-pagina.xhtml" />
-            </p:layoutUnit>
-
-        </p:layout>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>   
+        <ui:composition template="/plantilla/plantilla.xhtml">
+            <ui:define name="content" >
+                <p:outputLabel value="Linea de Investigación Grupos Empresariales" styleClass="titulo-center-h2" style="color: #B6014C;"/>
+                <p>Proyecto de linea de investigación para el DANE sobre los grupos empresariales en Colombia.</p>
+           <!--lista:unica-seleccion label="Lista frutas:" bean="#{practica.cboFrutas}" habilitarTest="true"/-->
+           <!--p:outputLabel value="#{request.contextPath} -" />
+           <p:outputLabel value="#{root} -"/>
+           <p:outputLabel value="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}"/-->
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
