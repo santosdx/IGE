@@ -40,92 +40,92 @@ public class BodegaTamano implements Serializable {
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO")
     //@SequenceGenerator(name = "SEQ_MODULO", sequenceName = "seq_id_ige_modulo", allocationSize = 1)
     @Column(name = "t_id_organizacion", unique = true, nullable = false, scale = 0)
-    private Integer id;
+    private Long id;
     @Column(name = "info_corte")
-    private Integer infoCorte;
+    private Long infoCorte;
 
     @Column(name = "personal_ocupado")
-    private Integer personalOcupado;
+    private Long personalOcupado;
     @Column(name = "fuente_personal_ocupado")
     private String fuentePersonalOcupado;
 
     @Column(name = "personal_empleado")
-    private Integer personalEmpleado;
+    private Long personalEmpleado;
     @Column(name = "fuente_personal_empleado")
     private String fuentePersonalEmpleado;
 
     @Column(name = "personal_temporal")
-    private Integer personalTemporal;
+    private Long personalTemporal;
     @Column(name = "fuente_personal_temporal")
     private String fuentePersonaltemporal;
 
     @Column(name = "personal_cotizante")
-    private Integer personalCotizante;
+    private Long personalCotizante;
     @Column(name = "fuente_personal_cotizante")
     private String fuentePersonalCotizante;
 
     @Column(name = "hombres_ocupados")
-    private Integer hombresOcupados;
+    private Long hombresOcupados;
     @Column(name = "fuente_hombres_ocupados")
     private String fuenteHombresOcupados;
 
     @Column(name = "mujeres_ocupadas")
-    private Integer mujeresOcupadas;
+    private Long mujeresOcupadas;
     @Column(name = "fuente_mujeres_ocupadas")
     private String fuenteMujeresOcupadas;
 
     @Column(name = "ingresos_operacionales")
-    private Integer ingresosOperacionales;
+    private Long ingresosOperacionales;
     @Column(name = "fuente_ingresos_operacional")
     private String fuenteIngresosOperacional;
 
     @Column(name = "utilidad_neta")
-    private Integer utilidadNeta;
+    private Long utilidadNeta;
     @Column(name = "fuente_utilidad_neta")
     private String fuenteUtilidadNeta;
 
     @Column(name = "utilidad_bruta")
-    private Integer utilidadBruta;
+    private Long utilidadBruta;
     @Column(name = "fuente_utilidad_bruta")
     private String fuenteUtilidadBrura;
 
     @Column(name = "activo")
-    private Integer activo;
+    private Long activo;
     @Column(name = "fuente_activo")
     private String fuenteActivo;
 
     @Column(name = "pasivo")
-    private Integer pasivo;
+    private Long pasivo;
     @Column(name = "fuente_pasivo")
     private String fuentePasivo;
 
     @Column(name = "patrimonio")
-    private Integer patrimonio;
+    private Long patrimonio;
     @Column(name = "fuente_patrimonio")
     private String fuentePatrimonio;
 
     @Column(name = "gastos_operacionales")
-    private Integer gastosOperacionales;
+    private Long gastosOperacionales;
     @Column(name = "fuente_gastos_operacionales")
     private String fuenteGastosOperacionales;
 
     @Column(name = "gastos_operacionales_admon")
-    private Integer gastosOperacionalesAdmon;
+    private Long gastosOperacionalesAdmon;
     @Column(name = "fuente_gastos_Admon")
     private String fuenteGastosAdmon;
 
     @Column(name = "gastos_operacionales_venta")
-    private Integer gastosOperacionalesVenta;
+    private Long gastosOperacionalesVenta;
     @Column(name = "fuente_gastos_venta")
     private String fuenteGastosVenta;
 
     @Column(name = "utilidad_operativa")
-    private Integer utilidadOperativa;
+    private Long utilidadOperativa;
     @Column(name = "fuente_utilidad_operativa")
     private String fuenteUtilidadOperativa;
 
     @Column(name = "ebitda")
-    private Integer ebitda;
+    private Long ebitda;
     @Column(name = "fuente_ebitda")
     private String fuenteEbitda;
 
@@ -135,31 +135,31 @@ public class BodegaTamano implements Serializable {
     public BodegaTamano() {
     }
 
-    public BodegaTamano(Integer id) {
+    public BodegaTamano(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getInfoCorte() {
+    public Long getInfoCorte() {
         return infoCorte;
     }
 
-    public void setInfoCorte(Integer infoCorte) {
+    public void setInfoCorte(Long infoCorte) {
         this.infoCorte = infoCorte;
     }
 
-    public Integer getPersonalOcupado() {
+    public Long getPersonalOcupado() {
         return personalOcupado;
     }
 
-    public void setPersonalOcupado(Integer personalOcupado) {
+    public void setPersonalOcupado(Long personalOcupado) {
         this.personalOcupado = personalOcupado;
     }
 
@@ -171,11 +171,11 @@ public class BodegaTamano implements Serializable {
         this.fuentePersonalOcupado = fuentePersonalOcupado;
     }
 
-    public Integer getPersonalEmpleado() {
+    public Long getPersonalEmpleado() {
         return personalEmpleado;
     }
 
-    public void setPersonalEmpleado(Integer personalEmpleado) {
+    public void setPersonalEmpleado(Long personalEmpleado) {
         this.personalEmpleado = personalEmpleado;
     }
 
@@ -187,11 +187,11 @@ public class BodegaTamano implements Serializable {
         this.fuentePersonalEmpleado = fuentePersonalEmpleado;
     }
 
-    public Integer getPersonalTemporal() {
+    public Long getPersonalTemporal() {
         return personalTemporal;
     }
 
-    public void setPersonalTemporal(Integer personalTemporal) {
+    public void setPersonalTemporal(Long personalTemporal) {
         this.personalTemporal = personalTemporal;
     }
 
@@ -203,11 +203,11 @@ public class BodegaTamano implements Serializable {
         this.fuentePersonaltemporal = fuentePersonaltemporal;
     }
 
-    public Integer getPersonalCotizante() {
+    public Long getPersonalCotizante() {
         return personalCotizante;
     }
 
-    public void setPersonalCotizante(Integer personalCotizante) {
+    public void setPersonalCotizante(Long personalCotizante) {
         this.personalCotizante = personalCotizante;
     }
 
@@ -219,11 +219,11 @@ public class BodegaTamano implements Serializable {
         this.fuentePersonalCotizante = fuentePersonalCotizante;
     }
 
-    public Integer getHombresOcupados() {
+    public Long getHombresOcupados() {
         return hombresOcupados;
     }
 
-    public void setHombresOcupados(Integer hombresOcupados) {
+    public void setHombresOcupados(Long hombresOcupados) {
         this.hombresOcupados = hombresOcupados;
     }
 
@@ -235,11 +235,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteHombresOcupados = fuenteHombresOcupados;
     }
 
-    public Integer getMujeresOcupadas() {
+    public Long getMujeresOcupadas() {
         return mujeresOcupadas;
     }
 
-    public void setMujeresOcupadas(Integer mujeresOcupadas) {
+    public void setMujeresOcupadas(Long mujeresOcupadas) {
         this.mujeresOcupadas = mujeresOcupadas;
     }
 
@@ -251,11 +251,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteMujeresOcupadas = fuenteMujeresOcupadas;
     }
 
-    public Integer getIngresosOperacionales() {
+    public Long getIngresosOperacionales() {
         return ingresosOperacionales;
     }
 
-    public void setIngresosOperacionales(Integer ingresosOperacionales) {
+    public void setIngresosOperacionales(Long ingresosOperacionales) {
         this.ingresosOperacionales = ingresosOperacionales;
     }
 
@@ -267,11 +267,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteIngresosOperacional = fuenteIngresosOperacional;
     }
 
-    public Integer getUtilidadNeta() {
+    public Long getUtilidadNeta() {
         return utilidadNeta;
     }
 
-    public void setUtilidadNeta(Integer utilidadNeta) {
+    public void setUtilidadNeta(Long utilidadNeta) {
         this.utilidadNeta = utilidadNeta;
     }
 
@@ -283,11 +283,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteUtilidadNeta = fuenteUtilidadNeta;
     }
 
-    public Integer getUtilidadBruta() {
+    public Long getUtilidadBruta() {
         return utilidadBruta;
     }
 
-    public void setUtilidadBruta(Integer utilidadBruta) {
+    public void setUtilidadBruta(Long utilidadBruta) {
         this.utilidadBruta = utilidadBruta;
     }
 
@@ -299,11 +299,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteUtilidadBrura = fuenteUtilidadBrura;
     }
 
-    public Integer getActivo() {
+    public Long getActivo() {
         return activo;
     }
 
-    public void setActivo(Integer activo) {
+    public void setActivo(Long activo) {
         this.activo = activo;
     }
 
@@ -315,11 +315,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteActivo = fuenteActivo;
     }
 
-    public Integer getPasivo() {
+    public Long getPasivo() {
         return pasivo;
     }
 
-    public void setPasivo(Integer pasivo) {
+    public void setPasivo(Long pasivo) {
         this.pasivo = pasivo;
     }
 
@@ -331,11 +331,11 @@ public class BodegaTamano implements Serializable {
         this.fuentePasivo = fuentePasivo;
     }
 
-    public Integer getPatrimonio() {
+    public Long getPatrimonio() {
         return patrimonio;
     }
 
-    public void setPatrimonio(Integer patrimonio) {
+    public void setPatrimonio(Long patrimonio) {
         this.patrimonio = patrimonio;
     }
 
@@ -347,11 +347,11 @@ public class BodegaTamano implements Serializable {
         this.fuentePatrimonio = fuentePatrimonio;
     }
 
-    public Integer getGastosOperacionales() {
+    public Long getGastosOperacionales() {
         return gastosOperacionales;
     }
 
-    public void setGastosOperacionales(Integer gastosOperacionales) {
+    public void setGastosOperacionales(Long gastosOperacionales) {
         this.gastosOperacionales = gastosOperacionales;
     }
 
@@ -363,11 +363,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteGastosOperacionales = fuenteGastosOperacionales;
     }
 
-    public Integer getGastosOperacionalesAdmon() {
+    public Long getGastosOperacionalesAdmon() {
         return gastosOperacionalesAdmon;
     }
 
-    public void setGastosOperacionalesAdmon(Integer gastosOperacionalesAdmon) {
+    public void setGastosOperacionalesAdmon(Long gastosOperacionalesAdmon) {
         this.gastosOperacionalesAdmon = gastosOperacionalesAdmon;
     }
 
@@ -379,11 +379,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteGastosAdmon = fuenteGastosAdmon;
     }
 
-    public Integer getGastosOperacionalesVenta() {
+    public Long getGastosOperacionalesVenta() {
         return gastosOperacionalesVenta;
     }
 
-    public void setGastosOperacionalesVenta(Integer gastosOperacionalesVenta) {
+    public void setGastosOperacionalesVenta(Long gastosOperacionalesVenta) {
         this.gastosOperacionalesVenta = gastosOperacionalesVenta;
     }
 
@@ -395,11 +395,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteGastosVenta = fuenteGastosVenta;
     }
 
-    public Integer getUtilidadOperativa() {
+    public Long getUtilidadOperativa() {
         return utilidadOperativa;
     }
 
-    public void setUtilidadOperativa(Integer utilidadOperativa) {
+    public void setUtilidadOperativa(Long utilidadOperativa) {
         this.utilidadOperativa = utilidadOperativa;
     }
 
@@ -411,11 +411,11 @@ public class BodegaTamano implements Serializable {
         this.fuenteUtilidadOperativa = fuenteUtilidadOperativa;
     }
 
-    public Integer getEbitda() {
+    public Long getEbitda() {
         return ebitda;
     }
 
-    public void setEbitda(Integer ebitda) {
+    public void setEbitda(Long ebitda) {
         this.ebitda = ebitda;
     }
 

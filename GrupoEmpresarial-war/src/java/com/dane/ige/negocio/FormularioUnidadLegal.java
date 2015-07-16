@@ -10,25 +10,26 @@ import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
 import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.seguridad.Login;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import org.apache.log4j.Logger;
 import org.primefaces.event.FlowEvent;
 
 /**
  * Clase que permite administrar los procesos de actualización del formulario
- * Grupo Empresarial.
+ * Unidad Legal.
  *
  * @author SRojasM
  */
-@ManagedBean(name = "MbFormGrupoEmpresa")
-@ViewScoped
-public class FormularioGrupoEmpresa implements Serializable {
+@ManagedBean(name = "MbFormUnidadLegal")
+@SessionScoped
+public class FormularioUnidadLegal implements Serializable {
 
-    final static Logger LOGGER = Logger.getLogger(FormularioGrupoEmpresa.class);
+    final static Logger LOGGER = Logger.getLogger(FormularioUnidadLegal.class);
 
     @EJB
     private BodegaIdentificacionFacadeLocal eJBServicioBodegaIdentificacion;
@@ -47,19 +48,21 @@ public class FormularioGrupoEmpresa implements Serializable {
     private BodegaRelacion relacionSeleccionada;
     private BodegaTamano tamanoSeleccionado;
 
-    public FormularioGrupoEmpresa() {
+    private List<BodegaIdentificacion> listaIdentificacion;
+
+    public FormularioUnidadLegal() {
     }
 
     @PostConstruct
     public void init() {
-        Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion()+"");
-
-        setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(id,"GRUPO"));
-        setNovedadSeleccionada(geteJBServicioBodegaNovedad().obtenerNovedadGrupoEmpresaById(id));
-        setRelacionSeleccionada(geteJBServicioBodegaRelacion().obtenerRelacionGrupoEmpresaById(id));
-        setTamanoSeleccionado(geteJBServicioBodegaTamano().obtenerTamanoGrupoEmpresaById(id));
+        Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
+        setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(id, "UNIDAD LEGAL"));
     }
 
+    public String seleccionarUnidadLegal(Long idOrganizacion) {
+        setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(idOrganizacion, "UNIDAD LEGAL"));
+       return "/interfaz/unidad-legal/itz-formulario-unidad-legal.xhtml";
+    }
     private boolean skip;
 
     public boolean isSkip() {
@@ -150,6 +153,14 @@ public class FormularioGrupoEmpresa implements Serializable {
 
     public void setTamanoSeleccionado(BodegaTamano tamanoSeleccionado) {
         this.tamanoSeleccionado = tamanoSeleccionado;
+    }
+
+    public List<BodegaIdentificacion> getListaIdentificacion() {
+        return listaIdentificacion;
+    }
+
+    public void setListaIdentificacion(List<BodegaIdentificacion> listaIdentificacion) {
+        this.listaIdentificacion = listaIdentificacion;
     }
 
 }

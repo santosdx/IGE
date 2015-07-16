@@ -13,7 +13,7 @@ public interface BodegaTamanoFacadeLocal {
 
     void create(BodegaTamano relacion);
 
-    //public Integer createAndGetKey(BodegaTamano tamano);
+    //public Long createAndGetKey(BodegaTamano tamano);
     void edit(BodegaTamano relacion);
 
     void remove(BodegaTamano relacion);
@@ -26,6 +26,6 @@ public interface BodegaTamanoFacadeLocal {
 
     int count();
 
-    BodegaTamano obtenerTamanoGrupoEmpresaById(Integer id);
+    BodegaTamano obtenerTamanoGrupoEmpresaById(Long id);
 
 }

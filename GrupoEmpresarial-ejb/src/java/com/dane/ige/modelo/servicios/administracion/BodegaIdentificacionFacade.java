@@ -31,16 +31,18 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
     }
 
     /**
-     * Método que permite obtener el registro del grupo empresarial por el ID
+     * Método que permite obtener el registro de identificación del grupo empresarial
+     * pasando como parametro el ID del grupo empresarial.
      * @param id
      * @return 
      */
     @Override
-    public BodegaIdentificacion obtenerIdentificacionGrupoEmpresaById(Integer id) {
+    public BodegaIdentificacion obtenerIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion) {
         BodegaIdentificacion resultado = null;
         try {
             Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID);
             query.setParameter("id", id);
+            query.setParameter("tipoOrganizacion", tipoOrganizacion);
 
             List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
@@ -55,4 +57,30 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
         return resultado;
     }
 
+    /**
+     * Método que permite obtener el listado de registros de identificación de cualquier tipo unidad
+     * pasando como parametro el ID del grupo empresarial.
+     * @param id
+     * @return 
+     */
+    @Override
+    public List<BodegaIdentificacion> obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado, String tipoOrganizacion) {
+        List<BodegaIdentificacion> resultado = null;
+        try {
+            Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID_GRUPO_RELACIONADO);
+            query.setParameter("idGrupoRelacionado", idGrupoRelacionado);
+            query.setParameter("tipoOrganizacion", tipoOrganizacion);
+
+            List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+        return resultado;
+    }
 }

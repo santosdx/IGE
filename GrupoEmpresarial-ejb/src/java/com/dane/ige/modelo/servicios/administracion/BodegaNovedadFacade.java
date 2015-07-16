@@ -38,7 +38,7 @@ public class BodegaNovedadFacade extends AbstractFacade<BodegaNovedad> implement
      * @return
      */
     @Override
-    public BodegaNovedad obtenerNovedadGrupoEmpresaById(Integer id) {
+    public BodegaNovedad obtenerNovedadGrupoEmpresaById(Long id) {
         BodegaNovedad resultado = null;
         try {
             Query query = em.createNamedQuery(BodegaNovedad.FINE_BYE_ID);

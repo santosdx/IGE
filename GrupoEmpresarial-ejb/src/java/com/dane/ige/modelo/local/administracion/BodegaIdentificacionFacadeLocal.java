@@ -13,7 +13,7 @@ public interface BodegaIdentificacionFacadeLocal {
 
     void create(BodegaIdentificacion identificacion);
 
-    //public Integer createAndGetKey(BodegaIdentificacion identificacion);
+    //public Long createAndGetKey(BodegaIdentificacion identificacion);
 
     void edit(BodegaIdentificacion identificacion);
 
@@ -27,5 +27,7 @@ public interface BodegaIdentificacionFacadeLocal {
 
     int count();
 
-    BodegaIdentificacion obtenerIdentificacionGrupoEmpresaById(Integer id);
+    BodegaIdentificacion obtenerIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion);
+
+    public List<BodegaIdentificacion> obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado, String tipoOrganizacion) ;
 }

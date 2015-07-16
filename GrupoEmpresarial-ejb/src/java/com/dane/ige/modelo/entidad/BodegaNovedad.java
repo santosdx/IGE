@@ -43,7 +43,7 @@ public class BodegaNovedad implements Serializable {
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO")
     //@SequenceGenerator(name = "SEQ_MODULO", sequenceName = "seq_id_ige_modulo", allocationSize = 1)
     @Column(name = "n_id_organizacion", unique = true, nullable = false, scale = 0)
-    private Integer id;
+    private Long id;
     @Column(name = "estado")
     private String estado;
     @Temporal(TemporalType.TIMESTAMP)
@@ -55,7 +55,7 @@ public class BodegaNovedad implements Serializable {
     @Column(name = "estado_matricula")
     private String estadoMatricula;
     @Column(name = "ultimo_ano_renovado")
-    private Integer ultimoAnoRenovado;
+    private Long ultimoAnoRenovado;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
@@ -74,24 +74,24 @@ public class BodegaNovedad implements Serializable {
     @Column(name = "fecha_novedad")
     private Date fechaNovedad;
     @Column(name = "id_grupo_novedad")
-    private Integer idGrupoNovedad;
+    private Long idGrupoNovedad;
     @Column(name = "nit_ul_involucrada")
-    private Integer nitUlInvolucrada;
+    private Long nitUlInvolucrada;
     @Column(name = "observaciones")
     private String observaciones;
 
     public BodegaNovedad() {
     }
 
-    public BodegaNovedad(Integer id) {
+    public BodegaNovedad(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -127,11 +127,11 @@ public class BodegaNovedad implements Serializable {
         this.estadoMatricula = estadoMatricula;
     }
 
-    public Integer getUltimoAnoRenovado() {
+    public Long getUltimoAnoRenovado() {
         return ultimoAnoRenovado;
     }
 
-    public void setUltimoAnoRenovado(Integer ultimoAnoRenovado) {
+    public void setUltimoAnoRenovado(Long ultimoAnoRenovado) {
         this.ultimoAnoRenovado = ultimoAnoRenovado;
     }
 
@@ -183,19 +183,19 @@ public class BodegaNovedad implements Serializable {
         this.fechaNovedad = fechaNovedad;
     }
 
-    public Integer getIdGrupoNovedad() {
+    public Long getIdGrupoNovedad() {
         return idGrupoNovedad;
     }
 
-    public void setIdGrupoNovedad(Integer idGrupoNovedad) {
+    public void setIdGrupoNovedad(Long idGrupoNovedad) {
         this.idGrupoNovedad = idGrupoNovedad;
     }
 
-    public Integer getNitUlInvolucrada() {
+    public Long getNitUlInvolucrada() {
         return nitUlInvolucrada;
     }
 
-    public void setNitUltimaInvolucrada(Integer nitUlInvolucrada) {
+    public void setNitUltimaInvolucrada(Long nitUlInvolucrada) {
         this.nitUlInvolucrada = nitUlInvolucrada;
     }
 

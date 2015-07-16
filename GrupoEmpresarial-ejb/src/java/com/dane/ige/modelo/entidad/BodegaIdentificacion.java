@@ -30,13 +30,16 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_identificacion")
 @NamedQueries({
     @NamedQuery(name = "BodegaIdentificacion.findAll", query = "SELECT i FROM BodegaIdentificacion i"),
-    @NamedQuery(name = "BodegaIdentificacion.findById", query = "SELECT i FROM BodegaIdentificacion i WHERE i.id.id = :id")})
+    @NamedQuery(name = "BodegaIdentificacion.findById", query = "SELECT i FROM BodegaIdentificacion i WHERE i.id.id = :id AND i.tipoOrganizacion=:tipoOrganizacion"),
+    @NamedQuery(name = "BodegaIdentificacion.findByIdGrupoRelacionadoTipoOrganizacion", 
+                query = "SELECT i FROM BodegaIdentificacion i WHERE i.idGrupoRelacionado = :idGrupoRelacionado AND i.tipoOrganizacion=:tipoOrganizacion")})
 public class BodegaIdentificacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     public static final String GET_ALL = "BodegaIdentificacion.findAll";
     public static final String FINE_BYE_ID = "BodegaIdentificacion.findById";
+    public static final String FINE_BYE_ID_GRUPO_RELACIONADO = "BodegaIdentificacion.findByIdGrupoRelacionadoTipoOrganizacion";
 
     @EmbeddedId
     private PkIdentificacion id;
@@ -44,9 +47,9 @@ public class BodegaIdentificacion implements Serializable {
     @Column(name = "tipo_organizacion")
     private String tipoOrganizacion;
     @Column(name = "id_grupo_relacionado")
-    private Integer idGrupoRelacionado;
+    private Long idGrupoRelacionado;
     @Column(name = "id_ul_relacionada")
-    private Integer idUlRelacionada;
+    private Long idUlRelacionada;
     @Column(name = "tipo_unidad_legal")
     private String tipoUnidadLegal;
     @Column(name = "tipo_establecimiento")
@@ -56,11 +59,11 @@ public class BodegaIdentificacion implements Serializable {
     @Column(name = "nombre_registrado")
     private String nombreRegistrado;
     @Column(name = "nit")
-    private Integer nit;
+    private Long nit;
     @Column(name = "matricula_mercantil")
-    private Integer matriculaMercantil;
+    private Long matriculaMercantil;
     @Column(name = "digito_verificacion")
-    private Integer digitoVerificacion;
+    private Long digitoVerificacion;
     @Column(name = "pais")
     private String pais;
     @Column(name = "departamento")
@@ -70,13 +73,13 @@ public class BodegaIdentificacion implements Serializable {
     @Column(name = "direccion")
     private String direccion;
     @Column(name = "telefono")
-    private Integer telefono;
+    private Long telefono;
     @Column(name = "pagina_web")
     private String paginaWeb;
     @Column(name = "representante_legal")
     private String representanteLegal;
     @Column(name = "actividad_principal")
-    private Integer actividadPrincipal;
+    private Long actividadPrincipal;
     @Column(name = "actividad_secundaria")
     private String actividadSecundaria;
     @Column(name = "unidad_auxiliar_ul")
@@ -146,19 +149,19 @@ public class BodegaIdentificacion implements Serializable {
         this.tipoOrganizacion = tipoOrganizacion;
     }
 
-    public Integer getIdGrupoRelacionado() {
+    public Long getIdGrupoRelacionado() {
         return idGrupoRelacionado;
     }
 
-    public void setIdGrupoRelacionado(Integer idGrupoRelacionado) {
+    public void setIdGrupoRelacionado(Long idGrupoRelacionado) {
         this.idGrupoRelacionado = idGrupoRelacionado;
     }
 
-    public Integer getIdUlRelacionada() {
+    public Long getIdUlRelacionada() {
         return idUlRelacionada;
     }
 
-    public void setIdUlRelacionada(Integer idUlRelacionada) {
+    public void setIdUlRelacionada(Long idUlRelacionada) {
         this.idUlRelacionada = idUlRelacionada;
     }
 
@@ -194,27 +197,27 @@ public class BodegaIdentificacion implements Serializable {
         this.nombreRegistrado = nombreRegistrado;
     }
 
-    public Integer getNit() {
+    public Long getNit() {
         return nit;
     }
 
-    public void setNit(Integer nit) {
+    public void setNit(Long nit) {
         this.nit = nit;
     }
 
-    public Integer getMatriculaMercantil() {
+    public Long getMatriculaMercantil() {
         return matriculaMercantil;
     }
 
-    public void setMatriculaMercantil(Integer matriculaMercantil) {
+    public void setMatriculaMercantil(Long matriculaMercantil) {
         this.matriculaMercantil = matriculaMercantil;
     }
 
-    public Integer getDigitoVerificacion() {
+    public Long getDigitoVerificacion() {
         return digitoVerificacion;
     }
 
-    public void setDigitoVerificacion(Integer digitoVerificacion) {
+    public void setDigitoVerificacion(Long digitoVerificacion) {
         this.digitoVerificacion = digitoVerificacion;
     }
 
@@ -250,11 +253,11 @@ public class BodegaIdentificacion implements Serializable {
         this.direccion = direccion;
     }
 
-    public Integer getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 
@@ -274,11 +277,11 @@ public class BodegaIdentificacion implements Serializable {
         this.representanteLegal = representanteLegal;
     }
 
-    public Integer getActividadPrincipal() {
+    public Long getActividadPrincipal() {
         return actividadPrincipal;
     }
 
-    public void setActividadPrincipal(Integer actividadPrincipal) {
+    public void setActividadPrincipal(Long actividadPrincipal) {
         this.actividadPrincipal = actividadPrincipal;
     }
 

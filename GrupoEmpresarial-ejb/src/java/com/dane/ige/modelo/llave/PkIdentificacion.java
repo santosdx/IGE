@@ -19,7 +19,7 @@ public class PkIdentificacion implements Serializable {
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SeqGen")
     //@SequenceGenerator(name = "SeqGen", sequenceName = "SEQ_DEE_COCA", allocationSize = 1)
     @Column(name = "ID_ORGANIZACION")
-    private Integer id;
+    private Long id;
     //@Id
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "FECHA_ACTUALIZA_IDEN")
@@ -28,16 +28,16 @@ public class PkIdentificacion implements Serializable {
     public PkIdentificacion() {
     }
 
-    public PkIdentificacion(Integer id, Date fecha) {
+    public PkIdentificacion(Long id, Date fecha) {
         this.id = id;
         this.fecha = fecha;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

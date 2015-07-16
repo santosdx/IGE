@@ -24,20 +24,25 @@
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Actualizar información desde formulario</h4>
-                                <p:dataTable id="dtUnidadLegal" var="fila" rowIndexVar="rowIndex"
+                                <p:dataTable id="dtUnidadLegal" var="fila" value="#{MbFormUnidadLegal.listaIdentificacion}"
+                                             rowIndexVar="rowIndex"
                                              emptyMessage="La consulta no genero resultados..." paginatorPosition="bottom" 
                                              paginator="true" rows="25" scrollable="true" scrollHeight="280" 
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="25,50,100" 
-                                             selectionMode="single">
+                                             selectionMode="single" rowKey="#{fila.id.id}">
 
                                     <p:column headerText="#" width="25">
-                                        <p:outputLabel />
+                                        <p:outputLabel value="#{rowIndex+1}"/>
                                     </p:column>
                                     <p:column headerText="Unidad Legal">
-                                        <p:outputLabel />
+                                        <p:outputLabel value="#{fila.nombreRegistrado}"/>
                                     </p:column>
-
+                                    <p:column headerText="">
+                                        <p:commandLink action="#{MbFormUnidadLegal.seleccionarUnidadLegal(fila.id.id)}" ajax="false">
+                                            <h:outputText value="Editar Información" />
+                                        </p:commandLink>
+                                    </p:column>
                                 </p:dataTable>
                             </div>
                         </div>

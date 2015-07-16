@@ -8,7 +8,7 @@
             <ui:define name="content">
                 <h3 style="text-align: center;">FORMULARIO DE PERFILAMIENTO DE UNIDADES LEGALES</h3>
                 <h:form>
-                    <p:wizard flowListener="#{practica.onFlowProcess}" backLabel="anterior" nextLabel="siguiente">
+                    <p:wizard flowListener="#{MbFormUnidadLegal.onFlowProcess}" backLabel="anterior" nextLabel="siguiente">
                         <p:tab id="identificacion" title="Identificación">
                             <ui:include src="componente/cpt-formulario-identificacion.xhtml"/>
                         </p:tab>

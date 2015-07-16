@@ -13,7 +13,7 @@ public interface BodegaRelacionFacadeLocal {
 
     void create(BodegaRelacion relacion);
 
-    //public Integer createAndGetKey(BodegaRelacion relacion);
+    //public Long createAndGetKey(BodegaRelacion relacion);
 
     void edit(BodegaRelacion relacion);
 
@@ -27,5 +27,5 @@ public interface BodegaRelacionFacadeLocal {
 
     int count();
 
-    BodegaRelacion obtenerRelacionGrupoEmpresaById(Integer id);
+    BodegaRelacion obtenerRelacionGrupoEmpresaById(Long id);
 }

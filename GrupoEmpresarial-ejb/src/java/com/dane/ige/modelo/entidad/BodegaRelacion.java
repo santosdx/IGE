@@ -40,7 +40,7 @@ public class BodegaRelacion implements Serializable {
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO")
     //@SequenceGenerator(name = "SEQ_MODULO", sequenceName = "seq_id_ige_modulo", allocationSize = 1)
     @Column(name = "r_id_organizacion", unique = true, nullable = false, scale = 0)
-    private Integer id;
+    private Long id;
     @Column(name = "tipo_congromelado")
     private String tipoCongromelado;
     @Column(name = "situacion_control")
@@ -62,22 +62,22 @@ public class BodegaRelacion implements Serializable {
     @Column(name = "nombre_controlante")
     private String nombreControlante;
     @Column(name = "porcentaje_controlante_ul")
-    private Integer porcentajeControlanteul;
+    private Long porcentajeControlanteul;
     @Column(name = "perfilador")
     private String perfilador;
 
     public BodegaRelacion() {
     }
 
-    public BodegaRelacion(Integer id) {
+    public BodegaRelacion(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -177,11 +177,11 @@ public class BodegaRelacion implements Serializable {
         this.nombreControlante = nombreControlante;
     }
 
-    public Integer getPorcentajeControlanteul() {
+    public Long getPorcentajeControlanteul() {
         return porcentajeControlanteul;
     }
 
-    public void setPorcentajeControlanteul(Integer porcentajeControlanteul) {
+    public void setPorcentajeControlanteul(Long porcentajeControlanteul) {
         this.porcentajeControlanteul = porcentajeControlanteul;
     }
 
