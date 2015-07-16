@@ -2,14 +2,15 @@
     Author     : srojasm
 */
 @font-face {
-    /*font-family: 'DeliciousRoman';
-    src: url("#{resource['font/Delicious-Roman.otf']}");
-    src: url('../font/Delicious-Roman.otf');*/
+    font-family: 'open-sans';
+    src: url("#{resource['font:open-sans/OpenSans-Regular.ttf']}&v=1.1");
 }
 
-body{
-    font-family: Sans-Serif, Arial, Helvetica; 
-    font-size: 0.8em;
+html{
+    font-size: 0.8em !important;
+}
+.ui-widget, .ui-widget .ui-widget {
+    font-family: Sans-Serif,open-sans, Arial, Helvetica !important;
 }
 
 .ui-wizard-step-title{

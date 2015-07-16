@@ -10,7 +10,7 @@
         <h:panelGrid columns="2" columnClasses="label, value">
 
             <h:outputText value="Estado: "  styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
+            <p:selectOneMenu style="width:430px" value="#{MbFormGrupoEmpresa.novedadSeleccionada.estado}">
                 <f:selectItem itemLabel="Estado..." itemValue="" />
                 <f:selectItem itemLabel="Activo" itemValue="Activo" />
                 <f:selectItem itemLabel="Cancelado" itemValue="Cancelado" />
@@ -19,33 +19,33 @@
             </p:selectOneMenu>
 
             <h:outputText value="Fecha de configuración: *" styleClass="etiquetaFormulario"/>
-            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
-            <!--
-                        <h:outputText value="Tipo de novedad: "  styleClass="etiquetaFormulario"/>
-                        <p:selectOneMenu style="width:330px">
-                            <f:selectItem itemLabel="Novedad..." itemValue="" />
-                            <f:selectItem itemLabel="Venta" itemValue="Venta" />
-                            <f:selectItem itemLabel="Compra" itemValue="Compra" />
-                            <f:selectItem itemLabel="Cierre" itemValue="Cierre" />
-                            <f:selectItem itemLabel="Fusión total" itemValue="Fusión total" /> 
-                            <f:selectItem itemLabel="Cambio de NIT" itemValue="Cambio de NIT" />
-                            <f:selectItem itemLabel="Escisión total" itemValue="Escisión total" />
-                            <f:selectItem itemLabel="Fusión absorción" itemValue="Fusión absorción" />
-                            <f:selectItem itemLabel="Escisión parcial" itemValue="Escisión parcial" />
-                        </p:selectOneMenu>
-            
-                        <h:outputText value="Fecha de novedad: " styleClass="etiquetaFormulario"/>
-                        <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
-            
-                        <h:outputText value="ID de grupo involucrado en la novedad: " styleClass="etiquetaFormulario"/>
-                        <p:inputText styleClass="valorEtiquetaFormulario"/>
-            
-                        <h:outputText value="Fecha de cierre: " styleClass="etiquetaFormulario"/>
-                        <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
-            
-                        <h:outputText value="Fecha de liquidación: " styleClass="etiquetaFormulario"/>
-                        <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
-            -->
+            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaConfiguracion}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Tipo de novedad: "  styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu style="width:430px" value="#{MbFormGrupoEmpresa.novedadSeleccionada.tipoNovedad}">
+                <f:selectItem itemLabel="Novedad..." itemValue="" />
+                <f:selectItem itemLabel="Venta" itemValue="Venta" />
+                <f:selectItem itemLabel="Compra" itemValue="Compra" />
+                <f:selectItem itemLabel="Cierre" itemValue="Cierre" />
+                <f:selectItem itemLabel="Fusión total" itemValue="Fusión total" /> 
+                <f:selectItem itemLabel="Cambio de NIT" itemValue="Cambio de NIT" />
+                <f:selectItem itemLabel="Escisión total" itemValue="Escisión total" />
+                <f:selectItem itemLabel="Fusión absorción" itemValue="Fusión absorción" />
+                <f:selectItem itemLabel="Escisión parcial" itemValue="Escisión parcial" />
+            </p:selectOneMenu>
+
+            <h:outputText value="Fecha de novedad: " styleClass="etiquetaFormulario"/>
+            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaNovedad}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="ID de grupo involucrado en la novedad: " styleClass="etiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.novedadSeleccionada.idGrupoNovedad}" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fecha de cierre: " styleClass="etiquetaFormulario"/>
+            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaCierre}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
+            <h:outputText value="Fecha de liquidación: " styleClass="etiquetaFormulario"/>
+            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaLiquidacion}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+
         </h:panelGrid>
     </p:panel>
 </ui:composition>

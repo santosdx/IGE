@@ -57,7 +57,7 @@ public class ReporteGrupoEmpresa{
             exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(temp)); // your output goes here
             exporter.exportReport();
 
-            setContenido(new DefaultStreamedContent(new FileInputStream(temp), "application/pdf"));
+            setContenido(new DefaultStreamedContent(new FileInputStream(temp), "application/pdf", "Reporte Grupo Empresa - 0001.pdf"));
             temp.delete();
             temp.deleteOnExit();
             LOGGER.info("setContenido");

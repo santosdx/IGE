@@ -22,13 +22,13 @@ import org.apache.log4j.Logger;
 @ViewScoped
 public class AdministrarUsuario {
 
+    final static Logger LOGGER = Logger.getLogger(AdministrarUsuario.class);
+
     @EJB
     private UsuarioFacadeLocal eJBServicioUsuario;
 
     @EJB
     private UsuarioPerfilFacadeLocal eJBServicioUsuarioPerfil;
-
-    final static Logger LOGGER = Logger.getLogger(AdministrarUsuario.class);
 
     @ManagedProperty("#{MbAdministrarPerfil}")
     private AdministrarPerfil servicioPerfil;
@@ -124,14 +124,15 @@ public class AdministrarUsuario {
     }
 
     /**
-     * Método que permite actualizar los datos del usuario, pasando como parametro
-     * el objeto usuario.
-     * @param  usuario
+     * Método que permite actualizar los datos del usuario, pasando como
+     * parametro el objeto usuario.
+     *
+     * @param usuario
      */
     public void actualziarUsuarioPerfil(Usuario usuario) {
-            geteJBServicioUsuario().edit(usuario);
-            //LOGGER.info("actualizo usuario");
-            Mensaje.agregarMensajeGrowlInfo("Exito!", "Usuario actualizado.");
+        geteJBServicioUsuario().edit(usuario);
+        //LOGGER.info("actualizo usuario");
+        Mensaje.agregarMensajeGrowlInfo("Exito!", "Usuario actualizado.");
     }
 
     /**

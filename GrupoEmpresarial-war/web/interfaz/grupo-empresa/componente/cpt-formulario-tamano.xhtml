@@ -10,34 +10,34 @@
         <h:panelGrid columns="2" columnClasses="label, value">
 
             <h:outputText value="Activo: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Pasivo: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Patrimonio: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Ingresos operacionales: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Gastos operacionales: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.gastosOperacionales}" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Utilidad neta: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="EBITDA: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Personal ocupado: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.personalOcupado}" styleClass="valorEtiquetaFormulario"/>
 
             <h:outputText value="Número de hombres ocupados: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.hombresOcupados}" styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Número de mujeres ocupados: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <h:outputText value="Número de mujeres ocupadas: " styleClass="etiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.mujeresOcupadas}" styleClass="valorEtiquetaFormulario"/>
 
             <!--
             <h:outputText value="Información con corte a: " styleClass="etiquetaFormulario"/>
@@ -45,7 +45,7 @@
             -->
 
             <h:outputText value="Observaciones: " styleClass="etiquetaFormulario"/>
-            <p:inputTextarea rows="6" cols="50" />
+            <p:inputTextarea value="#{MbFormGrupoEmpresa.tamanoSeleccionado.observaciones}" rows="6" cols="66" />
 
         </h:panelGrid>
     </p:panel>

@@ -48,8 +48,8 @@
                         </div>
                     </div>
 
-                    <p:dialog id="dlgReportePdf" header="Reporte Grupo Empresa" widgetVar="dlg" 
-                              resizable="false" modal="false" width="800" height="550">
+                    <p:dialog id="dlgReportePdf" header="Reporte Grupo Empresa" widgetVar="dlg"  appendTo="@(body)"
+                              resizable="false" modal="true" width="800" height="550">
                         <!--p:panelGrid id="pnlReportePdf" columns="1" style="width: 100%; height: 100%">
                             </p:panelGrid-->
                         <p:outputPanel deferred="true">
@@ -66,16 +66,6 @@
                 <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
                     <p:graphicImage name="imagen/ajax-donwload.gif" />
                 </p:dialog>
-
-                <script type="text/javascript">
-                    function start() {
-                        PF('statusDialog').show();
-                    }
-
-                    function stop() {
-                        PF('statusDialog').hide();
-                    }
-                </script>
 
             </ui:define>
         </ui:composition>

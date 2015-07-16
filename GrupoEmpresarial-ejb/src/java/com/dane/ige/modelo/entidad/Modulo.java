@@ -57,7 +57,7 @@ public class Modulo implements Serializable {
             joinColumns = @JoinColumn(name = "id_ige_modulo"),
             inverseJoinColumns = @JoinColumn(name = "id_ige_permiso")
     )
-    private List<Permiso> permisos;      
+    private List<Permiso> permisos;
 
     public Modulo() {
     }

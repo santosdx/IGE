@@ -130,25 +130,25 @@ public class Login implements Serializable {
                 DefaultSubMenu submenu = new DefaultSubMenu(modulo.getModulo());
 
                 for (Permiso permiso : getUsuarioLogueado().getPerfil().getPermisos()) {
-                    if (geteJBServicioModuloPermiso().buscarAsignacionModuloPermiso(modulo.getId(), permiso.getId()) != null) {
-                        DefaultMenuItem item = new DefaultMenuItem(permiso.getPermiso());
-                        if (permiso.getUrl() != null) {
-                            item.setUrl(permiso.getUrl());
-                        }
-                        if (permiso.getComando() != null && !StringUtils.isEmpty(permiso.getComando())) {
-                            item.setCommand(permiso.getComando());
-                            item.setUrl(null);
-                        }
-                        if (permiso.getActualizar() != null) {
-                            item.setUpdate(permiso.getActualizar());
-                        }
+                    if (permiso.getVisible().equals("true")) {
+                        if (geteJBServicioModuloPermiso().buscarAsignacionModuloPermiso(modulo.getId(), permiso.getId()) != null) {
+                            DefaultMenuItem item = new DefaultMenuItem(permiso.getPermiso());
+                            if (permiso.getUrl() != null) {
+                                item.setUrl(permiso.getUrl());
+                            }
+                            if (permiso.getComando() != null && !StringUtils.isEmpty(permiso.getComando())) {
+                                item.setCommand(permiso.getComando());
+                                item.setUrl(null);
+                            }
+                            if (permiso.getActualizar() != null) {
+                                item.setUpdate(permiso.getActualizar());
+                            }
 
-                        item.setAjax((permiso.getAjax() != 0));
-                        //item.setIcon("ui-icon-home");
-                        if(permiso.getVisible()==0){
-                            item.setDisabled(true);
+                            item.setAjax((permiso.getAjax() != 0));
+                            //item.setIcon("ui-icon-home");
+                            submenu.addElement(item);
+                            //item.setDisabled(true);
                         }
-                        submenu.addElement(item);
                     }
                 }
                 getModeloMenu().addElement(submenu);

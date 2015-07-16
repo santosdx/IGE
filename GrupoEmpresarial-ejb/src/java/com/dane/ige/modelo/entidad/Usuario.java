@@ -32,11 +32,12 @@ import org.apache.commons.lang3.text.WordUtils;
     @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo"),
     @NamedQuery(name = "Usuario.findByNicknamePassword", query = "SELECT u FROM Usuario u WHERE u.nickname = :nickname AND u.password = :password")})
 public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final String FINE_BYE_NICKNAME = "Usuario.findByNickname";
     public static final String FINE_BYE_NICKNAME_PASSWORD = "Usuario.findByNicknamePassword";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUARIO")
     @SequenceGenerator(name = "SEQ_USUARIO", sequenceName = "seq_id_ige_usuario", allocationSize = 1)
@@ -52,11 +53,13 @@ public class Usuario implements Serializable {
     private String apellidos;
     @Column(name = "correo")
     private String correo;
+    @Column(name = "ige_iden_id_organizacion")
+    private Integer idIdentificacion;
     /*
-    @OneToOne
-    @JoinColumn(name = "id_ige_usuario", referencedColumnName = "id_ige_usuario", insertable = false, updatable = false)
+     @OneToOne
+     @JoinColumn(name = "id_ige_usuario", referencedColumnName = "id_ige_usuario", insertable = false, updatable = false)
      private Perfil perfil;
-    */
+     */
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -66,17 +69,16 @@ public class Usuario implements Serializable {
     )
     private Perfil perfil;
 
-
     public Usuario() {
     }
 
     public Usuario(String nickname, String nombres, String apellidos, String correo) {
-        this.nickname=nickname;
-        this.nombres=nombres;
-        this.apellidos=apellidos;
-        this.correo=correo;
+        this.nickname = nickname;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.correo = correo;
     }
-    
+
     public Usuario(Integer id) {
         this.id = id;
     }
@@ -104,7 +106,7 @@ public class Usuario implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-        
+
     public String getNombres() {
         return nombres;
     }
@@ -136,21 +138,24 @@ public class Usuario implements Serializable {
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
-    
-    
+
+    public Integer getIdIdentificacion() {
+        return idIdentificacion;
+    }
+
+    public void setIdIdentificacion(Integer idIdentificacion) {
+        this.idIdentificacion = idIdentificacion;
+    }
 
     /*
-    public List<Perfil> getPerfiles() {
-        return perfiles;
-    }
+     public List<Perfil> getPerfiles() {
+     return perfiles;
+     }
 
-    public void setPerfiles(List<Perfil> perfiles) {
-        this.perfiles = perfiles;
-    }
-    */
-    
-    
-
+     public void setPerfiles(List<Perfil> perfiles) {
+     this.perfiles = perfiles;
+     }
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -175,5 +180,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "com.nerv.sai.modelo.entidad.Usuario[ id=" + id + " ]";
     }
-    
+
 }

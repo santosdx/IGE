@@ -6,13 +6,14 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  * Clase que administra el bean de la ventana principal de la aplicación.
  * @author srojasm
  */
 @ManagedBean(name="aplicacionPrincipal")
-@ApplicationScoped
+@SessionScoped
 public class AplicacionPrincipal {
     @EJB
     private SistemaInfoFacadeLocal eJBServicioSistemaInfo;

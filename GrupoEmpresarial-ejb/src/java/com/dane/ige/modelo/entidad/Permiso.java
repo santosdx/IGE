@@ -49,7 +49,7 @@ public class Permiso implements Serializable {
     @Column(name = "orden")
     private Integer orden;
     @Column(name = "visible")
-    private Integer visible;
+    private String visible;
 
     public Permiso() {
     }
@@ -82,7 +82,8 @@ public class Permiso implements Serializable {
     }
 
     public void setPermiso(String permiso) {
-        this.permiso = WordUtils.capitalize(permiso.trim());
+        //this.permiso = WordUtils.capitalize(permiso.trim());
+        this.permiso = permiso.trim();
     }
 
     public String getDescripcion() {
@@ -133,11 +134,11 @@ public class Permiso implements Serializable {
         this.orden = orden;
     }
 
-    public Integer getVisible() {
+    public String getVisible() {
         return visible;
     }
 
-    public void setVisible(Integer visible) {
+    public void setVisible(String visible) {
         this.visible = visible;
     }
 
