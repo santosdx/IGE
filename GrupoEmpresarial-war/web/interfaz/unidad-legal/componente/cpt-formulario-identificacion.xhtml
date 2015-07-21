@@ -12,7 +12,7 @@
 
             <p:outputLabel  value="Tipo de unidad: *" styleClass="etiquetaFormulario" />
             <p:selectOneMenu id="cboTipoUnidad" value="#{MbFormUnidadLegal.identificacionSeleccionada.tipoUnidadLegal}"
-                             required="true" requiredMessage="El tipo de unidad es requerido." style="width:430px">
+                             required="true" requiredMessage="El tipo de unidad es requerido." style="width:430px" >
                 <f:selectItem itemLabel="Unidad..." itemValue="" />
                 <f:selectItem itemLabel="CONSORCIO" itemValue="CONSORCIO" />
                 <f:selectItem itemLabel="UNIDAD LEGAL" itemValue="UNIDAD LEGAL" />
@@ -37,7 +37,7 @@
             <p:spacer/>
 
             <p:outputLabel value="País: *" styleClass="etiquetaFormulario" />
-            <p:selectOneMenu id="cboPais" value="#{MbFormUnidadLegal.identificacionSeleccionada.pais}" style="width:430px">
+            <p:selectOneMenu id="cboPais" value="#{MbFormUnidadLegal.identificacionSeleccionada.pais}" style="width:430px" required="true" requiredMessage="El País es requerido.">
                 <f:selectItem itemLabel="País..." itemValue="" />
                 <f:selectItem itemLabel="COLOMBIA" itemValue="COLOMBIA" />
                 <f:selectItem itemLabel="ARGENTINA" itemValue="ARGENTINA" />
@@ -46,7 +46,7 @@
             <p:message for="cboPais" />
 
             <p:outputLabel value="Departamento: *" styleClass="etiquetaFormulario" />
-            <p:selectOneMenu id="cboDepartamento" value="#{MbFormUnidadLegal.identificacionSeleccionada.departamento}" style="width:430px">
+            <p:selectOneMenu id="cboDepartamento" value="#{MbFormUnidadLegal.identificacionSeleccionada.departamento}" style="width:430px" required="true" requiredMessage="El Departamento es requerido.">
                 <f:selectItem itemLabel="Departamento..." itemValue="" />
                 <f:selectItem itemLabel="ANTIOQUIA" itemValue="ANTIOQUIA" />
                 <f:selectItem itemLabel="HUILA" itemValue="HUILA" />
@@ -55,7 +55,7 @@
             <p:message for="cboDepartamento" />
 
             <p:outputLabel value="Municipio: *" styleClass="etiquetaFormulario" />
-            <p:selectOneMenu id="cboMunicipio" value="#{MbFormUnidadLegal.identificacionSeleccionada.municipio}" style="width:430px">
+            <p:selectOneMenu id="cboMunicipio" value="#{MbFormUnidadLegal.identificacionSeleccionada.municipio}" style="width:430px" required="true" requiredMessage="El Municipio es requerido.">
                 <f:selectItem itemLabel="Municipio..." itemValue="" />
                 <f:selectItem itemLabel="MEDELLIN" itemValue="MEDELLIN" />
                 <f:selectItem itemLabel="NEIVA" itemValue="NEIVA" />
@@ -64,19 +64,19 @@
             <p:message for="cboMunicipio" />
 
             <p:outputLabel value="Dirección: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtDireccion" value="#{MbFormUnidadLegal.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtDireccion" value="#{MbFormUnidadLegal.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerido."/>
             <p:message for="txtDireccion" />
 
             <p:outputLabel value="Teléfono: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtTelefono" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtTelefono" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido."/>
             <p:message for="txtTelefono" />
 
             <p:outputLabel value="Correo electrónico: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtMail" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtMail" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo electrónico es requerido."/>
             <p:message for="txtMail" />
 
             <p:outputLabel value="Tipo de organización: *" styleClass="etiquetaFormulario" />
-            <p:selectOneMenu id="cboTipoOrganizacion" value="#{MbFormUnidadLegal.identificacionSeleccionada.tipoOrganizacionUl}" style="width:430px">
+            <p:selectOneMenu id="cboTipoOrganizacion" value="#{MbFormUnidadLegal.identificacionSeleccionada.tipoOrganizacionUl}" style="width:430px" required="true" requiredMessage="El Tipo de organización es requerido.">
                 <f:selectItem itemLabel="Organización..." itemValue="" />
                 <f:selectItem itemLabel="SOCIEDAD ANONIMA" itemValue="SOCIEDAD ANONIMA" />
                 <f:selectItem itemLabel="SOCIEDAD LIMITADA" itemValue="SOCIEDAD LIMITADA" />
@@ -112,19 +112,19 @@
             <p:message for="swtOrientadaMercado" />
 
             <p:outputLabel value="Nombre de contacto: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtNombreContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtNombreContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre de contacto es requerido."/>
             <p:message for="txtNombreContacto" />
 
             <p:outputLabel value="Cargo: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtCargoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtCargoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido."/>
             <p:message for="txtCargoContacto" />
 
             <p:outputLabel value="Teléfono de contacto: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtTelefonoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtTelefonoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido."/>
             <p:message for="txtTelefonoContacto" />
 
             <p:outputLabel value="Correo electrónico de contacto: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtMailContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtMailContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido."/>
             <p:message for="txtMailContacto" />
 
             <!--h:outputText value="Saltar siguiente: " />

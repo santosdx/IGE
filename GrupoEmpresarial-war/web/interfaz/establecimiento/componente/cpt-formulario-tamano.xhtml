@@ -15,39 +15,39 @@
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
             -->    
             <p:outputLabel value="Personal ocupado: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPersonalOcupado" value="#{MbFormEstablecimiento.tamanoSeleccionado.personalOcupado}"  styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtPersonalOcupado" value="#{MbFormEstablecimiento.tamanoSeleccionado.personalOcupado}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Personal ocupado es requerido."/>
             <p:message for="txtPersonalOcupado" />
 
             <p:outputLabel value="Personal empleado: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPersonalEmpleado" value="#{MbFormEstablecimiento.tamanoSeleccionado.personalEmpleado}"  styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtPersonalEmpleado" value="#{MbFormEstablecimiento.tamanoSeleccionado.personalEmpleado}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Personal empleado es requerido."/>
             <p:message for="txtPersonalEmpleado" />
 
             <p:outputLabel value="Personal temporal: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPersoTemporal" value="#{MbFormEstablecimiento.tamanoSeleccionado.personalTemporal}"  styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtPersoTemporal" value="#{MbFormEstablecimiento.tamanoSeleccionado.personalTemporal}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Personal temporal es requerido."/>
             <p:message for="txtPersoTemporal" />
 
             <p:outputLabel value="Hombres ocupados: " styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNumeroHombres" value="#{MbFormEstablecimiento.tamanoSeleccionado.hombresOcupados}"  styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtNumeroHombres" value="#{MbFormEstablecimiento.tamanoSeleccionado.hombresOcupados}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Hombres ocupados son requeridos."/>
             <p:message for="txtNumeroHombres" />
 
             <p:outputLabel value="Mujeres ocupadas: " styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNumeroMujeres" value="#{MbFormEstablecimiento.tamanoSeleccionado.mujeresOcupadas}"  styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtNumeroMujeres" value="#{MbFormEstablecimiento.tamanoSeleccionado.mujeresOcupadas}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Las Mujeres ocupadas son requeridos."/>
             <p:message for="txtNumeroMujeres" />
 
             <p:outputLabel value="Activos: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtActivo" value="#{MbFormEstablecimiento.tamanoSeleccionado.activo}"  styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtActivo" value="#{MbFormEstablecimiento.tamanoSeleccionado.activo}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Activos son requeridos."/>
             <p:message for="txtActivo" />
 
             <p:outputLabel value="Ingresos operacionales: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtIngresosOperacionales" value="#{MbFormEstablecimiento.tamanoSeleccionado.ingresosOperacionales}"  styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtIngresosOperacionales" value="#{MbFormEstablecimiento.tamanoSeleccionado.ingresosOperacionales}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Ingresos operacionales son requeridos."/>
             <p:message for="txtIngresosOperacionales" />
 
             <p:outputLabel value="Costo de ventas: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtCostoVentas" value="#{MbFormEstablecimiento.tamanoSeleccionado.costoVentasEst}"  styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtCostoVentas" value="#{MbFormEstablecimiento.tamanoSeleccionado.costoVentasEst}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Costo de ventas es requerido."/>
             <p:message for="txtCostoVentas" />
 
             <p:outputLabel value="Gastos operacionales: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtGastosOperacionales" value="#{MbFormEstablecimiento.tamanoSeleccionado.gastosOperacionales}"  styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtGastosOperacionales" value="#{MbFormEstablecimiento.tamanoSeleccionado.gastosOperacionales}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Gastos operacionales son requerido."/>
             <p:message for="txtGastosOperacionales" />
 
         </h:panelGrid>
