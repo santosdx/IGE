@@ -62,17 +62,15 @@
                             <div class="ui-grid-col-2"></div>
                             <div class="ui-grid-col-8">
                                 <p:outputLabel value="#{aplicacionPrincipal.sistemaInfo.textoBienvenida}" escape="false"/>
-                                <h:outputLink id="btnIngresar" value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-                                    ingresar
-                                </h:outputLink>
-                                <p:tooltip for="btnIngresar" value="Acceder a la plataforma." />
-                                <!--p:commandButton value="Ingresar" icon="ui-icon-extlink" actionListener="#{MbLogin.abrirVentanaLogin}"/-->
+                                    <center>
+                                        <p:commandButton value="Ingresar" id="btnIngresar" onclick="PF('dlg').show()" icon="fa-share"/>
+                                    </center>    
                             </div>
                             <div class="ui-grid-col-2"></div>
                         </div>
                     </div>
 
-                    <p:dialog header="Credenciales de acceso" widgetVar="dlg" resizable="false" modal="false">
+                    <p:dialog header="" widgetVar="dlg" resizable="false" modal="false">
                         <h:panelGrid columns="2" cellpadding="5">
                             <h:outputLabel for="username" value="Usuario:" styleClass="etiquetaFormulario"/>
                             <p:inputText id="username" value="#{MbLogin.username}" 
@@ -94,7 +92,7 @@
                         function manejarLogin(xhr, status, args) {
                             if (args.loggedIn) {
                                 PF('dlg').hide();
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     window.location = args.view;
                                 }, 500);
                             }

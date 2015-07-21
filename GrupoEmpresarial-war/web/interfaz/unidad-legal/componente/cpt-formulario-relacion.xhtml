@@ -11,7 +11,7 @@
         <h:panelGrid columns="3" columnClasses="label, value" >
 
             <p:outputLabel value="Situación de control: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboSituacionControl" value="#{MbFormUnidadLegal.relacionSeleccionada.situacionControl}" style="width:430px">
+            <p:selectOneMenu id="cboSituacionControl" value="#{MbFormUnidadLegal.relacionSeleccionada.situacionControl}" style="width:430px" required="true" requiredMessage="La Situación de control es requerido.">
                 <f:selectItem itemLabel="Relación..." itemValue="" />
                 <f:selectItem itemLabel="MATRIZ" itemValue="MATRIZ" />
                 <f:selectItem itemLabel="CONTROLANTE" itemValue="CONTROLANTE" />
@@ -20,7 +20,7 @@
             <p:message for="cboSituacionControl" />
 
             <p:outputLabel value="Tipo de relación: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboTipoRelacion" value="#{MbFormUnidadLegal.relacionSeleccionada.tipoRelacionUl}" style="width:430px">
+            <p:selectOneMenu id="cboTipoRelacion" value="#{MbFormUnidadLegal.relacionSeleccionada.tipoRelacionUl}" style="width:430px" required="true" requiredMessage="El Tipo de relación es requerido.">
                 <f:selectItem itemLabel="Relación..." itemValue="" />
                 <f:selectItem itemLabel="FILIAL" itemValue="FILIAL" />
                 <f:selectItem itemLabel="SUBSIDIARIA" itemValue="SUBSIDIARIA" />
@@ -28,7 +28,7 @@
             <p:message for="cboTipoRelacion" />
 
             <p:outputLabel value="NIT de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNitControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtNitControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El NIT de la controlante es requerido."/>
             <p:message for="txtNitControlante" />
 
             <!--p:outputLabel value="Dígito de verificación: *" styleClass="etiquetaFormulario"/>
@@ -36,11 +36,11 @@
             <p:message for="txtDigitoVerificacion" /-->
 
             <p:outputLabel value="Nombre de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNombreControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText id="txtNombreControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido."/>
             <p:message for="txtNombreControlante" />
 
             <p:outputLabel value="Porcentaje de participación de la controlante directa: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPorcentajeParticipacionControlanteDirecta"  value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}" styleClass="valorEtiquetaFormulario" />
+            <p:inputText id="txtPorcentajeParticipacionControlanteDirecta"  value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Porcentaje de participación es requerido."/>
             <p:message for="txtPorcentajeParticipacionControlanteDirecta" />
 
             <!--h:outputText value="Saltar siguiente: " />
