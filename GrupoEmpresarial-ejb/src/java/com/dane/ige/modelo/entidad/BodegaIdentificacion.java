@@ -40,7 +40,7 @@ public class BodegaIdentificacion implements Serializable {
 
     public static final String GET_ALL = "BodegaIdentificacion.findAll";
     public static final String FINE_BYE_ID = "BodegaIdentificacion.findById";
-    public static final String FINE_BYE_ID_GRUPO_RELACIONADO = "BodegaIdentificacion.findByIdGrupoRelacionadoTipoOrganizacion";
+    //public static final String FINE_BYE_ID_GRUPO_RELACIONADO = "BodegaIdentificacion.findByIdGrupoRelacionadoTipoOrganizacion";
 
     @EmbeddedId
     private PkIdentificacion id;

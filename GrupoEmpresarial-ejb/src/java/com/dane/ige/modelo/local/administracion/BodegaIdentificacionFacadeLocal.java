@@ -29,5 +29,7 @@ public interface BodegaIdentificacionFacadeLocal {
 
     BodegaIdentificacion obtenerIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion);
 
-    public List<BodegaIdentificacion> obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado, String tipoOrganizacion) ;
+    public List<BodegaIdentificacion> obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado) ;
+
+    public List<BodegaIdentificacion> obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(Long idUnidadLegallacionada) ;
 }

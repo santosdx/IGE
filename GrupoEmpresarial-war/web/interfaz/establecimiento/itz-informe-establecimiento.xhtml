@@ -21,8 +21,8 @@
                                                  style="width:430px">
                                     <!--p:ajax event="change" listener="#{MbFormEstablecimiento.seleccionarUnidadLegal(unidadLegal)}" update="dtEstablecimiento"/-->
                                     <p:ajax event="change" listener="#{MbFormEstablecimiento.mySelectionMethodListener}" update="dtEstablecimiento"/>
-                                    <f:selectItem itemLabel="Unidad..." itemValue="" noSelectionOption="true"/>
-                                    <f:selectItems value="#{MbFormEstablecimiento.listaIdentificacionUnidadLegal}" var="unidadLegal" itemLabel="#{unidadLegal.nombreRegistrado}" itemValue="#{unidadLegal.idGrupoRelacionado}"/>
+                                    <f:selectItem itemLabel="Unidad legal..." itemValue="" />
+                                    <f:selectItems value="#{MbFormEstablecimiento.listaIdentificacionUnidadLegal}" var="unidadLegal" itemLabel="#{unidadLegal.nombreRegistrado}" itemValue="#{unidadLegal.id.id}"/>
                                 </p:selectOneMenu>
                             </div>
                         </div>

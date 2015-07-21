@@ -63,11 +63,11 @@ public class FormularioEstablecimiento implements Serializable {
     @PostConstruct
     public void init() {
         Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
-        setListaIdentificacionUnidadLegal(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(id, "UNIDAD LEGAL"));
+        setListaIdentificacionUnidadLegal(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(id));
     }
 
     public void mySelectionMethodListener(AjaxBehaviorEvent event) {
-        setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(getIdIdentificacionSeleccionada(), "ESTABLECIMIENTO"));
+        setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(getIdIdentificacionSeleccionada()));
         System.out.println("consulto los establecimietnos");
     }
 
@@ -75,7 +75,7 @@ public class FormularioEstablecimiento implements Serializable {
     public void seleccionarUnidadLegal(BodegaIdentificacion identificacion) {
         //idOrganizacion = getIdentificacionUnidadLegalSeleccionada().getIdGrupoRelacionado();
         //setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(idOrganizacion, "ESTABLECIMIENTO"));
-        setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(identificacion.getId().getId(), "ESTABLECIMIENTO"));
+        setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(identificacion.getId().getId()));
         System.out.println("consulto los establecimietnos");
     }
 

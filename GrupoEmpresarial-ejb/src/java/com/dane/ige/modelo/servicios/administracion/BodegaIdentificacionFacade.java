@@ -58,18 +58,69 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
     }
 
     /**
-     * Método que permite obtener el listado de registros de identificación de cualquier tipo unidad
+     * Método que permite obtener el listado de registros de identificación de unidad legal
      * pasando como parametro el ID del grupo empresarial.
      * @param id
      * @return 
      */
     @Override
-    public List<BodegaIdentificacion> obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado, String tipoOrganizacion) {
+    public List<BodegaIdentificacion> obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado) {
         List<BodegaIdentificacion> resultado = null;
         try {
-            Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID_GRUPO_RELACIONADO);
-            query.setParameter("idGrupoRelacionado", idGrupoRelacionado);
-            query.setParameter("tipoOrganizacion", tipoOrganizacion);
+            //Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID_GRUPO_RELACIONADO);
+            //query.setParameter("idGrupoRelacionado", idGrupoRelacionado);
+            //query.setParameter("tipoOrganizacion", tipoOrganizacion);
+
+            String sql = "SELECT * FROM IGE_IDENTIFICACION "
+                    + "WHERE ID_ORGANIZACION ||''||FECHA_ACTUALIZA_IDEN in ( "
+                      + "SELECT ID_ORGANIZACION ||''||FECHA AS ID FROM ( "
+                        + "SELECT ID_ORGANIZACION, MAX (FECHA_ACTUALIZA_IDEN) AS FECHA "
+                        + "FROM IGE_IDENTIFICACION "
+                        + "WHERE ID_GRUPO_RELACIONADO ="+idGrupoRelacionado+" AND TIPO_ORGANIZACION='UNIDAD LEGAL' "
+                        + "GROUP BY ID_ORGANIZACION ORDER BY 1 "
+                        + ") "
+                    + ")ORDER BY NOMBRE_REGISTRADO ";
+
+            Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
+
+            List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+        return resultado;
+    }
+
+    /**
+     * Método que permite obtener el listado de registros de identificación de la unidad establecimiento
+     * pasando como parametro el ID del grupo empresarial.
+     * @param id
+     * @return 
+     */
+    @Override
+    public List<BodegaIdentificacion> obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(Long idUnidadLegallacionada) {
+        List<BodegaIdentificacion> resultado = null;
+        try {
+            //Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID_GRUPO_RELACIONADO);
+            //query.setParameter("idGrupoRelacionado", idGrupoRelacionado);
+            //query.setParameter("tipoOrganizacion", tipoOrganizacion);
+
+            String sql = "SELECT * FROM IGE_IDENTIFICACION "
+                    + "WHERE ID_ORGANIZACION ||''||FECHA_ACTUALIZA_IDEN in ( "
+                      + "SELECT ID_ORGANIZACION ||''||FECHA AS ID FROM ( "
+                        + "SELECT ID_ORGANIZACION, MAX (FECHA_ACTUALIZA_IDEN) AS FECHA "
+                        + "FROM IGE_IDENTIFICACION "
+                        + "WHERE ID_UL_RELACIONADA ="+idUnidadLegallacionada+" AND TIPO_ORGANIZACION='ESTABLECIMIENTO' "
+                        + "GROUP BY ID_ORGANIZACION ORDER BY 1 "
+                        + ") "
+                    + ")ORDER BY NOMBRE_REGISTRADO ";
+
+            Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
 
             List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();

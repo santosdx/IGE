@@ -1,13 +1,17 @@
 package com.dane.ige.reporte;
 
 import com.dane.ige.modelo.connection.ConexionBd;
+import com.dane.ige.seguridad.Login;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import jxl.read.biff.BiffException;
 import net.sf.jasperreports.engine.JRException;
@@ -28,11 +32,14 @@ import org.primefaces.model.StreamedContent;
  */
 @ManagedBean(name = "MbReporteGrupoEmpresa")
 @SessionScoped
-public class ReporteGrupoEmpresa{
+public class ReporteGrupoEmpresa {
 
     final static Logger LOGGER = Logger.getLogger(ReporteGrupoEmpresa.class);
 
     private StreamedContent contenido;
+
+    @ManagedProperty("#{MbLogin}")
+    private Login servicioLogin;
 
     public ReporteGrupoEmpresa() {
     }
@@ -50,8 +57,14 @@ public class ReporteGrupoEmpresa{
             String reportName = "REPORTE";
             File temp = File.createTempFile(reportName, ".pdf");
 
+            Map parameters = new HashMap();
+            /**
+             * Passing ReportTitle and Author as parameters
+             */
+            parameters.put("id_grupo", getServicioLogin().getUsuarioLogueado().getIdIdentificacion());
+
             reporteJasper = JasperCompileManager.compileReport(urlArchivo + nombreArchivo);
-            print = JasperFillManager.fillReport(reporteJasper, null, connection.getConexion());
+            print = JasperFillManager.fillReport(reporteJasper, parameters, connection.getConexion());
             JRExporter exporter = new JRPdfExporter();
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
             exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(temp)); // your output goes here
@@ -80,15 +93,21 @@ public class ReporteGrupoEmpresa{
         LOGGER.info("Fin");
     }
 
-    
     //Métodos Set y Get de la clase
-    
     public StreamedContent getContenido() {
         return contenido;
     }
 
     public void setContenido(StreamedContent contenido) {
         this.contenido = contenido;
+    }
+
+    public Login getServicioLogin() {
+        return servicioLogin;
+    }
+
+    public void setServicioLogin(Login servicioLogin) {
+        this.servicioLogin = servicioLogin;
     }
 
 }
