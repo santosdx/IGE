@@ -9,8 +9,8 @@
         <p:messages />
         <h:panelGrid columns="2" columnClasses="label, value">
 
-            <h:outputText value="Tipo de conglomerado: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
+            <h:outputText value="Tipo de conglomerado: *" styleClass="etiquetaFormulario" />
+            <p:selectOneMenu style="width:330px" required="true" requiredMessage="El Tipo de conglomerado es requerido.">
                 <f:selectItem itemLabel="Conglomerado..." itemValue="" />
                 <f:selectItem itemLabel="Grupo" itemValue="Grupo" />
                 <f:selectItem itemLabel="Situación de control" itemValue="Situación de control" />
@@ -18,7 +18,7 @@
             </p:selectOneMenu>
 
             <h:outputText value="Situación de control: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
+            <p:selectOneMenu style="width:330px" required="true" requiredMessage="La situación de control es requerido.">
                 <f:selectItem itemLabel="Situación..." itemValue="" />
                 <f:selectItem itemLabel="Controlante" itemValue="Controlante" />
                 <f:selectItem itemLabel="Controlada" itemValue="Controlada" />
@@ -26,14 +26,14 @@
             </p:selectOneMenu>
 
             <h:outputText value="Tipo de control: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
+            <p:selectOneMenu style="width:330px" required="true" requiredMessage="El Tipo de control es requerido.">
                 <f:selectItem itemLabel="Control..." itemValue="" />
                 <f:selectItem itemLabel="Nacional" itemValue="Nacional" />
                 <f:selectItem itemLabel="Extranjera" itemValue="Extranjera" />
             </p:selectOneMenu>
 
             <h:outputText value="Tipo de empresa (controlante): *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
+            <p:selectOneMenu style="width:330px" required="true" requiredMessage="El Tipo de empresa es requerido.">
                 <f:selectItem itemLabel="Empresa..." itemValue="" />
                 <f:selectItem itemLabel="Privada" itemValue="Privada" />
                 <f:selectItem itemLabel="Publica" itemValue="Publica" />
@@ -52,7 +52,7 @@
             -->
 
             <h:outputText value="País de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
+            <p:selectOneMenu style="width:330px" required="true" requiredMessage="El País es requerido.">
                 <f:selectItem itemLabel="País..." itemValue="" />
                 <f:selectItem itemLabel="Colombia" itemValue="Colombia" />
                 <f:selectItem itemLabel="Brasil" itemValue="Brasil" />

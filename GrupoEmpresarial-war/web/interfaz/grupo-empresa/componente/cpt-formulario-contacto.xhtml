@@ -10,16 +10,16 @@
         <h:panelGrid columns="2" columnClasses="label, value" >
 
             <h:outputText value="Nombre de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido."/>
 
             <h:outputText value="Cargo de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido."/>
 
             <h:outputText value="Teléfono contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido."/>
 
             <h:outputText value="Correo electrónico de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido."/>
 
             <h:outputText value="Nombre de contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto2}" styleClass="valorEtiquetaFormulario"/>
