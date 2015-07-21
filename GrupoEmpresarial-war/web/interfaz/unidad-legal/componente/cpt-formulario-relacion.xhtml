@@ -6,30 +6,42 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <p:panel header="Información de relación">
-        <p:messages />
-        <h:panelGrid columns="2" columnClasses="label, value">
+        <p:tooltip />
 
-            <h:outputText value="Matriz/Subordinada: *" styleClass="etiquetaFormulario"/>
-            <p:inputSwitch onLabel="Matriz" offLabel="Subordinada"/>
-            
-            <h:outputText value="Tipo de relación: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu style="width:330px">
+        <h:panelGrid columns="3" columnClasses="label, value" >
+
+            <p:outputLabel value="Situación de control: *" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboSituacionControl" value="#{MbFormUnidadLegal.relacionSeleccionada.situacionControl}" style="width:430px">
                 <f:selectItem itemLabel="Relación..." itemValue="" />
-                <f:selectItem itemLabel="Filial" itemValue="Filial" />
-                <f:selectItem itemLabel="Subsidiaria" itemValue="Subsidiaria" />
+                <f:selectItem itemLabel="MATRIZ" itemValue="MATRIZ" />
+                <f:selectItem itemLabel="CONTROLANTE" itemValue="CONTROLANTE" />
+                <f:selectItem itemLabel="SUBORDINADA" itemValue="SUBORDINADA" />
             </p:selectOneMenu>
+            <p:message for="cboSituacionControl" />
 
-            <h:outputText value="NIT de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-            
-            <h:outputText value="Dígito de verificación: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Tipo de relación: *" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboTipoRelacion" value="#{MbFormUnidadLegal.relacionSeleccionada.tipoRelacionUl}" style="width:430px">
+                <f:selectItem itemLabel="Relación..." itemValue="" />
+                <f:selectItem itemLabel="FILIAL" itemValue="FILIAL" />
+                <f:selectItem itemLabel="SUBSIDIARIA" itemValue="SUBSIDIARIA" />
+            </p:selectOneMenu>
+            <p:message for="cboTipoRelacion" />
 
-            <h:outputText value="Nombre de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="NIT de la controlante: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtNitControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtNitControlante" />
 
-            <h:outputText value="Porcentaje de participación de la controlante directa: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <!--p:outputLabel value="Dígito de verificación: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtDigitoVerificacion" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtDigitoVerificacion" /-->
+
+            <p:outputLabel value="Nombre de la controlante: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtNombreControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtNombreControlante" />
+
+            <p:outputLabel value="Porcentaje de participación de la controlante directa: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtPorcentajeParticipacionControlanteDirecta"  value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}" styleClass="valorEtiquetaFormulario" />
+            <p:message for="txtPorcentajeParticipacionControlanteDirecta" />
 
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{practica.skip}" /-->

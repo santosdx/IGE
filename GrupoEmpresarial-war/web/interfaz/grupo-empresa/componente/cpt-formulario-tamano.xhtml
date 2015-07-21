@@ -6,11 +6,14 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <p:panel header="Información tamaño">
-        <p:messages />
+        <p:tooltip />
+
         <h:panelGrid columns="2" columnClasses="label, value">
 
             <h:outputText value="Activo: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario" >
+                <f:convertNumber currencySymbol="$" pattern="#000.000"/>
+            </p:inputText>
 
             <h:outputText value="Pasivo: *" styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario"/>

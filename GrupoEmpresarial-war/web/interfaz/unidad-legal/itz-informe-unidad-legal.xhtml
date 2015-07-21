@@ -15,8 +15,8 @@
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Generación de Reporte</h4>
-                                <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos los datos del grupo empresarial.</p>
-                                <p:commandButton id="btnGenerarReporte" value="Generar reporte" update="dlgReportePdf" oncomplete="PF('dlg').show();"
+                                <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos los datos de la unidades legales del grupo empresarial.</p>
+                                <p:commandButton id="btnGenerarReporteUnidadLegal" value="Generar reporte" update="dlgReportePdf" oncomplete="PF('dlg').show();"
                                                  actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.unidadLegal.path'], nerv['reporte.unidadLegal.archivo'])}"/>
                                 <!--p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="100%" height="90%" player="pdf"/-->
                             </div>
@@ -24,39 +24,41 @@
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Actualizar información desde formulario</h4>
-                                <p:dataTable id="dtUnidadLegal" var="fila" value="#{MbFormUnidadLegal.listaIdentificacion}"
-                                             rowIndexVar="rowIndex"
-                                             emptyMessage="La consulta no genero resultados..." paginatorPosition="bottom" 
-                                             paginator="true" rows="25" scrollable="true" scrollHeight="280" 
-                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                             rowsPerPageTemplate="25,50,100" 
-                                             selectionMode="single" rowKey="#{fila.id.id}">
+                                <p:outputPanel deferred="true">
+                                    <p:dataTable id="dtUnidadLegal" var="fila" value="#{MbFormUnidadLegal.listaIdentificacion}"
+                                                 rowIndexVar="rowIndex"
+                                                 emptyMessage="La consulta no genero resultados..." paginatorPosition="bottom" 
+                                                 paginator="true" rows="25" scrollable="true" scrollHeight="280" 
+                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="25,50,100" 
+                                                 selectionMode="single" rowKey="#{fila.id.id}">
 
-                                    <p:column headerText="#" width="25">
-                                        <p:outputLabel value="#{rowIndex+1}"/>
-                                    </p:column>
-                                    <p:column headerText="Unidad Legal">
-                                        <p:outputLabel value="#{fila.nombreRegistrado}"/>
-                                    </p:column>
-                                    <p:column headerText="">
-                                        <p:commandLink action="#{MbFormUnidadLegal.seleccionarUnidadLegal(fila.id.id)}" ajax="false">
-                                            <h:outputText value="Editar Información" />
-                                        </p:commandLink>
-                                    </p:column>
-                                </p:dataTable>
+                                        <p:column headerText="#" width="25">
+                                            <p:outputLabel value="#{rowIndex+1}"/>
+                                        </p:column>
+                                        <p:column headerText="Unidad Legal">
+                                            <p:outputLabel value="#{fila.nombreRegistrado}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandLink action="#{MbFormUnidadLegal.seleccionarUnidadLegal(fila.id.id)}" ajax="false">
+                                                <h:outputText value="Editar Información" />
+                                            </p:commandLink>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:outputPanel>
                             </div>
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Actualizar información desde archivo XLS</h4>
-                                <p>En esta sección el usuario puede descargar un archivo XLS, que contiene la información del grupo empresarial, la cual podra
+                                <p>En esta sección el usuario puede descargar un archivo XLS, que contiene el listado de unidades legales del grupo empresarial, la cual podra
                                     actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
                                 <p:commandButton id="btnGenerarXlsGrupoEmpresa" value="Generar Excel" ajax="false" 
                                                  actionListener="#{MbEscribirExcel.generarArchivoXlsGrupoEmpresarial(nerv['plantilla.grupoEmpresarial.path'], nerv['plantilla.grupoEmpresarial.archivo'])}"
                                                  onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
                                     <p:fileDownload value="#{MbEscribirExcel.file}" />
                                 </p:commandButton>
-                                <p>Subir el archivo con la ifnromación del grupo empresarial diligenciada para actualizar los datos.</p>
+                                <p>Subir el archivo con la ifnromación de las unidades legales diligenciada para actualizar los datos.</p>
                                 <p:fileUpload fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"
                                               multiple="false" fileLimitMessage="Número de archivos permitidos 1."
                                               mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
@@ -75,7 +77,7 @@
                         </p:outputPanel>
                     </p:dialog>
 
-                    <p:blockUI block="@form" trigger="btnGenerarReporte" >
+                    <p:blockUI block="@form" trigger="btnGenerarReporteUnidadLegal" >
                         Generando reporte...<br />
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>

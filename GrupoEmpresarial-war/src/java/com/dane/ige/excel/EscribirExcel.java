@@ -1,7 +1,16 @@
 package com.dane.ige.excel;
 
+import com.dane.ige.modelo.entidad.BodegaIdentificacion;
+import com.dane.ige.modelo.entidad.BodegaNovedad;
+import com.dane.ige.modelo.entidad.BodegaRelacion;
+import com.dane.ige.modelo.entidad.BodegaTamano;
 import com.dane.ige.modelo.entidad.VariableIge;
+import com.dane.ige.modelo.local.administracion.BodegaIdentificacionFacadeLocal;
+import com.dane.ige.modelo.local.administracion.BodegaNovedadFacadeLocal;
+import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
+import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.VariableIgeFacadeLocal;
+import com.dane.ige.seguridad.Login;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
@@ -36,8 +46,24 @@ public class EscribirExcel {
 
     @EJB
     private VariableIgeFacadeLocal eJBServicioVariableIge;
-
     private StreamedContent file;
+
+    @EJB
+    private BodegaIdentificacionFacadeLocal eJBServicioBodegaIdentificacion;
+    @EJB
+    private BodegaNovedadFacadeLocal eJBServicioBodegaNovedad;
+    @EJB
+    private BodegaTamanoFacadeLocal eJBServicioBodegaTamano;
+    @EJB
+    private BodegaRelacionFacadeLocal eJBServicioBodegaRelacion;
+
+    @ManagedProperty("#{MbLogin}")
+    private Login servicioLogin;
+
+    private BodegaIdentificacion identificacionSeleccionada;
+    private BodegaNovedad novedadSeleccionada;
+    private BodegaRelacion relacionSeleccionada;
+    private BodegaTamano tamanoSeleccionado;
 
     public EscribirExcel() {
     }
@@ -69,11 +95,16 @@ public class EscribirExcel {
      * @param libro
      */
     private void escribirLibroXlsGrupoEmpresa(Workbook libro, String nombreArchivo) {
+        Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
 
         Workbook libroTemp = ingresarDatosIdentificacionGrupoEmpresa(libro);
         libroTemp = ingresarDatosRelacionGrupoEmpresa(libroTemp);
+
+        setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(id, "GRUPO"));
         ingresarDatosRelacionGrupoEmpresa(libroTemp);
+
         ingresarDatosEventosGrupoEmpresa(libroTemp);
+
         ingresarDatosTamanoGrupoEmpresa(libroTemp);
         /*
          LeerExcel excel = new LeerExcel();
@@ -103,7 +134,7 @@ public class EscribirExcel {
      */
     private Workbook ingresarDatosIdentificacionGrupoEmpresa(Workbook libro) {
         //La hoja 1 es la hoja de los datos de identificacion
-        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("IDENTIFICACIÓN");
+        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("IDENTIFICACION");
         Sheet hoja = libro.getSheetAt(1);
         hoja.protectSheet("123");
 
@@ -136,7 +167,7 @@ public class EscribirExcel {
      */
     private Workbook ingresarDatosRelacionGrupoEmpresa(Workbook libro) {
         //La hoja 2 es la hoja de los datos de relación
-        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("RELACIÓN");
+        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("RELACION");
         Sheet hoja = libro.getSheetAt(2);
         hoja.protectSheet("123");
 
@@ -162,7 +193,7 @@ public class EscribirExcel {
 
     private Workbook ingresarDatosEventosGrupoEmpresa(Workbook libro) {
         //La hoja 3 es la hoja de los datos de eventos
-        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("EVENTOS");
+        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("NOVEDAD");
         Sheet hoja = libro.getSheetAt(3);
         hoja.protectSheet("123");
 
@@ -250,6 +281,78 @@ public class EscribirExcel {
 
     public void setFile(StreamedContent file) {
         this.file = file;
+    }
+
+    public BodegaIdentificacionFacadeLocal geteJBServicioBodegaIdentificacion() {
+        return eJBServicioBodegaIdentificacion;
+    }
+
+    public void seteJBServicioBodegaIdentificacion(BodegaIdentificacionFacadeLocal eJBServicioBodegaIdentificacion) {
+        this.eJBServicioBodegaIdentificacion = eJBServicioBodegaIdentificacion;
+    }
+
+    public BodegaNovedadFacadeLocal geteJBServicioBodegaNovedad() {
+        return eJBServicioBodegaNovedad;
+    }
+
+    public void seteJBServicioBodegaNovedad(BodegaNovedadFacadeLocal eJBServicioBodegaNovedad) {
+        this.eJBServicioBodegaNovedad = eJBServicioBodegaNovedad;
+    }
+
+    public BodegaTamanoFacadeLocal geteJBServicioBodegaTamano() {
+        return eJBServicioBodegaTamano;
+    }
+
+    public void seteJBServicioBodegaTamano(BodegaTamanoFacadeLocal eJBServicioBodegaTamano) {
+        this.eJBServicioBodegaTamano = eJBServicioBodegaTamano;
+    }
+
+    public BodegaRelacionFacadeLocal geteJBServicioBodegaRelacion() {
+        return eJBServicioBodegaRelacion;
+    }
+
+    public void seteJBServicioBodegaRelacion(BodegaRelacionFacadeLocal eJBServicioBodegaRelacion) {
+        this.eJBServicioBodegaRelacion = eJBServicioBodegaRelacion;
+    }
+
+    public Login getServicioLogin() {
+        return servicioLogin;
+    }
+
+    public void setServicioLogin(Login servicioLogin) {
+        this.servicioLogin = servicioLogin;
+    }
+
+    public BodegaIdentificacion getIdentificacionSeleccionada() {
+        return identificacionSeleccionada;
+    }
+
+    public void setIdentificacionSeleccionada(BodegaIdentificacion identificacionSeleccionada) {
+        this.identificacionSeleccionada = identificacionSeleccionada;
+    }
+
+    public BodegaNovedad getNovedadSeleccionada() {
+        return novedadSeleccionada;
+    }
+
+    public void setNovedadSeleccionada(BodegaNovedad novedadSeleccionada) {
+        this.novedadSeleccionada = novedadSeleccionada;
+    }
+
+    public BodegaRelacion getRelacionSeleccionada() {
+        return relacionSeleccionada;
+    }
+
+    public void setRelacionSeleccionada(BodegaRelacion relacionSeleccionada) {
+        this.relacionSeleccionada = relacionSeleccionada;
+    }
+
+    public BodegaTamano getTamanoSeleccionado() {
+        return tamanoSeleccionado;
+    }
+
+    public void setTamanoSeleccionado(BodegaTamano tamanoSeleccionado) {
+        this.tamanoSeleccionado = tamanoSeleccionado;
     }
 
 }

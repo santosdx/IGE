@@ -31,7 +31,7 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
     }
 
     /**
-     * Método que permite obtener el registro de identificación del grupo empresarial
+     * Método que permite obtener el registro de identificación de cualquier tipo de unidad
      * pasando como parametro el ID del grupo empresarial.
      * @param id
      * @return 

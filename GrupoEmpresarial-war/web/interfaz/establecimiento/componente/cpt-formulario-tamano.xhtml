@@ -6,38 +6,49 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <p:panel header="Información tamaño">
-        <p:messages />
-        <h:panelGrid columns="2" columnClasses="label, value">
+        <p:tooltip />
+
+        <h:panelGrid columns="3" columnClasses="label, value" >
+
             <!--
             <h:outputText value="Información con corte a:: " styleClass="etiquetaFormulario"/>
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
             -->    
-            <h:outputText value="Personal ocupado: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Personal ocupado: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtPersonalOcupado" value="#{MbFormEstablecimiento.tamanoSeleccionado.personalOcupado}"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtPersonalOcupado" />
 
-            <h:outputText value="Personal empleado: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Personal empleado: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtPersonalEmpleado" value="#{MbFormEstablecimiento.tamanoSeleccionado.personalEmpleado}"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtPersonalEmpleado" />
 
-            <h:outputText value="Personal temporal: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Personal temporal: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtPersoTemporal" value="#{MbFormEstablecimiento.tamanoSeleccionado.personalTemporal}"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtPersoTemporal" />
 
-            <h:outputText value="Hombres ocupados: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Hombres ocupados: " styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtNumeroHombres" value="#{MbFormEstablecimiento.tamanoSeleccionado.hombresOcupados}"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtNumeroHombres" />
 
-            <h:outputText value="Mujeres ocupadas: " styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Mujeres ocupadas: " styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtNumeroMujeres" value="#{MbFormEstablecimiento.tamanoSeleccionado.mujeresOcupadas}"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtNumeroMujeres" />
 
-            <h:outputText value="Activos: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Activos: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtActivo" value="#{MbFormEstablecimiento.tamanoSeleccionado.activo}"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtActivo" />
 
-            <h:outputText value="ingresos operacionales: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="ingresos operacionales: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtIngresosOperacionales" value="#{MbFormEstablecimiento.tamanoSeleccionado.ingresosOperacionales}"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtIngresosOperacionales" />
 
-            <h:outputText value="Costo de ventas: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Costo de ventas: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtCostoVentas" value="#{MbFormEstablecimiento.tamanoSeleccionado.costoVentasEst}"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtCostoVentas" />
 
-            <h:outputText value="Gastos operacionales: *" styleClass="etiquetaFormulario"/>
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Gastos operacionales: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtGastosOperacionales" value="#{MbFormEstablecimiento.tamanoSeleccionado.gastosOperacionales}"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtGastosOperacionales" />
 
         </h:panelGrid>
     </p:panel>

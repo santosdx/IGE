@@ -6,31 +6,43 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <p:panel header="Información historia">
-        <p:messages />
-        <h:panelGrid columns="2" columnClasses="label, value">
-            <h:outputText value="Fecha de configuración de control: *" styleClass="etiquetaFormulario" />
-            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+        <p:tooltip />
 
-            <h:outputText value="Fecha de matrícula: *" styleClass="etiquetaFormulario" />
-            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+        <h:panelGrid columns="3" columnClasses="label, value" >
 
-            <h:outputText value="Estado de matricula: *" styleClass="etiquetaFormulario" />
-            <p:selectOneMenu style="width:330px">
+            <p:outputLabel value="Fecha de configuración de control: *" styleClass="etiquetaFormulario" />
+            <p:calendar id="cldFechaConfiguracion" value="#{MbFormUnidadLegal.novedadSeleccionada.fechaConfiguracion}"
+                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="cldFechaConfiguracion" />
+
+            <p:outputLabel value="Fecha de matrícula: *" styleClass="etiquetaFormulario" />
+            <p:calendar id="cldFechaMatricula" value="#{MbFormUnidadLegal.novedadSeleccionada.fechaMatricula}"
+                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="cldFechaMatricula" />
+
+            <p:outputLabel value="Estado de matricula: *" styleClass="etiquetaFormulario" />
+            <p:selectOneMenu id="cboEstadoMatricula"  value="#{MbFormUnidadLegal.novedadSeleccionada.estadoMatricula}" style="width:430px">
                 <f:selectItem itemLabel="Estado..." itemValue="" />
-                <f:selectItem itemLabel="Activa" itemValue="Activa" />
-                <f:selectItem itemLabel="Inactiva" itemValue="Inactiva" />
+                <f:selectItem itemLabel="ACTIVA" itemValue="ACTIVA" />
+                <f:selectItem itemLabel="INACTIVA" itemValue="INACTIVA" />
             </p:selectOneMenu>
+            <p:message for="cboEstadoMatricula" />
 
-            <h:outputText value="Ultimo año renovado: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Ultimo año renovado: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtUltimoAnoRenovado"  value="#{MbFormUnidadLegal.novedadSeleccionada.ultimoAnoRenovado}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtUltimoAnoRenovado" />
 
-            <h:outputText value="Fecha de creación: *" styleClass="etiquetaFormulario" />
-            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Fecha de creación: *" styleClass="etiquetaFormulario" />
+            <p:calendar id="cldFechaCreacion"  value="#{MbFormUnidadLegal.novedadSeleccionada.fechaCreacion}"
+                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="cldFechaCreacion" />
 
-            <h:outputText value="Fecha de inicio de actividades: *" styleClass="etiquetaFormulario" />
-            <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Fecha de inicio de actividades: *" styleClass="etiquetaFormulario" />
+            <p:calendar id="cldFechaInicioActividades"  value="#{MbFormUnidadLegal.novedadSeleccionada.fechaInicioActi}"
+                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="cldFechaInicioActividades" />
             <!--
-            <h:outputText value="Tipo de novedad: " styleClass="etiquetaFormulario" />
+            <p:outputLabel value="Tipo de novedad: " styleClass="etiquetaFormulario" />
             <p:selectOneMenu style="width:330px">
                 <f:selectItem itemLabel="Novedad..." itemValue="" />
                 <f:selectItem itemLabel="Venta" itemValue="Venta" />
@@ -43,16 +55,16 @@
                 <f:selectItem itemLabel="Escisión parcial" itemValue="Escisión parcial" />
             </p:selectOneMenu>
 
-            <h:outputText value="Fecha de novedad: " styleClass="etiquetaFormulario" />
+            <p:outputLabel value="Fecha de novedad: " styleClass="etiquetaFormulario" />
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Nit de la unidad legal involucrada: " styleClass="etiquetaFormulario" />
+            <p:outputLabel value="Nit de la unidad legal involucrada: " styleClass="etiquetaFormulario" />
             <p:inputText styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Fecha de cierre de actividades: " styleClass="etiquetaFormulario" />
+            <p:outputLabel value="Fecha de cierre de actividades: " styleClass="etiquetaFormulario" />
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
 
-            <h:outputText value="Fecha de liquidación: " styleClass="etiquetaFormulario" />
+            <p:outputLabel value="Fecha de liquidación: " styleClass="etiquetaFormulario" />
             <p:calendar locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario"/>
             -->
         </h:panelGrid>

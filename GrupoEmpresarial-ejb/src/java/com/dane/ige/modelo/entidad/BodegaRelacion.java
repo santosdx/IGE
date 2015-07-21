@@ -1,11 +1,13 @@
 package com.dane.ige.modelo.entidad;
 
+import com.dane.ige.modelo.llave.PkRelacion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,7 +30,8 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_relacion")
 @NamedQueries({
     @NamedQuery(name = "BodegaRelacion.findAll", query = "SELECT m FROM BodegaRelacion m"),
-    @NamedQuery(name = "BodegaRelacion.findById", query = "SELECT m FROM BodegaRelacion m WHERE m.id = :id")})
+    @NamedQuery(name = "BodegaRelacion.findById", 
+            query = "SELECT m FROM BodegaRelacion m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")})
 public class BodegaRelacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,11 +39,8 @@ public class BodegaRelacion implements Serializable {
     public static final String GET_ALL = "BodegaRelacion.findAll";
     public static final String FINE_BYE_ID = "BodegaRelacion.findById";
 
-    @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO")
-    //@SequenceGenerator(name = "SEQ_MODULO", sequenceName = "seq_id_ige_modulo", allocationSize = 1)
-    @Column(name = "r_id_organizacion", unique = true, nullable = false, scale = 0)
-    private Long id;
+    @EmbeddedId
+    private PkRelacion id;
     @Column(name = "tipo_congromelado")
     private String tipoCongromelado;
     @Column(name = "situacion_control")
@@ -62,22 +62,18 @@ public class BodegaRelacion implements Serializable {
     @Column(name = "nombre_controlante")
     private String nombreControlante;
     @Column(name = "porcentaje_controlante_ul")
-    private Long porcentajeControlanteul;
+    private Double porcentajeControlanteul;
     @Column(name = "perfilador")
     private String perfilador;
 
     public BodegaRelacion() {
     }
 
-    public BodegaRelacion(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
+    public PkRelacion getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(PkRelacion id) {
         this.id = id;
     }
 
@@ -122,33 +118,33 @@ public class BodegaRelacion implements Serializable {
     }
 
     public String getSucursalesExtranjeroGe() {
-        if(sucursalesExtranjeroGe != null){
-            return sucursalesExtranjeroGe.equals("SI")?"true":"false";
-        }else{
+        if (sucursalesExtranjeroGe != null) {
+            return sucursalesExtranjeroGe.equals("SI") ? "true" : "false";
+        } else {
             return "false";
         }
     }
 
     public void setSucursalesExtranjeroGe(String sucursalesExtranjeroGe) {
-        if(sucursalesExtranjeroGe != null){
-            this.sucursalesExtranjeroGe = sucursalesExtranjeroGe.equals("true")?"SI":"NO";
-        }else{
+        if (sucursalesExtranjeroGe != null) {
+            this.sucursalesExtranjeroGe = sucursalesExtranjeroGe.equals("true") ? "SI" : "NO";
+        } else {
             this.sucursalesExtranjeroGe = "NO";
         }
     }
 
     public String getConsorcioUnidadesTempGe() {
-        if(consorcioUnidadesTempGe != null){
-            return consorcioUnidadesTempGe.equals("SI")?"true":"false";
-        }else{
+        if (consorcioUnidadesTempGe != null) {
+            return consorcioUnidadesTempGe.equals("SI") ? "true" : "false";
+        } else {
             return "false";
         }
     }
 
     public void setConsorcioUnidadesTempGe(String consorcioUnidadesTempGe) {
-        if(consorcioUnidadesTempGe != null){
-            this.consorcioUnidadesTempGe = consorcioUnidadesTempGe.equals("true")?"SI":"NO";
-        }else{
+        if (consorcioUnidadesTempGe != null) {
+            this.consorcioUnidadesTempGe = consorcioUnidadesTempGe.equals("true") ? "SI" : "NO";
+        } else {
             this.consorcioUnidadesTempGe = "NO";
         }
     }
@@ -177,11 +173,11 @@ public class BodegaRelacion implements Serializable {
         this.nombreControlante = nombreControlante;
     }
 
-    public Long getPorcentajeControlanteul() {
+    public Double getPorcentajeControlanteul() {
         return porcentajeControlanteul;
     }
 
-    public void setPorcentajeControlanteul(Long porcentajeControlanteul) {
+    public void setPorcentajeControlanteul(Double porcentajeControlanteul) {
         this.porcentajeControlanteul = porcentajeControlanteul;
     }
 

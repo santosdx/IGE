@@ -6,9 +6,11 @@
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
-                <h3 style="text-align: center;">FORMULARIO DE PERFILAMIENTO DEL GRUPO EMPRESARIAL</h3>
                 <h:form>
-                    <p:wizard flowListener="#{MbFormGrupoEmpresa.onFlowProcess}" backLabel="anterior" nextLabel="siguiente" >
+                    <h3 style="text-align: center;">FORMULARIO DE PERFILAMIENTO DEL GRUPO EMPRESARIAL</h3>
+                    <p:growl id="gwFormGrupoEmpresa" sticky="true" showDetail="true" life="6000" />
+
+                    <p:wizard flowListener="#{MbFormGrupoEmpresa.onFlowProcess}" backLabel="anterior" nextLabel="siguiente"  >
 
                         <p:tab id="identificacion" title="Identificación">
                             <ui:include src="componente/cpt-formulario-identificacion.xhtml"/>
@@ -18,9 +20,9 @@
                             <ui:include src="componente/cpt-formulario-contacto.xhtml"/>
                         </p:tab>
 
-                        <p:tab id="historia" title="Historia">
+                        <!--p:tab id="historia" title="Historia">
                             <ui:include src="componente/cpt-formulario-historia.xhtml"/>
-                        </p:tab>
+                        </p:tab-->
 
                         <p:tab id="tamano" title="Tamaño">
                             <ui:include src="componente/cpt-formulario-tamano.xhtml"/>
@@ -28,19 +30,20 @@
 
                         <p:tab id="confirm" title="Confirmar">
                             <ui:include src="componente/cpt-formulario-resumen.xhtml"/>
-                            <p:spacer height="10"/>
-                            <p:commandButton value="Actualizar Datos"  style="float: right; top: 3px;">
+                            <p:commandButton value="Actualizar Datos" action="#{MbFormGrupoEmpresa.actualizarGrupoEmpresa}" style="float: right; top: 3px;">
                                 <p:confirm header="Confirmación" icon="ui-icon-alert" message="Esta a punto de actualizar la información, desea continuar?"/>
                             </p:commandButton>
                         </p:tab>
+
                     </p:wizard>
+
                     <p:confirmDialog global="true" showEffect="fade" >
                         <p:commandButton value="Aceptar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                         <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
+
                 </h:form>
             </ui:define>
-
         </ui:composition>
     </h:body>
 </html>

@@ -25,13 +25,16 @@
                          styleClass="valorEtiquetaFormulario" requiredMessage="La razón social es requerida." onblur="value = value.toUpperCase()" required="true"/>
             <p:message for="txtRazonSocial" />
 
-            <p:outputLabel value="NIT de la Unidad Legal: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtNit" value="#{MbFormUnidadLegal.identificacionSeleccionada.nit}" styleClass="valorEtiquetaFormulario"/>
-            <p:message for="txtNit" />
-
-            <p:outputLabel value="Dígito de verificación: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtDigitoVerificacion" value="#{MbFormUnidadLegal.identificacionSeleccionada.digitoVerificacion}" styleClass="valorEtiquetaFormulario"/>
-            <p:message for="txtDigitoVerificacion" />
+            <p:outputLabel value="NIT Unidad Legal: *" styleClass="etiquetaFormulario" />
+            <h:panelGrid columns="5" >
+                <p:inputText id="txtNit" value="#{MbFormUnidadLegal.identificacionSeleccionada.nit}"  style="width: 250px;"/>
+                <p:message for="txtNit" display="tooltip"/>
+                <p:outputLabel value="DV: *" styleClass="etiquetaFormulario"/>
+                <p:inputText id="txtDigitoVerificacion" value="#{MbFormUnidadLegal.identificacionSeleccionada.digitoVerificacion}"  maxlength="1"
+                             required="true" requiredMessage="El digito de verificación es requerido." style="width: 20px;"/>
+                <p:message for="txtDigitoVerificacion" display="tooltip"/>
+            </h:panelGrid>
+            <p:spacer/>
 
             <p:outputLabel value="País: *" styleClass="etiquetaFormulario" />
             <p:selectOneMenu id="cboPais" value="#{MbFormUnidadLegal.identificacionSeleccionada.pais}" style="width:430px">

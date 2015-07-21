@@ -9,7 +9,9 @@ import com.dane.ige.modelo.local.administracion.BodegaNovedadFacadeLocal;
 import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
 import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.seguridad.Login;
+import com.dane.ige.utilidad.Mensaje;
 import java.io.Serializable;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -52,12 +54,38 @@ public class FormularioGrupoEmpresa implements Serializable {
 
     @PostConstruct
     public void init() {
-        Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion()+"");
+        Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
 
-        setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(id,"GRUPO"));
-        setNovedadSeleccionada(geteJBServicioBodegaNovedad().obtenerNovedadGrupoEmpresaById(id));
+        setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(id, "GRUPO"));
         setRelacionSeleccionada(geteJBServicioBodegaRelacion().obtenerRelacionGrupoEmpresaById(id));
+        setNovedadSeleccionada(geteJBServicioBodegaNovedad().obtenerNovedadGrupoEmpresaById(id));
         setTamanoSeleccionado(geteJBServicioBodegaTamano().obtenerTamanoGrupoEmpresaById(id));
+    }
+
+    /**
+     * Método que permite insertar un nuevo registro en la bodega de datos, para
+     * las tablas de identificacion, relacion, novedad y tamaño del grupo
+     * empresarial.
+     */
+    public String actualizarGrupoEmpresa() {
+        Date fechaActualizacion = new Date();
+
+        getIdentificacionSeleccionada().getId().setFecha(fechaActualizacion);
+        getIdentificacionSeleccionada().setPersonaActualiza(getServicioLogin().getUsuarioLogueado().getNombres() + getServicioLogin().getUsuarioLogueado().getApellidos());
+        geteJBServicioBodegaIdentificacion().create(identificacionSeleccionada);
+/*
+        getRelacionSeleccionada().getId().setFecha(fechaActualizacion);
+        geteJBServicioBodegaRelacion().create(relacionSeleccionada);
+
+        getNovedadSeleccionada().getId().setFecha(fechaActualizacion);
+        geteJBServicioBodegaNovedad().create(novedadSeleccionada);
+
+        getTamanoSeleccionado().getId().setFecha(fechaActualizacion);
+        geteJBServicioBodegaTamano().create(tamanoSeleccionado);
+*/
+        Mensaje.agregarMensajeGrowlInfo("Exito!", "Información actualizada del grupo empresarial.");
+
+        return "/interfaz/grupo-empresa/itz-informe-grupo-empresa.xhtml";
     }
 
     private boolean skip;

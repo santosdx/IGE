@@ -1,11 +1,13 @@
 package com.dane.ige.modelo.entidad;
 
+import com.dane.ige.modelo.llave.PkTamano;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,7 +30,8 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_tamano")
 @NamedQueries({
     @NamedQuery(name = "BodegaTamano.findAll", query = "SELECT m FROM BodegaTamano m"),
-    @NamedQuery(name = "BodegaTamano.findById", query = "SELECT m FROM BodegaTamano m WHERE m.id = :id")})
+    @NamedQuery(name = "BodegaTamano.findById",
+            query = "SELECT m FROM BodegaTamano m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")})
 public class BodegaTamano implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,11 +39,9 @@ public class BodegaTamano implements Serializable {
     public static final String GET_ALL = "BodegaTamano.findAll";
     public static final String FINE_BYE_ID = "BodegaTamano.findById";
 
-    @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO")
-    //@SequenceGenerator(name = "SEQ_MODULO", sequenceName = "seq_id_ige_modulo", allocationSize = 1)
-    @Column(name = "t_id_organizacion", unique = true, nullable = false, scale = 0)
-    private Long id;
+    @EmbeddedId
+    private PkTamano id;
+
     @Column(name = "info_corte")
     private Long infoCorte;
 
@@ -129,21 +130,20 @@ public class BodegaTamano implements Serializable {
     @Column(name = "fuente_ebitda")
     private String fuenteEbitda;
 
+    @Column(name = "costo_ventas_est")
+    private Long costoVentasEst;
+
     @Column(name = "observaciones")
     private String observaciones;
 
     public BodegaTamano() {
     }
 
-    public BodegaTamano(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
+    public PkTamano getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(PkTamano id) {
         this.id = id;
     }
 
@@ -427,6 +427,14 @@ public class BodegaTamano implements Serializable {
         this.fuenteEbitda = fuenteEbitda;
     }
 
+    public Long getCostoVentasEst() {
+        return costoVentasEst;
+    }
+
+    public void setCostoVentasEst(Long costoVentasEst) {
+        this.costoVentasEst = costoVentasEst;
+    }
+
     public String getObservaciones() {
         return observaciones;
     }
@@ -435,7 +443,6 @@ public class BodegaTamano implements Serializable {
         this.observaciones = observaciones;
     }
 
-    
     //--
     @Override
     public int hashCode() {

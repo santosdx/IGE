@@ -1,5 +1,6 @@
 package com.dane.ige.modelo.entidad;
 
+import com.dane.ige.modelo.llave.PkNovedad;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,7 +33,8 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_novedad")
 @NamedQueries({
     @NamedQuery(name = "BodegaNovedad.findAll", query = "SELECT m FROM BodegaNovedad m"),
-    @NamedQuery(name = "BodegaNovedad.findById", query = "SELECT m FROM BodegaNovedad m WHERE m.id = :id")})
+    @NamedQuery(name = "BodegaNovedad.findById", 
+            query = "SELECT m FROM BodegaNovedad m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")})
 public class BodegaNovedad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,11 +42,8 @@ public class BodegaNovedad implements Serializable {
     public static final String GET_ALL = "BodegaNovedad.findAll";
     public static final String FINE_BYE_ID = "BodegaNovedad.findById";
 
-    @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO")
-    //@SequenceGenerator(name = "SEQ_MODULO", sequenceName = "seq_id_ige_modulo", allocationSize = 1)
-    @Column(name = "n_id_organizacion", unique = true, nullable = false, scale = 0)
-    private Long id;
+    @EmbeddedId
+    private PkNovedad id;
     @Column(name = "estado")
     private String estado;
     @Temporal(TemporalType.TIMESTAMP)
@@ -83,15 +83,11 @@ public class BodegaNovedad implements Serializable {
     public BodegaNovedad() {
     }
 
-    public BodegaNovedad(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
+    public PkNovedad getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(PkNovedad id) {
         this.id = id;
     }
 
@@ -207,8 +203,6 @@ public class BodegaNovedad implements Serializable {
         this.observaciones = observaciones;
     }
 
-    
-    
     //---
     @Override
     public int hashCode() {

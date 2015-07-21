@@ -30,9 +30,10 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_identificacion")
 @NamedQueries({
     @NamedQuery(name = "BodegaIdentificacion.findAll", query = "SELECT i FROM BodegaIdentificacion i"),
-    @NamedQuery(name = "BodegaIdentificacion.findById", query = "SELECT i FROM BodegaIdentificacion i WHERE i.id.id = :id AND i.tipoOrganizacion=:tipoOrganizacion"),
+    @NamedQuery(name = "BodegaIdentificacion.findById", 
+            query = "SELECT i FROM BodegaIdentificacion i WHERE i.id.id = :id AND i.tipoOrganizacion=:tipoOrganizacion AND ROWNUM<=1 ORDER BY i.id.fecha DESC"),
     @NamedQuery(name = "BodegaIdentificacion.findByIdGrupoRelacionadoTipoOrganizacion", 
-                query = "SELECT i FROM BodegaIdentificacion i WHERE i.idGrupoRelacionado = :idGrupoRelacionado AND i.tipoOrganizacion=:tipoOrganizacion")})
+            query = "SELECT i FROM BodegaIdentificacion i WHERE i.idGrupoRelacionado = :idGrupoRelacionado AND i.tipoOrganizacion=:tipoOrganizacion ORDER BY i.nombreRegistrado")})
 public class BodegaIdentificacion implements Serializable {
 
     private static final long serialVersionUID = 1L;

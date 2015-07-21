@@ -6,69 +6,90 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <p:panel header="Información tamaño">
-        <p:messages />
-        <h:panelGrid columns="2" columnClasses="label, value">
-            <!--
+        <p:tooltip />
+
+        <h:panelGrid columns="3" columnClasses="label, value" >
+            
             <h:outputText value="Información con corte a: " styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-            -->
+            <p:inputText id="txtInforCorteA" value="#{MbFormUnidadLegal.tamanoSeleccionado.infoCorte}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtInforCorteA" />
+<!--
+            <p:outputLabel value="Actividad principal*: " styleClass="etiquetaFormulario" />
+            <p:inputText id="txtActividadPrincipal"  styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtActividadPrincipal" />
 
-            <h:outputText value="Actividad principal*: " styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Actividad secundaria: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtActividadSecundaria" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtActividadSecundaria" />
+-->
+            <p:outputLabel value="Personal ocupado: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPersonalOcupado" value="#{MbFormUnidadLegal.tamanoSeleccionado.personalOcupado}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtPersonalOcupado" />
 
-            <h:outputText value="Actividad secundaria: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Personal empleado: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPersonalEmpleado" value="#{MbFormUnidadLegal.tamanoSeleccionado.personalEmpleado}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtPersonalEmpleado" />
 
-            <h:outputText value="Personal ocupado: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Personal cotizante: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPersonalCotizante" value="#{MbFormUnidadLegal.tamanoSeleccionado.personalCotizante}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtPersonalCotizante" />
 
-            <h:outputText value="Personal empleado: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Número de hombres: " styleClass="etiquetaFormulario" />
+            <p:inputText id="txtNumeroHombres" value="#{MbFormUnidadLegal.tamanoSeleccionado.hombresOcupados}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtNumeroHombres" />
 
-            <h:outputText value="Personal cotizante: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Número de mujeres: " styleClass="etiquetaFormulario" />
+            <p:inputText id="txtNumeroMujeres" value="#{MbFormUnidadLegal.tamanoSeleccionado.mujeresOcupadas}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtNumeroMujeres" />
 
-            <h:outputText value="Número de hombres: " styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Activo: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtActivo" value="#{MbFormUnidadLegal.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtActivo" />
 
-            <h:outputText value="Número de mujeres: " styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Pasivo: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPasivo" value="#{MbFormUnidadLegal.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtPasivo" />
 
-            <h:outputText value="Activo: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Patrimonio: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPatrimonio" value="#{MbFormUnidadLegal.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtPatrimonio" />
 
-            <h:outputText value="Pasivo: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Ingresos operacionales: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtIngresosOperacionales" value="#{MbFormUnidadLegal.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtIngresosOperacionales" />
 
-            <h:outputText value="Patrimonio: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Utilidad bruta: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtUtilidadBruta" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadBruta}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtUtilidadBruta" />
 
-            <h:outputText value="Ingresos operacionales: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Gastos operacionales de administración: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtGastosOperacionalesAdminitracion" value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesAdmon}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtGastosOperacionalesAdminitracion" />
 
-            <h:outputText value="Utilidad bruta: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Gastos operacionales de venta: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtGastosOperacionalesVenta" value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesVenta}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtGastosOperacionalesVenta" />
 
-            <h:outputText value="Gastos operacionales de administración: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Gastos operacionales:* " styleClass="etiquetaFormulario" />
+            <p:inputText id="txtGastosOperacionales" value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionales}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtGastosOperacionales" />
 
-            <h:outputText value="Gastos operacionales de venta: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Utilidad operativa: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtUtilidadOperativa" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadOperativa}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtUtilidadOperativa" />
 
-            <h:outputText value="Gastos operacionales:* " styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="EBITDA: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtEbitda" value="#{MbFormUnidadLegal.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtEbitda" />
 
-            <h:outputText value="Utilidad operativa: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Utilidad neta: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtUtilidadNeta" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario"/>
+            <p:message for="txtUtilidadNeta" />
 
-            <h:outputText value="EBITDA: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
+            <p:outputLabel value="Observaciones: " styleClass="etiquetaFormulario" />
+            <p:inputTextarea id="txtObservaciones" value="#{MbFormUnidadLegal.tamanoSeleccionado.observaciones}" rows="6" cols="66" />
+            <p:message for="txtObservaciones" />
 
-            <h:outputText value="Utilidad neta: *" styleClass="etiquetaFormulario" />
-            <p:inputText styleClass="valorEtiquetaFormulario"/>
-
-            <h:outputText value="Observaciones: " styleClass="etiquetaFormulario" />
-            <p:inputTextarea rows="6" cols="50" />
         </h:panelGrid>
     </p:panel>
 
