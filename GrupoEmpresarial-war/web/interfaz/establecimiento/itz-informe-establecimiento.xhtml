@@ -7,10 +7,10 @@
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
-                <h:form style="height: 88%;" >
+                <h:form id="frmInfEstablecimiento" style="height: 88%;" >
                     <p:growl id="msnInforUnidadLegal" showDetail="true" />
                     <h3 class="titulo-center-h3">REPORTE DE PERFILAMIENTO DE LOS ESTABLECIMIENTOS</h3>
-                    <!--p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="100%" height="100%" player="pdf"/-->
+                    <!--p:media value="#{MbReporteEstablecimiento.contenido}" cache="false" width="100%" height="100%" player="pdf"/-->
 
                     <div class="ui-grid ui-grid-responsive">
                         <div class="ui-grid-row">
@@ -18,9 +18,8 @@
                                 <h4 class="titulo-left-h3">Unidad Legal</h4>
                                 <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos establecimientos de la unidad legal seleccionada.</p>
                                 <p:selectOneMenu id="cboUnidadLegal" value="#{MbFormEstablecimiento.idIdentificacionSeleccionada}" 
-                                                 style="width:430px">
-                                    <!--p:ajax event="change" listener="#{MbFormEstablecimiento.seleccionarUnidadLegal(unidadLegal)}" update="dtEstablecimiento"/-->
-                                    <p:ajax event="change" listener="#{MbFormEstablecimiento.mySelectionMethodListener}" update="dtEstablecimiento"/>
+                                                 filter="true" filterMatchMode="contains" >
+                                    <p:ajax event="change" listener="#{MbFormEstablecimiento.mySelectionMethodListener}" update="dtEstablecimiento,btnGenerarReporteEstablecimientos"/>
                                     <f:selectItem itemLabel="Unidad legal..." itemValue="" />
                                     <f:selectItems value="#{MbFormEstablecimiento.listaIdentificacionUnidadLegal}" var="unidadLegal" itemLabel="#{unidadLegal.nombreRegistrado}" itemValue="#{unidadLegal.id.id}"/>
                                 </p:selectOneMenu>
@@ -30,9 +29,10 @@
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Generación de Reporte</h4>
                                 <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos establecimientos de la unidad legal seleccionada.</p>
-                                <p:commandButton id="btnGenerarReporteEstablecimiento" value="Generar reporte" update="dlgReportePdf" oncomplete="PF('dlg').show();"
-                                                 actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.establecimiento.path'], nerv['reporte.establecimiento.archivo'])}"/>
-                                <!--p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="100%" height="90%" player="pdf"/-->
+                                <p:commandButton id="btnGenerarReporteEstablecimientos"  disabled="#{empty MbFormEstablecimiento.listaIdentificacion}" 
+                                                 value="Generar reporte" update="frmInfEstablecimiento:dlgReportePdf" oncomplete="PF('dlg').show();" 
+                                                 actionListener="#{MbReporteEstablecimiento.generarReporteEstablecimientosPdf(nerv['reporte.establecimientos.path'], nerv['reporte.establecimientos.archivo'])}"/>
+                                <!--p:media value="#{MbReporteEstablecimiento.contenido}" cache="false" width="100%" height="90%" player="pdf"/-->
                             </div>
                         </div>
                         <div class="ui-grid-row">
@@ -54,8 +54,14 @@
                                             <p:outputLabel value="#{fila.nombreRegistrado}"/>
                                         </p:column>
                                         <p:column headerText="">
-                                            <p:commandLink action="#{MbFormEstablecimiento.seleccionarEstablecimiento(fila.id.id)}" ajax="false">
-                                                <h:outputText value="Editar Información" />
+                                            <p:commandLink update="frmInfEstablecimiento:dlgReportePdf" oncomplete="PF('dlg').show();" 
+                                                 actionListener="#{MbReporteEstablecimiento.generarReporteEstablecimientoPdf(nerv['reporte.establecimiento.path'], nerv['reporte.establecimiento.archivo'],fila.id.id)}" >
+                                                <!--h:outputText value="Reporte de datos" /-->
+                                                <div class="ui-grid-col-3"><i class="fa fa-fw fa-file-pdf-o"></i>Reporte</div>
+                                            </p:commandLink>
+                                            <p:commandLink action="#{MbFormEstablecimiento.abrirFormularioActualizarDatos(fila.id.id)}" ajax="false">
+                                                <!--h:outputText value="Formulario actualización datos" /-->
+                                                <div class="ui-grid-col-3"><i class="fa fa-fw fa-edit"></i>Formulario</div>
                                             </p:commandLink>
                                         </p:column>
                                     </p:dataTable>
@@ -82,16 +88,16 @@
                         </div>
                     </div>
 
-                    <p:dialog id="dlgReportePdf" header="Reporte Grupo Empresa" widgetVar="dlg" 
-                              resizable="false" modal="false" width="800" height="550">
+                    <p:dialog id="dlgReportePdf" header="Reporte Establecimiento" widgetVar="dlg" appendTo="@(body)"
+                              resizable="false" modal="true" width="800" height="550">
                         <!--p:panelGrid id="pnlReportePdf" columns="1" style="width: 100%; height: 100%">
                             </p:panelGrid-->
                         <p:outputPanel deferred="true">
-                            <p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="756" height="550" player="pdf"/>
+                            <p:media value="#{MbReporteEstablecimiento.contenido}" cache="false" width="756" height="550" player="pdf"/>
                         </p:outputPanel>
                     </p:dialog>
 
-                    <p:blockUI block="@form" trigger="btnGenerarReporteEstablecimiento" >
+                    <p:blockUI block="@form" trigger="btnGenerarReporteEstablecimientos" >
                         Generando reporte...<br />
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>

@@ -71,14 +71,6 @@ public class FormularioEstablecimiento implements Serializable {
         System.out.println("consulto los establecimietnos");
     }
 
-    //public void seleccionarUnidadLegal(Long idOrganizacion) {
-    public void seleccionarUnidadLegal(BodegaIdentificacion identificacion) {
-        //idOrganizacion = getIdentificacionUnidadLegalSeleccionada().getIdGrupoRelacionado();
-        //setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionByIdGrupoRelacionadoTipoOrganizacion(idOrganizacion, "ESTABLECIMIENTO"));
-        setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(identificacion.getId().getId()));
-        System.out.println("consulto los establecimietnos");
-    }
-
     /**
      * Método que permite seleccionar un establecimietno y abrir la pagina del
      * formulario con los datos prediligenciados con el establecimiento
@@ -87,7 +79,7 @@ public class FormularioEstablecimiento implements Serializable {
      * @param idOrganizacion
      * @return
      */
-    public String seleccionarEstablecimiento(Long idOrganizacion) {
+    public String abrirFormularioActualizarDatos(Long idOrganizacion) {
         setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(idOrganizacion, "ESTABLECIMIENTO"));
         setRelacionSeleccionada(geteJBServicioBodegaRelacion().obtenerRelacionGrupoEmpresaById(idOrganizacion));
         setNovedadSeleccionada(geteJBServicioBodegaNovedad().obtenerNovedadGrupoEmpresaById(idOrganizacion));
@@ -106,7 +98,7 @@ public class FormularioEstablecimiento implements Serializable {
         getIdentificacionSeleccionada().getId().setFecha(fechaActualizacion);
         getIdentificacionSeleccionada().setPersonaActualiza(getServicioLogin().getUsuarioLogueado().getNombres() + getServicioLogin().getUsuarioLogueado().getApellidos());
         geteJBServicioBodegaIdentificacion().create(identificacionSeleccionada);
-        /*
+        
          getRelacionSeleccionada().getId().setFecha(fechaActualizacion);
          geteJBServicioBodegaRelacion().create(relacionSeleccionada);
 
@@ -115,7 +107,7 @@ public class FormularioEstablecimiento implements Serializable {
 
          getTamanoSeleccionado().getId().setFecha(fechaActualizacion);
          geteJBServicioBodegaTamano().create(tamanoSeleccionado);
-         */
+         
         Mensaje.agregarMensajeGrowlInfo("Exito!", "Información actualizada del establecimiento.");
 
         return "/interfaz/establecimiento/itz-informe-establecimiento.xhtml";

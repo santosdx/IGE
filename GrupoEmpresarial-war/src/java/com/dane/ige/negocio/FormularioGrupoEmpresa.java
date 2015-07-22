@@ -73,7 +73,7 @@ public class FormularioGrupoEmpresa implements Serializable {
         getIdentificacionSeleccionada().getId().setFecha(fechaActualizacion);
         getIdentificacionSeleccionada().setPersonaActualiza(getServicioLogin().getUsuarioLogueado().getNombres() + getServicioLogin().getUsuarioLogueado().getApellidos());
         geteJBServicioBodegaIdentificacion().create(identificacionSeleccionada);
-/*
+
         getRelacionSeleccionada().getId().setFecha(fechaActualizacion);
         geteJBServicioBodegaRelacion().create(relacionSeleccionada);
 
@@ -82,7 +82,7 @@ public class FormularioGrupoEmpresa implements Serializable {
 
         getTamanoSeleccionado().getId().setFecha(fechaActualizacion);
         geteJBServicioBodegaTamano().create(tamanoSeleccionado);
-*/
+
         Mensaje.agregarMensajeGrowlInfo("Exito!", "Información actualizada del grupo empresarial.");
 
         return "/interfaz/grupo-empresa/itz-informe-grupo-empresa.xhtml";

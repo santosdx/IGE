@@ -26,3 +26,8 @@
     padding: 0px!important;
     border: medium none;
 }
+
+.ui-widget-overlay {
+    background: #484848 none repeat scroll 0 0;
+    opacity: 0.8;
+}

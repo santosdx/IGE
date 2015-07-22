@@ -67,7 +67,7 @@ public class FormularioUnidadLegal implements Serializable {
      * @param idOrganizacion
      * @return 
      */
-    public String seleccionarUnidadLegal(Long idOrganizacion) {
+    public String abrirFormularioActualizarDatos(Long idOrganizacion) {
         setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(idOrganizacion, "UNIDAD LEGAL"));
         setRelacionSeleccionada(geteJBServicioBodegaRelacion().obtenerRelacionGrupoEmpresaById(idOrganizacion));
         setNovedadSeleccionada(geteJBServicioBodegaNovedad().obtenerNovedadGrupoEmpresaById(idOrganizacion));
@@ -85,7 +85,7 @@ public class FormularioUnidadLegal implements Serializable {
         getIdentificacionSeleccionada().getId().setFecha(fechaActualizacion);
         getIdentificacionSeleccionada().setPersonaActualiza(getServicioLogin().getUsuarioLogueado().getNombres() + getServicioLogin().getUsuarioLogueado().getApellidos());
         geteJBServicioBodegaIdentificacion().create(identificacionSeleccionada);
-/*
+
         getRelacionSeleccionada().getId().setFecha(fechaActualizacion);
         geteJBServicioBodegaRelacion().create(relacionSeleccionada);
 
@@ -94,7 +94,7 @@ public class FormularioUnidadLegal implements Serializable {
 
         getTamanoSeleccionado().getId().setFecha(fechaActualizacion);
         geteJBServicioBodegaTamano().create(tamanoSeleccionado);
-*/
+
         Mensaje.agregarMensajeGrowlInfo("Exito!", "Información actualizada de la unidad legal.");
 
         return "/interfaz/unidad-legal/itz-informe-unidad-legal.xhtml";

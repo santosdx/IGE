@@ -58,9 +58,6 @@ public class ReporteGrupoEmpresa {
             File temp = File.createTempFile(reportName, ".pdf");
 
             Map parameters = new HashMap();
-            /**
-             * Passing ReportTitle and Author as parameters
-             */
             parameters.put("id_grupo", getServicioLogin().getUsuarioLogueado().getIdIdentificacion());
 
             reporteJasper = JasperCompileManager.compileReport(urlArchivo + nombreArchivo);

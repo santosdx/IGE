@@ -116,3 +116,8 @@
 .texto-derecha{
     text-align: right;
 }
+
+/* TITULO mensaje dialog*/
+.ui-dialog-title {
+    font-size: 1.2em !important;
+}
