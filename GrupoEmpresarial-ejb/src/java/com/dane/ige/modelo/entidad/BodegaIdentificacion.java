@@ -4,7 +4,9 @@ import com.dane.ige.modelo.llave.PkIdentificacion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -30,9 +32,9 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_identificacion")
 @NamedQueries({
     @NamedQuery(name = "BodegaIdentificacion.findAll", query = "SELECT i FROM BodegaIdentificacion i"),
-    @NamedQuery(name = "BodegaIdentificacion.findById", 
+    @NamedQuery(name = "BodegaIdentificacion.findById",
             query = "SELECT i FROM BodegaIdentificacion i WHERE i.id.id = :id AND i.tipoOrganizacion=:tipoOrganizacion AND ROWNUM<=1 ORDER BY i.id.fecha DESC"),
-    @NamedQuery(name = "BodegaIdentificacion.findByIdGrupoRelacionadoTipoOrganizacion", 
+    @NamedQuery(name = "BodegaIdentificacion.findByIdGrupoRelacionadoTipoOrganizacion",
             query = "SELECT i FROM BodegaIdentificacion i WHERE i.idGrupoRelacionado = :idGrupoRelacionado AND i.tipoOrganizacion=:tipoOrganizacion ORDER BY i.nombreRegistrado")})
 public class BodegaIdentificacion implements Serializable {
 
@@ -77,6 +79,8 @@ public class BodegaIdentificacion implements Serializable {
     private Long telefono;
     @Column(name = "pagina_web")
     private String paginaWeb;
+    @Column(name = "correo_electronico")
+    private String correoElectronico;
     @Column(name = "representante_legal")
     private String representanteLegal;
     @Column(name = "actividad_principal")
@@ -129,7 +133,6 @@ public class BodegaIdentificacion implements Serializable {
 
     @Column(name = "persona_actualiza")
     private String personaActualiza;
-
 
     public BodegaIdentificacion() {
     }
@@ -268,6 +271,14 @@ public class BodegaIdentificacion implements Serializable {
 
     public void setPaginaWeb(String paginaWeb) {
         this.paginaWeb = paginaWeb;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
     public String getRepresentanteLegal() {
@@ -483,9 +494,102 @@ public class BodegaIdentificacion implements Serializable {
         return true;
     }
 
+    public Map<String, String> toMap() {
+        Map<String, String> resultado = new HashMap<String, String>();
+        resultado.put("ID_ORGANIZACION", id.getId()+"");
+        resultado.put("FECHA_ACTUALIZA_IDEN", id.getFecha()+"");
+        resultado.put("TIPO_ORGANIZACION", tipoOrganizacion+"");
+        resultado.put("ID_GRUPO_RELACIONADO", idGrupoRelacionado+"");
+        resultado.put("ID_UL_RELACIONADA", idUlRelacionada+"");
+        resultado.put("TIPO_UNIDAD_LEGAL", tipoUnidadLegal+"");
+        resultado.put("TIPO_ESTABLECIMIENTO", tipoEstablecimiento+"");
+        resultado.put("NOMBRE_COMERCIAL", nombreComercial+"");
+        resultado.put("NOMBRE_REGISTRADO", nombreRegistrado+"");
+        resultado.put("NIT", nit+"");
+        resultado.put("MATRICULA_MERCANTIL", matriculaMercantil+"");
+        resultado.put("DIGITO_VERIFICACION", digitoVerificacion+"");
+        resultado.put("PAIS", pais+"");
+        resultado.put("DEPARTAMENTO", departamento+"");
+        resultado.put("MUNICIPIO", municipio+"");
+        resultado.put("DIRECCION", direccion+"");
+        resultado.put("TELEFONO", telefono+"");
+        resultado.put("PAGINA_WEB", paginaWeb+"");
+        resultado.put("CORREO_ELECTRONICO", correoElectronico+"");
+        resultado.put("REPRESENTANTE_LEGAL", representanteLegal+"");
+        resultado.put("ACTIVIDAD_PRINCIPAL", actividadPrincipal+"");
+        resultado.put("ACTIVIDAD_SECUNDARIA", actividadSecundaria+"");
+        resultado.put("UNIDAD_AUXILIAR_UL", unidadAuxiliarUl+"");
+        resultado.put("ACTIVIDAD_AUXILIAR_EST", actividadAuxiliarEst+"");
+        resultado.put("OTRAS_ACTIVIDADES_EST", otrasActividadesEst+"");
+        resultado.put("ESTADO_EST", estadoEst+"");
+        resultado.put("TIPO_ORGANIZACION_UL", tipoOrganizacionUl+"");
+        resultado.put("SECTOR_INSTITUCIONAL_UL", sectorInstitucionalUl+"");
+        resultado.put("ORIENTADA_MERCADO_UL", orientadaMercadoUl+"");
+        resultado.put("ENCUESTAS_UL", encuestasUl+"");
+        resultado.put("NOMBRE_CONTACTO", nombreContacto+"");
+        resultado.put("CARGO_CONTACTO", cargoContacto+"");
+        resultado.put("TELEFONO_CONTACTO", telefonoContacto+"");
+        resultado.put("MAIL_CONTACTO", mailContacto+"");
+        resultado.put("NOMBRE_CONTACTO2", nombreContacto2+"");
+        resultado.put("CARGO_CONTACTO2", cargoContacto2+"");
+        resultado.put("TELEFONO_CONTACTO2", telefonoContacto2+"");
+        resultado.put("MAIL_CONTACTO2", mailContacto2+"");
+        resultado.put("NOMBRE_CONTACTO3", nombreContacto3+"");
+        resultado.put("CARGO_CONTACTO3", cargoContacto3+"");
+        resultado.put("TELEFONO_CONTACTO3", telefonoContacto3+"");
+        resultado.put("MAIL_CONTACTO3", mailContacto3+"");
+        resultado.put("PERSONA_ACTUALIZA", personaActualiza+"");
+        return resultado;
+    }
+
     @Override
     public String toString() {
-        return "com.dabe.ige.modelo.entidad.BodegaIdentificacion[ id=" + id + " ]";
+        return "com.dabe.ige.modelo.entidad.BodegaIdentificacion[ id=" + id.getId() + " ]";
+        /*
+        return "id_organizacion^" + id.getId()
+                + "~fecha_actualiza_iden^" + id.getFecha()
+                + "~tipo_organizacion^" + tipoOrganizacion
+                + "~id_grupo_relacionado^" + idGrupoRelacionado
+                + "~id_ul_relacionada^" + idUlRelacionada
+                + "~tipo_unidad_legal^" + tipoUnidadLegal
+                + "~tipo_establecimiento^" + tipoEstablecimiento
+                + "~nombre_comercial^" + nombreComercial
+                + "~nombre_registrado^" + nombreRegistrado
+                + "~nit^" + nit
+                + "~matricula_mercantil^" + matriculaMercantil
+                + "~digito_verificacion^" + digitoVerificacion
+                + "~pais^" + pais
+                + "~departamento^" + departamento
+                + "~municipio^" + municipio
+                + "~direccion^" + direccion
+                + "~telefono^" + telefono
+                + "~pagina_web^" + paginaWeb
+                + "~correo_electronico^" + correoElectronico
+                + "~representante_legal^" + representanteLegal
+                + "~actividad_principal^" + actividadPrincipal
+                + "~actividad_secundaria^" + actividadSecundaria
+                + "~unidad_auxiliar_ul^" + unidadAuxiliarUl
+                + "~actividad_auxiliar_est^" + actividadAuxiliarEst
+                + "~otras_actividades_est^" + otrasActividadesEst
+                + "~estado_est^" + estadoEst
+                + "~tipo_organizacion_ul^" + tipoOrganizacionUl
+                + "~sector_institucional_ul^" + sectorInstitucionalUl
+                + "~orientada_mercado_ul^" + orientadaMercadoUl
+                + "~encuestas_ul^" + encuestasUl
+                + "~nombre_contacto^" + nombreContacto
+                + "~cargo_contacto^" + cargoContacto
+                + "~telefono_contacto^" + telefonoContacto
+                + "~mail_contacto^" + mailContacto
+                + "~nombre_contacto2^" + nombreContacto2
+                + "~cargo_contacto2^" + cargoContacto2
+                + "~telefono_contacto2^" + telefonoContacto2
+                + "~mail_contacto2^" + mailContacto2
+                + "~nombre_contacto3^" + nombreContacto3
+                + "~cargo_contacto3^" + cargoContacto3
+                + "~telefono_contacto3^" + telefonoContacto3
+                + "~mail_contacto3^" + mailContacto3
+                + "~personaActualiza^" + personaActualiza;
+        */
     }
 
 }

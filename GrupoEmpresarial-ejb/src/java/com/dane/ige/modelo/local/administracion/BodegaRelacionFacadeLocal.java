@@ -2,6 +2,7 @@ package com.dane.ige.modelo.local.administracion;
 
 import com.dane.ige.modelo.entidad.BodegaRelacion;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Local;
 
 /**
@@ -28,4 +29,6 @@ public interface BodegaRelacionFacadeLocal {
     int count();
 
     BodegaRelacion obtenerRelacionGrupoEmpresaById(Long id);
+    
+    Map<String, String> obtenerMapRelacionGrupoEmpresaById(Long id);
 }

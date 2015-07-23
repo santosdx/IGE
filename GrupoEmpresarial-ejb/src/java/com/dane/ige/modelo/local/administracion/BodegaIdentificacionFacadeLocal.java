@@ -2,6 +2,7 @@ package com.dane.ige.modelo.local.administracion;
 
 import com.dane.ige.modelo.entidad.BodegaIdentificacion;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Local;
 
 /**
@@ -14,7 +15,6 @@ public interface BodegaIdentificacionFacadeLocal {
     void create(BodegaIdentificacion identificacion);
 
     //public Long createAndGetKey(BodegaIdentificacion identificacion);
-
     void edit(BodegaIdentificacion identificacion);
 
     void remove(BodegaIdentificacion identificacion);
@@ -29,7 +29,9 @@ public interface BodegaIdentificacionFacadeLocal {
 
     BodegaIdentificacion obtenerIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion);
 
-    public List<BodegaIdentificacion> obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado) ;
+    Map<String, String> obtenerMapIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion);
 
-    public List<BodegaIdentificacion> obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(Long idUnidadLegallacionada) ;
+    List<BodegaIdentificacion> obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado);
+
+    List<BodegaIdentificacion> obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(Long idUnidadLegallacionada);
 }

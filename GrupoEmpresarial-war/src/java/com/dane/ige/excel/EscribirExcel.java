@@ -18,12 +18,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
-import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -59,11 +59,16 @@ public class EscribirExcel {
 
     @ManagedProperty("#{MbLogin}")
     private Login servicioLogin;
-
-    private BodegaIdentificacion identificacionSeleccionada;
-    private BodegaNovedad novedadSeleccionada;
-    private BodegaRelacion relacionSeleccionada;
-    private BodegaTamano tamanoSeleccionado;
+    /*
+     private BodegaIdentificacion identificacionSeleccionada;
+     private BodegaNovedad novedadSeleccionada;
+     private BodegaRelacion relacionSeleccionada;
+     private BodegaTamano tamanoSeleccionado;
+     */
+    private Map<String, String> identificacionSeleccionada;
+    private Map<String, String> novedadSeleccionada;
+    private Map<String, String> relacionSeleccionada;
+    private Map<String, String> tamanoSeleccionado;
 
     public EscribirExcel() {
     }
@@ -96,11 +101,14 @@ public class EscribirExcel {
      */
     private void escribirLibroXlsGrupoEmpresa(Workbook libro, String nombreArchivo) {
         Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
-
+        
+        //setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(id, "GRUPO"));
+        setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerMapIdentificacionByIdTipoOrganizacion(id, "GRUPO"));
         Workbook libroTemp = ingresarDatosIdentificacionGrupoEmpresa(libro);
-        libroTemp = ingresarDatosRelacionGrupoEmpresa(libroTemp);
 
-        setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(id, "GRUPO"));
+        setRelacionSeleccionada(geteJBServicioBodegaRelacion().obtenerMapRelacionGrupoEmpresaById(id));
+        ingresarDatosRelacionGrupoEmpresa(libroTemp);
+
         ingresarDatosRelacionGrupoEmpresa(libroTemp);
 
         ingresarDatosEventosGrupoEmpresa(libroTemp);
@@ -148,7 +156,7 @@ public class EscribirExcel {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
                     celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                    celda.setCellValue(variableIge.getColumna() + indiceColumna);
+                    celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
                     break;
                 }
             }
@@ -181,7 +189,7 @@ public class EscribirExcel {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
                     celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                    celda.setCellValue(variableIge.getColumna() + indiceColumna);
+                    celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
                     break;
                 }
             }
@@ -323,35 +331,61 @@ public class EscribirExcel {
         this.servicioLogin = servicioLogin;
     }
 
-    public BodegaIdentificacion getIdentificacionSeleccionada() {
+    /*
+     public BodegaIdentificacion getIdentificacionSeleccionada() {
+     return identificacionSeleccionada;
+     }
+     public void setIdentificacionSeleccionada(BodegaIdentificacion identificacionSeleccionada) {
+     this.identificacionSeleccionada = identificacionSeleccionada;
+     }
+     public BodegaNovedad getNovedadSeleccionada() {
+     return novedadSeleccionada;
+     }
+     public void setNovedadSeleccionada(BodegaNovedad novedadSeleccionada) {
+     this.novedadSeleccionada = novedadSeleccionada;
+     }
+     public BodegaRelacion getRelacionSeleccionada() {
+     return relacionSeleccionada;
+     }
+     public void setRelacionSeleccionada(BodegaRelacion relacionSeleccionada) {
+     this.relacionSeleccionada = relacionSeleccionada;
+     }
+     public BodegaTamano getTamanoSeleccionado() {
+     return tamanoSeleccionado;
+     }
+     public void setTamanoSeleccionado(BodegaTamano tamanoSeleccionado) {
+     this.tamanoSeleccionado = tamanoSeleccionado;
+     }
+     */
+    public Map<String, String> getIdentificacionSeleccionada() {
         return identificacionSeleccionada;
     }
 
-    public void setIdentificacionSeleccionada(BodegaIdentificacion identificacionSeleccionada) {
+    public void setIdentificacionSeleccionada(Map<String, String> identificacionSeleccionada) {
         this.identificacionSeleccionada = identificacionSeleccionada;
     }
 
-    public BodegaNovedad getNovedadSeleccionada() {
+    public Map<String, String> getNovedadSeleccionada() {
         return novedadSeleccionada;
     }
 
-    public void setNovedadSeleccionada(BodegaNovedad novedadSeleccionada) {
+    public void setNovedadSeleccionada(Map<String, String> novedadSeleccionada) {
         this.novedadSeleccionada = novedadSeleccionada;
     }
 
-    public BodegaRelacion getRelacionSeleccionada() {
+    public Map<String, String> getRelacionSeleccionada() {
         return relacionSeleccionada;
     }
 
-    public void setRelacionSeleccionada(BodegaRelacion relacionSeleccionada) {
+    public void setRelacionSeleccionada(Map<String, String> relacionSeleccionada) {
         this.relacionSeleccionada = relacionSeleccionada;
     }
 
-    public BodegaTamano getTamanoSeleccionado() {
+    public Map<String, String> getTamanoSeleccionado() {
         return tamanoSeleccionado;
     }
 
-    public void setTamanoSeleccionado(BodegaTamano tamanoSeleccionado) {
+    public void setTamanoSeleccionado(Map<String, String> tamanoSeleccionado) {
         this.tamanoSeleccionado = tamanoSeleccionado;
     }
 

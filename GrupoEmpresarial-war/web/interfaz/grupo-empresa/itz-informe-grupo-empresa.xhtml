@@ -61,6 +61,10 @@
                         Generando reporte...<br />
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>
+                    <p:blockUI block="@form" trigger="btnGenerarXlsGrupoEmpresa" >
+                        Generando archivo...<br />
+                        <p:graphicImage name="imagen/ajax-loading.gif"/>
+                    </p:blockUI>
                 </h:form>
 
                 <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">

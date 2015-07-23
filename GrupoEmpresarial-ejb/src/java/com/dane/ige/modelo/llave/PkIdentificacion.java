@@ -18,11 +18,11 @@ public class PkIdentificacion implements Serializable {
     //@GeneratedValue(strategy = GenerationType.AUTO)
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SeqGen")
     //@SequenceGenerator(name = "SeqGen", sequenceName = "SEQ_DEE_COCA", allocationSize = 1)
-    @Column(name = "ID_ORGANIZACION")
+    @Column(name = "id_organizacion")
     private Long id;
     //@Id
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "FECHA_ACTUALIZA_IDEN")
+    @Column(name = "fecha_actualiza_iden")
     private Date fecha;
 
     public PkIdentificacion() {

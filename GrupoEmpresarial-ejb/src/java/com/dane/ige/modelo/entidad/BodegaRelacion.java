@@ -4,7 +4,9 @@ import com.dane.ige.modelo.llave.PkRelacion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -30,7 +32,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_relacion")
 @NamedQueries({
     @NamedQuery(name = "BodegaRelacion.findAll", query = "SELECT m FROM BodegaRelacion m"),
-    @NamedQuery(name = "BodegaRelacion.findById", 
+    @NamedQuery(name = "BodegaRelacion.findById",
             query = "SELECT m FROM BodegaRelacion m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")})
 public class BodegaRelacion implements Serializable {
 
@@ -210,9 +212,28 @@ public class BodegaRelacion implements Serializable {
         return true;
     }
 
+    public Map<String, String> toMap() {
+        Map<String, String> resultado = new HashMap<String, String>();
+        resultado.put("R_ID_ORGANIZACION", id.getId()+"");
+        resultado.put("R_FECHA_ACTUALIZA", id.getFecha()+"");
+        resultado.put("TIPO_CONGROMELADO", tipoCongromelado+"");
+        resultado.put("SITUACION_CONTROL", situacionControl+"");
+        resultado.put("TIPO_CONTROL", tipoControl+"");
+        resultado.put("TIPO_EMPRESA_CONTROLANTE", tipoEmpresaControlante+"");
+        resultado.put("PAIS_CONTROLANTE", paisControlante+"");
+        resultado.put("SUCURSALES_EXTRANJERO_GE", sucursalesExtranjeroGe+"");
+        resultado.put("CONSORCIO_UNIDADES_TEMP_GE", consorcioUnidadesTempGe+"");
+        resultado.put("TIPO_RELACION_UL",tipoRelacionUl +"");
+        resultado.put("NIT_CONTROLANTE", nitControlante+"");
+        resultado.put("NOMBRE_CONTROLANTE", nombreControlante+"");
+        resultado.put("PORCENTAJE_CONTROLANTE_UL", porcentajeControlanteul+"");
+        resultado.put("PERFILADOR", perfilador+"");
+        return resultado;
+    }
+
     @Override
     public String toString() {
-        return "com.dabe.ige.modelo.entidad.BodegaIdentificacion[ id=" + id + " ]";
+        return "com.dabe.ige.modelo.entidad.BodegaIdentificacion[ id=" + id.getId() + " ]";
     }
 
 }
