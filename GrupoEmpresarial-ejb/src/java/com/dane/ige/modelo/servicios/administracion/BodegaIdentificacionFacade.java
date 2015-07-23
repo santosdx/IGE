@@ -60,6 +60,12 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
         return resultado;
     }
 
+    /**
+     * Método que permite obtener un Map con los datos de identificación del grupo.
+     * @param id
+     * @param tipoOrganizacion
+     * @return 
+     */
     @Override
     public Map<String, String> obtenerMapIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion) {
         Map<String, String> resultado = null;

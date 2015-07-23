@@ -8,7 +8,7 @@
     <p:panel header="Información de identificación">
         <p:tooltip />
 
-        <h:panelGrid columns="3" columnClasses="label, value" >
+        <h:panelGrid columns="3">
 
             <p:outputLabel value="Nombre Comercial:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreComercial" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreComercial}" styleClass="valorEtiquetaFormulario" 
@@ -30,7 +30,7 @@
                              required="true" requiredMessage="El DV es requerido." style="width: 20px;"/>
                 <p:message for="txtDigitoVerificacion" display="tooltip"/>
             </h:panelGrid>
-            <p:spacer/>
+            <p:spacer width="10" height="10"/>
 
             <p:outputLabel value="Página web: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtPaginaWeb" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.paginaWeb}" styleClass="valorEtiquetaFormulario" 
@@ -124,11 +124,13 @@
             <p:message for="cboPais"/>
 
             <p:outputLabel value="Sucursales en el extranjero: *" styleClass="etiquetaFormulario"/>
-            <p:inputSwitch id="swtSucursale" value="#{MbFormGrupoEmpresa.relacionSeleccionada.sucursalesExtranjeroGe}" onLabel="SI" offLabel="NO" required="true" requiredMessage="Las Sucursales son requeridas."/>
+            <p:inputSwitch id="swtSucursale" onLabel="SI" offLabel="NO" required="true" 
+                           value="#{MbFormGrupoEmpresa.relacionSeleccionada.sucursalesExtranjeroGe}" requiredMessage="Las Sucursales son requeridas."/>
             <p:message for="swtSucursale"/>
 
             <p:outputLabel value="Consorcios - Uniones temporales: " styleClass="etiquetaFormulario"/>
-            <p:inputSwitch id="swtConsorcios" value="#{MbFormGrupoEmpresa.relacionSeleccionada.consorcioUnidadesTempGe}" onLabel="SI" offLabel="NO"/>
+            <p:inputSwitch id="swtConsorcios" onLabel="SI" offLabel="NO" 
+                           value="#{MbFormGrupoEmpresa.relacionSeleccionada.consorcioUnidadesTempGe}" />
             <p:message for="swtConsorcios"/>
 
             <!--h:outputText value="Saltar siguiente: " />

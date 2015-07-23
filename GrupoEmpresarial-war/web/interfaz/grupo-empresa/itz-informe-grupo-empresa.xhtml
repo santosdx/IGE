@@ -17,7 +17,6 @@
                                 <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos los datos del grupo empresarial.</p>
                                 <p:commandButton id="btnGenerarReporte" value="Generar reporte" update="dlgReportePdf" oncomplete="PF('dlg').show();"
                                                  actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.grupoEmpresarial.path'], nerv['reporte.grupoEmpresarial.archivo'])}"/>
-                                <!--p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="100%" height="90%" player="pdf"/-->
                             </div>
                         </div>
                         <div class="ui-grid-row">
@@ -34,9 +33,10 @@
                                 <p>En esta sección el usuario puede descargar un archivo XLS, que contiene la información del grupo empresarial, la cual podra
                                 actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
                                 <p:commandButton id="btnGenerarXlsGrupoEmpresa" value="Generar Excel" ajax="false" 
-                                                 actionListener="#{MbEscribirExcel.generarArchivoXlsGrupoEmpresarial(nerv['plantilla.grupoEmpresarial.path'], nerv['plantilla.grupoEmpresarial.archivo'])}"
+                                                 actionListener="#{MbEscribirExcelGrupoEmpresa.generarArchivoXls(nerv['plantilla.grupoEmpresarial.path'],
+                                                                   nerv['plantilla.grupoEmpresarial.archivo'], MbLogin.usuarioLogueado.idIdentificacion,'GRUPO')}"
                                                  onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                                    <p:fileDownload value="#{MbEscribirExcel.file}" />
+                                    <p:fileDownload value="#{MbEscribirExcelGrupoEmpresa.file}" />
                                 </p:commandButton>
                                 <p>Subir el archivo con la ifnromación del grupo empresarial diligenciada para actualizar los datos.</p>
                                 <p:fileUpload fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"
@@ -50,10 +50,10 @@
 
                     <p:dialog id="dlgReportePdf" header="Reporte Grupo Empresa" widgetVar="dlg"  appendTo="@(body)"
                               resizable="false" modal="true" width="800" height="550">
-                        <!--p:panelGrid id="pnlReportePdf" columns="1" style="width: 100%; height: 100%">
-                            </p:panelGrid-->
                         <p:outputPanel deferred="true">
-                            <p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="756" height="550" player="pdf"/>
+                            <p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="756" height="550" player="pdf" >
+                                Your browser can't display pdf
+                            </p:media>
                         </p:outputPanel>
                     </p:dialog>
 

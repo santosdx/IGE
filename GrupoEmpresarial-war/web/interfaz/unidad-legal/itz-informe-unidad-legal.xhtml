@@ -61,9 +61,9 @@
                                 <p>En esta sección el usuario puede descargar un archivo XLS, que contiene el listado de unidades legales del grupo empresarial, la cual podra
                                     actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
                                 <p:commandButton id="btnGenerarXlsGrupoEmpresa" value="Generar Excel" ajax="false" 
-                                                 actionListener="#{MbEscribirExcel.generarArchivoXlsGrupoEmpresarial(nerv['plantilla.grupoEmpresarial.path'], nerv['plantilla.grupoEmpresarial.archivo'])}"
+                                                 actionListener="#{MbEscribirExcelUnidadLegal.generarArchivoXls(nerv['plantilla.unidadLegal.path'], nerv['plantilla.unidadLegal.archivo'])}"
                                                  onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                                    <p:fileDownload value="#{MbEscribirExcel.file}" />
+                                    <p:fileDownload value="#{MbEscribirExcelUnidadLegal.file}" />
                                 </p:commandButton>
                                 <p>Subir el archivo con la ifnromación de las unidades legales diligenciada para actualizar los datos.</p>
                                 <p:fileUpload fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"

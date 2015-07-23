@@ -54,7 +54,7 @@ public class Usuario implements Serializable {
     @Column(name = "correo")
     private String correo;
     @Column(name = "ige_iden_id_organizacion")
-    private Integer idIdentificacion;
+    private Long idIdentificacion;
     /*
      @OneToOne
      @JoinColumn(name = "id_ige_usuario", referencedColumnName = "id_ige_usuario", insertable = false, updatable = false)
@@ -139,11 +139,11 @@ public class Usuario implements Serializable {
         this.perfil = perfil;
     }
 
-    public Integer getIdIdentificacion() {
+    public Long getIdIdentificacion() {
         return idIdentificacion;
     }
 
-    public void setIdIdentificacion(Integer idIdentificacion) {
+    public void setIdIdentificacion(Long idIdentificacion) {
         this.idIdentificacion = idIdentificacion;
     }
 

@@ -1,11 +1,14 @@
 package com.dane.ige.modelo.entidad;
 
 import com.dane.ige.modelo.llave.PkNovedad;
+import com.dane.ige.utilidad.Texto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -33,7 +36,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_novedad")
 @NamedQueries({
     @NamedQuery(name = "BodegaNovedad.findAll", query = "SELECT m FROM BodegaNovedad m"),
-    @NamedQuery(name = "BodegaNovedad.findById", 
+    @NamedQuery(name = "BodegaNovedad.findById",
             query = "SELECT m FROM BodegaNovedad m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")})
 public class BodegaNovedad implements Serializable {
 
@@ -222,6 +225,27 @@ public class BodegaNovedad implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public Map<String, String> toMap() {
+        Map<String, String> resultado = new HashMap<String, String>();
+        resultado.put("N_ID_ORGANIZACION", id.getId()+"");
+        resultado.put("N_FECHA_ACTUALIZA", id.getFecha()+"");
+        resultado.put("ESTADO", Texto.blankText(estado+""));
+        resultado.put("FECHA_CONFIGURACION", Texto.blankText(fechaConfiguracion+""));
+        resultado.put("FECHA_MATRICULA",  Texto.blankText(fechaMatricula+""));
+        resultado.put("ESTADO_MATRICULA",  Texto.blankText(estadoMatricula+""));
+        resultado.put("ULTIMO_ANO_RENOVADO", Texto.blankText(ultimoAnoRenovado+""));
+        resultado.put("FECHA_CREACION", Texto.blankText(fechaCreacion+""));
+        resultado.put("FECHA_INICIO_ACTI", Texto.blankText(fechaInicioActi+""));
+        resultado.put("FECHA_CIERRE", Texto.blankText(fechaCierre+""));
+        resultado.put("FECHA_LIQUIDACION", Texto.blankText(fechaLiquidacion+""));
+        resultado.put("TIPO_NOVEDAD", Texto.blankText(tipoNovedad+""));
+        resultado.put("FECHA_NOVEDAD", Texto.blankText(fechaNovedad+""));
+        resultado.put("ID_GRUPO_NOVEDAD", Texto.blankText(idGrupoNovedad+""));
+        resultado.put("NIT_UL_INVOLUCRADA", Texto.blankText(nitUlInvolucrada+""));
+        resultado.put("OBSERVACIONES", Texto.blankText(observaciones+""));
+        return resultado;
     }
 
     @Override

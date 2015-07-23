@@ -57,7 +57,7 @@ public class FormularioUnidadLegal implements Serializable {
 
     @PostConstruct
     public void init() {
-        Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
+        Long id = getServicioLogin().getUsuarioLogueado().getIdIdentificacion();
         setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(id));
     }
 

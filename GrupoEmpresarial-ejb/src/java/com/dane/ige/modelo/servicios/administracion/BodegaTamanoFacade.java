@@ -5,7 +5,9 @@ import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.modelo.fachada.AbstractFacade;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -50,6 +52,28 @@ public class BodegaTamanoFacade extends AbstractFacade<BodegaTamano> implements 
                 return null;
             } else {
                 resultado = listaResultado.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+        return resultado;
+    }
+
+    @Override
+    public Map<String, String> obtenerMapTamanoGrupoEmpresaById(Long id) {
+        Map<String, String> resultado = null;
+        try {
+            Query query = em.createNamedQuery(BodegaTamano.FINE_BYE_ID);
+            query.setParameter("id", id);
+
+            List<BodegaTamano> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = new HashMap<String, String>();
+                resultado = listaResultado.get(0).toMap();
             }
         } catch (Exception e) {
             e.printStackTrace(System.err);

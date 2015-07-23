@@ -58,7 +58,7 @@ public class BodegaRelacionFacade extends AbstractFacade<BodegaRelacion> impleme
         }
         return resultado;
     }
-    
+
     @Override
     public Map<String, String> obtenerMapRelacionGrupoEmpresaById(Long id) {
         Map<String, String> resultado = null;
@@ -68,7 +68,6 @@ public class BodegaRelacionFacade extends AbstractFacade<BodegaRelacion> impleme
 
             List<BodegaRelacion> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
-
             if (listaResultado.isEmpty()) {
                 return null;
             } else {

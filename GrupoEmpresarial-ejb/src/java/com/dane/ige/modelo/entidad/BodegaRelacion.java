@@ -1,6 +1,7 @@
 package com.dane.ige.modelo.entidad;
 
 import com.dane.ige.modelo.llave.PkRelacion;
+import com.dane.ige.utilidad.Texto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,7 +65,7 @@ public class BodegaRelacion implements Serializable {
     @Column(name = "nombre_controlante")
     private String nombreControlante;
     @Column(name = "porcentaje_controlante_ul")
-    private Double porcentajeControlanteul;
+    private String porcentajeControlanteul;
     @Column(name = "perfilador")
     private String perfilador;
 
@@ -175,11 +176,11 @@ public class BodegaRelacion implements Serializable {
         this.nombreControlante = nombreControlante;
     }
 
-    public Double getPorcentajeControlanteul() {
+    public String getPorcentajeControlanteul() {
         return porcentajeControlanteul;
     }
 
-    public void setPorcentajeControlanteul(Double porcentajeControlanteul) {
+    public void setPorcentajeControlanteul(String porcentajeControlanteul) {
         this.porcentajeControlanteul = porcentajeControlanteul;
     }
 
@@ -216,18 +217,18 @@ public class BodegaRelacion implements Serializable {
         Map<String, String> resultado = new HashMap<String, String>();
         resultado.put("R_ID_ORGANIZACION", id.getId()+"");
         resultado.put("R_FECHA_ACTUALIZA", id.getFecha()+"");
-        resultado.put("TIPO_CONGROMELADO", tipoCongromelado+"");
-        resultado.put("SITUACION_CONTROL", situacionControl+"");
-        resultado.put("TIPO_CONTROL", tipoControl+"");
-        resultado.put("TIPO_EMPRESA_CONTROLANTE", tipoEmpresaControlante+"");
-        resultado.put("PAIS_CONTROLANTE", paisControlante+"");
-        resultado.put("SUCURSALES_EXTRANJERO_GE", sucursalesExtranjeroGe+"");
-        resultado.put("CONSORCIO_UNIDADES_TEMP_GE", consorcioUnidadesTempGe+"");
-        resultado.put("TIPO_RELACION_UL",tipoRelacionUl +"");
-        resultado.put("NIT_CONTROLANTE", nitControlante+"");
-        resultado.put("NOMBRE_CONTROLANTE", nombreControlante+"");
-        resultado.put("PORCENTAJE_CONTROLANTE_UL", porcentajeControlanteul+"");
-        resultado.put("PERFILADOR", perfilador+"");
+        resultado.put("TIPO_CONGROMELADO", Texto.blankText(tipoCongromelado+""));
+        resultado.put("SITUACION_CONTROL", Texto.blankText(situacionControl+""));
+        resultado.put("TIPO_CONTROL", Texto.blankText(tipoControl+""));
+        resultado.put("TIPO_EMPRESA_CONTROLANTE", Texto.blankText(tipoEmpresaControlante+""));
+        resultado.put("PAIS_CONTROLANTE", Texto.blankText(paisControlante+""));
+        resultado.put("SUCURSALES_EXTRANJERO_GE", Texto.blankText(sucursalesExtranjeroGe+""));
+        resultado.put("CONSORCIO_UNIDADES_TEMP_GE", Texto.blankText(consorcioUnidadesTempGe+""));
+        resultado.put("TIPO_RELACION_UL", Texto.blankText(tipoRelacionUl +""));
+        resultado.put("NIT_CONTROLANTE", Texto.blankText(nitControlante+""));
+        resultado.put("NOMBRE_CONTROLANTE", Texto.blankText(nombreControlante+""));
+        resultado.put("PORCENTAJE_CONTROLANTE_UL", Texto.blankText(porcentajeControlanteul+""));
+        resultado.put("PERFILADOR", Texto.blankText(perfilador+""));
         return resultado;
     }
 

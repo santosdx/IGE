@@ -29,6 +29,6 @@ public interface BodegaRelacionFacadeLocal {
     int count();
 
     BodegaRelacion obtenerRelacionGrupoEmpresaById(Long id);
-    
+
     Map<String, String> obtenerMapRelacionGrupoEmpresaById(Long id);
 }

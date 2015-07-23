@@ -1,6 +1,7 @@
 package com.dane.ige.modelo.entidad;
 
 import com.dane.ige.modelo.llave.PkIdentificacion;
+import com.dane.ige.utilidad.Texto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -306,11 +307,19 @@ public class BodegaIdentificacion implements Serializable {
     }
 
     public String getUnidadAuxiliarUl() {
-        return unidadAuxiliarUl;
+        if (unidadAuxiliarUl != null) {
+            return unidadAuxiliarUl.equals("SI") ? "true" : "false";
+        } else {
+            return "false";
+        }
     }
 
     public void setUnidadAuxiliarUl(String unidadAuxiliarUl) {
-        this.unidadAuxiliarUl = unidadAuxiliarUl;
+        if (unidadAuxiliarUl != null) {
+            this.unidadAuxiliarUl = unidadAuxiliarUl.equals("true") ? "SI" : "NO";
+        } else {
+            this.unidadAuxiliarUl = "NO";
+        }
     }
 
     public String getActividadAuxiliarEst() {
@@ -354,11 +363,19 @@ public class BodegaIdentificacion implements Serializable {
     }
 
     public String getOrientadaMercadoUl() {
-        return orientadaMercadoUl;
+        if (orientadaMercadoUl != null) {
+            return orientadaMercadoUl.equals("SI") ? "true" : "false";
+        } else {
+            return "false";
+        }
     }
 
     public void setOrientadaMercadoUl(String orientadaMercadoUl) {
-        this.orientadaMercadoUl = orientadaMercadoUl;
+        if (orientadaMercadoUl != null) {
+            this.orientadaMercadoUl = orientadaMercadoUl.equals("true") ? "SI" : "NO";
+        } else {
+            this.orientadaMercadoUl = "NO";
+        }
     }
 
     public String getEncuestasUl() {
@@ -498,47 +515,47 @@ public class BodegaIdentificacion implements Serializable {
         Map<String, String> resultado = new HashMap<String, String>();
         resultado.put("ID_ORGANIZACION", id.getId()+"");
         resultado.put("FECHA_ACTUALIZA_IDEN", id.getFecha()+"");
-        resultado.put("TIPO_ORGANIZACION", tipoOrganizacion+"");
-        resultado.put("ID_GRUPO_RELACIONADO", idGrupoRelacionado+"");
-        resultado.put("ID_UL_RELACIONADA", idUlRelacionada+"");
-        resultado.put("TIPO_UNIDAD_LEGAL", tipoUnidadLegal+"");
-        resultado.put("TIPO_ESTABLECIMIENTO", tipoEstablecimiento+"");
-        resultado.put("NOMBRE_COMERCIAL", nombreComercial+"");
-        resultado.put("NOMBRE_REGISTRADO", nombreRegistrado+"");
-        resultado.put("NIT", nit+"");
-        resultado.put("MATRICULA_MERCANTIL", matriculaMercantil+"");
-        resultado.put("DIGITO_VERIFICACION", digitoVerificacion+"");
-        resultado.put("PAIS", pais+"");
-        resultado.put("DEPARTAMENTO", departamento+"");
-        resultado.put("MUNICIPIO", municipio+"");
-        resultado.put("DIRECCION", direccion+"");
-        resultado.put("TELEFONO", telefono+"");
-        resultado.put("PAGINA_WEB", paginaWeb+"");
-        resultado.put("CORREO_ELECTRONICO", correoElectronico+"");
-        resultado.put("REPRESENTANTE_LEGAL", representanteLegal+"");
-        resultado.put("ACTIVIDAD_PRINCIPAL", actividadPrincipal+"");
-        resultado.put("ACTIVIDAD_SECUNDARIA", actividadSecundaria+"");
-        resultado.put("UNIDAD_AUXILIAR_UL", unidadAuxiliarUl+"");
-        resultado.put("ACTIVIDAD_AUXILIAR_EST", actividadAuxiliarEst+"");
-        resultado.put("OTRAS_ACTIVIDADES_EST", otrasActividadesEst+"");
-        resultado.put("ESTADO_EST", estadoEst+"");
-        resultado.put("TIPO_ORGANIZACION_UL", tipoOrganizacionUl+"");
-        resultado.put("SECTOR_INSTITUCIONAL_UL", sectorInstitucionalUl+"");
-        resultado.put("ORIENTADA_MERCADO_UL", orientadaMercadoUl+"");
-        resultado.put("ENCUESTAS_UL", encuestasUl+"");
-        resultado.put("NOMBRE_CONTACTO", nombreContacto+"");
-        resultado.put("CARGO_CONTACTO", cargoContacto+"");
-        resultado.put("TELEFONO_CONTACTO", telefonoContacto+"");
-        resultado.put("MAIL_CONTACTO", mailContacto+"");
-        resultado.put("NOMBRE_CONTACTO2", nombreContacto2+"");
-        resultado.put("CARGO_CONTACTO2", cargoContacto2+"");
-        resultado.put("TELEFONO_CONTACTO2", telefonoContacto2+"");
-        resultado.put("MAIL_CONTACTO2", mailContacto2+"");
-        resultado.put("NOMBRE_CONTACTO3", nombreContacto3+"");
-        resultado.put("CARGO_CONTACTO3", cargoContacto3+"");
-        resultado.put("TELEFONO_CONTACTO3", telefonoContacto3+"");
-        resultado.put("MAIL_CONTACTO3", mailContacto3+"");
-        resultado.put("PERSONA_ACTUALIZA", personaActualiza+"");
+        resultado.put("TIPO_ORGANIZACION", Texto.blankText(tipoOrganizacion+""));
+        resultado.put("ID_GRUPO_RELACIONADO", Texto.blankText(idGrupoRelacionado+""));
+        resultado.put("ID_UL_RELACIONADA", Texto.blankText(idUlRelacionada+""));
+        resultado.put("TIPO_UNIDAD_LEGAL", Texto.blankText(tipoUnidadLegal+""));
+        resultado.put("TIPO_ESTABLECIMIENTO", Texto.blankText(tipoEstablecimiento+""));
+        resultado.put("NOMBRE_COMERCIAL", Texto.blankText(nombreComercial+""));
+        resultado.put("NOMBRE_REGISTRADO", Texto.blankText(nombreRegistrado+""));
+        resultado.put("NIT", Texto.blankText(nit+""));
+        resultado.put("MATRICULA_MERCANTIL", Texto.blankText(matriculaMercantil+""));
+        resultado.put("DIGITO_VERIFICACION", Texto.blankText(digitoVerificacion+""));
+        resultado.put("PAIS", Texto.blankText(pais+""));
+        resultado.put("DEPARTAMENTO", Texto.blankText(departamento+""));
+        resultado.put("MUNICIPIO", Texto.blankText(municipio+""));
+        resultado.put("DIRECCION", Texto.blankText(direccion+""));
+        resultado.put("TELEFONO", Texto.blankText(telefono+""));
+        resultado.put("PAGINA_WEB", Texto.blankText(paginaWeb+""));
+        resultado.put("CORREO_ELECTRONICO", Texto.blankText(correoElectronico+""));
+        resultado.put("REPRESENTANTE_LEGAL", Texto.blankText(representanteLegal+""));
+        resultado.put("ACTIVIDAD_PRINCIPAL", Texto.blankText(actividadPrincipal+""));
+        resultado.put("ACTIVIDAD_SECUNDARIA", Texto.blankText(actividadSecundaria+""));
+        resultado.put("UNIDAD_AUXILIAR_UL", Texto.blankText(unidadAuxiliarUl+""));
+        resultado.put("ACTIVIDAD_AUXILIAR_EST", Texto.blankText(actividadAuxiliarEst+""));
+        resultado.put("OTRAS_ACTIVIDADES_EST", Texto.blankText(otrasActividadesEst+""));
+        resultado.put("ESTADO_EST", Texto.blankText(estadoEst+""));
+        resultado.put("TIPO_ORGANIZACION_UL", Texto.blankText(tipoOrganizacionUl+""));
+        resultado.put("SECTOR_INSTITUCIONAL_UL", Texto.blankText(sectorInstitucionalUl+""));
+        resultado.put("ORIENTADA_MERCADO_UL", Texto.blankText(orientadaMercadoUl+""));
+        resultado.put("ENCUESTAS_UL", Texto.blankText(encuestasUl+""));
+        resultado.put("NOMBRE_CONTACTO", Texto.blankText(nombreContacto+""));
+        resultado.put("CARGO_CONTACTO", Texto.blankText(cargoContacto+""));
+        resultado.put("TELEFONO_CONTACTO", Texto.blankText(telefonoContacto+""));
+        resultado.put("MAIL_CONTACTO", Texto.blankText(mailContacto+""));
+        resultado.put("NOMBRE_CONTACTO2", Texto.blankText(nombreContacto2+""));
+        resultado.put("CARGO_CONTACTO2", Texto.blankText(cargoContacto2+""));
+        resultado.put("TELEFONO_CONTACTO2", Texto.blankText(telefonoContacto2+""));
+        resultado.put("MAIL_CONTACTO2", Texto.blankText(mailContacto2+""));
+        resultado.put("NOMBRE_CONTACTO3", Texto.blankText(nombreContacto3+""));
+        resultado.put("CARGO_CONTACTO3", Texto.blankText(cargoContacto3+""));
+        resultado.put("TELEFONO_CONTACTO3", Texto.blankText(telefonoContacto3+""));
+        resultado.put("MAIL_CONTACTO3", Texto.blankText(mailContacto3+""));
+        resultado.put("PERSONA_ACTUALIZA", Texto.blankText(personaActualiza+""));
         return resultado;
     }
 

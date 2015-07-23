@@ -1,10 +1,13 @@
 package com.dane.ige.modelo.entidad;
 
 import com.dane.ige.modelo.llave.PkTamano;
+import com.dane.ige.utilidad.Texto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -462,6 +465,50 @@ public class BodegaTamano implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public Map<String, String> toMap() {
+        Map<String, String> resultado = new HashMap<String, String>();
+        resultado.put("T_ID_ORGANIZACION", id.getId()+"");
+        resultado.put("T_FECHA_ACTUALIZA", id.getFecha()+"");
+        resultado.put("INFO_CORTE", Texto.blankText(infoCorte+""));
+        resultado.put("PERSONAL_OCUPADO", Texto.blankText(personalOcupado+""));
+        resultado.put("FUENTE_PERSONAL_OCUPADO", Texto.blankText(fuentePersonalOcupado+""));
+        resultado.put("PERSONAL_EMPLEADO", Texto.blankText(personalEmpleado+""));
+        resultado.put("FUENTE_PERSONAL_EMPLEADO", Texto.blankText(fuentePersonalEmpleado+""));
+        resultado.put("PERSONAL_TEMPORAL", Texto.blankText(personalTemporal+""));
+        resultado.put("FUENTE_PERSONAL_TEMPORAL", Texto.blankText(fuentePersonaltemporal+""));
+        resultado.put("PERSONAL_COTIZANTE", Texto.blankText(personalCotizante+""));
+        resultado.put("FUENTE_PERSONAL_COTIZANTE", Texto.blankText(fuentePersonalCotizante+""));
+        resultado.put("HOMBRES_OCUPADOS", Texto.blankText(hombresOcupados+""));
+        resultado.put("FUENTE_HOMBRES_OCUPADOS", Texto.blankText(fuenteHombresOcupados+""));
+        resultado.put("MUJERES_OCUPADAS", Texto.blankText(mujeresOcupadas+""));
+        resultado.put("FUENTE_MUJERES_OCUPADAS", Texto.blankText(fuenteMujeresOcupadas+""));
+        resultado.put("INGRESOS_OPERACIONALES", Texto.blankText(ingresosOperacionales+""));
+        resultado.put("FUENTE_INGRESOS_OPERACIONAL", Texto.blankText(fuenteIngresosOperacional+""));
+        resultado.put("UTILIDAD_NETA", Texto.blankText(utilidadNeta+""));
+        resultado.put("FUENTE_UTILIDAD_NETA", Texto.blankText(fuenteUtilidadNeta+""));
+        resultado.put("UTILIDAD_BRUTA", Texto.blankText(utilidadBruta+""));
+        resultado.put("FUENTE_UTILIDAD_BRUTA", Texto.blankText(fuenteUtilidadBrura+""));
+        resultado.put("ACTIVO", Texto.blankText(activo+""));
+        resultado.put("FUENTE_ACTIVO", Texto.blankText(fuenteActivo+""));
+        resultado.put("PASIVO", Texto.blankText(pasivo+""));
+        resultado.put("FUENTE_PASIVO", Texto.blankText(fuentePasivo+""));
+        resultado.put("PATRIMONIO", Texto.blankText(patrimonio+""));
+        resultado.put("FUENTE_PATRIMONIO", Texto.blankText(fuentePatrimonio+""));
+        resultado.put("GASTOS_OPERACIONALES", Texto.blankText(gastosOperacionales+""));
+        resultado.put("FUENTE_GASTOS_OPERACIONALES", Texto.blankText(fuenteGastosOperacionales+""));
+        resultado.put("GASTOS_OPERACIONALES_ADMON", Texto.blankText(gastosOperacionalesAdmon+""));
+        resultado.put("FUENTE_GASTOS_ADMON", Texto.blankText(fuenteGastosAdmon+""));
+        resultado.put("GASTOS_OPERACIONALES_VENTA", Texto.blankText(gastosOperacionalesVenta+""));
+        resultado.put("FUENTE_GASTOS_VENTA", Texto.blankText(fuenteGastosVenta+""));
+        resultado.put("UTILIDAD_OPERATIVA", Texto.blankText(utilidadOperativa+""));
+        resultado.put("FUENTE_UTILIDAD_OPERATIVA", Texto.blankText(fuenteUtilidadOperativa+""));
+        resultado.put("EBITDA", Texto.blankText(ebitda+""));
+        resultado.put("FUENTE_EBITDA", Texto.blankText(fuenteEbitda+""));
+        resultado.put("COSTO_VENTAS_EST", Texto.blankText(costoVentasEst+""));
+        resultado.put("OBSERVACIONES", Texto.blankText(observaciones+""));
+        return resultado;
     }
 
     @Override

@@ -1,9 +1,5 @@
 package com.dane.ige.excel;
 
-import com.dane.ige.modelo.entidad.BodegaIdentificacion;
-import com.dane.ige.modelo.entidad.BodegaNovedad;
-import com.dane.ige.modelo.entidad.BodegaRelacion;
-import com.dane.ige.modelo.entidad.BodegaTamano;
 import com.dane.ige.modelo.entidad.VariableIge;
 import com.dane.ige.modelo.local.administracion.BodegaIdentificacionFacadeLocal;
 import com.dane.ige.modelo.local.administracion.BodegaNovedadFacadeLocal;
@@ -38,11 +34,11 @@ import org.primefaces.model.StreamedContent;
  *
  * @author SRojasM
  */
-@ManagedBean(name = "MbEscribirExcel")
+@ManagedBean(name = "MbEscribirExcelGrupoEmpresa")
 @ViewScoped
-public class EscribirExcel {
+public class EscribirExcelGrupoEmpresa {
 
-    final static Logger LOGGER = Logger.getLogger(EscribirExcel.class);
+    final static Logger LOGGER = Logger.getLogger(EscribirExcelGrupoEmpresa.class);
 
     @EJB
     private VariableIgeFacadeLocal eJBServicioVariableIge;
@@ -59,21 +55,16 @@ public class EscribirExcel {
 
     @ManagedProperty("#{MbLogin}")
     private Login servicioLogin;
-    /*
-     private BodegaIdentificacion identificacionSeleccionada;
-     private BodegaNovedad novedadSeleccionada;
-     private BodegaRelacion relacionSeleccionada;
-     private BodegaTamano tamanoSeleccionado;
-     */
+
     private Map<String, String> identificacionSeleccionada;
     private Map<String, String> novedadSeleccionada;
     private Map<String, String> relacionSeleccionada;
     private Map<String, String> tamanoSeleccionado;
 
-    public EscribirExcel() {
+    public EscribirExcelGrupoEmpresa() {
     }
 
-    public void generarArchivoXlsGrupoEmpresarial(String urlArchivo, String nombreArchivo) {
+    public void generarArchivoXls(String urlArchivo, String nombreArchivo, Long id, String unidad) {
         try {
             LOGGER.info(urlArchivo);
             LOGGER.info(nombreArchivo);
@@ -82,14 +73,14 @@ public class EscribirExcel {
             FileInputStream fis = new FileInputStream(filename);
 
             Workbook workbook = new HSSFWorkbook(fis);
-            escribirLibroXlsGrupoEmpresa(workbook, nombreArchivo);
+            escribirLibroXls(workbook, nombreArchivo, id, unidad);
 
         } catch (FileNotFoundException ex) {
             LOGGER.warn(ex.getMessage());
-            //java.util.logging.Logger.getLogger(EscribirExcel.class.getName()).log(Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             LOGGER.warn(ex.getMessage());
-            //java.util.logging.Logger.getLogger(EscribirExcel.class.getName()).log(Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -99,28 +90,28 @@ public class EscribirExcel {
      *
      * @param libro
      */
-    private void escribirLibroXlsGrupoEmpresa(Workbook libro, String nombreArchivo) {
-        Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
-        
-        //setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(id, "GRUPO"));
-        setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerMapIdentificacionByIdTipoOrganizacion(id, "GRUPO"));
-        Workbook libroTemp = ingresarDatosIdentificacionGrupoEmpresa(libro);
+    private void escribirLibroXls(Workbook libro, String nombreArchivo, Long id, String unidad) {
+        //Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
+        //String unidad = "GRUPO";
+
+        setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerMapIdentificacionByIdTipoOrganizacion(id, unidad));
+        Workbook libroTemp = ingresarDatosIdentificacion(libro);
 
         setRelacionSeleccionada(geteJBServicioBodegaRelacion().obtenerMapRelacionGrupoEmpresaById(id));
-        ingresarDatosRelacionGrupoEmpresa(libroTemp);
+        ingresarDatosRelacion(libroTemp);
 
-        ingresarDatosRelacionGrupoEmpresa(libroTemp);
+        setNovedadSeleccionada(geteJBServicioBodegaNovedad().obtenerMapNovedadGrupoEmpresaById(id));
+        ingresarDatosEventos(libroTemp);
 
-        ingresarDatosEventosGrupoEmpresa(libroTemp);
-
-        ingresarDatosTamanoGrupoEmpresa(libroTemp);
+        setTamanoSeleccionado(geteJBServicioBodegaTamano().obtenerMapTamanoGrupoEmpresaById(id));
+        ingresarDatosTamano(libroTemp);
         /*
          LeerExcel excel = new LeerExcel();
          excel.visualizarDatosXls(excel.obtenerListaDatosHojaXls(libroTemp.getSheetAt(1)));
          excel.visualizarDatosXls(excel.obtenerListaDatosHojaXls(libroTemp.getSheetAt(2)));
          */
         try {
-            File temp = File.createTempFile("TEMP_PLANTILLA_GRUPO_EMPRESA", ".xls");
+            File temp = File.createTempFile(nombreArchivo, ".xls");
             FileOutputStream elFichero = new FileOutputStream(temp);
             libro.write(elFichero);
 
@@ -140,7 +131,7 @@ public class EscribirExcel {
      * @param libro
      * @return libro
      */
-    private Workbook ingresarDatosIdentificacionGrupoEmpresa(Workbook libro) {
+    private Workbook ingresarDatosIdentificacion(Workbook libro) {
         //La hoja 1 es la hoja de los datos de identificacion
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("IDENTIFICACION");
         Sheet hoja = libro.getSheetAt(1);
@@ -167,13 +158,13 @@ public class EscribirExcel {
     }
 
     /**
-     * Método que permite ingresar los datos de relación la plantilla xls de el
+     * Método que permite ingresar los datos de relación a la plantilla xls de el
      * grupo empresa.
      *
      * @param libro
      * @return libro
      */
-    private Workbook ingresarDatosRelacionGrupoEmpresa(Workbook libro) {
+    private Workbook ingresarDatosRelacion(Workbook libro) {
         //La hoja 2 es la hoja de los datos de relación
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("RELACION");
         Sheet hoja = libro.getSheetAt(2);
@@ -185,6 +176,7 @@ public class EscribirExcel {
         Row fila = hoja.getRow(2);
         while (cells.hasNext()) {
             Cell cell = (Cell) cells.next();
+            cell.setCellType(1);
             for (VariableIge variableIge : columnas) {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
@@ -199,7 +191,14 @@ public class EscribirExcel {
         return libro;
     }
 
-    private Workbook ingresarDatosEventosGrupoEmpresa(Workbook libro) {
+    /**
+     * Método que permite ingresar los datos de novedad a la plantilla xls de el
+     * grupo empresa.
+     *
+     * @param libro
+     * @return libro
+     */
+    private Workbook ingresarDatosEventos(Workbook libro) {
         //La hoja 3 es la hoja de los datos de eventos
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("NOVEDAD");
         Sheet hoja = libro.getSheetAt(3);
@@ -215,7 +214,7 @@ public class EscribirExcel {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
                     celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                    celda.setCellValue(variableIge.getColumna() + indiceColumna);
+                    celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
                     break;
                 }
             }
@@ -225,7 +224,14 @@ public class EscribirExcel {
         return libro;
     }
 
-    private Workbook ingresarDatosTamanoGrupoEmpresa(Workbook libro) {
+    /**
+     * Método que permite ingresar los datos de tamaño a la plantilla xls de el
+     * grupo empresa.
+     *
+     * @param libro
+     * @return libro
+     */
+    private Workbook ingresarDatosTamano(Workbook libro) {
         //La hoja 3 es la hoja de los datos de tamaño
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("TAMAÑO");
         Sheet hoja = libro.getSheetAt(4);
@@ -241,7 +247,7 @@ public class EscribirExcel {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
                     celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                    celda.setCellValue(variableIge.getColumna() + indiceColumna);
+                    celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
                     break;
                 }
             }
@@ -331,32 +337,6 @@ public class EscribirExcel {
         this.servicioLogin = servicioLogin;
     }
 
-    /*
-     public BodegaIdentificacion getIdentificacionSeleccionada() {
-     return identificacionSeleccionada;
-     }
-     public void setIdentificacionSeleccionada(BodegaIdentificacion identificacionSeleccionada) {
-     this.identificacionSeleccionada = identificacionSeleccionada;
-     }
-     public BodegaNovedad getNovedadSeleccionada() {
-     return novedadSeleccionada;
-     }
-     public void setNovedadSeleccionada(BodegaNovedad novedadSeleccionada) {
-     this.novedadSeleccionada = novedadSeleccionada;
-     }
-     public BodegaRelacion getRelacionSeleccionada() {
-     return relacionSeleccionada;
-     }
-     public void setRelacionSeleccionada(BodegaRelacion relacionSeleccionada) {
-     this.relacionSeleccionada = relacionSeleccionada;
-     }
-     public BodegaTamano getTamanoSeleccionado() {
-     return tamanoSeleccionado;
-     }
-     public void setTamanoSeleccionado(BodegaTamano tamanoSeleccionado) {
-     this.tamanoSeleccionado = tamanoSeleccionado;
-     }
-     */
     public Map<String, String> getIdentificacionSeleccionada() {
         return identificacionSeleccionada;
     }
