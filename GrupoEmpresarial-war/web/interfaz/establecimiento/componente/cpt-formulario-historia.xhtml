@@ -10,13 +10,13 @@
 
         <h:panelGrid columns="3" columnClasses="label, value" >
 
-            <p:outputLabel for="claFechaMatricula" value="Fecha matrícula: *" styleClass="etiquetaFormulario"/>
+            <p:outputLabel for="claFechaMatricula" value="Fecha matrícula: " styleClass="etiquetaFormulario"/>
             <p:calendar id="claFechaMatricula" value="#{MbFormEstablecimiento.novedadSeleccionada.fechaMatricula}" 
                         locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha matrícula es requerida."/>
             <p:message for="claFechaMatricula" />
 
             <p:outputLabel value="Estado matrícula: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboEstadoMatricula" value="#{MbFormEstablecimiento.novedadSeleccionada.estadoMatricula}"  style="width:430px" required="true" requiredMessage="El Estado matrícula es requerido.">
+            <p:selectOneMenu id="cboEstadoMatricula" value="#{MbFormEstablecimiento.novedadSeleccionada.estadoMatricula}"  style="width:150px" required="true" requiredMessage="El Estado matrícula es requerido.">
                 <f:selectItem itemLabel="Estado..." itemValue="" />
                 <f:selectItem itemLabel="Activa" itemValue="Activa" />
                 <f:selectItem itemLabel="Inactiva" itemValue="Inactiva" />
@@ -24,7 +24,7 @@
             <p:message for="cboEstadoMatricula" />
 
             <p:outputLabel value="Ultimo año renovado: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtUltimoAnoRenovado" value="#{MbFormEstablecimiento.novedadSeleccionada.ultimoAnoRenovado}"  styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Ultimo año renovado es requerido."/>
+            <p:inputText id="txtUltimoAnoRenovado" value="#{MbFormEstablecimiento.novedadSeleccionada.ultimoAnoRenovado}"  style="width:145px" required="true" requiredMessage="El Ultimo año renovado es requerido."/>
             <p:message for="txtUltimoAnoRenovado" />
 
             <p:outputLabel value="Fecha de creación: *" styleClass="etiquetaFormulario"/>

@@ -46,7 +46,7 @@ public class BodegaTamanoFacade extends AbstractFacade<BodegaTamano> implements 
             //query.setParameter("id", id);
             String sql = "SELECT * FROM ige_tamano "
                     + "WHERE t_id_organizacion = " + id + " "
-                    + "AND t_fecha_actualiza = (SELECT MAX(t_fecha_actualiza) FROM ige_tamano)";
+                    + "AND t_fecha_actualiza = (SELECT MAX(t_fecha_actualiza) FROM ige_tamano WHERE t_id_organizacion = " + id + " )";
             Query query = em.createNativeQuery(sql, BodegaTamano.class);
 
             List<BodegaTamano> listaResultado = Collections.EMPTY_LIST;
@@ -70,7 +70,7 @@ public class BodegaTamanoFacade extends AbstractFacade<BodegaTamano> implements 
             //query.setParameter("id", id);
             String sql = "SELECT * FROM ige_tamano "
                     + "WHERE t_id_organizacion = " + id + " "
-                    + "AND t_fecha_actualiza = (SELECT MAX(t_fecha_actualiza) FROM ige_tamano)";
+                    + "AND t_fecha_actualiza = (SELECT MAX(t_fecha_actualiza) FROM ige_tamano WHERE t_id_organizacion = " + id + " )";
             Query query = em.createNativeQuery(sql, BodegaTamano.class);
 
             List<BodegaTamano> listaResultado = Collections.EMPTY_LIST;

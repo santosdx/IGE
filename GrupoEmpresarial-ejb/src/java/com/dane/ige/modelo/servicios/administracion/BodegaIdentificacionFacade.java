@@ -3,7 +3,6 @@ package com.dane.ige.modelo.servicios.administracion;
 import com.dane.ige.modelo.entidad.BodegaIdentificacion;
 import com.dane.ige.modelo.local.administracion.BodegaIdentificacionFacadeLocal;
 import com.dane.ige.modelo.fachada.AbstractFacade;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +48,7 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
             String sql = "SELECT * FROM ige_identificacion "
                     + "WHERE id_organizacion = " + id + " "
                     + "AND tipo_organizacion = '" + tipoOrganizacion + "' "
-                    + "AND fecha_actualiza_iden = (SELECT MAX(fecha_actualiza_iden) FROM ige_identificacion)";
+                    + "AND fecha_actualiza_iden = (SELECT MAX(fecha_actualiza_iden) FROM ige_identificacion WHERE id_organizacion = " + id + " AND tipo_organizacion = '" + tipoOrganizacion + "' )";
             Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
 
             List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
@@ -81,7 +80,7 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
             String sql = "SELECT * FROM ige_identificacion "
                     + "WHERE id_organizacion = " + id + " "
                     + "AND tipo_organizacion = '" + tipoOrganizacion + "' "
-                    + "AND fecha_actualiza_iden = (SELECT MAX(fecha_actualiza_iden) FROM ige_identificacion)";
+                    + "AND fecha_actualiza_iden = (SELECT MAX(fecha_actualiza_iden) FROM ige_identificacion WHERE id_organizacion = " + id + " AND tipo_organizacion = '" + tipoOrganizacion + "' )";
             Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
 
             List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;

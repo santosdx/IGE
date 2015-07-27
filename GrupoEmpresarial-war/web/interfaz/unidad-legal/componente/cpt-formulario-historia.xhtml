@@ -21,7 +21,7 @@
             <p:message for="cldFechaMatricula" />
 
             <p:outputLabel value="Estado de matricula: *" styleClass="etiquetaFormulario" />
-            <p:selectOneMenu id="cboEstadoMatricula"  value="#{MbFormUnidadLegal.novedadSeleccionada.estadoMatricula}" style="width:430px" required="true" requiredMessage="El Estado de matricula es requerido.">
+            <p:selectOneMenu id="cboEstadoMatricula"  value="#{MbFormUnidadLegal.novedadSeleccionada.estadoMatricula}" style="width:150px" required="true" requiredMessage="El Estado de matricula es requerido.">
                 <f:selectItem itemLabel="Estado..." itemValue="" />
                 <f:selectItem itemLabel="ACTIVA" itemValue="ACTIVA" />
                 <f:selectItem itemLabel="INACTIVA" itemValue="INACTIVA" />
@@ -29,7 +29,7 @@
             <p:message for="cboEstadoMatricula" />
 
             <p:outputLabel value="Ultimo año renovado: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtUltimoAnoRenovado"  value="#{MbFormUnidadLegal.novedadSeleccionada.ultimoAnoRenovado}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Ultimo año renovado es requerido."/>
+            <p:inputText id="txtUltimoAnoRenovado"  value="#{MbFormUnidadLegal.novedadSeleccionada.ultimoAnoRenovado}" style="width:145px" required="true" requiredMessage="El Ultimo año renovado es requerido."/>
             <p:message for="txtUltimoAnoRenovado" />
 
             <p:outputLabel value="Fecha de creación: *" styleClass="etiquetaFormulario" />
