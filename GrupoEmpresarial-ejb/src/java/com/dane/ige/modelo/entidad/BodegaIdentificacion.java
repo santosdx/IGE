@@ -3,27 +3,14 @@ package com.dane.ige.modelo.entidad;
 import com.dane.ige.modelo.llave.PkIdentificacion;
 import com.dane.ige.utilidad.Texto;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *
@@ -32,18 +19,16 @@ import org.apache.commons.lang3.text.WordUtils;
 @Entity
 @Table(name = "ige_identificacion")
 @NamedQueries({
-    @NamedQuery(name = "BodegaIdentificacion.findAll", query = "SELECT i FROM BodegaIdentificacion i"),
-    @NamedQuery(name = "BodegaIdentificacion.findById",
-            query = "SELECT i FROM BodegaIdentificacion i WHERE i.id.id = :id AND i.tipoOrganizacion=:tipoOrganizacion AND ROWNUM<=1 ORDER BY i.id.fecha DESC"),
-    @NamedQuery(name = "BodegaIdentificacion.findByIdGrupoRelacionadoTipoOrganizacion",
-            query = "SELECT i FROM BodegaIdentificacion i WHERE i.idGrupoRelacionado = :idGrupoRelacionado AND i.tipoOrganizacion=:tipoOrganizacion ORDER BY i.nombreRegistrado")})
+    @NamedQuery(name = "BodegaIdentificacion.findAll", query = "SELECT i FROM BodegaIdentificacion i"), 
+    //@NamedQuery(name = "BodegaIdentificacion.findById", 
+    //        query = "SELECT i FROM BodegaIdentificacion i WHERE i.id.id = :id AND i.tipoOrganizacion=:tipoOrganizacion AND ROWNUM<=1 ORDER BY i.id.fecha DESC"),
+})
 public class BodegaIdentificacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     public static final String GET_ALL = "BodegaIdentificacion.findAll";
-    public static final String FINE_BYE_ID = "BodegaIdentificacion.findById";
-    //public static final String FINE_BYE_ID_GRUPO_RELACIONADO = "BodegaIdentificacion.findByIdGrupoRelacionadoTipoOrganizacion";
+    //public static final String FINE_BYE_ID = "BodegaIdentificacion.findById";
 
     @EmbeddedId
     private PkIdentificacion id;
@@ -513,49 +498,49 @@ public class BodegaIdentificacion implements Serializable {
 
     public Map<String, String> toMap() {
         Map<String, String> resultado = new HashMap<String, String>();
-        resultado.put("ID_ORGANIZACION", id.getId()+"");
-        resultado.put("FECHA_ACTUALIZA_IDEN", id.getFecha()+"");
-        resultado.put("TIPO_ORGANIZACION", Texto.blankText(tipoOrganizacion+""));
-        resultado.put("ID_GRUPO_RELACIONADO", Texto.blankText(idGrupoRelacionado+""));
-        resultado.put("ID_UL_RELACIONADA", Texto.blankText(idUlRelacionada+""));
-        resultado.put("TIPO_UNIDAD_LEGAL", Texto.blankText(tipoUnidadLegal+""));
-        resultado.put("TIPO_ESTABLECIMIENTO", Texto.blankText(tipoEstablecimiento+""));
-        resultado.put("NOMBRE_COMERCIAL", Texto.blankText(nombreComercial+""));
-        resultado.put("NOMBRE_REGISTRADO", Texto.blankText(nombreRegistrado+""));
-        resultado.put("NIT", Texto.blankText(nit+""));
-        resultado.put("MATRICULA_MERCANTIL", Texto.blankText(matriculaMercantil+""));
-        resultado.put("DIGITO_VERIFICACION", Texto.blankText(digitoVerificacion+""));
-        resultado.put("PAIS", Texto.blankText(pais+""));
-        resultado.put("DEPARTAMENTO", Texto.blankText(departamento+""));
-        resultado.put("MUNICIPIO", Texto.blankText(municipio+""));
-        resultado.put("DIRECCION", Texto.blankText(direccion+""));
-        resultado.put("TELEFONO", Texto.blankText(telefono+""));
-        resultado.put("PAGINA_WEB", Texto.blankText(paginaWeb+""));
-        resultado.put("CORREO_ELECTRONICO", Texto.blankText(correoElectronico+""));
-        resultado.put("REPRESENTANTE_LEGAL", Texto.blankText(representanteLegal+""));
-        resultado.put("ACTIVIDAD_PRINCIPAL", Texto.blankText(actividadPrincipal+""));
-        resultado.put("ACTIVIDAD_SECUNDARIA", Texto.blankText(actividadSecundaria+""));
-        resultado.put("UNIDAD_AUXILIAR_UL", Texto.blankText(unidadAuxiliarUl+""));
-        resultado.put("ACTIVIDAD_AUXILIAR_EST", Texto.blankText(actividadAuxiliarEst+""));
-        resultado.put("OTRAS_ACTIVIDADES_EST", Texto.blankText(otrasActividadesEst+""));
-        resultado.put("ESTADO_EST", Texto.blankText(estadoEst+""));
-        resultado.put("TIPO_ORGANIZACION_UL", Texto.blankText(tipoOrganizacionUl+""));
-        resultado.put("SECTOR_INSTITUCIONAL_UL", Texto.blankText(sectorInstitucionalUl+""));
-        resultado.put("ORIENTADA_MERCADO_UL", Texto.blankText(orientadaMercadoUl+""));
-        resultado.put("ENCUESTAS_UL", Texto.blankText(encuestasUl+""));
-        resultado.put("NOMBRE_CONTACTO", Texto.blankText(nombreContacto+""));
-        resultado.put("CARGO_CONTACTO", Texto.blankText(cargoContacto+""));
-        resultado.put("TELEFONO_CONTACTO", Texto.blankText(telefonoContacto+""));
-        resultado.put("MAIL_CONTACTO", Texto.blankText(mailContacto+""));
-        resultado.put("NOMBRE_CONTACTO2", Texto.blankText(nombreContacto2+""));
-        resultado.put("CARGO_CONTACTO2", Texto.blankText(cargoContacto2+""));
-        resultado.put("TELEFONO_CONTACTO2", Texto.blankText(telefonoContacto2+""));
-        resultado.put("MAIL_CONTACTO2", Texto.blankText(mailContacto2+""));
-        resultado.put("NOMBRE_CONTACTO3", Texto.blankText(nombreContacto3+""));
-        resultado.put("CARGO_CONTACTO3", Texto.blankText(cargoContacto3+""));
-        resultado.put("TELEFONO_CONTACTO3", Texto.blankText(telefonoContacto3+""));
-        resultado.put("MAIL_CONTACTO3", Texto.blankText(mailContacto3+""));
-        resultado.put("PERSONA_ACTUALIZA", Texto.blankText(personaActualiza+""));
+        resultado.put("ID_ORGANIZACION", id.getId() + "");
+        resultado.put("FECHA_ACTUALIZA_IDEN", id.getFecha() + "");
+        resultado.put("TIPO_ORGANIZACION", Texto.blankText(tipoOrganizacion + ""));
+        resultado.put("ID_GRUPO_RELACIONADO", Texto.blankText(idGrupoRelacionado + ""));
+        resultado.put("ID_UL_RELACIONADA", Texto.blankText(idUlRelacionada + ""));
+        resultado.put("TIPO_UNIDAD_LEGAL", Texto.blankText(tipoUnidadLegal + ""));
+        resultado.put("TIPO_ESTABLECIMIENTO", Texto.blankText(tipoEstablecimiento + ""));
+        resultado.put("NOMBRE_COMERCIAL", Texto.blankText(nombreComercial + ""));
+        resultado.put("NOMBRE_REGISTRADO", Texto.blankText(nombreRegistrado + ""));
+        resultado.put("NIT", Texto.blankText(nit + ""));
+        resultado.put("MATRICULA_MERCANTIL", Texto.blankText(matriculaMercantil + ""));
+        resultado.put("DIGITO_VERIFICACION", Texto.blankText(digitoVerificacion + ""));
+        resultado.put("PAIS", Texto.blankText(pais + ""));
+        resultado.put("DEPARTAMENTO", Texto.blankText(departamento + ""));
+        resultado.put("MUNICIPIO", Texto.blankText(municipio + ""));
+        resultado.put("DIRECCION", Texto.blankText(direccion + ""));
+        resultado.put("TELEFONO", Texto.blankText(telefono + ""));
+        resultado.put("PAGINA_WEB", Texto.blankText(paginaWeb + ""));
+        resultado.put("CORREO_ELECTRONICO", Texto.blankText(correoElectronico + ""));
+        resultado.put("REPRESENTANTE_LEGAL", Texto.blankText(representanteLegal + ""));
+        resultado.put("ACTIVIDAD_PRINCIPAL", Texto.blankText(actividadPrincipal + ""));
+        resultado.put("ACTIVIDAD_SECUNDARIA", Texto.blankText(actividadSecundaria + ""));
+        resultado.put("UNIDAD_AUXILIAR_UL", Texto.blankText(unidadAuxiliarUl + ""));
+        resultado.put("ACTIVIDAD_AUXILIAR_EST", Texto.blankText(actividadAuxiliarEst + ""));
+        resultado.put("OTRAS_ACTIVIDADES_EST", Texto.blankText(otrasActividadesEst + ""));
+        resultado.put("ESTADO_EST", Texto.blankText(estadoEst + ""));
+        resultado.put("TIPO_ORGANIZACION_UL", Texto.blankText(tipoOrganizacionUl + ""));
+        resultado.put("SECTOR_INSTITUCIONAL_UL", Texto.blankText(sectorInstitucionalUl + ""));
+        resultado.put("ORIENTADA_MERCADO_UL", Texto.blankText(orientadaMercadoUl + ""));
+        resultado.put("ENCUESTAS_UL", Texto.blankText(encuestasUl + ""));
+        resultado.put("NOMBRE_CONTACTO", Texto.blankText(nombreContacto + ""));
+        resultado.put("CARGO_CONTACTO", Texto.blankText(cargoContacto + ""));
+        resultado.put("TELEFONO_CONTACTO", Texto.blankText(telefonoContacto + ""));
+        resultado.put("MAIL_CONTACTO", Texto.blankText(mailContacto + ""));
+        resultado.put("NOMBRE_CONTACTO2", Texto.blankText(nombreContacto2 + ""));
+        resultado.put("CARGO_CONTACTO2", Texto.blankText(cargoContacto2 + ""));
+        resultado.put("TELEFONO_CONTACTO2", Texto.blankText(telefonoContacto2 + ""));
+        resultado.put("MAIL_CONTACTO2", Texto.blankText(mailContacto2 + ""));
+        resultado.put("NOMBRE_CONTACTO3", Texto.blankText(nombreContacto3 + ""));
+        resultado.put("CARGO_CONTACTO3", Texto.blankText(cargoContacto3 + ""));
+        resultado.put("TELEFONO_CONTACTO3", Texto.blankText(telefonoContacto3 + ""));
+        resultado.put("MAIL_CONTACTO3", Texto.blankText(mailContacto3 + ""));
+        resultado.put("PERSONA_ACTUALIZA", Texto.blankText(personaActualiza + ""));
         return resultado;
     }
 
@@ -563,50 +548,50 @@ public class BodegaIdentificacion implements Serializable {
     public String toString() {
         return "com.dabe.ige.modelo.entidad.BodegaIdentificacion[ id=" + id.getId() + " ]";
         /*
-        return "id_organizacion^" + id.getId()
-                + "~fecha_actualiza_iden^" + id.getFecha()
-                + "~tipo_organizacion^" + tipoOrganizacion
-                + "~id_grupo_relacionado^" + idGrupoRelacionado
-                + "~id_ul_relacionada^" + idUlRelacionada
-                + "~tipo_unidad_legal^" + tipoUnidadLegal
-                + "~tipo_establecimiento^" + tipoEstablecimiento
-                + "~nombre_comercial^" + nombreComercial
-                + "~nombre_registrado^" + nombreRegistrado
-                + "~nit^" + nit
-                + "~matricula_mercantil^" + matriculaMercantil
-                + "~digito_verificacion^" + digitoVerificacion
-                + "~pais^" + pais
-                + "~departamento^" + departamento
-                + "~municipio^" + municipio
-                + "~direccion^" + direccion
-                + "~telefono^" + telefono
-                + "~pagina_web^" + paginaWeb
-                + "~correo_electronico^" + correoElectronico
-                + "~representante_legal^" + representanteLegal
-                + "~actividad_principal^" + actividadPrincipal
-                + "~actividad_secundaria^" + actividadSecundaria
-                + "~unidad_auxiliar_ul^" + unidadAuxiliarUl
-                + "~actividad_auxiliar_est^" + actividadAuxiliarEst
-                + "~otras_actividades_est^" + otrasActividadesEst
-                + "~estado_est^" + estadoEst
-                + "~tipo_organizacion_ul^" + tipoOrganizacionUl
-                + "~sector_institucional_ul^" + sectorInstitucionalUl
-                + "~orientada_mercado_ul^" + orientadaMercadoUl
-                + "~encuestas_ul^" + encuestasUl
-                + "~nombre_contacto^" + nombreContacto
-                + "~cargo_contacto^" + cargoContacto
-                + "~telefono_contacto^" + telefonoContacto
-                + "~mail_contacto^" + mailContacto
-                + "~nombre_contacto2^" + nombreContacto2
-                + "~cargo_contacto2^" + cargoContacto2
-                + "~telefono_contacto2^" + telefonoContacto2
-                + "~mail_contacto2^" + mailContacto2
-                + "~nombre_contacto3^" + nombreContacto3
-                + "~cargo_contacto3^" + cargoContacto3
-                + "~telefono_contacto3^" + telefonoContacto3
-                + "~mail_contacto3^" + mailContacto3
-                + "~personaActualiza^" + personaActualiza;
-        */
+         return "id_organizacion^" + id.getId()
+         + "~fecha_actualiza_iden^" + id.getFecha()
+         + "~tipo_organizacion^" + tipoOrganizacion
+         + "~id_grupo_relacionado^" + idGrupoRelacionado
+         + "~id_ul_relacionada^" + idUlRelacionada
+         + "~tipo_unidad_legal^" + tipoUnidadLegal
+         + "~tipo_establecimiento^" + tipoEstablecimiento
+         + "~nombre_comercial^" + nombreComercial
+         + "~nombre_registrado^" + nombreRegistrado
+         + "~nit^" + nit
+         + "~matricula_mercantil^" + matriculaMercantil
+         + "~digito_verificacion^" + digitoVerificacion
+         + "~pais^" + pais
+         + "~departamento^" + departamento
+         + "~municipio^" + municipio
+         + "~direccion^" + direccion
+         + "~telefono^" + telefono
+         + "~pagina_web^" + paginaWeb
+         + "~correo_electronico^" + correoElectronico
+         + "~representante_legal^" + representanteLegal
+         + "~actividad_principal^" + actividadPrincipal
+         + "~actividad_secundaria^" + actividadSecundaria
+         + "~unidad_auxiliar_ul^" + unidadAuxiliarUl
+         + "~actividad_auxiliar_est^" + actividadAuxiliarEst
+         + "~otras_actividades_est^" + otrasActividadesEst
+         + "~estado_est^" + estadoEst
+         + "~tipo_organizacion_ul^" + tipoOrganizacionUl
+         + "~sector_institucional_ul^" + sectorInstitucionalUl
+         + "~orientada_mercado_ul^" + orientadaMercadoUl
+         + "~encuestas_ul^" + encuestasUl
+         + "~nombre_contacto^" + nombreContacto
+         + "~cargo_contacto^" + cargoContacto
+         + "~telefono_contacto^" + telefonoContacto
+         + "~mail_contacto^" + mailContacto
+         + "~nombre_contacto2^" + nombreContacto2
+         + "~cargo_contacto2^" + cargoContacto2
+         + "~telefono_contacto2^" + telefonoContacto2
+         + "~mail_contacto2^" + mailContacto2
+         + "~nombre_contacto3^" + nombreContacto3
+         + "~cargo_contacto3^" + cargoContacto3
+         + "~telefono_contacto3^" + telefonoContacto3
+         + "~mail_contacto3^" + mailContacto3
+         + "~personaActualiza^" + personaActualiza;
+         */
     }
 
 }

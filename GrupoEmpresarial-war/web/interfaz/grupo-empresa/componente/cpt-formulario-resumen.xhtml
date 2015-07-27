@@ -56,10 +56,10 @@
                 <p:outputLabel value="#{MbFormGrupoEmpresa.relacionSeleccionada.paisControlante}"/>
 
                 <p:outputLabel value="Sucursales en el extranjero: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormGrupoEmpresa.relacionSeleccionada.sucursalesExtranjeroGe}"/>
+                <p:outputLabel value="#{MbFormGrupoEmpresa.relacionSeleccionada.sucursalesExtranjeroGe==true?'SI':'NO'}"/>
 
                 <p:outputLabel value="Consorcios - Uniones temporales: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormGrupoEmpresa.relacionSeleccionada.consorcioUnidadesTempGe}"/>
+                <p:outputLabel value="#{MbFormGrupoEmpresa.relacionSeleccionada.consorcioUnidadesTempGe==true?'SI':'NO'}"/>
 
             </h:panelGrid>
 

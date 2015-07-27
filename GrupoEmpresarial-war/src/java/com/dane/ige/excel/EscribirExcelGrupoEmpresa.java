@@ -134,7 +134,7 @@ public class EscribirExcelGrupoEmpresa {
     private Workbook ingresarDatosIdentificacion(Workbook libro) {
         //La hoja 1 es la hoja de los datos de identificacion
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("IDENTIFICACION");
-        Sheet hoja = libro.getSheetAt(1);
+        Sheet hoja = libro.getSheet("Identificación");//getSheetAt(1);
         hoja.protectSheet("123");
 
         Row encabezadoXsl = hoja.getRow(1);
@@ -167,7 +167,7 @@ public class EscribirExcelGrupoEmpresa {
     private Workbook ingresarDatosRelacion(Workbook libro) {
         //La hoja 2 es la hoja de los datos de relación
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("RELACION");
-        Sheet hoja = libro.getSheetAt(2);
+        Sheet hoja = libro.getSheet("Relación");//getSheetAt(2);
         hoja.protectSheet("123");
 
         Row encabezadoXsl = hoja.getRow(1);
@@ -192,7 +192,7 @@ public class EscribirExcelGrupoEmpresa {
     }
 
     /**
-     * Método que permite ingresar los datos de novedad a la plantilla xls de el
+     * Método que permite ingresar los datos de historia a la plantilla xls de el
      * grupo empresa.
      *
      * @param libro
@@ -201,8 +201,7 @@ public class EscribirExcelGrupoEmpresa {
     private Workbook ingresarDatosEventos(Workbook libro) {
         //La hoja 3 es la hoja de los datos de eventos
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("NOVEDAD");
-        Sheet hoja = libro.getSheetAt(3);
-        hoja.protectSheet("123");
+        Sheet hoja = libro.getSheet("Historia");//.getSheetAt(3);
 
         Row encabezadoXsl = hoja.getRow(1);
         Iterator cells = encabezadoXsl.cellIterator();
@@ -234,7 +233,7 @@ public class EscribirExcelGrupoEmpresa {
     private Workbook ingresarDatosTamano(Workbook libro) {
         //La hoja 3 es la hoja de los datos de tamaño
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("TAMAÑO");
-        Sheet hoja = libro.getSheetAt(4);
+        Sheet hoja = libro.getSheet("Tamaño");//.getSheetAt(4);
         hoja.protectSheet("123");
 
         Row encabezadoXsl = hoja.getRow(1);

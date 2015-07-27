@@ -6,44 +6,57 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <p:panel header="Información de contacto">
-        <p:messages />
-        <h:panelGrid columns="2" columnClasses="label, value" >
+        <p:tooltip />
+
+        <h:panelGrid columns="3" columnClasses="label, value" >
 
             <h:outputText value="Nombre de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido."/>
+            <p:inputText id="txtNombreContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido."/>
+            <p:message for="txtNombreContacto"/>
 
             <h:outputText value="Cargo de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido."/>
+            <p:inputText id="txtCargoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido."/>
+            <p:message for="txtCargoContacto"/>
 
             <h:outputText value="Teléfono contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido."/>
+            <p:inputText id="txtTelefonoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido."/>
+            <p:message for="txtTelefonoContacto"/>
 
             <h:outputText value="Correo electrónico de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido."/>
+            <p:inputText id="txtCorreoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido."/>
+            <p:message for="txtCorreoContacto"/>
 
             <h:outputText value="Nombre de contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto2}" styleClass="valorEtiquetaFormulario"/>
+            <p:spacer/>
 
             <h:outputText value="Cargo de contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto2}" styleClass="valorEtiquetaFormulario"/>
+            <p:spacer/>
 
             <h:outputText value="Teléfono de contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto2}" styleClass="valorEtiquetaFormulario"/>
+            <p:spacer/>
 
             <h:outputText value="Correo electrónico de contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto2}" styleClass="valorEtiquetaFormulario"/>
+            <p:spacer/>
 
             <h:outputText value="Nombre de contacto 3: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto3}" styleClass="valorEtiquetaFormulario"/>
+            <p:spacer/>
 
             <h:outputText value="Cargo de contacto 3: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto3}" styleClass="valorEtiquetaFormulario"/>
+            <p:spacer/>
 
             <h:outputText value="Teléfono de contacto 3: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto3}" styleClass="valorEtiquetaFormulario"/>
+            <p:spacer/>
 
             <h:outputText value="Correo electrónico de contacto 3: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto3}" styleClass="valorEtiquetaFormulario"/>
+            <p:spacer/>
 
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{practica.skip}" /-->

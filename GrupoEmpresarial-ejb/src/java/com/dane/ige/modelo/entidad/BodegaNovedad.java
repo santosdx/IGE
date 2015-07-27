@@ -3,30 +3,17 @@ package com.dane.ige.modelo.entidad;
 import com.dane.ige.modelo.llave.PkNovedad;
 import com.dane.ige.utilidad.Texto;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *
@@ -35,15 +22,15 @@ import org.apache.commons.lang3.text.WordUtils;
 @Entity
 @Table(name = "ige_novedad")
 @NamedQueries({
-    @NamedQuery(name = "BodegaNovedad.findAll", query = "SELECT m FROM BodegaNovedad m"),
-    @NamedQuery(name = "BodegaNovedad.findById",
-            query = "SELECT m FROM BodegaNovedad m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")})
+    @NamedQuery(name = "BodegaNovedad.findAll", query = "SELECT m FROM BodegaNovedad m"), 
+    //@NamedQuery(name = "BodegaNovedad.findById",query = "SELECT m FROM BodegaNovedad m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")
+})
 public class BodegaNovedad implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     public static final String GET_ALL = "BodegaNovedad.findAll";
-    public static final String FINE_BYE_ID = "BodegaNovedad.findById";
+    // public static final String FINE_BYE_ID = "BodegaNovedad.findById";
 
     @EmbeddedId
     private PkNovedad id;
@@ -229,22 +216,22 @@ public class BodegaNovedad implements Serializable {
 
     public Map<String, String> toMap() {
         Map<String, String> resultado = new HashMap<String, String>();
-        resultado.put("N_ID_ORGANIZACION", id.getId()+"");
-        resultado.put("N_FECHA_ACTUALIZA", id.getFecha()+"");
-        resultado.put("ESTADO", Texto.blankText(estado+""));
-        resultado.put("FECHA_CONFIGURACION", Texto.blankText(fechaConfiguracion+""));
-        resultado.put("FECHA_MATRICULA",  Texto.blankText(fechaMatricula+""));
-        resultado.put("ESTADO_MATRICULA",  Texto.blankText(estadoMatricula+""));
-        resultado.put("ULTIMO_ANO_RENOVADO", Texto.blankText(ultimoAnoRenovado+""));
-        resultado.put("FECHA_CREACION", Texto.blankText(fechaCreacion+""));
-        resultado.put("FECHA_INICIO_ACTI", Texto.blankText(fechaInicioActi+""));
-        resultado.put("FECHA_CIERRE", Texto.blankText(fechaCierre+""));
-        resultado.put("FECHA_LIQUIDACION", Texto.blankText(fechaLiquidacion+""));
-        resultado.put("TIPO_NOVEDAD", Texto.blankText(tipoNovedad+""));
-        resultado.put("FECHA_NOVEDAD", Texto.blankText(fechaNovedad+""));
-        resultado.put("ID_GRUPO_NOVEDAD", Texto.blankText(idGrupoNovedad+""));
-        resultado.put("NIT_UL_INVOLUCRADA", Texto.blankText(nitUlInvolucrada+""));
-        resultado.put("OBSERVACIONES", Texto.blankText(observaciones+""));
+        resultado.put("N_ID_ORGANIZACION", id.getId() + "");
+        resultado.put("N_FECHA_ACTUALIZA", id.getFecha() + "");
+        resultado.put("ESTADO", Texto.blankText(estado + ""));
+        resultado.put("FECHA_CONFIGURACION", Texto.blankText(fechaConfiguracion + ""));
+        resultado.put("FECHA_MATRICULA", Texto.blankText(fechaMatricula + ""));
+        resultado.put("ESTADO_MATRICULA", Texto.blankText(estadoMatricula + ""));
+        resultado.put("ULTIMO_ANO_RENOVADO", Texto.blankText(ultimoAnoRenovado + ""));
+        resultado.put("FECHA_CREACION", Texto.blankText(fechaCreacion + ""));
+        resultado.put("FECHA_INICIO_ACTI", Texto.blankText(fechaInicioActi + ""));
+        resultado.put("FECHA_CIERRE", Texto.blankText(fechaCierre + ""));
+        resultado.put("FECHA_LIQUIDACION", Texto.blankText(fechaLiquidacion + ""));
+        resultado.put("TIPO_NOVEDAD", Texto.blankText(tipoNovedad + ""));
+        resultado.put("FECHA_NOVEDAD", Texto.blankText(fechaNovedad + ""));
+        resultado.put("ID_GRUPO_NOVEDAD", Texto.blankText(idGrupoNovedad + ""));
+        resultado.put("NIT_UL_INVOLUCRADA", Texto.blankText(nitUlInvolucrada + ""));
+        resultado.put("OBSERVACIONES", Texto.blankText(observaciones + ""));
         return resultado;
     }
 

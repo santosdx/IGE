@@ -3,27 +3,14 @@ package com.dane.ige.modelo.entidad;
 import com.dane.ige.modelo.llave.PkRelacion;
 import com.dane.ige.utilidad.Texto;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *
@@ -32,15 +19,15 @@ import org.apache.commons.lang3.text.WordUtils;
 @Entity
 @Table(name = "ige_relacion")
 @NamedQueries({
-    @NamedQuery(name = "BodegaRelacion.findAll", query = "SELECT m FROM BodegaRelacion m"),
-    @NamedQuery(name = "BodegaRelacion.findById",
-            query = "SELECT m FROM BodegaRelacion m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")})
+    @NamedQuery(name = "BodegaRelacion.findAll", query = "SELECT m FROM BodegaRelacion m"), 
+    //@NamedQuery(name = "BodegaRelacion.findById", query = "SELECT m FROM BodegaRelacion m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")
+})
 public class BodegaRelacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     public static final String GET_ALL = "BodegaRelacion.findAll";
-    public static final String FINE_BYE_ID = "BodegaRelacion.findById";
+    //public static final String FINE_BYE_ID = "BodegaRelacion.findById";
 
     @EmbeddedId
     private PkRelacion id;
@@ -202,7 +189,6 @@ public class BodegaRelacion implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof BodegaRelacion)) {
             return false;
         }
@@ -215,26 +201,26 @@ public class BodegaRelacion implements Serializable {
 
     public Map<String, String> toMap() {
         Map<String, String> resultado = new HashMap<String, String>();
-        resultado.put("R_ID_ORGANIZACION", id.getId()+"");
-        resultado.put("R_FECHA_ACTUALIZA", id.getFecha()+"");
-        resultado.put("TIPO_CONGROMELADO", Texto.blankText(tipoCongromelado+""));
-        resultado.put("SITUACION_CONTROL", Texto.blankText(situacionControl+""));
-        resultado.put("TIPO_CONTROL", Texto.blankText(tipoControl+""));
-        resultado.put("TIPO_EMPRESA_CONTROLANTE", Texto.blankText(tipoEmpresaControlante+""));
-        resultado.put("PAIS_CONTROLANTE", Texto.blankText(paisControlante+""));
-        resultado.put("SUCURSALES_EXTRANJERO_GE", Texto.blankText(sucursalesExtranjeroGe+""));
-        resultado.put("CONSORCIO_UNIDADES_TEMP_GE", Texto.blankText(consorcioUnidadesTempGe+""));
-        resultado.put("TIPO_RELACION_UL", Texto.blankText(tipoRelacionUl +""));
-        resultado.put("NIT_CONTROLANTE", Texto.blankText(nitControlante+""));
-        resultado.put("NOMBRE_CONTROLANTE", Texto.blankText(nombreControlante+""));
-        resultado.put("PORCENTAJE_CONTROLANTE_UL", Texto.blankText(porcentajeControlanteul+""));
-        resultado.put("PERFILADOR", Texto.blankText(perfilador+""));
+        resultado.put("R_ID_ORGANIZACION", id.getId() + "");
+        resultado.put("R_FECHA_ACTUALIZA", id.getFecha() + "");
+        resultado.put("TIPO_CONGROMELADO", Texto.blankText(tipoCongromelado + ""));
+        resultado.put("SITUACION_CONTROL", Texto.blankText(situacionControl + ""));
+        resultado.put("TIPO_CONTROL", Texto.blankText(tipoControl + ""));
+        resultado.put("TIPO_EMPRESA_CONTROLANTE", Texto.blankText(tipoEmpresaControlante + ""));
+        resultado.put("PAIS_CONTROLANTE", Texto.blankText(paisControlante + ""));
+        resultado.put("SUCURSALES_EXTRANJERO_GE", Texto.blankText(sucursalesExtranjeroGe + ""));
+        resultado.put("CONSORCIO_UNIDADES_TEMP_GE", Texto.blankText(consorcioUnidadesTempGe + ""));
+        resultado.put("TIPO_RELACION_UL", Texto.blankText(tipoRelacionUl + ""));
+        resultado.put("NIT_CONTROLANTE", Texto.blankText(nitControlante + ""));
+        resultado.put("NOMBRE_CONTROLANTE", Texto.blankText(nombreControlante + ""));
+        resultado.put("PORCENTAJE_CONTROLANTE_UL", Texto.blankText(porcentajeControlanteul + ""));
+        resultado.put("PERFILADOR", Texto.blankText(perfilador + ""));
         return resultado;
     }
 
     @Override
     public String toString() {
-        return "com.dabe.ige.modelo.entidad.BodegaIdentificacion[ id=" + id.getId() + " ]";
+        return "com.dabe.ige.modelo.entidad.BodegaRelacion[ id=" + id.getId() + " ]";
     }
 
 }

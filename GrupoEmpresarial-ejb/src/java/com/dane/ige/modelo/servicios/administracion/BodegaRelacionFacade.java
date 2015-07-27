@@ -3,7 +3,6 @@ package com.dane.ige.modelo.servicios.administracion;
 import com.dane.ige.modelo.entidad.BodegaRelacion;
 import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
 import com.dane.ige.modelo.fachada.AbstractFacade;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -43,8 +42,12 @@ public class BodegaRelacionFacade extends AbstractFacade<BodegaRelacion> impleme
     public BodegaRelacion obtenerRelacionGrupoEmpresaById(Long id) {
         BodegaRelacion resultado = null;
         try {
-            Query query = em.createNamedQuery(BodegaRelacion.FINE_BYE_ID);
-            query.setParameter("id", id);
+            //Query query = em.createNamedQuery(BodegaRelacion.FINE_BYE_ID);
+            //query.setParameter("id", id);
+            String sql = "SELECT * FROM ige_relacion "
+                    + "WHERE r_id_organizacion = " + id + " "
+                    + "AND r_fecha_actualiza = (SELECT MAX(r_fecha_actualiza) FROM ige_relacion )";
+            Query query = em.createNativeQuery(sql, BodegaRelacion.class);
 
             List<BodegaRelacion> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
@@ -63,8 +66,12 @@ public class BodegaRelacionFacade extends AbstractFacade<BodegaRelacion> impleme
     public Map<String, String> obtenerMapRelacionGrupoEmpresaById(Long id) {
         Map<String, String> resultado = null;
         try {
-            Query query = em.createNamedQuery(BodegaRelacion.FINE_BYE_ID);
-            query.setParameter("id", id);
+            //Query query = em.createNamedQuery(BodegaRelacion.FINE_BYE_ID);
+            //query.setParameter("id", id);
+            String sql = "SELECT * FROM ige_relacion "
+                    + "WHERE r_id_organizacion = " + id + " "
+                    + "AND r_fecha_actualiza = (SELECT MAX(r_fecha_actualiza) FROM ige_relacion )";
+            Query query = em.createNativeQuery(sql, BodegaRelacion.class);
 
             List<BodegaRelacion> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();

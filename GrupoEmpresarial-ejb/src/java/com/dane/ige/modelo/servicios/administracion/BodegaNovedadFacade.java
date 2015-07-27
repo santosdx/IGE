@@ -3,7 +3,6 @@ package com.dane.ige.modelo.servicios.administracion;
 import com.dane.ige.modelo.entidad.BodegaNovedad;
 import com.dane.ige.modelo.local.administracion.BodegaNovedadFacadeLocal;
 import com.dane.ige.modelo.fachada.AbstractFacade;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -43,8 +42,12 @@ public class BodegaNovedadFacade extends AbstractFacade<BodegaNovedad> implement
     public BodegaNovedad obtenerNovedadGrupoEmpresaById(Long id) {
         BodegaNovedad resultado = null;
         try {
-            Query query = em.createNamedQuery(BodegaNovedad.FINE_BYE_ID);
-            query.setParameter("id", id);
+            //Query query = em.createNamedQuery(BodegaNovedad.FINE_BYE_ID);
+            //query.setParameter("id", id);
+            String sql = "SELECT * FROM ige_novedad "
+                    + "WHERE n_id_organizacion = " + id + " "
+                    + "AND n_fecha_actualiza = (SELECT MAX(n_fecha_actualiza) FROM ige_novedad)";
+            Query query = em.createNativeQuery(sql, BodegaNovedad.class);
 
             List<BodegaNovedad> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
@@ -63,8 +66,12 @@ public class BodegaNovedadFacade extends AbstractFacade<BodegaNovedad> implement
     public Map<String, String> obtenerMapNovedadGrupoEmpresaById(Long id) {
         Map<String, String> resultado = null;
         try {
-            Query query = em.createNamedQuery(BodegaNovedad.FINE_BYE_ID);
-            query.setParameter("id", id);
+            //Query query = em.createNamedQuery(BodegaNovedad.FINE_BYE_ID);
+            //query.setParameter("id", id);
+            String sql = "SELECT * FROM ige_novedad "
+                    + "WHERE n_id_organizacion = " + id + " "
+                    + "AND n_fecha_actualiza = (SELECT MAX(n_fecha_actualiza) FROM ige_novedad)";
+            Query query = em.createNativeQuery(sql, BodegaNovedad.class);
 
             List<BodegaNovedad> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();

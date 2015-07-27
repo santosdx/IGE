@@ -44,10 +44,10 @@
                 <p:outputLabel value="#{MbFormUnidadLegal.identificacionSeleccionada.tipoOrganizacionUl}"/>
 
                 <p:outputLabel value="Es unidad auxiliar: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.identificacionSeleccionada.unidadAuxiliarUl}"/>
+                <p:outputLabel value="#{MbFormUnidadLegal.identificacionSeleccionada.unidadAuxiliarUl==true?'SI':'NO'}"/>
 
                 <p:outputLabel value="Orientada al mercado: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.identificacionSeleccionada.orientadaMercadoUl}"/>
+                <p:outputLabel value="#{MbFormUnidadLegal.identificacionSeleccionada.orientadaMercadoUl==true?'SI':'NO'}"/>
 
                 <p:outputLabel value="Nombre Contacto: " styleClass="etiquetaFormulario"/>
                 <p:outputLabel value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreContacto}"/>

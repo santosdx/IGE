@@ -41,13 +41,13 @@
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadPrincipal}"/>
 
                 <p:outputLabel value="¿Es una actividad auxiliar?: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadAuxiliarEst}"/>
+                <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadAuxiliarEst==true?'SI':'NO'}"/>
 
                 <p:outputLabel value="Otras actividades: " styleClass="etiquetaFormulario"/>
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadSecundaria}"/>
 
                 <p:outputLabel value="El establecimiento es unidad auxiliar: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.unidadAuxiliarUl}"/>
+                <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.unidadAuxiliarUl==true?'SI':'NO'}"/>
 
             </h:panelGrid>
 

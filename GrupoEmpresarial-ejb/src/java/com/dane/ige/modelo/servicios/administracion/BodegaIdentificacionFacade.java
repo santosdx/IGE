@@ -43,9 +43,14 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
     public BodegaIdentificacion obtenerIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion) {
         BodegaIdentificacion resultado = null;
         try {
-            Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID);
-            query.setParameter("id", id);
-            query.setParameter("tipoOrganizacion", tipoOrganizacion);
+            //Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID);
+            //query.setParameter("id", id);
+            //query.setParameter("tipoOrganizacion", tipoOrganizacion);
+            String sql = "SELECT * FROM ige_identificacion "
+                    + "WHERE id_organizacion = " + id + " "
+                    + "AND tipo_organizacion = '" + tipoOrganizacion + "' "
+                    + "AND fecha_actualiza_iden = (SELECT MAX(fecha_actualiza_iden) FROM ige_identificacion)";
+            Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
 
             List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
@@ -70,9 +75,14 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
     public Map<String, String> obtenerMapIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion) {
         Map<String, String> resultado = null;
         try {
-            Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID);
-            query.setParameter("id", id);
-            query.setParameter("tipoOrganizacion", tipoOrganizacion);
+            //Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID);
+            //query.setParameter("id", id);
+            //query.setParameter("tipoOrganizacion", tipoOrganizacion);
+            String sql = "SELECT * FROM ige_identificacion "
+                    + "WHERE id_organizacion = " + id + " "
+                    + "AND tipo_organizacion = '" + tipoOrganizacion + "' "
+                    + "AND fecha_actualiza_iden = (SELECT MAX(fecha_actualiza_iden) FROM ige_identificacion)";
+            Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
 
             List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
