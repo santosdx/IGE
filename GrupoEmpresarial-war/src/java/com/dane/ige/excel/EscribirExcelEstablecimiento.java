@@ -100,7 +100,7 @@ public class EscribirExcelEstablecimiento {
         setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(id));
 
         Workbook libroTemp = ingresarDatosIdentificacion(libro);
-        //ingresarDatosRelacion(libroTemp);
+        ingresarDatosRelacion(libroTemp);
         ingresarDatosEventos(libroTemp);
         ingresarDatosTamano(libroTemp);
 

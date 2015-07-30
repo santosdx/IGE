@@ -12,11 +12,13 @@ import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
 import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.VariableIgeFacadeLocal;
 import com.dane.ige.utilidad.Fecha;
+import com.dane.ige.utilidad.Mensaje;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -46,7 +48,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 @ManagedBean(name = "MbLeerExcel")
 @ViewScoped
-public class LeerExcel {
+public class LeerExcel implements Serializable {
 
     final static Logger LOGGER = Logger.getLogger(LeerExcel.class);
     @EJB
@@ -67,6 +69,11 @@ public class LeerExcel {
     private List<InformeRegistroInconsistenteXls> listaInconsistencias;
     private InformeRegistroInconsistenteXls inconsistenciaSeleccionada;
 
+    private List<BodegaIdentificacion> jsonIdentificacion = null;
+    private List<BodegaRelacion> jsonRelacion = null;
+    private List<BodegaNovedad> jsonHistoria = null;
+    private List<BodegaTamano> jsonTamano = null;
+
     public LeerExcel() {
     }
 
@@ -85,9 +92,8 @@ public class LeerExcel {
         setSePuedeInsertarDatos(true);
         setListaInconsistencias(new ArrayList<InformeRegistroInconsistenteXls>());
 
-        List<BodegaIdentificacion> jsonIdentificacion = null;
         if (libro.getSheet("Identificación") != null) {
-            String resultadoIdentificacion = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Identificación"), 2, 1, "IDENTIFICACION","Identificación").toString();
+            String resultadoIdentificacion = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Identificación"), 2, 1, "IDENTIFICACION", "Identificación").toString();
             //Gson gsonIdentificacion = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             Gson gsonIdentificacion = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             Type typeIdentificacion = new TypeToken<List<BodegaIdentificacion>>() {
@@ -96,9 +102,8 @@ public class LeerExcel {
             LOGGER.info("Iden count:" + jsonIdentificacion.size());
         }
 
-        List<BodegaRelacion> jsonRelacion = null;
         if (libro.getSheet("Relación") != null) {
-            String resultadoRelacion = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Relación"), 2, 1, "RELACION","Relación").toString();
+            String resultadoRelacion = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Relación"), 2, 1, "RELACION", "Relación").toString();
             //Gson gsonRelacion = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             Gson gsonRelacion = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             Type typeRelacion = new TypeToken<List<BodegaRelacion>>() {
@@ -107,7 +112,6 @@ public class LeerExcel {
             LOGGER.info("Rela count:" + jsonRelacion.size());
         }
 
-        List<BodegaNovedad> jsonHistoria = null;
         if (libro.getSheet("Historia") != null) {
             String resultadoHistoria = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Historia"), 2, 1, "NOVEDAD", "Historia").toString();
             //Gson gsonHistoria = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
@@ -118,9 +122,8 @@ public class LeerExcel {
             LOGGER.info("Histo count:" + jsonHistoria.size());
         }
 
-        List<BodegaTamano> jsonTamano = null;
         if (libro.getSheet("Tamaño") != null) {
-            String resultadoTamano = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Tamaño"), 2, 1, "TAMAÑO","Tamaño").toString();
+            String resultadoTamano = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Tamaño"), 2, 1, "TAMAÑO", "Tamaño").toString();
             //Gson gsonTamano = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             Gson gsonTamano = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             Type typeTamano = new TypeToken<List<BodegaTamano>>() {
@@ -131,38 +134,48 @@ public class LeerExcel {
 
         //Inicia Insercciones
         if (isSePuedeInsertarDatos()) {
+            Mensaje.agregarMensajeGrowlInfo("Exitosa", event.getFile().getFileName() + " está cargado.");
+        } else {
+            Mensaje.agregarMensajeGrowlWarn("Inconsistencia", event.getFile().getFileName() + " presenta datos incompletos.");
+        }
+    }
+
+    public void insertarRegistrosBodega() {
+
+        Workbook libro;
+        try {
+            libro = new HSSFWorkbook((FileInputStream) getFile().getInputstream());
             if (libro.getSheet("Identificación") != null) {
                 //Creamos cada uno de los registros de identificación en la Tabla.
                 for (BodegaIdentificacion bodegaIdentificacion : jsonIdentificacion) {
-                    //geteJBServicioBodegaIdentificacion().create(bodegaIdentificacion);
+                    geteJBServicioBodegaIdentificacion().create(bodegaIdentificacion);
                 }
             }
 
             if (libro.getSheet("Relación") != null) {
                 //Creamos cada uno de los registros de relación en la Tabla.
                 for (BodegaRelacion bodegaRelacion : jsonRelacion) {
-                    //geteJBServicioBodegaRelacion().create(bodegaRelacion);
+                    geteJBServicioBodegaRelacion().create(bodegaRelacion);
                 }
             }
 
             if (libro.getSheet("Historia") != null) {
                 //Creamos cada uno de los reigistros de historia en la Tabla.
                 for (BodegaNovedad bodegaNovedad : jsonHistoria) {
-                    //geteJBServicioBodegaNovedad().create(bodegaNovedad);
+                    geteJBServicioBodegaNovedad().create(bodegaNovedad);
                 }
             }
 
             if (libro.getSheet("Tamaño") != null) {
                 //Creamos cada uno de los registros de tamaño en la Tabla.
                 for (BodegaTamano bodegaTamano : jsonTamano) {
-                    //geteJBServicioBodegaTamano().create(bodegaTamano);
+                    geteJBServicioBodegaTamano().create(bodegaTamano);
                 }
             }
-            FacesMessage message = new FacesMessage("Exitosa", event.getFile().getFileName() + " está cargado.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
-            FacesMessage message = new FacesMessage("Inconsistencia", event.getFile().getFileName() + " presenta datos incompletos.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
+
+            Mensaje.agregarMensajeGrowlInfo("Exitosa", "Información cargada con exito.");
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(LeerExcel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -352,10 +365,10 @@ public class LeerExcel {
                     }
                 }
 
-                if (listaVariablesSinDatos.size()> 0) {
+                if (listaVariablesSinDatos.size() > 0) {
                     DecimalFormat nf = (DecimalFormat) NumberFormat.getInstance(Locale.US);
                     nf.applyPattern("####");
-                    getListaInconsistencias().add(new InformeRegistroInconsistenteXls(Integer.parseInt(  nf.format(cellIndice.getNumericCellValue())+ ""), nombreHoja, listaVariablesSinDatos));
+                    getListaInconsistencias().add(new InformeRegistroInconsistenteXls(Integer.parseInt(nf.format(cellIndice.getNumericCellValue()) + ""), nombreHoja, listaVariablesSinDatos));
                     setSePuedeInsertarDatos(false);
                 }
 
@@ -449,5 +462,4 @@ public class LeerExcel {
         this.inconsistenciaSeleccionada = inconsistenciaSeleccionada;
     }
 
-    
 }
