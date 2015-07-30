@@ -1,11 +1,32 @@
 package com.dane.ige.excel;
 
+import com.dane.ige.dto.InformeRegistroInconsistenteXls;
+import com.dane.ige.modelo.entidad.BodegaIdentificacion;
+import com.dane.ige.modelo.entidad.BodegaNovedad;
+import com.dane.ige.modelo.entidad.BodegaRelacion;
+import com.dane.ige.modelo.entidad.BodegaTamano;
+import com.dane.ige.modelo.entidad.VariableIge;
+import com.dane.ige.modelo.local.administracion.BodegaIdentificacionFacadeLocal;
+import com.dane.ige.modelo.local.administracion.BodegaNovedadFacadeLocal;
+import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
+import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
+import com.dane.ige.modelo.local.administracion.VariableIgeFacadeLocal;
+import com.dane.ige.utilidad.Fecha;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -28,7 +49,23 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class LeerExcel {
 
     final static Logger LOGGER = Logger.getLogger(LeerExcel.class);
+    @EJB
+    private VariableIgeFacadeLocal eJBServicioVariableIge;
+    @EJB
+    private BodegaIdentificacionFacadeLocal eJBServicioBodegaIdentificacion;
+    @EJB
+    private BodegaNovedadFacadeLocal eJBServicioBodegaNovedad;
+    @EJB
+    private BodegaTamanoFacadeLocal eJBServicioBodegaTamano;
+    @EJB
+    private BodegaRelacionFacadeLocal eJBServicioBodegaRelacion;
+
     private UploadedFile file;
+    private int filaDatosInicial = 2;
+    private int colulmnaDatosInicial = 1;
+    private boolean sePuedeInsertarDatos = false;
+    private List<InformeRegistroInconsistenteXls> listaInconsistencias;
+    private InformeRegistroInconsistenteXls inconsistenciaSeleccionada;
 
     public LeerExcel() {
     }
@@ -43,9 +80,90 @@ public class LeerExcel {
      */
     public void subirArchivoGrupoEmpresarial(FileUploadEvent event) throws IOException {
         setFile(event.getFile());
-        FacesMessage message = new FacesMessage("Exitosa", event.getFile().getFileName() + " está cargado.");
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        visualizarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), 1));
+        Workbook libro = new HSSFWorkbook((FileInputStream) event.getFile().getInputstream());
+
+        setSePuedeInsertarDatos(true);
+        setListaInconsistencias(new ArrayList<InformeRegistroInconsistenteXls>());
+
+        List<BodegaIdentificacion> jsonIdentificacion = null;
+        if (libro.getSheet("Identificación") != null) {
+            String resultadoIdentificacion = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Identificación"), 2, 1, "IDENTIFICACION","Identificación").toString();
+            //Gson gsonIdentificacion = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            Gson gsonIdentificacion = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+            Type typeIdentificacion = new TypeToken<List<BodegaIdentificacion>>() {
+            }.getType();
+            jsonIdentificacion = gsonIdentificacion.fromJson(resultadoIdentificacion, typeIdentificacion);
+            LOGGER.info("Iden count:" + jsonIdentificacion.size());
+        }
+
+        List<BodegaRelacion> jsonRelacion = null;
+        if (libro.getSheet("Relación") != null) {
+            String resultadoRelacion = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Relación"), 2, 1, "RELACION","Relación").toString();
+            //Gson gsonRelacion = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            Gson gsonRelacion = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+            Type typeRelacion = new TypeToken<List<BodegaRelacion>>() {
+            }.getType();
+            jsonRelacion = gsonRelacion.fromJson(resultadoRelacion, typeRelacion);
+            LOGGER.info("Rela count:" + jsonRelacion.size());
+        }
+
+        List<BodegaNovedad> jsonHistoria = null;
+        if (libro.getSheet("Historia") != null) {
+            String resultadoHistoria = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Historia"), 2, 1, "NOVEDAD", "Historia").toString();
+            //Gson gsonHistoria = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            Gson gsonHistoria = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+            Type typeHistoria = new TypeToken<List<BodegaNovedad>>() {
+            }.getType();
+            jsonHistoria = gsonHistoria.fromJson(resultadoHistoria, typeHistoria);
+            LOGGER.info("Histo count:" + jsonHistoria.size());
+        }
+
+        List<BodegaTamano> jsonTamano = null;
+        if (libro.getSheet("Tamaño") != null) {
+            String resultadoTamano = procesarDatosXls(leerArchivoXlsGrupoEmpresarial((FileInputStream) event.getFile().getInputstream(), "Tamaño"), 2, 1, "TAMAÑO","Tamaño").toString();
+            //Gson gsonTamano = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            Gson gsonTamano = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+            Type typeTamano = new TypeToken<List<BodegaTamano>>() {
+            }.getType();
+            jsonTamano = gsonTamano.fromJson(resultadoTamano, typeTamano);
+            LOGGER.info("Tama count:" + jsonTamano.size());
+        }
+
+        //Inicia Insercciones
+        if (isSePuedeInsertarDatos()) {
+            if (libro.getSheet("Identificación") != null) {
+                //Creamos cada uno de los registros de identificación en la Tabla.
+                for (BodegaIdentificacion bodegaIdentificacion : jsonIdentificacion) {
+                    //geteJBServicioBodegaIdentificacion().create(bodegaIdentificacion);
+                }
+            }
+
+            if (libro.getSheet("Relación") != null) {
+                //Creamos cada uno de los registros de relación en la Tabla.
+                for (BodegaRelacion bodegaRelacion : jsonRelacion) {
+                    //geteJBServicioBodegaRelacion().create(bodegaRelacion);
+                }
+            }
+
+            if (libro.getSheet("Historia") != null) {
+                //Creamos cada uno de los reigistros de historia en la Tabla.
+                for (BodegaNovedad bodegaNovedad : jsonHistoria) {
+                    //geteJBServicioBodegaNovedad().create(bodegaNovedad);
+                }
+            }
+
+            if (libro.getSheet("Tamaño") != null) {
+                //Creamos cada uno de los registros de tamaño en la Tabla.
+                for (BodegaTamano bodegaTamano : jsonTamano) {
+                    //geteJBServicioBodegaTamano().create(bodegaTamano);
+                }
+            }
+            FacesMessage message = new FacesMessage("Exitosa", event.getFile().getFileName() + " está cargado.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage message = new FacesMessage("Inconsistencia", event.getFile().getFileName() + " presenta datos incompletos.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
     }
 
     /**
@@ -53,20 +171,20 @@ public class LeerExcel {
      * genera un List de resultado de datos.
      *
      * @param archivo
-     * @param indexHoja
+     * @param nombreHoja
      * @return List
      */
-    public List leerArchivoXlsGrupoEmpresarial(FileInputStream archivo, int indexHoja) {
+    public List leerArchivoXlsGrupoEmpresarial(FileInputStream archivo, String nombreHoja) {
 
         List sheetData = new ArrayList();
         FileInputStream fileInpSt = null;
         try {
 
             fileInpSt = archivo;
-            Workbook workbook = new HSSFWorkbook(fileInpSt);
-            Sheet sheet = workbook.getSheetAt(indexHoja);
+            Workbook libro = new HSSFWorkbook(fileInpSt);
+            Sheet hoja = libro.getSheet(nombreHoja);
 
-            Iterator rows = sheet.rowIterator();
+            Iterator rows = hoja.rowIterator();
             rows.hasNext();
             while (rows.hasNext()) {
                 Row row = (Row) rows.next();
@@ -93,8 +211,8 @@ public class LeerExcel {
     }
 
     /**
-     * Método que permite leer una hoja de un archivo xls y 
-     * genera una List de resultado de datos.
+     * Método que permite leer una hoja de un archivo xls y genera una List de
+     * resultado de datos.
      *
      * @param sheet
      * @return List
@@ -117,30 +235,145 @@ public class LeerExcel {
 
     /**
      * Método que permite mostrar por consola los resultados fila por fila de
-     * los datos del archivo xls.
+     * los datos del archivo xls. Recibe como parametro el listado de resultados
+     * y el indice de fila y columna por el cual iniciar la visualización.
      *
+     * @param fila
+     * @param columna
      * @param sheetData
      */
-    public void visualizarDatosXls(List sheetData) {
+    public void visualizarDatosXls(List sheetData, int fila, int columna) {
         StringBuffer resultado;
+        int filaTemp = 0;
+        int columnaTemp = 0;
+
         for (Object sheetRow : sheetData) {
-            resultado = new StringBuffer();
-            List list = (List) sheetRow;
-            for (int j = 0; j < list.size(); j++) {
-                Cell cell = (Cell) list.get(j);
-                if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-                    resultado.append(cell.getNumericCellValue());
-                } else if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
-                    resultado.append(cell.getRichStringCellValue());
-                } else if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
-                    resultado.append(cell.getBooleanCellValue());
+            if (filaTemp >= fila) {
+                resultado = new StringBuffer();
+                List list = (List) sheetRow;
+                for (int j = 0; j < list.size(); j++) {
+                    if (columnaTemp >= columna) {
+                        Cell cell = (Cell) list.get(j);
+                        if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+                            resultado.append(cell.getNumericCellValue());
+                        } else if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+                            resultado.append(cell.getRichStringCellValue());
+                        } else if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
+                            resultado.append(cell.getBooleanCellValue());
+                        }
+                        if (j < list.size() - 1) {
+                            resultado.append("|");
+                        }
+                    }
+                    columnaTemp++;
                 }
-                if (j < list.size() - 1) {
-                    resultado.append("|");
-                }
+                LOGGER.info(resultado);
             }
-            LOGGER.info(resultado);
+            filaTemp++;
         }
+    }
+
+    private StringBuffer procesarDatosXls(List sheetData, int fila, int columna, String grupoVariable, String nombreHoja) {
+
+        StringBuffer resultado;
+        StringBuffer resultadoFila;
+
+        List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo(grupoVariable);
+        List encabezadoXsl = (List) sheetData.get(1);
+
+        int filaTemp = 0;
+        int columnaTemp = 0;
+
+        resultado = new StringBuffer();
+        resultado.append("[");
+
+        for (Object sheetRow : sheetData) {
+            if (filaTemp >= fila) {
+
+                List<String> listaVariablesSinDatos = new ArrayList<String>();
+                List list = (List) sheetRow;
+                resultadoFila = new StringBuffer();
+                resultadoFila.append("{");
+
+                Cell cellIndice = (Cell) list.get(0);
+                String textoLlave = "";
+                Cell cellId = (Cell) list.get(1);
+                Cell cellFecha = (Cell) list.get(2);
+                String date = Fecha.formatFechaDateToString(new Date());
+                textoLlave = "\"id\":{\"id\":\"" + cellId.getRichStringCellValue() + "\",\"fecha\":\"" + date + "\"},";
+                resultadoFila.append(textoLlave);
+
+                for (int j = columna + 2; j < encabezadoXsl.size(); j++) {
+                    Cell cellEncabezado = (Cell) encabezadoXsl.get(j);
+                    for (VariableIge variable : columnas) {
+                        String valorCelda = null;
+
+                        if (cellEncabezado.getStringCellValue().equals(variable.getEtiqueta())) {
+                            //LOGGER.info(variable.getColumna());
+                            Cell cellRegistro = (Cell) list.get(j);
+
+                            if (variable.getTipo().equals("NUMBER")) {
+                                if (cellRegistro.getCellType() == 0) {
+                                    if ("".equals(cellRegistro.getNumericCellValue() + "")) {
+                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":" + null + "");
+                                    } else {
+                                        valorCelda = cellRegistro.getNumericCellValue() + "";
+                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getNumericCellValue() + "\"");
+                                    }
+                                } else {
+                                    if ("".equals(cellRegistro.getStringCellValue() + "")) {
+                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":" + null + "");
+                                    } else {
+                                        valorCelda = cellRegistro.getStringCellValue() + "";
+                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getStringCellValue() + "\"");
+                                    }
+                                }
+                            } else if (variable.getTipo().equals("DATE")) {
+
+                                String fecha = Fecha.formatFechaDateToString(cellRegistro.getDateCellValue());
+                                if (fecha != null) {
+                                    valorCelda = fecha;
+                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + fecha + "\"");
+                                } else {
+                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":" + null + "");
+                                }
+
+                            } else {
+                                valorCelda = cellRegistro.getStringCellValue();
+                                resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getStringCellValue() + "\"");
+                            }
+                            if (variable.getObligatoria().equals("true")) {
+                                if (valorCelda == null || valorCelda.equals("")) {
+                                    listaVariablesSinDatos.add(variable.getEtiqueta());
+                                }
+                            }
+                            resultadoFila.append(",");
+                        }
+                    }
+                }
+
+                if (listaVariablesSinDatos.size()> 0) {
+                    DecimalFormat nf = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    nf.applyPattern("####");
+                    getListaInconsistencias().add(new InformeRegistroInconsistenteXls(Integer.parseInt(  nf.format(cellIndice.getNumericCellValue())+ ""), nombreHoja, listaVariablesSinDatos));
+                    setSePuedeInsertarDatos(false);
+                }
+
+                String temp = resultadoFila.toString();
+                temp = temp.substring(0, temp.length() - 1);
+                resultadoFila = new StringBuffer(temp);
+
+                if (sheetData.size() == (filaTemp + 1)) {
+                    resultadoFila.append("}");
+                } else {
+                    resultadoFila.append("},");
+                }
+                resultado.append(resultadoFila);
+            }
+            filaTemp++;
+        }
+        LOGGER.info(resultado.append("]"));
+        return resultado;
     }
 
     //Métodos Set y Get de la clase
@@ -151,4 +384,70 @@ public class LeerExcel {
     public void setFile(UploadedFile file) {
         this.file = file;
     }
+
+    public VariableIgeFacadeLocal geteJBServicioVariableIge() {
+        return eJBServicioVariableIge;
+    }
+
+    public void seteJBServicioVariableIge(VariableIgeFacadeLocal eJBServicioVariableIge) {
+        this.eJBServicioVariableIge = eJBServicioVariableIge;
+    }
+
+    public BodegaIdentificacionFacadeLocal geteJBServicioBodegaIdentificacion() {
+        return eJBServicioBodegaIdentificacion;
+    }
+
+    public void seteJBServicioBodegaIdentificacion(BodegaIdentificacionFacadeLocal eJBServicioBodegaIdentificacion) {
+        this.eJBServicioBodegaIdentificacion = eJBServicioBodegaIdentificacion;
+    }
+
+    public BodegaNovedadFacadeLocal geteJBServicioBodegaNovedad() {
+        return eJBServicioBodegaNovedad;
+    }
+
+    public void seteJBServicioBodegaNovedad(BodegaNovedadFacadeLocal eJBServicioBodegaNovedad) {
+        this.eJBServicioBodegaNovedad = eJBServicioBodegaNovedad;
+    }
+
+    public BodegaTamanoFacadeLocal geteJBServicioBodegaTamano() {
+        return eJBServicioBodegaTamano;
+    }
+
+    public void seteJBServicioBodegaTamano(BodegaTamanoFacadeLocal eJBServicioBodegaTamano) {
+        this.eJBServicioBodegaTamano = eJBServicioBodegaTamano;
+    }
+
+    public BodegaRelacionFacadeLocal geteJBServicioBodegaRelacion() {
+        return eJBServicioBodegaRelacion;
+    }
+
+    public void seteJBServicioBodegaRelacion(BodegaRelacionFacadeLocal eJBServicioBodegaRelacion) {
+        this.eJBServicioBodegaRelacion = eJBServicioBodegaRelacion;
+    }
+
+    public boolean isSePuedeInsertarDatos() {
+        return sePuedeInsertarDatos;
+    }
+
+    public void setSePuedeInsertarDatos(boolean sePuedeInsertarDatos) {
+        this.sePuedeInsertarDatos = sePuedeInsertarDatos;
+    }
+
+    public List<InformeRegistroInconsistenteXls> getListaInconsistencias() {
+        return listaInconsistencias;
+    }
+
+    public void setListaInconsistencias(List<InformeRegistroInconsistenteXls> listaInconsistencias) {
+        this.listaInconsistencias = listaInconsistencias;
+    }
+
+    public InformeRegistroInconsistenteXls getInconsistenciaSeleccionada() {
+        return inconsistenciaSeleccionada;
+    }
+
+    public void setInconsistenciaSeleccionada(InformeRegistroInconsistenteXls inconsistenciaSeleccionada) {
+        this.inconsistenciaSeleccionada = inconsistenciaSeleccionada;
+    }
+
+    
 }

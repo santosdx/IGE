@@ -6,8 +6,7 @@
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
-
-                <h:form style="height: 88%;" >
+                <h:form id="frmInfoGrupoEmpresa" style="height: 88%;" >
                     <p:growl id="msnInforGruEmp" showDetail="true" />
                     <h3 class="titulo-center-h3">REPORTE DE PERFILAMIENTO DEL GRUPO EMPRESARIAL</h3>
                     <div class="ui-grid ui-grid-responsive">
@@ -15,8 +14,16 @@
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Generación de Reporte</h4>
                                 <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos los datos del grupo empresarial.</p>
-                                <p:commandButton id="btnGenerarReporte" value="Generar reporte" update="dlgReportePdf" oncomplete="PF('dlg').show();"
+                                <p:commandButton id="btnGenerarReporteGrupoEmpresa" value="Generar reporte" rendered="#{aplicacionPrincipal.browserName != 'Internet Explorer'}"
+                                                 update="dlgReportePdf" oncomplete="PF('dlg').show();"
                                                  actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.grupoEmpresarial.path'], nerv['reporte.grupoEmpresarial.archivo'])}"/>
+
+                                <p:commandButton id="btnDescargarReporteGrupoEmpresa" value="Descargar" ajax="false" 
+                                                 rendered="#{aplicacionPrincipal.browserName eq 'Internet Explorer'}" 
+                                                 actionListener="#{MbReporteGrupoEmpresa.generarReportePdf(nerv['reporte.grupoEmpresarial.path'], nerv['reporte.grupoEmpresarial.archivo'])}"
+                                                 onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                    <p:fileDownload value="#{MbReporteGrupoEmpresa.contenido}" />
+                                </p:commandButton>
                             </div>
                         </div>
                         <div class="ui-grid-row">
@@ -31,7 +38,7 @@
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Actualizar información desde archivo XLS</h4>
                                 <p>En esta sección el usuario puede descargar un archivo XLS, que contiene la información del grupo empresarial, la cual podra
-                                actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
+                                    actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
                                 <p:commandButton id="btnGenerarXlsGrupoEmpresa" value="Generar Excel" ajax="false" 
                                                  actionListener="#{MbEscribirExcelGrupoEmpresa.generarArchivoXls(nerv['plantilla.grupoEmpresarial.path'],
                                                                    nerv['plantilla.grupoEmpresarial.archivo'], MbLogin.usuarioLogueado.idIdentificacion,'GRUPO')}"
@@ -39,11 +46,9 @@
                                     <p:fileDownload value="#{MbEscribirExcelGrupoEmpresa.file}" />
                                 </p:commandButton>
                                 <p>Subir el archivo con la ifnromación del grupo empresarial diligenciada para actualizar los datos.</p>
-                                <p:fileUpload fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"
-                                              multiple="false" fileLimitMessage="Número de archivos permitidos 1."
-                                              mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
-                                              invalidFileMessage="Tipo de archivo no soportado" 
-                                              update="msnInforGruEmp" fileLimit="1" allowTypes="/(\.|\/)(xls)$/" />
+                                <ui:include src="../utilidades/cpt-cargar-archivo-xls.xhtml">
+                                    <ui:param name="frmPadre" value="frmInfoGrupoEmpresa" />
+                                </ui:include>
                             </div>
                         </div>
                     </div>
@@ -57,14 +62,19 @@
                         </p:outputPanel>
                     </p:dialog>
 
-                    <p:blockUI block="@form" trigger="btnGenerarReporte" >
+                    <p:blockUI block="@form" trigger="btnGenerarReporteGrupoEmpresa" >
                         Generando reporte...<br />
+                        <p:graphicImage name="imagen/ajax-loading.gif"/>
+                    </p:blockUI>
+                    <p:blockUI block="@form" trigger="btnDescargarReporteGrupoEmpresa" >
+                        Descargando reporte...<br />
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>
                     <p:blockUI block="@form" trigger="btnGenerarXlsGrupoEmpresa" >
                         Generando archivo...<br />
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>
+
                 </h:form>
 
                 <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">

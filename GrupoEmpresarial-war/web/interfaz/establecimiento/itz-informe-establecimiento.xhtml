@@ -19,7 +19,7 @@
                                 <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos establecimientos de la unidad legal seleccionada.</p>
                                 <p:selectOneMenu id="cboUnidadLegal" value="#{MbFormEstablecimiento.idIdentificacionSeleccionada}" 
                                                  filter="true" filterMatchMode="contains" >
-                                    <p:ajax event="change" listener="#{MbFormEstablecimiento.mySelectionMethodListener}" update="dtEstablecimiento,btnGenerarReporteEstablecimientos,btnGenerarXlsEstablecimiento"/>
+                                    <p:ajax event="change" listener="#{MbFormEstablecimiento.mySelectionMethodListener}" update="dtEstablecimiento,btnGenerarReporteEstablecimientos,btnGenerarXlsEstablecimiento,btnDescargarReporteEstablecimiento"/>
                                     <f:selectItem itemLabel="Unidad legal..." itemValue="" />
                                     <f:selectItems value="#{MbFormEstablecimiento.listaIdentificacionUnidadLegal}" var="unidadLegal" itemLabel="#{unidadLegal.nombreRegistrado}" itemValue="#{unidadLegal.id.id}"/>
                                 </p:selectOneMenu>
@@ -29,10 +29,16 @@
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Generación de Reporte</h4>
                                 <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos establecimientos de la unidad legal seleccionada.</p>
-                                <p:commandButton id="btnGenerarReporteEstablecimientos"  disabled="#{empty MbFormEstablecimiento.listaIdentificacion}" 
+                                <p:commandButton id="btnGenerarReporteEstablecimientos"  disabled="#{empty MbFormEstablecimiento.listaIdentificacion}" rendered="#{aplicacionPrincipal.browserName != 'Internet Explorer'}"
                                                  value="Generar reporte" update="frmInfEstablecimiento:dlgReportePdf" oncomplete="PF('dlg').show();" 
                                                  actionListener="#{MbReporteEstablecimiento.generarReporteEstablecimientosPdf(nerv['reporte.establecimientos.path'], nerv['reporte.establecimientos.archivo'])}"/>
                                 <!--p:media value="#{MbReporteEstablecimiento.contenido}" cache="false" width="100%" height="90%" player="pdf"/-->
+                                <p:commandButton id="btnDescargarReporteEstablecimiento" value="Descargar" ajax="false" 
+                                                 rendered="#{aplicacionPrincipal.browserName eq 'Internet Explorer'}" disabled="#{empty MbFormEstablecimiento.listaIdentificacion}"
+                                                 actionListener="#{MbReporteEstablecimiento.generarReporteEstablecimientosPdf(nerv['reporte.establecimientos.path'], nerv['reporte.establecimientos.archivo'])}"
+                                                 onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                    <p:fileDownload value="#{MbReporteEstablecimiento.contenido}" />
+                                </p:commandButton>
                             </div>
                         </div>
                         <div class="ui-grid-row">
@@ -79,11 +85,9 @@
                                     <p:fileDownload value="#{MbEscribirExcelEstablecimiento.file}" />
                                 </p:commandButton>
                                 <p>Subir el archivo con la ifnromación de los establecimientos diligenciados para actualizar los datos.</p>
-                                <p:fileUpload fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"
-                                              multiple="false" fileLimitMessage="Número de archivos permitidos 1."
-                                              mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
-                                              invalidFileMessage="Tipo de archivo no soportado" 
-                                              update="msnInforUnidadLegal" fileLimit="1" allowTypes="/(\.|\/)(xls)$/" />
+                                <ui:include src="../utilidades/cpt-cargar-archivo-xls.xhtml" >
+                                    <ui:param name="frmPadre" value="frmInfEstablecimiento" />
+                                </ui:include>
                             </div>
                         </div>
                     </div>
@@ -99,6 +103,14 @@
 
                     <p:blockUI block="@form" trigger="btnGenerarReporteEstablecimientos" >
                         Generando reporte...<br />
+                        <p:graphicImage name="imagen/ajax-loading.gif"/>
+                    </p:blockUI>
+                    <p:blockUI block="@form" trigger="btnDescargarReporteEstablecimiento" >
+                        Descargando reporte...<br />
+                        <p:graphicImage name="imagen/ajax-loading.gif"/>
+                    </p:blockUI>
+                    <p:blockUI block="@form" trigger="btnGenerarXlsEstablecimiento" >
+                        Generando archivo...<br />
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>
                 </h:form>

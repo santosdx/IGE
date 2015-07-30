@@ -7,6 +7,7 @@ import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
 import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.VariableIgeFacadeLocal;
 import com.dane.ige.seguridad.Login;
+import com.dane.ige.utilidad.Fecha;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -146,8 +147,15 @@ public class EscribirExcelGrupoEmpresa {
             for (VariableIge variableIge : columnas) {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
-                    celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                    celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
+                    if (variableIge.getTipo().equals("DATE")) {
+                        celda.setCellStyle(estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        if(Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())) != null){
+                            celda.setCellValue(Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())));
+                        }
+                    } else {
+                        celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
+                    }
                     break;
                 }
             }
@@ -158,8 +166,8 @@ public class EscribirExcelGrupoEmpresa {
     }
 
     /**
-     * Método que permite ingresar los datos de relación a la plantilla xls de el
-     * grupo empresa.
+     * Método que permite ingresar los datos de relación a la plantilla xls de
+     * el grupo empresa.
      *
      * @param libro
      * @return libro
@@ -180,8 +188,15 @@ public class EscribirExcelGrupoEmpresa {
             for (VariableIge variableIge : columnas) {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
-                    celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                    celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                    if (variableIge.getTipo().equals("DATE")) {
+                        celda.setCellStyle(estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        if(Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())) != null){
+                            celda.setCellValue(Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())));
+                        }
+                    } else {
+                        celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                    }
                     break;
                 }
             }
@@ -192,8 +207,8 @@ public class EscribirExcelGrupoEmpresa {
     }
 
     /**
-     * Método que permite ingresar los datos de historia a la plantilla xls de el
-     * grupo empresa.
+     * Método que permite ingresar los datos de historia a la plantilla xls de
+     * el grupo empresa.
      *
      * @param libro
      * @return libro
@@ -202,7 +217,7 @@ public class EscribirExcelGrupoEmpresa {
         //La hoja 3 es la hoja de los datos de eventos
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("NOVEDAD");
         Sheet hoja = libro.getSheet("Historia");//.getSheetAt(3);
-
+        hoja.protectSheet("123");
         Row encabezadoXsl = hoja.getRow(1);
         Iterator cells = encabezadoXsl.cellIterator();
         int indiceColumna = 0;
@@ -212,8 +227,15 @@ public class EscribirExcelGrupoEmpresa {
             for (VariableIge variableIge : columnas) {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
-                    celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                    celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                    if (variableIge.getTipo().equals("DATE")) {
+                        celda.setCellStyle(estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        if(Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())) != null){
+                            celda.setCellValue(Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())));
+                        }
+                    } else {
+                        celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                    }
                     break;
                 }
             }
@@ -245,8 +267,15 @@ public class EscribirExcelGrupoEmpresa {
             for (VariableIge variableIge : columnas) {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
-                    celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                    celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                    if (variableIge.getTipo().equals("DATE")) {
+                        celda.setCellStyle(estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        if(Fecha.fomatoFechaStringToDate(getTamanoSeleccionado().get(variableIge.getColumna().trim())) != null){
+                            celda.setCellValue(Fecha.fomatoFechaStringToDate(getTamanoSeleccionado().get(variableIge.getColumna().trim())));
+                        }
+                    } else {
+                        celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                    }
                     break;
                 }
             }
@@ -268,6 +297,31 @@ public class EscribirExcelGrupoEmpresa {
     private CellStyle estiloBordeCompletoCedaEditable(Workbook libro, boolean editable) {
         CellStyle css = libro.createCellStyle();
         css.setLocked((editable != true));
+        css.setBorderTop(CellStyle.BORDER_THIN);
+        css.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        css.setBorderLeft(CellStyle.BORDER_THIN);
+        css.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        css.setBorderRight(CellStyle.BORDER_THIN);
+        css.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        css.setBorderBottom(CellStyle.BORDER_THIN);
+        css.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        return css;
+    }
+
+    /**
+     * Método que permite obtener el estilo de una celda aplicando el borde
+     * completo. Incluye que la celda este bloqueada para exritura, de acuerdo
+     * al parametro y con formato de fecha dd/MM/yyyy
+     *
+     * @param libro
+     * @param editable
+     * @return
+     */
+    private CellStyle estiloBordeCompletoCedaEditableFecha(Workbook libro, boolean editable) {
+        CellStyle css = libro.createCellStyle();
+        css.setLocked((editable != true));
+        short df = libro.createDataFormat().getFormat("dd/MM/yyyy");
+        css.setDataFormat(df);
         css.setBorderTop(CellStyle.BORDER_THIN);
         css.setTopBorderColor(IndexedColors.BLACK.getIndex());
         css.setBorderLeft(CellStyle.BORDER_THIN);

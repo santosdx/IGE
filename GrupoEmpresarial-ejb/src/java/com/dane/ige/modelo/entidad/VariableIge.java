@@ -47,6 +47,10 @@ public class VariableIge implements Serializable {
     private Integer longitud;
     @Column(name = "editable")
     private String editable;
+    @Column(name = "nombre_atributo_clase")
+    private String nombreAtributoClase;
+    @Column(name = "obligatoria")
+    private String obligatoria;
 
     public VariableIge() {
     }
@@ -113,6 +117,22 @@ public class VariableIge implements Serializable {
 
     public void setEditable(String editable) {
         this.editable = editable;
+    }
+
+    public String getNombreAtributoClase() {
+        return nombreAtributoClase;
+    }
+
+    public void setNombreAtributoClase(String nombreAtributoClase) {
+        this.nombreAtributoClase = nombreAtributoClase;
+    }
+
+    public String getObligatoria() {
+        return obligatoria;
+    }
+
+    public void setObligatoria(String obligatoria) {
+        this.obligatoria = obligatoria;
     }
 
     @Override

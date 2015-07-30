@@ -26,4 +26,5 @@ public class Texto {
         resultado = resultado.equals("null") == true ? "" : dato.trim();
         return resultado;
     }
+
 }

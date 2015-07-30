@@ -1,0 +1,55 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:panel style="border: none; padding:0px;">
+        <h:form id="frmCargarArchivoXls">
+            <p:growl id="msnInforGruEmp" sticky="true" showDetail="true" life="3000" />
+
+            <p:fileUpload id="btnCargarXlsGrupoEmpresa" fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"
+                          multiple="false" 
+                          mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
+                          invalidFileMessage="Tipo de archivo no soportado"  oncomplete="PF('dlgCargarXls').show();" 
+                          update="msnInforGruEmp,dtInconsistenciasXls" allowTypes="/(\.|\/)(xls)$/" />
+
+            <p:dialog header="Reporte Cargar Información" widgetVar="dlgCargarXls"  appendTo="@(body)"
+                      resizable="false" modal="false" width="800" height="550">
+                <p:outputPanel deferred="true">
+                    <p:dataList id="dtInconsistenciasXls" value="#{MbLeerExcel.listaInconsistencias}" 
+                                var="inconsistencia" itemType="none" paginator="true" rows="22" styleClass="paginated" paginatorPosition="bottom">
+                        <p:commandLink oncomplete="PF('dlgInconsistencia').show()" title="Lista Variables" update="#{frmPadre}:frmCargarArchivoXls:dtVariableInconsistencia" process="@this"
+                                       styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+
+                            <f:setPropertyActionListener value="#{inconsistencia}" target="#{MbLeerExcel.inconsistenciaSeleccionada}" />
+                            <p:outputLabel value="#{inconsistencia.id}. #{inconsistencia.origen}" />
+                        </p:commandLink>
+                        <!--f:facet name="header">Lista Registros Inconsistencias</f:facet-->
+                        <p:outputLabel value="&nbsp;&nbsp;Hoja: #{inconsistencia.origen}" style="display:inline-block"/>
+                        <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;ID #: #{inconsistencia.id}" style="display:inline-block"/>
+                        <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;Incompletos: #{inconsistencia.listaAtributosRequeridos.size()}" style="display:inline-block"/>
+                    </p:dataList>
+                </p:outputPanel>
+                <h3 class="titulo-left-h3">Atención:</h3>
+                <p:outputLabel value="Para poder cargar los registros y actualizar la información, cada una de las variables solicitadas como requeridas (*) para cada uno de los registros, debe ser diligenciada. Por favor ajustar los datos de cada variable para cada registro que el reporte indica y cargar de nuevo. "/>
+            </p:dialog>
+
+            <p:dialog  header="Lista Variables Requeridas"  widgetVar="dlgInconsistencia" modal="true"  resizable="false" appendTo="@(body)">
+                <p:outputPanel deferred="true" >
+                    <p:dataList id="dtVariableInconsistencia" var="variable"  style="border: none;"
+                                value="#{MbLeerExcel.inconsistenciaSeleccionada.listaAtributosRequeridos}" >
+                        #{variable}
+                    </p:dataList>
+                </p:outputPanel>
+            </p:dialog>
+
+            <p:blockUI block="@form" trigger="btnCargarXlsGrupoEmpresa" >
+                Subiendo información...<br />
+                <p:graphicImage name="imagen/ajax-loading.gif"/>
+            </p:blockUI>
+
+        </h:form>
+    </p:panel>
+</ui:composition>
