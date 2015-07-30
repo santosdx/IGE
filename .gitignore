@@ -3,3 +3,6 @@
 /GrupoEmpresarial-ejb/dist/
 /GrupoEmpresarial-war/dist/
 /dist/
+/GrupoEmpresarial-ejb/nbproject/private/
+/GrupoEmpresarial-war/build/
+/build/

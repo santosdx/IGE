@@ -11,36 +11,36 @@
         <h:panelGrid columns="2" columnClasses="label, value">
 
             <h:outputText value="Activo: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Activo es requerido.">
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Activo es requerido." label="Activo">
                 <!--f:convertNumber currencySymbol="$" pattern="#000.000"/-->
             </p:inputText>
 
             <h:outputText value="Pasivo: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Pasivo es requerido."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Pasivo es requerido." label="Pasivo"/>
 
             <h:outputText value="Patrimonio: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Patrimonio es requerido."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Patrimonio es requerido." label="Patrimonio"/>
 
             <h:outputText value="Ingresos operacionales: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Ingresos operacionales son requeridos."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Ingresos operacionales son requeridos." label="Ingresos operacionales"/>
 
             <h:outputText value="Gastos operacionales: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.gastosOperacionales}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Gastos operacionales son requeridos."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.gastosOperacionales}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Gastos operacionales son requeridos." label="Gastos operacionales"/>
 
             <h:outputText value="Utilidad neta: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Utilidad neta es requerida."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Utilidad neta es requerida." label="Utilidad neta"/>
 
             <h:outputText value="EBITDA: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El EBITDA es requerido."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El EBITDA es requerido." label="EBITDA"/>
 
             <h:outputText value="Personal ocupado: *" styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.personalOcupado}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Personal ocupado es requerido."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.personalOcupado}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Personal ocupado es requerido." label="Personal ocupado"/>
 
             <h:outputText value="Número de hombres ocupados: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.hombresOcupados}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Número de hombres ocupados es requerido."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.hombresOcupados}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Número de hombres ocupados es requerido." label="Número de hombres ocupados"/>
 
             <h:outputText value="Número de mujeres ocupadas: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.mujeresOcupadas}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Número de mujeres ocupadas es requerido."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.mujeresOcupadas}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Número de mujeres ocupadas es requerido." label="Número de mujeres ocupadas"/>
 
             <!--
             <h:outputText value="Información con corte a: " styleClass="etiquetaFormulario"/>
@@ -48,7 +48,7 @@
             -->
 
             <h:outputText value="Observaciones: " styleClass="etiquetaFormulario" />
-            <p:inputTextarea value="#{MbFormGrupoEmpresa.tamanoSeleccionado.observaciones}" rows="6" cols="66" />
+            <p:inputTextarea value="#{MbFormGrupoEmpresa.tamanoSeleccionado.observaciones}" rows="6" cols="66" label="Observaciones"/>
 
         </h:panelGrid>
     </p:panel>

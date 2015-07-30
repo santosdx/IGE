@@ -12,7 +12,7 @@
 
             <p:outputLabel for="claFechaMatricula" value="Fecha matrícula: " styleClass="etiquetaFormulario"/>
             <p:calendar id="claFechaMatricula" value="#{MbFormEstablecimiento.novedadSeleccionada.fechaMatricula}" 
-                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha matrícula es requerida."/>
+                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha matrícula es requerida." label="Fecha matrícula"/>
             <p:message for="claFechaMatricula" />
 
             <p:outputLabel value="Estado matrícula: *" styleClass="etiquetaFormulario"/>
@@ -24,15 +24,17 @@
             <p:message for="cboEstadoMatricula" />
 
             <p:outputLabel value="Ultimo año renovado: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtUltimoAnoRenovado" value="#{MbFormEstablecimiento.novedadSeleccionada.ultimoAnoRenovado}"  style="width:145px" required="true" requiredMessage="El Ultimo año renovado es requerido."/>
+            <p:inputText id="txtUltimoAnoRenovado" value="#{MbFormEstablecimiento.novedadSeleccionada.ultimoAnoRenovado}"  style="width:145px" required="true" requiredMessage="El Ultimo año renovado es requerido." label="Ultimo año renovado" maxlength="4">
+                <f:validateLength minimum="4" maximum="4"/> 
+            </p:inputText> 
             <p:message for="txtUltimoAnoRenovado" />
 
             <p:outputLabel value="Fecha de creación: *" styleClass="etiquetaFormulario"/>
-            <p:calendar id="claFechaCreacion" value="#{MbFormEstablecimiento.novedadSeleccionada.fechaCreacion}"  locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de creación es requerida."/>
+            <p:calendar id="claFechaCreacion" value="#{MbFormEstablecimiento.novedadSeleccionada.fechaCreacion}"  locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de creación es requerida." label="Fecha de creación"/>
             <p:message for="claFechaCreacion" />
 
             <p:outputLabel value="Fecha de inicio de actividades: *" styleClass="etiquetaFormulario"/>
-            <p:calendar id="claFechaInicioActividades" value="#{MbFormEstablecimiento.novedadSeleccionada.fechaInicioActi}"  locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de inicio de actividades es requerida."/>
+            <p:calendar id="claFechaInicioActividades" value="#{MbFormEstablecimiento.novedadSeleccionada.fechaInicioActi}"  locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de inicio de actividades es requerida." label="Fecha de inicio de actividades"/>
             <p:message for="claFechaInicioActividades" />
 
             <!--

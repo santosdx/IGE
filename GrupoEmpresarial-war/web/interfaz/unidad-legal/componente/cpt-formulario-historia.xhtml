@@ -12,12 +12,12 @@
 
             <p:outputLabel value="Fecha de configuración de control: *" styleClass="etiquetaFormulario" />
             <p:calendar id="cldFechaConfiguracion" value="#{MbFormUnidadLegal.novedadSeleccionada.fechaConfiguracion}"
-                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="la Fecha de configuración de control es requerido."/>
+                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="la Fecha de configuración de control es requerido." label="Fecha de configuración de control"/>
             <p:message for="cldFechaConfiguracion" />
 
             <p:outputLabel value="Fecha de matrícula: *" styleClass="etiquetaFormulario" />
             <p:calendar id="cldFechaMatricula" value="#{MbFormUnidadLegal.novedadSeleccionada.fechaMatricula}"
-                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="la Fecha de matrícula es requerido."/>
+                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="la Fecha de matrícula es requerido." label="Fecha de matrícula"/>
             <p:message for="cldFechaMatricula" />
 
             <p:outputLabel value="Estado de matricula: *" styleClass="etiquetaFormulario" />
@@ -29,17 +29,19 @@
             <p:message for="cboEstadoMatricula" />
 
             <p:outputLabel value="Ultimo año renovado: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtUltimoAnoRenovado"  value="#{MbFormUnidadLegal.novedadSeleccionada.ultimoAnoRenovado}" style="width:145px" required="true" requiredMessage="El Ultimo año renovado es requerido."/>
+            <p:inputText id="txtUltimoAnoRenovado"  value="#{MbFormUnidadLegal.novedadSeleccionada.ultimoAnoRenovado}" style="width:145px" required="true" requiredMessage="El Ultimo año renovado es requerido." label="Ultimo año renovado">
+            <f:validateLength minimum="4" maximum="4"/> 
+            </p:inputText> 
             <p:message for="txtUltimoAnoRenovado" />
 
             <p:outputLabel value="Fecha de creación: *" styleClass="etiquetaFormulario" />
             <p:calendar id="cldFechaCreacion"  value="#{MbFormUnidadLegal.novedadSeleccionada.fechaCreacion}"
-                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Fecha de creación es requerido."/>
+                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Fecha de creación es requerido." label="Fecha de creación"/>
             <p:message for="cldFechaCreacion" />
 
             <p:outputLabel value="Fecha de inicio de actividades: *" styleClass="etiquetaFormulario" />
             <p:calendar id="cldFechaInicioActividades"  value="#{MbFormUnidadLegal.novedadSeleccionada.fechaInicioActi}"
-                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Fecha de inicio de actividades es requerido."/>
+                        locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Fecha de inicio de actividades es requerido." label="Fecha de inicio de actividades"/>
             <p:message for="cldFechaInicioActividades" />
             <!--
             <p:outputLabel value="Tipo de novedad: " styleClass="etiquetaFormulario" />

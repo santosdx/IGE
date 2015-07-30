@@ -22,7 +22,7 @@
 
             <p:outputLabel value="Razón social: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtRazonSocial" value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreComercial}" 
-                         styleClass="valorEtiquetaFormulario" requiredMessage="La razón social es requerida." onblur="value = value.toUpperCase()" required="true"/>
+                         styleClass="valorEtiquetaFormulario" requiredMessage="La razón social es requerida." onblur="value = value.toUpperCase()" required="true" maxlength="80" label="Razón social"/>
             <p:message for="txtRazonSocial" />
 
             <p:outputLabel value="NIT Unidad Legal: *" styleClass="etiquetaFormulario" />
@@ -64,15 +64,15 @@
             <p:message for="cboMunicipio" />
 
             <p:outputLabel value="Dirección: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtDireccion" value="#{MbFormUnidadLegal.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerido."/>
+            <p:inputText id="txtDireccion" value="#{MbFormUnidadLegal.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerido." maxlength="150" label="Dirección"/>
             <p:message for="txtDireccion" />
 
             <p:outputLabel value="Teléfono: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtTelefono" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido."/>
+            <p:inputText id="txtTelefono" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." maxlength="20" label="Teléfono"/>
             <p:message for="txtTelefono" />
 
             <p:outputLabel value="Correo electrónico: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtMail" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo electrónico es requerido."/>
+            <p:inputText id="txtMail" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo electrónico es requerido." maxlength="100" label="Correo electrónico"/>
             <p:message for="txtMail" />
 
             <p:outputLabel value="Tipo de organización: *" styleClass="etiquetaFormulario" />
@@ -112,19 +112,19 @@
             <p:message for="swtOrientadaMercado" />
 
             <p:outputLabel value="Nombre de contacto: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtNombreContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre de contacto es requerido."/>
+            <p:inputText id="txtNombreContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre de contacto es requerido." maxlength="100" label="Nombre de contacto"/>
             <p:message for="txtNombreContacto" />
 
             <p:outputLabel value="Cargo: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtCargoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido."/>
+            <p:inputText id="txtCargoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido." maxlength="60" label="Cargo"/>
             <p:message for="txtCargoContacto" />
 
             <p:outputLabel value="Teléfono de contacto: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtTelefonoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido."/>
+            <p:inputText id="txtTelefonoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." maxlength="100" label="Teléfono de contacto"/>
             <p:message for="txtTelefonoContacto" />
 
             <p:outputLabel value="Correo electrónico de contacto: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtMailContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido."/>
+            <p:inputText id="txtMailContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido." maxlength="80" label="Correo electrónico de contacto"/>
             <p:message for="txtMailContacto" />
 
             <!--h:outputText value="Saltar siguiente: " />

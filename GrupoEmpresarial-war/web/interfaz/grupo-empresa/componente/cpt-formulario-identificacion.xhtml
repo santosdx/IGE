@@ -12,17 +12,19 @@
 
             <p:outputLabel value="Nombre Comercial:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreComercial" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreComercial}" styleClass="valorEtiquetaFormulario" 
-                         maxlength="79" onblur="value = value.toUpperCase()"  required="true" requiredMessage="El Nombre Comercial es requerido."/>
+                         maxlength="150" onblur="value = value.toUpperCase()"  required="true" requiredMessage="El Nombre Comercial es requerido." label = "Nombre Comercial"/>
             <p:message for="txtNombreComercial" />
 
             <p:outputLabel value="Nombre registrado:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreRegistrado" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreRegistrado}"  styleClass="valorEtiquetaFormulario" 
-                         maxlength="149" onblur="value = value.toUpperCase()"  required="true" requiredMessage="El Nombre Registrado es requerido."/>
+                         maxlength="149" onblur="value = value.toUpperCase()"  required="true" requiredMessage="El Nombre Registrado es requerido." label ="Nombre registrado">
+                <f:validateLength minimum="0" maximum="150"/> 
+            </p:inputText> 
             <p:message for="txtNombreRegistrado"/>
 
             <p:outputLabel for="txtNit" value="NIT:" styleClass="etiquetaFormulario"/>
             <h:panelGrid columns="5" >
-                <p:inputText id="txtNit" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nit}" style="width: 250px;"
+                <p:inputText id="txtNit" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nit}" style="width: 250px;" maxlength="30"
                              required="true" requiredMessage="El NIT es requerido."/>
                 <p:message for="txtNit" display="tooltip"/>
                 <p:outputLabel for="txtDigitoVerificacion" value="DV:" styleClass="etiquetaFormulario"/>
@@ -34,11 +36,15 @@
 
             <p:outputLabel value="Página web: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtPaginaWeb" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.paginaWeb}" styleClass="valorEtiquetaFormulario" 
-                         maxlength="79"  required="true" requiredMessage="La Página Web es requerida."/>
+                         maxlength="79"  required="true" requiredMessage="La Página Web es requerida." label ="Página web">
+                <f:validateLength minimum="0" maximum="100"/> 
+            </p:inputText> 
             <p:message for="txtPaginaWeb"/>
 
             <p:outputLabel value="Presidente:" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPresidente" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.representanteLegal}" styleClass="valorEtiquetaFormulario" onblur="value = value.toUpperCase()" required="true" requiredMessage="El Presidente es requerido."/>
+            <p:inputText id="txtPresidente" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.representanteLegal}" styleClass="valorEtiquetaFormulario" onblur="value = value.toUpperCase()" required="true" requiredMessage="El Presidente es requerido." label ="Presidente">
+                <f:validateLength minimum="0" maximum="100"/> 
+            </p:inputText> 
             <p:message for="txtPresidente" />
 
             <p:outputLabel value="Departamento sede principal: *" styleClass="etiquetaFormulario"/>
@@ -61,15 +67,17 @@
             <p:message for="cboCiudadCedePrincipal"/>
 
             <p:outputLabel value="Dirección sede principal: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtDireccionSedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerida."/>
+            <p:inputText id="txtDireccionSedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerida." label ="Dirección sede principal">
+                <f:validateLength minimum="0" maximum="150"/> 
+            </p:inputText> 
             <p:message for="txtDireccionSedePrincipal"/>
 
             <p:outputLabel value="Teléfono sede principal: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtTelefonoPrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido."/>
+            <p:inputText id="txtTelefonoPrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." label ="Teléfono sede principal" maxlength="100"/>
             <p:message for="txtTelefonoPrincipal"/>
 
             <p:outputLabel value="Tipo de conglomerado: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboTipoConglomerado"  value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoCongromelado}" style="width:430px" required="true" requiredMessage="El Tipo Conglomerado es requerido.">
+            <p:selectOneMenu id="cboTipoConglomerado"  value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoCongromelado}" style="width:430px" required="true" requiredMessage="El Tipo Conglomerado es requerido." >
                 <f:selectItem itemLabel="Conglomerado..." itemValue="" />
                 <f:selectItem itemLabel="GRUPO" itemValue="GRUPO" />
                 <f:selectItem itemLabel="SITUACIÓN DE CONTROL" itemValue="SITUACIÓN DE CONTROL" />
@@ -78,7 +86,7 @@
             <p:message for="cboTipoConglomerado"/>
 
             <p:outputLabel value="Situación de control: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboSituacionControl" value="#{MbFormGrupoEmpresa.relacionSeleccionada.situacionControl}" style="width:430px" required="true" requiredMessage="La Situación de control es requerida.">
+            <p:selectOneMenu id="cboSituacionControl" value="#{MbFormGrupoEmpresa.relacionSeleccionada.situacionControl}" style="width:430px" required="true" requiredMessage="La Situación de control es requerida." >
                 <f:selectItem itemLabel="Situación..." itemValue="" />
                 <f:selectItem itemLabel="CONTROLANTE" itemValue="CONTROLANTE" />
                 <f:selectItem itemLabel="CONTROLADA" itemValue="CONTROLADA" />
@@ -87,7 +95,7 @@
             <p:message for="cboSituacionControl"/>
 
             <p:outputLabel value="Tipo de control: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboTipoControl" value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoControl}" style="width:430px" required="true" requiredMessage="El Tipo de control es requerido.">
+            <p:selectOneMenu id="cboTipoControl" value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoControl}" style="width:430px" required="true" requiredMessage="El Tipo de control es requerido." >
                 <f:selectItem itemLabel="Control..." itemValue="" />
                 <f:selectItem itemLabel="NACIONAL" itemValue="NACIONAL" />
                 <f:selectItem itemLabel="EXTRANJERA" itemValue="EXTRANJERA" />
@@ -95,7 +103,7 @@
             <p:message for="cboTipoControl"/>
 
             <p:outputLabel value="Tipo de empresa (controlante): *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboTipoEmpresa" value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoEmpresaControlante}" style="width:430px" required="true" requiredMessage="El Tipo de empresa es requerido.">
+            <p:selectOneMenu id="cboTipoEmpresa" value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoEmpresaControlante}" style="width:430px" required="true" requiredMessage="El Tipo de empresa es requerido." >
                 <f:selectItem itemLabel="Empresa..." itemValue="" />
                 <f:selectItem itemLabel="PRIVADA" itemValue="PRIVADA" />
                 <f:selectItem itemLabel="PUBLICA" itemValue="PUBLICA" />
@@ -125,14 +133,13 @@
 
             <p:outputLabel value="Sucursales en el extranjero: *" styleClass="etiquetaFormulario"/>
             <p:inputSwitch id="swtSucursale" onLabel="SI" offLabel="NO" required="true" 
-                           value="#{MbFormGrupoEmpresa.relacionSeleccionada.sucursalesExtranjeroGe}" requiredMessage="Las Sucursales son requeridas."/>
+                           value="#{MbFormGrupoEmpresa.relacionSeleccionada.sucursalesExtranjeroGe}" requiredMessage="Las Sucursales son requeridas." />
             <p:message for="swtSucursale"/>
 
             <p:outputLabel value="Consorcios - Uniones temporales: " styleClass="etiquetaFormulario"/>
             <p:inputSwitch id="swtConsorcios" onLabel="SI" offLabel="NO" 
                            value="#{MbFormGrupoEmpresa.relacionSeleccionada.consorcioUnidadesTempGe}" />
             <p:message for="swtConsorcios"/>
-
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{MbFormGrupoEmpresa.skip}" /-->
         </h:panelGrid>

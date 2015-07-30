@@ -19,7 +19,7 @@
             </p:selectOneMenu>
 
             <h:outputText value="Fecha de configuración: *" styleClass="etiquetaFormulario"/>
-            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaConfiguracion}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="la Fecha es requerido."/>
+            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaConfiguracion}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="la Fecha es requerido." label="Fecha de configuración"/>
 
             <h:outputText value="Tipo de novedad: "  styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:430px" value="#{MbFormGrupoEmpresa.novedadSeleccionada.tipoNovedad}" required="true" requiredMessage="El Tipo de novedad es requerido.">
@@ -35,16 +35,16 @@
             </p:selectOneMenu>
 
             <h:outputText value="Fecha de novedad: " styleClass="etiquetaFormulario"/>
-            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaNovedad}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de novedad es requerido."/>
+            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaNovedad}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de novedad es requerido." label="Fecha de novedad"/>
 
             <h:outputText value="ID de grupo involucrado en la novedad: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.novedadSeleccionada.idGrupoNovedad}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El ID es requerido."/>
+            <p:inputText value="#{MbFormGrupoEmpresa.novedadSeleccionada.idGrupoNovedad}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El ID es requerido." label="ID de grupo involucrado en la novedad"/>
 
             <h:outputText value="Fecha de cierre: " styleClass="etiquetaFormulario"/>
-            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaCierre}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de cierre es requerido."/>
+            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaCierre}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de cierre es requerido." label="Fecha de cierre"/>
 
             <h:outputText value="Fecha de liquidación: " styleClass="etiquetaFormulario"/>
-            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaLiquidacion}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de liquidación es requerido."/>
+            <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaLiquidacion}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de liquidación es requerido." label="Fecha de liquidación"/>
 
         </h:panelGrid>
     </p:panel>
