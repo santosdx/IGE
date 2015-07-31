@@ -25,4 +25,6 @@ public interface PaisFacadeLocal {
 
     int count();
     
+    List<Pais> findAllInOrderByNameAsc();
+    
 }

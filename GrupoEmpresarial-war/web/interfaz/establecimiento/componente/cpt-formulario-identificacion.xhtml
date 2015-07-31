@@ -26,18 +26,14 @@
             <p:outputLabel value="Departamento: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboDepartamento" value="#{MbFormEstablecimiento.identificacionSeleccionada.departamento}" style="width:430px" required="true" requiredMessage="El Departamento es requerido.">
                 <f:selectItem itemLabel="Departamento..." itemValue="" />
-                <f:selectItem itemLabel="Bogotá" itemValue="Bogotá" />
-                <f:selectItem itemLabel="Huila" itemValue="Huila" />
-                <f:selectItem itemLabel="Tolima" itemValue="Tolima" />
+                <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboDepartamento" />
 
             <p:outputLabel value="Municipio: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboMunicipio" value="#{MbFormEstablecimiento.identificacionSeleccionada.municipio}" style="width:430px" required="true" requiredMessage="El Municipio es requerido.">
                 <f:selectItem itemLabel="Municipio..." itemValue="" />
-                <f:selectItem itemLabel="A" itemValue="A" />
-                <f:selectItem itemLabel="B" itemValue="B" />
-                <f:selectItem itemLabel="C" itemValue="C" />
+                <f:selectItems value="#{MbListaDesplegable.listaMunicipios}" var="Municipio" itemLabel="#{Municipio.nombre}" itemValue="#{Municipio.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboMunicipio" />
 

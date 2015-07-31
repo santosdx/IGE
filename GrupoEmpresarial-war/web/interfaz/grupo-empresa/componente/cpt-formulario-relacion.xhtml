@@ -19,25 +19,19 @@
 
             <h:outputText value="Situación de control: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px" required="true" requiredMessage="La situación de control es requerido.">
-                <f:selectItem itemLabel="Situación..." itemValue="" />
-                <f:selectItem itemLabel="Controlante" itemValue="Controlante" />
-                <f:selectItem itemLabel="Controlada" itemValue="Controlada" />
-                <f:selectItem itemLabel="Ninguna" itemValue="Ninguna" />
+                <f:selectItems value="#{MbListaDesplegable.listaSituaciones}" var="SituacionControl" itemLabel="#{SituacionControl.situacion}" itemValue="#{SituacionControl.situacion}"/>
             </p:selectOneMenu>
 
             <h:outputText value="Tipo de control: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px" required="true" requiredMessage="El Tipo de control es requerido.">
                 <f:selectItem itemLabel="Control..." itemValue="" />
-                <f:selectItem itemLabel="Nacional" itemValue="Nacional" />
-                <f:selectItem itemLabel="Extranjera" itemValue="Extranjera" />
+                <f:selectItems value="#{MbListaDesplegable.listaControles}" var="Control" itemLabel="#{Control.tipo}" itemValue="#{Control.tipo}"/>
             </p:selectOneMenu>
 
             <h:outputText value="Tipo de empresa (controlante): *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px" required="true" requiredMessage="El Tipo de empresa es requerido.">
                 <f:selectItem itemLabel="Empresa..." itemValue="" />
-                <f:selectItem itemLabel="Privada" itemValue="Privada" />
-                <f:selectItem itemLabel="Publica" itemValue="Publica" />
-                <f:selectItem itemLabel="Mixta" itemValue="Mixta" />
+                <f:selectItems value="#{MbListaDesplegable.listaEmpresas}" var="TipoEmpresa" itemLabel="#{TipoEmpresa.tipo}" itemValue="#{TipoEmpresa.tipo}"/>
             </p:selectOneMenu>
 
             <!-- <h:outputText value="NIT de la controlante: " styleClass="etiquetaFormulario"/>
@@ -54,9 +48,7 @@
             <h:outputText value="País de la controlante: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu style="width:330px" required="true" requiredMessage="El País es requerido.">
                 <f:selectItem itemLabel="País..." itemValue="" />
-                <f:selectItem itemLabel="Colombia" itemValue="Colombia" />
-                <f:selectItem itemLabel="Brasil" itemValue="Brasil" />
-                <f:selectItem itemLabel="Argentina" itemValue="Argentina" />
+                <f:selectItems value="#{MbListaDesplegable.listaPaises}" var="Pais" itemLabel="#{Pais.nombre}" itemValue="#{Pais.nombre}"/>
             </p:selectOneMenu>
 
             <h:outputText value="Sucursales en el extranjero: *" styleClass="etiquetaFormulario"/>

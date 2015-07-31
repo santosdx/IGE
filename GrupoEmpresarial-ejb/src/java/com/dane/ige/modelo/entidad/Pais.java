@@ -1,6 +1,7 @@
 package com.dane.ige.modelo.entidad;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @Entity
 @Table(name = "ige_pais")
 @NamedQueries({
-    @NamedQuery(name = "Pais.findAll", query = "SELECT u FROM Pais u order by u.nombre"),
+    @NamedQuery(name = "Pais.findAllInOrderByNameAsc", query = "SELECT u FROM Pais u order by u.nombre"),
     @NamedQuery(name = "Pais.findById", query = "SELECT u FROM Pais u WHERE u.id = :id")})
     
  
@@ -32,7 +33,7 @@ public class Pais implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final String FINE_BYE_findAll = "pais.findAll";
+    public static final String FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC = "Pais.findAllInOrderByNameAsc";
 
     @Id
     @Column(name = "id_pais", unique = true, nullable = false)
@@ -94,4 +95,5 @@ public class Pais implements Serializable {
         return "com.nerv.sai.modelo.entidad.Pais[ id=" + id + " ]";
     }
 
+  
 }

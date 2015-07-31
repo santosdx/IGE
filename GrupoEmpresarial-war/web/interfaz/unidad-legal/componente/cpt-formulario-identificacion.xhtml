@@ -39,27 +39,21 @@
             <p:outputLabel value="País: *" styleClass="etiquetaFormulario" />
             <p:selectOneMenu id="cboPais" value="#{MbFormUnidadLegal.identificacionSeleccionada.pais}" style="width:430px" required="true" requiredMessage="El País es requerido.">
                 <f:selectItem itemLabel="País..." itemValue="" />
-                <f:selectItem itemLabel="COLOMBIA" itemValue="COLOMBIA" />
-                <f:selectItem itemLabel="ARGENTINA" itemValue="ARGENTINA" />
-                <f:selectItem itemLabel="PERU" itemValue="PERU" />
+                <f:selectItems value="#{MbListaDesplegable.listaPaises}" var="Pais" itemLabel="#{Pais.nombre}" itemValue="#{Pais.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboPais" />
 
             <p:outputLabel value="Departamento: *" styleClass="etiquetaFormulario" />
             <p:selectOneMenu id="cboDepartamento" value="#{MbFormUnidadLegal.identificacionSeleccionada.departamento}" style="width:430px" required="true" requiredMessage="El Departamento es requerido.">
                 <f:selectItem itemLabel="Departamento..." itemValue="" />
-                <f:selectItem itemLabel="ANTIOQUIA" itemValue="ANTIOQUIA" />
-                <f:selectItem itemLabel="HUILA" itemValue="HUILA" />
-                <f:selectItem itemLabel="TOLIMA" itemValue="TOLIMA" />
+                <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboDepartamento" />
 
             <p:outputLabel value="Municipio: *" styleClass="etiquetaFormulario" />
             <p:selectOneMenu id="cboMunicipio" value="#{MbFormUnidadLegal.identificacionSeleccionada.municipio}" style="width:430px" required="true" requiredMessage="El Municipio es requerido.">
                 <f:selectItem itemLabel="Municipio..." itemValue="" />
-                <f:selectItem itemLabel="MEDELLIN" itemValue="MEDELLIN" />
-                <f:selectItem itemLabel="NEIVA" itemValue="NEIVA" />
-                <f:selectItem itemLabel="IBAGUE" itemValue="IBAGUE" />
+                <f:selectItems value="#{MbListaDesplegable.listaMunicipios}" var="Municipios" itemLabel="#{Municipios.nombre}" itemValue="#{Municipios.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboMunicipio" />
 
@@ -81,13 +75,7 @@
             <p:outputLabel value="Tipo de organización: *" styleClass="etiquetaFormulario" />
             <p:selectOneMenu id="cboTipoOrganizacion" value="#{MbFormUnidadLegal.identificacionSeleccionada.tipoOrganizacionUl}" style="width:430px" required="true" requiredMessage="El Tipo de organización es requerido.">
                 <f:selectItem itemLabel="Organización..." itemValue="" />
-                <f:selectItem itemLabel="SOCIEDAD ANONIMA" itemValue="SOCIEDAD ANONIMA" />
-                <f:selectItem itemLabel="SOCIEDAD LIMITADA" itemValue="SOCIEDAD LIMITADA" />
-                <f:selectItem itemLabel="SOCIEDAD EXTRANJERA" itemValue="SOCIEDAD EXTRANJERA" />
-                <f:selectItem itemLabel="SOCIEDAD EN COMANDITA SIMPLE" itemValue="SOCIEDAD EN COMANDITA SIMPLE" />
-                <f:selectItem itemLabel="SOCIEDAD EN COMANDITA POR ACCIONES" itemValue="SOCIEDAD EN COMANDITA POR ACCIONES" />
-                <f:selectItem itemLabel="SOCIEDAD POR ACCIONES SIMPLIFICADAS SAS" itemValue="SOCIEDAD POR ACCIONES SIMPLIFICADAS SAS" />
-                <f:selectItem itemLabel="OTRA" itemValue="OTRA" />
+                <f:selectItems value="#{MbListaDesplegable.listaOrganizaciones}" var="TipoOrganizacion" itemLabel="#{TipoOrganizacion.tipo}" itemValue="#{TipoOrganizacion.tipo}"/>
             </p:selectOneMenu>
             <p:message for="cboTipoOrganizacion" />
 

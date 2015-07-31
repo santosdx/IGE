@@ -13,9 +13,7 @@
             <p:outputLabel value="Situación de control: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboSituacionControl" value="#{MbFormUnidadLegal.relacionSeleccionada.situacionControl}" style="width:430px" required="true" requiredMessage="La Situación de control es requerido.">
                 <f:selectItem itemLabel="Relación..." itemValue="" />
-                <f:selectItem itemLabel="MATRIZ" itemValue="MATRIZ" />
-                <f:selectItem itemLabel="CONTROLANTE" itemValue="CONTROLANTE" />
-                <f:selectItem itemLabel="SUBORDINADA" itemValue="SUBORDINADA" />
+                <f:selectItems value="#{MbListaDesplegable.listaSituaciones}" var="SituacionControl" itemLabel="#{SituacionControl.situacion}" itemValue="#{SituacionControl.situacion}"/>
             </p:selectOneMenu>
             <p:message for="cboSituacionControl" />
 

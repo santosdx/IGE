@@ -18,8 +18,7 @@
             <p:outputLabel value="Estado matrícula: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboEstadoMatricula" value="#{MbFormEstablecimiento.novedadSeleccionada.estadoMatricula}"  style="width:150px" required="true" requiredMessage="El Estado matrícula es requerido.">
                 <f:selectItem itemLabel="Estado..." itemValue="" />
-                <f:selectItem itemLabel="Activa" itemValue="Activa" />
-                <f:selectItem itemLabel="Inactiva" itemValue="Inactiva" />
+                <f:selectItems value="#{MbListaDesplegable.listaMatriculas}" var="Matricula" itemLabel="#{Matricula.estado}" itemValue="#{Matricula.estado}"/>
             </p:selectOneMenu>
             <p:message for="cboEstadoMatricula" />
 

@@ -24,7 +24,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @Entity
 @Table(name = "ige_estado_matricula")
 @NamedQueries({
-    @NamedQuery(name = "EstadoMatricula.findAll", query = "SELECT u FROM EstadoMatricula u order by u.estado"),
+    @NamedQuery(name = "EstadoMatricula.findAllInOrderByNameAsc", query = "SELECT u FROM EstadoMatricula u order by u.estado"),
     @NamedQuery(name = "EstadoMatricula.findById", query = "SELECT u FROM EstadoMatricula u WHERE u.id = :id")})
     
  
@@ -32,7 +32,7 @@ public class EstadoMatricula implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final String FINE_BYE_findAll = "EstadoMatricula.findAll";
+    public static final String FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC = "EstadoMatricula.findAllInOrderByNameAsc";
 
     @Id
     @Column(name = "ID_ESTADO_MATRICULA", unique = true, nullable = false)

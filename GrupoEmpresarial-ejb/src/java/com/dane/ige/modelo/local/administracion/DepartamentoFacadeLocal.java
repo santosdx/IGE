@@ -1,6 +1,7 @@
 package com.dane.ige.modelo.local.administracion;
 
 import com.dane.ige.modelo.entidad.Departamento;
+import com.dane.ige.modelo.entidad.Pais;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -24,5 +25,7 @@ public interface DepartamentoFacadeLocal {
     List<Departamento> findRange(int[] range);
 
     int count();
+    
+    List<Departamento> findAllInOrderByNameAsc();
     
 }

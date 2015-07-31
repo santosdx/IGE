@@ -1,5 +1,6 @@
 package com.dane.ige.modelo.local.administracion;
 
+import com.dane.ige.modelo.entidad.Pais;
 import com.dane.ige.modelo.entidad.TipoControl;
 import java.util.List;
 import javax.ejb.Local;
@@ -24,5 +25,6 @@ public interface TipoControlFacadeLocal {
     List<TipoControl> findRange(int[] range);
 
     int count();
-    
+
+    List<TipoControl> findAllInOrderByNameAsc();
 }

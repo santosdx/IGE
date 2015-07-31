@@ -44,19 +44,14 @@
             <p:outputLabel value="Departamento sede principal: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboDepartamentoSedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.departamento}" style="width:430px" required="true" requiredMessage="El Departamento es requerido.">
                 <f:selectItem itemLabel="Departamento..." itemValue="" />
-                <f:selectItem itemLabel="Bogotá" itemValue="Bogotá" />
-                <f:selectItem itemLabel="Huila" itemValue="Huila" />
-                <f:selectItem itemLabel="Tolima" itemValue="Tolima" />
-                <f:selectItem itemLabel="ANTIOQUIA" itemValue="ANTIOQUIA" />
+                <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboDepartamentoSedePrincipal"/>
 
             <p:outputLabel value="Ciudad sede principal: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboCiudadCedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.municipio}" style="width:430px" required="true" requiredMessage="La Ciudad es requerida.">
                 <f:selectItem itemLabel="Ciudad..." itemValue="" />
-                <f:selectItem itemLabel="Aipe" itemValue="Aipe" />
-                <f:selectItem itemLabel="Algeciras" itemValue="Algeciras" />
-                <f:selectItem itemLabel="MEDELLIN" itemValue="MEDELLIN" />
+                <f:selectItems value="#{MbListaDesplegable.listaMunicipios}" var="Municipio" itemLabel="#{Municipio.nombre}" itemValue="#{Municipio.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboCiudadCedePrincipal"/>
 
@@ -79,27 +74,22 @@
 
             <p:outputLabel value="Situación de control: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboSituacionControl" value="#{MbFormGrupoEmpresa.relacionSeleccionada.situacionControl}" style="width:430px" required="true" requiredMessage="La Situación de control es requerida." >
-                <f:selectItem itemLabel="Situación..." itemValue="" />
-                <f:selectItem itemLabel="CONTROLANTE" itemValue="CONTROLANTE" />
-                <f:selectItem itemLabel="CONTROLADA" itemValue="CONTROLADA" />
-                <f:selectItem itemLabel="NINGUNA" itemValue="NINGUNA" />
+               <f:selectItem itemLabel="Situación..." itemValue="" />
+                <f:selectItems value="#{MbListaDesplegable.listaSituaciones}" var="SituacionControl" itemLabel="#{SituacionControl.situacion}" itemValue="#{SituacionControl.situacion}"/>
             </p:selectOneMenu>
             <p:message for="cboSituacionControl"/>
 
             <p:outputLabel value="Tipo de control: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboTipoControl" value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoControl}" style="width:430px" required="true" requiredMessage="El Tipo de control es requerido." >
-                <f:selectItem itemLabel="Control..." itemValue="" />
-                <f:selectItem itemLabel="NACIONAL" itemValue="NACIONAL" />
-                <f:selectItem itemLabel="EXTRANJERA" itemValue="EXTRANJERA" />
+                <f:selectItem itemLabel="Control..." itemValue="" />                
+                <f:selectItems value="#{MbListaDesplegable.listaControles}" var="TipoControl" itemLabel="#{TipoControl.tipo}" itemValue="#{TipoControl.tipo}"/>
             </p:selectOneMenu>
             <p:message for="cboTipoControl"/>
 
             <p:outputLabel value="Tipo de empresa (controlante): *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboTipoEmpresa" value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoEmpresaControlante}" style="width:430px" required="true" requiredMessage="El Tipo de empresa es requerido." >
                 <f:selectItem itemLabel="Empresa..." itemValue="" />
-                <f:selectItem itemLabel="PRIVADA" itemValue="PRIVADA" />
-                <f:selectItem itemLabel="PUBLICA" itemValue="PUBLICA" />
-                <f:selectItem itemLabel="MIXTA" itemValue="MIXTA" />
+                <f:selectItems value="#{MbListaDesplegable.listaEmpresas}" var="TipoEmpresa" itemLabel="#{TipoEmpresa.tipo}" itemValue="#{TipoEmpresa.tipo}"/>
             </p:selectOneMenu>
             <p:message for="cboTipoEmpresa"/>
 
@@ -118,9 +108,6 @@
             <p:selectOneMenu id="cboPais" value="#{MbFormGrupoEmpresa.relacionSeleccionada.paisControlante}" style="width:430px" required="true" requiredMessage="El Pais es requerido.">
                 <f:selectItem itemLabel="País..." itemValue="" />
                 <f:selectItems value="#{MbListaDesplegable.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
-                <!--f:selectItem itemLabel="COLOMBIA" itemValue="COLOMBIA" />
-                <f:selectItem itemLabel="BRASIL" itemValue="BRASIL" />
-                <f:selectItem itemLabel="ARGENTINA" itemValue="ARGENTINA" /-->
             </p:selectOneMenu>
             <p:message for="cboPais"/>
 
