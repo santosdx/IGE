@@ -17,34 +17,28 @@
 
             <p:outputLabel value="Nombre registrado:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreRegistrado" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreRegistrado}"  styleClass="valorEtiquetaFormulario" 
-                         maxlength="149" onblur="value = value.toUpperCase()"  required="true" requiredMessage="El Nombre Registrado es requerido." label ="Nombre registrado">
-                <f:validateLength minimum="0" maximum="150"/> 
-            </p:inputText> 
+                         onblur="value = value.toUpperCase()"  required="true" requiredMessage="El Nombre Registrado es requerido." maxlength="150" label ="Nombre registrado"/>
             <p:message for="txtNombreRegistrado"/>
 
             <p:outputLabel for="txtNit" value="NIT:" styleClass="etiquetaFormulario"/>
             <h:panelGrid columns="5" >
                 <p:inputText id="txtNit" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nit}" style="width: 250px;" maxlength="30"
-                             required="true" requiredMessage="El NIT es requerido."/>
+                             required="true" requiredMessage="El NIT es requerido." label="NIT"/>
                 <p:message for="txtNit" display="tooltip"/>
                 <p:outputLabel for="txtDigitoVerificacion" value="DV:" styleClass="etiquetaFormulario"/>
                 <p:inputText id="txtDigitoVerificacion" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.digitoVerificacion}"  maxlength="1"
-                             required="true" requiredMessage="El DV es requerido." style="width: 20px;"/>
+                             required="true" requiredMessage="El DV es requerido." style="width: 20px;" label="DV"/>
                 <p:message for="txtDigitoVerificacion" display="tooltip"/>
             </h:panelGrid>
             <p:spacer width="10" height="10"/>
 
             <p:outputLabel value="Página web: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtPaginaWeb" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.paginaWeb}" styleClass="valorEtiquetaFormulario" 
-                         maxlength="79"  required="true" requiredMessage="La Página Web es requerida." label ="Página web">
-                <f:validateLength minimum="0" maximum="100"/> 
-            </p:inputText> 
+                          required="true" requiredMessage="La Página Web es requerida." maxlength="100" label ="Página web"/>
             <p:message for="txtPaginaWeb"/>
 
             <p:outputLabel value="Presidente:" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPresidente" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.representanteLegal}" styleClass="valorEtiquetaFormulario" onblur="value = value.toUpperCase()" required="true" requiredMessage="El Presidente es requerido." label ="Presidente">
-                <f:validateLength minimum="0" maximum="100"/> 
-            </p:inputText> 
+            <p:inputText id="txtPresidente" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.representanteLegal}" styleClass="valorEtiquetaFormulario" onblur="value = value.toUpperCase()" required="true" requiredMessage="El Presidente es requerido." maxlength="100" label ="Presidente"/>
             <p:message for="txtPresidente" />
 
             <p:outputLabel value="Departamento sede principal: *" styleClass="etiquetaFormulario"/>
@@ -67,9 +61,7 @@
             <p:message for="cboCiudadCedePrincipal"/>
 
             <p:outputLabel value="Dirección sede principal: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtDireccionSedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerida." label ="Dirección sede principal">
-                <f:validateLength minimum="0" maximum="150"/> 
-            </p:inputText> 
+            <p:inputText id="txtDireccionSedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerida." maxlength="150" label ="Dirección sede principal"/>
             <p:message for="txtDireccionSedePrincipal"/>
 
             <p:outputLabel value="Teléfono sede principal: *" styleClass="etiquetaFormulario"/>

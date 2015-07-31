@@ -23,7 +23,10 @@
             <p:message for="txtTelefonoContacto"/>
 
             <h:outputText value="Correo electrónico de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtCorreoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido." label ="Correo electrónico de contacto" maxlength="100"/>
+            <p:inputText id="txtCorreoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido." label ="Correo electrónico de contacto" validatorMessage="Correo electrónico de contacto incorrecto" maxlength="100">
+              <f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+            </p:inputText>
             <p:message for="txtCorreoContacto"/>
 
             <h:outputText value="Nombre de contacto 2: " styleClass="etiquetaFormulario"/>
@@ -39,7 +42,10 @@
             <p:spacer/>
 
             <h:outputText value="Correo electrónico de contacto 2: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto2}" styleClass="valorEtiquetaFormulario" label ="Correo electrónico de contacto 2" maxlength="80"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto2}" styleClass="valorEtiquetaFormulario" label ="Correo electrónico de contacto 2" maxlength="80">
+                <f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+            </p:inputText>
             <p:spacer/>
 
             <h:outputText value="Nombre de contacto 3: " styleClass="etiquetaFormulario"/>
@@ -55,7 +61,10 @@
             <p:spacer/>
 
             <h:outputText value="Correo electrónico de contacto 3: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto3}" styleClass="valorEtiquetaFormulario" label ="Correo electrónico de contacto 2" maxlength="80"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto3}" styleClass="valorEtiquetaFormulario" label ="Correo electrónico de contacto 2" maxlength="80">
+                <f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+            </p:inputText>
             <p:spacer/>
 
             <!--h:outputText value="Saltar siguiente: " />

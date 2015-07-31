@@ -10,24 +10,24 @@
 
         <h:panelGrid columns="2" columnClasses="label, value">
 
-            <h:outputText value="Activo: *" styleClass="etiquetaFormulario"/>
+            <h:outputText value="Activo: ($) *" styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Activo es requerido." label="Activo">
-                <!--f:convertNumber currencySymbol="$" pattern="#000.000"/-->
+                <f:convertNumber currencySymbol="$" pattern="#000.000" type="currency"/>
             </p:inputText>
 
-            <h:outputText value="Pasivo: *" styleClass="etiquetaFormulario"/>
+            <h:outputText value="Pasivo: ($) *" styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Pasivo es requerido." label="Pasivo"/>
 
-            <h:outputText value="Patrimonio: *" styleClass="etiquetaFormulario"/>
+            <h:outputText value="Patrimonio: ($) *" styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Patrimonio es requerido." label="Patrimonio"/>
 
-            <h:outputText value="Ingresos operacionales: *" styleClass="etiquetaFormulario"/>
+            <h:outputText value="Ingresos operacionales: ($) *" styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Ingresos operacionales son requeridos." label="Ingresos operacionales"/>
 
-            <h:outputText value="Gastos operacionales: *" styleClass="etiquetaFormulario"/>
+            <h:outputText value="Gastos operacionales: ($) *" styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.gastosOperacionales}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Gastos operacionales son requeridos." label="Gastos operacionales"/>
 
-            <h:outputText value="Utilidad neta: *" styleClass="etiquetaFormulario"/>
+            <h:outputText value="Utilidad neta: ($) *" styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Utilidad neta es requerida." label="Utilidad neta"/>
 
             <h:outputText value="EBITDA: *" styleClass="etiquetaFormulario"/>

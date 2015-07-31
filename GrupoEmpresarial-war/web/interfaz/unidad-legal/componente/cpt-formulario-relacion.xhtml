@@ -28,7 +28,7 @@
             <p:message for="cboTipoRelacion" />
 
             <p:outputLabel value="NIT de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNitControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El NIT de la controlante es requerido." label="NIT de la controlante"/>
+            <p:inputText id="txtNitControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El NIT de la controlante es requerido." label="NIT de la controlante" maxlength="30"/>
             <p:message for="txtNitControlante" />
 
             <!--p:outputLabel value="Dígito de verificación: *" styleClass="etiquetaFormulario"/>
