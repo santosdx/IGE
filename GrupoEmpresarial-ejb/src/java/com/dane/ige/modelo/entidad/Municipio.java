@@ -1,19 +1,11 @@
 package com.dane.ige.modelo.entidad;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -25,28 +17,32 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_municipio")
 @NamedQueries({
     @NamedQuery(name = "Municipio.findAllInOrderByNameAsc", query = "SELECT u FROM Municipio u order by u.nombre"),
-    @NamedQuery(name = "Municipio.findById", query = "SELECT u FROM Municipio u WHERE u.id = :id")})
-    
- 
+    @NamedQuery(name = "Municipio.findById", query = "SELECT u FROM Municipio u WHERE u.id = :id"),
+    @NamedQuery(name = "Municipio.findAllByDepartamentoOrderAsc", query = "SELECT u FROM Municipio u WHERE u.departamento = :departamento ORDER BY u.nombre")
+})
 public class Municipio implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     public static final String FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC = "Municipio.findAllInOrderByNameAsc";
+    public static final String FINE_BYE_FIND_ALL_BY_DEPARTAMENTO_ORDER_ASC = "Municipio.findAllByDepartamentoOrderAsc";
 
     @Id
     @Column(name = "ID_MUNICIPIO", unique = true, nullable = false)
     private Integer id;
     @Column(name = "MUNICIPIO_NOMBRE")
     private String nombre;
-    
+    @Column(name = "ID_DEPARTAMENTO")
+    private Integer idDepartamento;
+    @Column(name = "DEPARTAMENTO_NOMBRE")
+    private String departamento;
+
     public Municipio() {
     }
 
     public Municipio(Integer id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-
     }
 
     public Municipio(Integer id) {
@@ -67,6 +63,22 @@ public class Municipio implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = WordUtils.capitalize(nombre.trim());
+    }
+
+    public Integer getIdDepartamento() {
+        return idDepartamento;
+    }
+
+    public void setIdDepartamento(Integer idDepartamento) {
+        this.idDepartamento = idDepartamento;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
     @Override

@@ -82,8 +82,10 @@ public class Login implements Serializable {
 
         if (usuarioLogueado != null) {
             if (getUsuarioLogueado().getPerfil() == null) {
-                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un persil");
-            } else {
+                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un perfil");
+            } else if(getUsuarioLogueado().getIdIdentificacion() == null){
+                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un grupo empresarial");
+            }else{
                 setLoggedIn(true);
                 message = construirMenuLogin();
             }

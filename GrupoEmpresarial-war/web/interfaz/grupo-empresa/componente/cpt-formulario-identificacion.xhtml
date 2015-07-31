@@ -44,6 +44,7 @@
             <p:outputLabel value="Departamento sede principal: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboDepartamentoSedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.departamento}" style="width:430px" required="true" requiredMessage="El Departamento es requerido.">
                 <f:selectItem itemLabel="Departamento..." itemValue="" />
+                <p:ajax event="change" listener="#{MbListaDesplegable.seleccionDepartamento}" update="cboCiudadCedePrincipal"/>
                 <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboDepartamentoSedePrincipal"/>

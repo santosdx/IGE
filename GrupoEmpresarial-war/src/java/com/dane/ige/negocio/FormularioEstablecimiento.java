@@ -68,7 +68,6 @@ public class FormularioEstablecimiento implements Serializable {
 
     public void mySelectionMethodListener(AjaxBehaviorEvent event) {
         setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(getIdIdentificacionSeleccionada()));
-        System.out.println("consulto los establecimietnos");
     }
 
     /**

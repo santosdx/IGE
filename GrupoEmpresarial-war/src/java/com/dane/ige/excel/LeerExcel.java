@@ -352,8 +352,14 @@ public class LeerExcel implements Serializable {
                                 }
 
                             } else {
-                                valorCelda = cellRegistro.getStringCellValue();
-                                resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getStringCellValue() + "\"");
+                                if (cellRegistro.getCellType() == 0) {
+                                    valorCelda = cellRegistro.getNumericCellValue() + "";
+                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getNumericCellValue() + "\"");
+
+                                } else {
+                                    valorCelda = cellRegistro.getStringCellValue();
+                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getStringCellValue() + "\"");
+                                }
                             }
                             if (variable.getObligatoria().equals("true")) {
                                 if (valorCelda == null || valorCelda.equals("")) {

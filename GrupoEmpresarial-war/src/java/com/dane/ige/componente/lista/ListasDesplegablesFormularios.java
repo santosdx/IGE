@@ -23,7 +23,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import org.apache.log4j.Logger;
 
 /**
@@ -67,6 +69,9 @@ public class ListasDesplegablesFormularios {
     private List<TipoEstablecimiento> listaEstablecimeintos;
     private List<TipoOrganizacion> listaOrganizaciones;
 
+    @ManagedProperty("#{MbFormGrupoEmpresa}")
+    private FormularioGrupoEmpresa servicioFormularioGrupoEmpresa;
+
     public ListasDesplegablesFormularios() {
     }
 
@@ -81,6 +86,16 @@ public class ListasDesplegablesFormularios {
         setListaEmpresas(eJBServicioEmpresa.findAllInOrderByNameAsc());
         setListaEstablecimeintos(eJBServicioEstablecimiento.findAllInOrderByNameAsc());
         setListaOrganizaciones(eJBServicioOrganizacion.findAllInOrderByNameAsc());
+    }
+
+    /**
+     * Método listener que se dispara al seleccionar un item de la lista de 
+     * departamentos, permitiendo consultar y cargar el listado de municipios
+     * de acuerdo al departamento seleccionado
+     * @param event 
+     */
+    public void seleccionDepartamento(AjaxBehaviorEvent event) {
+        setListaMunicipios(eJBServicioMunicipio.findAllByDepartamentoOrderAsc(getServicioFormularioGrupoEmpresa().getIdentificacionSeleccionada().getDepartamento()));
     }
 
     //Lista Get y Set de la clase
@@ -156,5 +171,13 @@ public class ListasDesplegablesFormularios {
         this.listaOrganizaciones = listaOrganizaciones;
     }
 
+    public FormularioGrupoEmpresa getServicioFormularioGrupoEmpresa() {
+        return servicioFormularioGrupoEmpresa;
+    }
 
+    public void setServicioFormularioGrupoEmpresa(FormularioGrupoEmpresa servicioFormularioGrupoEmpresa) {
+        this.servicioFormularioGrupoEmpresa = servicioFormularioGrupoEmpresa;
+    }
+
+    
 }
