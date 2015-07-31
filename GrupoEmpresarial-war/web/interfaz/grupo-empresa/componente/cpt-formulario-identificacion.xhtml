@@ -2,7 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p= "http://primefaces.org/ui"
+                xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <p:panel header="Información de identificación">
@@ -117,9 +117,10 @@
             <p:outputLabel value="País de la controlante: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboPais" value="#{MbFormGrupoEmpresa.relacionSeleccionada.paisControlante}" style="width:430px" required="true" requiredMessage="El Pais es requerido.">
                 <f:selectItem itemLabel="País..." itemValue="" />
-                <f:selectItem itemLabel="COLOMBIA" itemValue="COLOMBIA" />
+                <f:selectItems value="#{MbListaDesplegable.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
+                <!--f:selectItem itemLabel="COLOMBIA" itemValue="COLOMBIA" />
                 <f:selectItem itemLabel="BRASIL" itemValue="BRASIL" />
-                <f:selectItem itemLabel="ARGENTINA" itemValue="ARGENTINA" />
+                <f:selectItem itemLabel="ARGENTINA" itemValue="ARGENTINA" /-->
             </p:selectOneMenu>
             <p:message for="cboPais"/>
 

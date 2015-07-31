@@ -54,7 +54,7 @@ public class ReporteGrupoEmpresa {
 
         try {
             connection = new ConexionBd(ConexionBd.getJndi_Sid_Desarrollo());
-            String reportName = "REPORTE";
+            String reportName = "Reporte Grupo Empresa";
             File temp = File.createTempFile(reportName, ".pdf");
 
             Map parameters = new HashMap();
@@ -67,7 +67,7 @@ public class ReporteGrupoEmpresa {
             exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(temp)); // your output goes here
             exporter.exportReport();
 
-            setContenido(new DefaultStreamedContent(new FileInputStream(temp), "application/pdf", "Reporte Grupo Empresa - 0001.pdf"));
+            setContenido(new DefaultStreamedContent(new FileInputStream(temp), "application/pdf", reportName+".pdf"));
             temp.delete();
             temp.deleteOnExit();
             LOGGER.info("setContenido");
