@@ -342,8 +342,10 @@ public class LeerExcel implements Serializable {
                                     }
                                 }
                             } else if (variable.getTipo().equals("DATE")) {
-
-                                String fecha = Fecha.formatFechaDateToString(cellRegistro.getDateCellValue());
+                                String fecha = null;
+                                if (cellRegistro.getCellType() == 0) {
+                                    fecha = Fecha.formatFechaDateToString(cellRegistro.getDateCellValue());
+                                }
                                 if (fecha != null) {
                                     valorCelda = fecha;
                                     resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + fecha + "\"");

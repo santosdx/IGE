@@ -26,6 +26,7 @@
             <p:outputLabel value="Departamento: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboDepartamento" value="#{MbFormEstablecimiento.identificacionSeleccionada.departamento}" style="width:430px" required="true" requiredMessage="El Departamento es requerido.">
                 <f:selectItem itemLabel="Departamento..." itemValue="" />
+                <p:ajax event="change" listener="#{MbListaDesplegable.seleccionDepartamentoEstablecimiento}" update="cboMunicipio"/>
                 <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboDepartamento" />
@@ -40,6 +41,10 @@
             <p:outputLabel value="Dirección del establecimiento: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtDireccion" value="#{MbFormEstablecimiento.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerida." maxlength="150" label="Dirección del establecimiento"/>
             <p:message for="txtDireccion" />
+
+            <p:outputLabel value="Indicativo *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtIndicativoTelefono" value="#{MbFormEstablecimiento.identificacionSeleccionada.indicativo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Indicativo es requerido." label ="Indicativo " maxlength="10"/>
+            <p:message for="txtIndicativoTelefono"/>
 
             <p:outputLabel value="Teléfono: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtTelefono" value="#{MbFormEstablecimiento.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." maxlength="20" label="Teléfono"/>

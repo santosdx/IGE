@@ -18,7 +18,9 @@ import com.dane.ige.modelo.local.administracion.TipoControlFacadeLocal;
 import com.dane.ige.modelo.local.administracion.TipoEmpresaFacadeLocal;
 import com.dane.ige.modelo.local.administracion.TipoEstablecimientoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.TipoOrganizacionFacadeLocal;
+import com.dane.ige.negocio.FormularioEstablecimiento;
 import com.dane.ige.negocio.FormularioGrupoEmpresa;
+import com.dane.ige.negocio.FormularioUnidadLegal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -71,6 +73,10 @@ public class ListasDesplegablesFormularios {
 
     @ManagedProperty("#{MbFormGrupoEmpresa}")
     private FormularioGrupoEmpresa servicioFormularioGrupoEmpresa;
+    @ManagedProperty("#{MbFormUnidadLegal}")
+    private FormularioUnidadLegal servicioFormularioUnidadLegal;
+    @ManagedProperty("#{MbFormEstablecimiento}")
+    private FormularioEstablecimiento servicioFormularioEstablecimiento;
 
     public ListasDesplegablesFormularios() {
     }
@@ -91,11 +97,31 @@ public class ListasDesplegablesFormularios {
     /**
      * Método listener que se dispara al seleccionar un item de la lista de 
      * departamentos, permitiendo consultar y cargar el listado de municipios
-     * de acuerdo al departamento seleccionado
+     * de acuerdo al departamento seleccionado del Formulario Grupo Empresarial
      * @param event 
      */
-    public void seleccionDepartamento(AjaxBehaviorEvent event) {
+    public void seleccionDepartamentoGrupoEmpresarial(AjaxBehaviorEvent event) {
         setListaMunicipios(eJBServicioMunicipio.findAllByDepartamentoOrderAsc(getServicioFormularioGrupoEmpresa().getIdentificacionSeleccionada().getDepartamento()));
+    }
+
+    /**
+     * Método listener que se dispara al seleccionar un item de la lista de 
+     * departamentos, permitiendo consultar y cargar el listado de municipios
+     * de acuerdo al departamento seleccionado del Formulario Unidad Legal
+     * @param event 
+     */
+    public void seleccionDepartamentoUnidadLegal(AjaxBehaviorEvent event) {
+        setListaMunicipios(eJBServicioMunicipio.findAllByDepartamentoOrderAsc(getServicioFormularioUnidadLegal().getIdentificacionSeleccionada().getDepartamento()));
+    }
+
+    /**
+     * Método listener que se dispara al seleccionar un item de la lista de 
+     * departamentos, permitiendo consultar y cargar el listado de municipios
+     * de acuerdo al departamento seleccionado del Formulario Establecimiento
+     * @param event 
+     */
+    public void seleccionDepartamentoEstablecimiento(AjaxBehaviorEvent event) {
+        setListaMunicipios(eJBServicioMunicipio.findAllByDepartamentoOrderAsc(getServicioFormularioEstablecimiento().getIdentificacionSeleccionada().getDepartamento()));
     }
 
     //Lista Get y Set de la clase
@@ -179,5 +205,20 @@ public class ListasDesplegablesFormularios {
         this.servicioFormularioGrupoEmpresa = servicioFormularioGrupoEmpresa;
     }
 
-    
+    public FormularioUnidadLegal getServicioFormularioUnidadLegal() {
+        return servicioFormularioUnidadLegal;
+    }
+
+    public void setServicioFormularioUnidadLegal(FormularioUnidadLegal servicioFormularioUnidadLegal) {
+        this.servicioFormularioUnidadLegal = servicioFormularioUnidadLegal;
+    }
+
+    public FormularioEstablecimiento getServicioFormularioEstablecimiento() {
+        return servicioFormularioEstablecimiento;
+    }
+
+    public void setServicioFormularioEstablecimiento(FormularioEstablecimiento servicioFormularioEstablecimiento) {
+        this.servicioFormularioEstablecimiento = servicioFormularioEstablecimiento;
+    }
+
 }

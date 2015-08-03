@@ -11,23 +11,23 @@
         <h:panelGrid columns="3">
 
             <p:outputLabel value="Nombre Comercial:" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNombreComercial" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreComercial}" styleClass="valorEtiquetaFormulario" 
-                         maxlength="150" onblur="value = value.toUpperCase()"  required="true" requiredMessage="El Nombre Comercial es requerido." label = "Nombre Comercial"/>
+            <p:inputText id="txtNombreComercial" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreComercial}" label = "Nombre Comercial" styleClass="valorEtiquetaFormulario" 
+                         onblur="value = value.toUpperCase()" required="true" requiredMessage="El Nombre Comercial es requerido." maxlength="150" />
             <p:message for="txtNombreComercial" />
 
             <p:outputLabel value="Nombre registrado:" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNombreRegistrado" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreRegistrado}"  styleClass="valorEtiquetaFormulario" 
-                         onblur="value = value.toUpperCase()"  required="true" requiredMessage="El Nombre Registrado es requerido." maxlength="150" label ="Nombre registrado"/>
+            <p:inputText id="txtNombreRegistrado" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreRegistrado}" label ="Nombre registrado" styleClass="valorEtiquetaFormulario" 
+                         onblur="value = value.toUpperCase()" required="true" requiredMessage="El Nombre Registrado es requerido." maxlength="150"/>
             <p:message for="txtNombreRegistrado"/>
 
             <p:outputLabel for="txtNit" value="NIT:" styleClass="etiquetaFormulario"/>
             <h:panelGrid columns="5" >
-                <p:inputText id="txtNit" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nit}" style="width: 250px;" maxlength="30"
-                             required="true" requiredMessage="El NIT es requerido." label="NIT"/>
+                <p:inputText id="txtNit" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nit}" label="NIT" style="width: 250px;" 
+                             required="true" requiredMessage="El NIT es requerido." validatorMessage="El NIT debe contener valores númericos (0-9), Ej: 890900050" maxlength="30" />
                 <p:message for="txtNit" display="tooltip"/>
                 <p:outputLabel for="txtDigitoVerificacion" value="DV:" styleClass="etiquetaFormulario"/>
-                <p:inputText id="txtDigitoVerificacion" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.digitoVerificacion}"  maxlength="1"
-                             required="true" requiredMessage="El DV es requerido." style="width: 20px;" label="DV"/>
+                <p:inputText id="txtDigitoVerificacion" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.digitoVerificacion}" label="DV" style="width: 20px;" 
+                             required="true" requiredMessage="El DV es requerido." validatorMessage="El DV debe ser un valor númerico entre 0-9, de un solo digito. Ej: 9" maxlength="1"/>
                 <p:message for="txtDigitoVerificacion" display="tooltip"/>
             </h:panelGrid>
             <p:spacer width="10" height="10"/>
@@ -44,7 +44,7 @@
             <p:outputLabel value="Departamento sede principal: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboDepartamentoSedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.departamento}" style="width:430px" required="true" requiredMessage="El Departamento es requerido.">
                 <f:selectItem itemLabel="Departamento..." itemValue="" />
-                <p:ajax event="change" listener="#{MbListaDesplegable.seleccionDepartamento}" update="cboCiudadCedePrincipal"/>
+                <p:ajax event="change" listener="#{MbListaDesplegable.seleccionDepartamentoGrupoEmpresarial}" update="cboCiudadCedePrincipal"/>
                 <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboDepartamentoSedePrincipal"/>
@@ -60,8 +60,13 @@
             <p:inputText id="txtDireccionSedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerida." maxlength="150" label ="Dirección sede principal"/>
             <p:message for="txtDireccionSedePrincipal"/>
 
+            <p:outputLabel value="Indicativo sede principal: *" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtIndicativoTelefonoPrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.indicativo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Indicativo es requerido." label ="Indicativo sede principal" maxlength="10"/>
+            <p:message for="txtIndicativoTelefonoPrincipal"/>
+
             <p:outputLabel value="Teléfono sede principal: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtTelefonoPrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." label ="Teléfono sede principal" maxlength="100"/>
+            <p:inputText id="txtTelefonoPrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefono}" label ="Teléfono sede principal" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="El Teléfono es requerido." validatorMessage="El Teléfono debe contener valores númericos (0-9) Ej: 777869"  maxlength="19"/>
             <p:message for="txtTelefonoPrincipal"/>
 
             <p:outputLabel value="Tipo de conglomerado: *" styleClass="etiquetaFormulario"/>

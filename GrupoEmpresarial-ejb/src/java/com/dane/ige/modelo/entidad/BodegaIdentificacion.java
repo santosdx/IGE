@@ -19,9 +19,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ige_identificacion")
 @NamedQueries({
-    @NamedQuery(name = "BodegaIdentificacion.findAll", query = "SELECT i FROM BodegaIdentificacion i"), 
-    //@NamedQuery(name = "BodegaIdentificacion.findById", 
-    //        query = "SELECT i FROM BodegaIdentificacion i WHERE i.id.id = :id AND i.tipoOrganizacion=:tipoOrganizacion AND ROWNUM<=1 ORDER BY i.id.fecha DESC"),
+    @NamedQuery(name = "BodegaIdentificacion.findAll", query = "SELECT i FROM BodegaIdentificacion i"), //@NamedQuery(name = "BodegaIdentificacion.findById", 
+//        query = "SELECT i FROM BodegaIdentificacion i WHERE i.id.id = :id AND i.tipoOrganizacion=:tipoOrganizacion AND ROWNUM<=1 ORDER BY i.id.fecha DESC"),
 })
 public class BodegaIdentificacion implements Serializable {
 
@@ -63,6 +62,8 @@ public class BodegaIdentificacion implements Serializable {
     private String direccion;
     @Column(name = "telefono")
     private Long telefono;
+    @Column(name = "indicativo")
+    private String indicativo;
     @Column(name = "pagina_web")
     private String paginaWeb;
     @Column(name = "correo_electronico")
@@ -249,6 +250,14 @@ public class BodegaIdentificacion implements Serializable {
 
     public void setTelefono(Long telefono) {
         this.telefono = telefono;
+    }
+
+    public String getIndicativo() {
+        return indicativo;
+    }
+
+    public void setIndicativo(String indicativo) {
+        this.indicativo = indicativo;
     }
 
     public String getPaginaWeb() {
