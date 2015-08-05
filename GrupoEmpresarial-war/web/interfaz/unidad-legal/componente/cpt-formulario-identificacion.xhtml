@@ -25,7 +25,7 @@
                          styleClass="valorEtiquetaFormulario" requiredMessage="La razón social es requerida." onblur="value = value.toUpperCase()" required="true" maxlength="80" label="Razón social"/>
             <p:message for="txtRazonSocial" />
 
-            <p:outputLabel for="txtNit" value="NIT Unidad Legal: *" styleClass="etiquetaFormulario" />
+            <p:outputLabel for="txtNit" value="NIT Unidad Legal: " styleClass="etiquetaFormulario" />
             <h:panelGrid columns="5" >
                 <p:inputText id="txtNit" value="#{MbFormUnidadLegal.identificacionSeleccionada.nit}" requiredMessage="El Nit es requerido." required="true" style="width: 250px;" label="NIT" maxlength="30"/>
                 <p:message for="txtNit" display="tooltip"/>

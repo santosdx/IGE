@@ -5,64 +5,66 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <p:panel style="border: none; padding:0px;">
-        <h:form id="frmCargarArchivoXls">
-            <p:growl id="msnInforGruEmp" showDetail="true" life="6000" />
 
-            <p:fileUpload id="btnCargarXlsGrupoEmpresa" fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"
-                          multiple="false" 
-                          mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
-                          invalidFileMessage="Tipo de archivo no soportado"  oncomplete="PF('dlgCargarXls').show();" 
-                          update="msnInforGruEmp,dlReporteCargue" allowTypes="/(\.|\/)(xls)$/" />
+    <h:form id="frmCargarArchivoXls">
+        <p:growl id="msnInforGruEmp" showDetail="true" life="6000" />
 
-            <p:dialog id="dlReporteCargue" header="Reporte Cargar Información" widgetVar="dlgCargarXls"  appendTo="@(body)"
-                      resizable="false" modal="false" width="800" height="550">
-                <p:outputPanel  rendered="#{!MbLeerExcel.sePuedeInsertarDatos}">
-                    <p:dataList id="dtInconsistenciasXls" value="#{MbLeerExcel.listaInconsistencias}" 
-                                var="inconsistencia" itemType="none" paginator="true" rows="22" styleClass="paginated" paginatorPosition="bottom">
-                        <p:commandLink oncomplete="PF('dlgInconsistencia').show()" title="Lista Variables" update="#{frmPadre}:frmCargarArchivoXls:dtVariableInconsistencia" process="@this"
-                                       styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+        <p:fileUpload id="btnCargarXlsGrupoEmpresa" fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"
+                      multiple="false" 
+                      mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
+                      invalidFileMessage="Tipo de archivo no soportado"  oncomplete="PF('dlgCargarXls').show();" 
+                      update="msnInforGruEmp,dlReporteCargue" allowTypes="/(\.|\/)(xls)$/" >
+            <f:attribute name="formulario" value="#{formulario}" />
+        </p:fileUpload>
 
-                            <f:setPropertyActionListener value="#{inconsistencia}" target="#{MbLeerExcel.inconsistenciaSeleccionada}" />
-                            <p:outputLabel value="#{inconsistencia.id}. #{inconsistencia.origen}" />
-                        </p:commandLink>
-                        <!--f:facet name="header">Lista Registros Inconsistencias</f:facet-->
-                        <p:outputLabel value="&nbsp;&nbsp;Hoja: #{inconsistencia.origen}" style="display:inline-block"/>
-                        <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;ID #: #{inconsistencia.id}" style="display:inline-block"/>
-                        <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;Incompletos: #{inconsistencia.listaAtributosRequeridos.size()}" style="display:inline-block"/>
-                    </p:dataList>
-                    <h3 class="titulo-left-h3">Atención:</h3>
-                    <p:outputLabel value="Para poder cargar los registros y actualizar la información, cada una de las variables solicitadas como requeridas (*) para cada uno de los registros, debe ser diligenciada. Por favor ajustar los datos de cada variable para cada registro que el reporte indica y cargar de nuevo. "/>
-                </p:outputPanel>
-                <p:outputPanel  rendered="#{MbLeerExcel.sePuedeInsertarDatos}">
-                    <h3 class="titulo-left-h3">Continuar:</h3>
-                    <p:outputLabel value="Se ha realizado la validación de completitud en las variables requeridas de los registros del archivo. Como resultado, la información se encuentra lista para ser actualizada."/>
-                    <p:commandButton value="Actualizar Datos" action="#{MbLeerExcel.insertarRegistrosBodega}" oncomplete="PF('dlgCargarXls').hide();"
-                                     update="#{frmPadre}:frmCargarArchivoXls:msnInforGruEmp" process="@this" style="float: right; top: 3px;">
-                        <p:confirm header="Confirmación" icon="ui-icon-alert" message="Esta a punto de actualizar la información, desea continuar?"/>
-                    </p:commandButton>
+        <p:dialog id="dlReporteCargue" header="Reporte Cargar Información" widgetVar="dlgCargarXls"  appendTo="@(body)"
+                  resizable="false" modal="false" width="800" height="550">
+            <p:outputPanel  rendered="#{!MbLeerExcel.sePuedeInsertarDatos}">
+                <p:dataList id="dtInconsistenciasXls" value="#{MbLeerExcel.listaInconsistencias}" 
+                            var="inconsistencia" itemType="none" paginator="true" rows="22" styleClass="paginated" paginatorPosition="bottom">
+                    <p:commandLink oncomplete="PF('dlgInconsistencia').show()" title="Lista Variables" update="#{frmPadre}:frmCargarArchivoXls:dtVariableInconsistencia" process="@this"
+                                   styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
 
-                    <p:confirmDialog global="true" showEffect="fade" >
-                        <p:commandButton value="Aceptar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                        <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>
-                </p:outputPanel>
-            </p:dialog>
+                        <f:setPropertyActionListener value="#{inconsistencia}" target="#{MbLeerExcel.inconsistenciaSeleccionada}" />
+                        <p:outputLabel value="#{inconsistencia.id}. #{inconsistencia.origen}" />
+                    </p:commandLink>
+                    <!--f:facet name="header">Lista Registros Inconsistencias</f:facet-->
+                    <p:outputLabel value="&nbsp;&nbsp;Hoja: #{inconsistencia.origen}" style="display:inline-block"/>
+                    <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;ID #: #{inconsistencia.id}" style="display:inline-block"/>
+                    <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;Incompletos: #{inconsistencia.listaAtributosRequeridos.size()}" style="display:inline-block"/>
+                </p:dataList>
+                <h3 class="titulo-left-h3">Atención:</h3>
+                <p:outputLabel value="Para poder cargar los registros y actualizar la información, cada una de las variables solicitadas como requeridas (*) para cada uno de los registros, debe ser diligenciada. Por favor ajustar los datos de cada variable para cada registro que el reporte indica y cargar de nuevo. "/>
+            </p:outputPanel>
+            <p:outputPanel  rendered="#{MbLeerExcel.sePuedeInsertarDatos}">
+                <h3 class="titulo-left-h3">Continuar:</h3>
+                <p:outputLabel value="Se ha realizado la validación de completitud en las variables requeridas de los registros del archivo. Como resultado, la información se encuentra lista para ser actualizada."/>
+                <p:commandButton value="Actualizar Datos" action="#{MbLeerExcel.insertarRegistrosBodega}" oncomplete="PF('dlgCargarXls').hide();"
+                                 update="#{frmPadre}:frmCargarArchivoXls:msnInforGruEmp" process="@this" style="float: right; top: 3px;">
+                    <p:confirm header="Confirmación" icon="ui-icon-alert" message="Esta a punto de actualizar la información, desea continuar?"/>
+                </p:commandButton>
 
-            <p:dialog  header="Lista Variables Requeridas"  widgetVar="dlgInconsistencia" modal="true"  resizable="false" appendTo="@(body)">
-                <p:outputPanel deferred="true" >
-                    <p:dataList id="dtVariableInconsistencia" var="variable"  style="border: none;"
-                                value="#{MbLeerExcel.inconsistenciaSeleccionada.listaAtributosRequeridos}" >
-                        #{variable}
-                    </p:dataList>
-                </p:outputPanel>
-            </p:dialog>
+                <p:confirmDialog global="true" showEffect="fade" >
+                    <p:commandButton value="Aceptar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </p:outputPanel>
+        </p:dialog>
 
-            <p:blockUI block="@form" trigger="btnCargarXlsGrupoEmpresa" >
-                Subiendo información...<br />
-                <p:graphicImage name="imagen/ajax-loading.gif"/>
-            </p:blockUI>
+        <p:dialog  header="Lista Variables Requeridas"  widgetVar="dlgInconsistencia" modal="true"  resizable="false" appendTo="@(body)">
+            <p:outputPanel deferred="true" >
+                <p:dataList id="dtVariableInconsistencia" var="variable"  style="border: none;"
+                            value="#{MbLeerExcel.inconsistenciaSeleccionada.listaAtributosRequeridos}" >
+                    #{variable}
+                </p:dataList>
+            </p:outputPanel>
+        </p:dialog>
 
-        </h:form>
-    </p:panel>
+        <p:blockUI block="@form" trigger="btnCargarXlsGrupoEmpresa" >
+            Subiendo información...<br />
+            <p:graphicImage name="imagen/ajax-loading.gif"/>
+        </p:blockUI>
+
+    </h:form>
+
 </ui:composition>

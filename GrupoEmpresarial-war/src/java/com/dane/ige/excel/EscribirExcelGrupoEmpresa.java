@@ -146,14 +146,17 @@ public class EscribirExcelGrupoEmpresa {
             Cell cell = (Cell) cells.next();
             for (VariableIge variableIge : columnas) {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
-                    Cell celda = fila.getCell(indiceColumna);
+                    Cell celda = fila.createCell(indiceColumna);
                     if (variableIge.getTipo().equals("DATE")) {
-                        celda.setCellStyle(estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
                         if(Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())) != null){
                             celda.setCellValue(Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())));
                         }
+                    } else if (variableIge.getTipo().equals("NUMBER")){
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
                     } else {
-                        celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, Boolean.parseBoolean(variableIge.getEditable())));
                         celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
                     }
                     break;
@@ -187,14 +190,17 @@ public class EscribirExcelGrupoEmpresa {
             cell.setCellType(1);
             for (VariableIge variableIge : columnas) {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
-                    Cell celda = fila.getCell(indiceColumna);
+                    Cell celda = fila.createCell(indiceColumna);
                     if (variableIge.getTipo().equals("DATE")) {
-                        celda.setCellStyle(estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
                         if(Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())) != null){
                             celda.setCellValue(Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())));
                         }
-                    } else {
-                        celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                    } else if (variableIge.getTipo().equals("NUMBER")){
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                    }else{
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, Boolean.parseBoolean(variableIge.getEditable())));
                         celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
                     }
                     break;
@@ -226,14 +232,17 @@ public class EscribirExcelGrupoEmpresa {
             Cell cell = (Cell) cells.next();
             for (VariableIge variableIge : columnas) {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
-                    Cell celda = fila.getCell(indiceColumna);
+                    Cell celda = fila.createCell(indiceColumna);
                     if (variableIge.getTipo().equals("DATE")) {
-                        celda.setCellStyle(estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
                         if(Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())) != null){
                             celda.setCellValue(Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())));
                         }
-                    } else {
-                        celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                    } else if (variableIge.getTipo().equals("NUMBER")){
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                    }else{
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, Boolean.parseBoolean(variableIge.getEditable())));
                         celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
                     }
                     break;
@@ -268,12 +277,15 @@ public class EscribirExcelGrupoEmpresa {
                 if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
                     Cell celda = fila.getCell(indiceColumna);
                     if (variableIge.getTipo().equals("DATE")) {
-                        celda.setCellStyle(estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, Boolean.parseBoolean(variableIge.getEditable())));
                         if(Fecha.fomatoFechaStringToDate(getTamanoSeleccionado().get(variableIge.getColumna().trim())) != null){
                             celda.setCellValue(Fecha.fomatoFechaStringToDate(getTamanoSeleccionado().get(variableIge.getColumna().trim())));
                         }
-                    } else {
-                        celda.setCellStyle(estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                    } else if (variableIge.getTipo().equals("NUMBER")){
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, Boolean.parseBoolean(variableIge.getEditable())));
+                        celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                    }else{
+                        celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, Boolean.parseBoolean(variableIge.getEditable())));
                         celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
                     }
                     break;
@@ -283,54 +295,6 @@ public class EscribirExcelGrupoEmpresa {
         }
 
         return libro;
-    }
-
-    /**
-     * Método que permite obtener el estilo de una celda aplicando el borde
-     * completo. Incluye que la celda este bloqueada para exritura, de acuerdo
-     * al parametro.
-     *
-     * @param libro
-     * @param editable
-     * @return
-     */
-    private CellStyle estiloBordeCompletoCedaEditable(Workbook libro, boolean editable) {
-        CellStyle css = libro.createCellStyle();
-        css.setLocked((editable != true));
-        css.setBorderTop(CellStyle.BORDER_THIN);
-        css.setTopBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderLeft(CellStyle.BORDER_THIN);
-        css.setLeftBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderRight(CellStyle.BORDER_THIN);
-        css.setRightBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderBottom(CellStyle.BORDER_THIN);
-        css.setBottomBorderColor(IndexedColors.BLACK.getIndex());
-        return css;
-    }
-
-    /**
-     * Método que permite obtener el estilo de una celda aplicando el borde
-     * completo. Incluye que la celda este bloqueada para exritura, de acuerdo
-     * al parametro y con formato de fecha dd/MM/yyyy
-     *
-     * @param libro
-     * @param editable
-     * @return
-     */
-    private CellStyle estiloBordeCompletoCedaEditableFecha(Workbook libro, boolean editable) {
-        CellStyle css = libro.createCellStyle();
-        css.setLocked((editable != true));
-        short df = libro.createDataFormat().getFormat("dd/MM/yyyy");
-        css.setDataFormat(df);
-        css.setBorderTop(CellStyle.BORDER_THIN);
-        css.setTopBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderLeft(CellStyle.BORDER_THIN);
-        css.setLeftBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderRight(CellStyle.BORDER_THIN);
-        css.setRightBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderBottom(CellStyle.BORDER_THIN);
-        css.setBottomBorderColor(IndexedColors.BLACK.getIndex());
-        return css;
     }
 
     //Métodos Set y Get de la clase

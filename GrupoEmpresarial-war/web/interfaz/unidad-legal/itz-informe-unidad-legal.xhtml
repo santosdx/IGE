@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      
+
       xmlns:p="http://primefaces.org/ui">
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
                 <h:form id="frmInfUnidadLegal" style="height: 88%;" >
                     <p:growl id="msnInforUnidadLegal" showDetail="true" />
-                    <h3 class="titulo-center-h3">REPORTE DE PERFILAMIENTO DE LAS UNIDADES LEGALES</h3>
+                    <h3 class="titulo-center-h3">INFORMACIÓN DE LAS UNIDADES LEGALES</h3>
                     <!--p:media value="#{MbReporteUnidadLegal.contenido}" cache="false" width="100%" height="100%" player="pdf"/-->
 
                     <div class="ui-grid ui-grid-responsive">
@@ -75,6 +75,7 @@
                                 <p>Subir el archivo con la ifnromación de las unidades legales diligenciada para actualizar los datos.</p>
                                 <ui:include src="../utilidades/cpt-cargar-archivo-xls.xhtml">
                                     <ui:param name="frmPadre" value="frmInfUnidadLegal" />
+                                    <ui:param name="formulario" value="UNIDAD_LEGAL" />
                                 </ui:include>
                             </div>
                         </div>

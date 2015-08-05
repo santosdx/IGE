@@ -4,13 +4,16 @@
 @font-face {
     font-family: 'open-sans';
     src: url("#{resource['font:open-sans/OpenSans-Regular.ttf']}&v=1.1");
+    font-family: 'open-sans-bold';
+    src: url("#{resource['font:open-sans/OpenSans-Bold.ttf']}&v=1.1");
 }
 
 html{
     font-size: 0.8em !important;
+    color:#626262 !important
 }
 .ui-widget, .ui-widget .ui-widget {
-    font-family: Sans-Serif,open-sans, Arial, Helvetica !important;
+    font-family: open-sans,Sans-Serif, Arial, Helvetica !important;
 }
 
 .ui-wizard-step-title{
@@ -31,4 +34,15 @@ html{
     color: white;
     padding: 5px;
     margin: 100px 0px 0px 0px;
+}
+
+.ui-menu.ui-widget li > .ui-menuitem-link.ui-state-hover{
+    background-color: #b6014c !important;
+    opacity: 0.8;
+    background-color: #b6014c;
+    background-image: linear-gradient(to bottom, #b6014c, #b6014c);
+    background-position: 0 center;
+    background-repeat: repeat-x;
+    color: #ffffff;
+    text-decoration: none;
 }

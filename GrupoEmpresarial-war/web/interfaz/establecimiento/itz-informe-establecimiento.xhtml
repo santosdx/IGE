@@ -9,7 +9,7 @@
             <ui:define name="content">
                 <h:form id="frmInfEstablecimiento" style="height: 88%;" >
                     <p:growl id="msnInforUnidadLegal" showDetail="true" />
-                    <h3 class="titulo-center-h3">REPORTE DE PERFILAMIENTO DE LOS ESTABLECIMIENTOS</h3>
+                    <h3 class="titulo-center-h3">INFORMACIÓN DE LOS ESTABLECIMIENTOS</h3>
                     <!--p:media value="#{MbReporteEstablecimiento.contenido}" cache="false" width="100%" height="100%" player="pdf"/-->
 
                     <div class="ui-grid ui-grid-responsive">
@@ -87,6 +87,7 @@
                                 <p>Subir el archivo con la ifnromación de los establecimientos diligenciados para actualizar los datos.</p>
                                 <ui:include src="../utilidades/cpt-cargar-archivo-xls.xhtml" >
                                     <ui:param name="frmPadre" value="frmInfEstablecimiento" />
+                                    <ui:param name="formulario" value="ESTABLECIMIENTO" />
                                 </ui:include>
                             </div>
                         </div>

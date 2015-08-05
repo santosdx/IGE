@@ -122,7 +122,7 @@ public class Login implements Serializable {
             itemHome.setIcon("ui-icon-home");
             getModeloMenu().addElement(itemHome);
 
-            DefaultMenuItem itemGuia = new DefaultMenuItem("Guía De Usuario");
+            DefaultMenuItem itemGuia = new DefaultMenuItem("Guía de Usuario");
             itemGuia.setUrl("/interfaz/usuario/itz-guial-usuario.xhtml");
             itemGuia.setIcon("fa fa-book");
             getModeloMenu().addElement(itemGuia);

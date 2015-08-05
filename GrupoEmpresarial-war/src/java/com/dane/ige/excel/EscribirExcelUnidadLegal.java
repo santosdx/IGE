@@ -25,7 +25,6 @@ import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -139,10 +138,12 @@ public class EscribirExcelUnidadLegal {
         int indiceRegistro = 1;
         int indiceFila = 2;
 
-        CellStyle cellStyleLocked = estiloBordeCompletoCedaEditable(libro, false);
-        CellStyle cellStyleUnlocked = estiloBordeCompletoCedaEditable(libro, true);
-        CellStyle cellStyleLockedFecha = estiloBordeCompletoCedaEditableFecha(libro, false);
-        CellStyle cellStyleUnlockedFecha = estiloBordeCompletoCedaEditableFecha(libro, true);
+        CellStyle cellStyleLocked = EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, false);
+        CellStyle cellStyleUnlocked = EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, true);
+        CellStyle cellStyleLockedFecha = EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, false);
+        CellStyle cellStyleUnlockedFecha = EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, true);
+        CellStyle cellStyleLockedTexto = EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, false);
+        CellStyle cellStyleUnlockedTexto = EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, true);
 
         for (BodegaIdentificacion unidad : getListaIdentificacion()) {
             setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerMapIdentificacionByIdTipoOrganizacion(unidad.getId().getId(), "UNIDAD LEGAL"));
@@ -172,11 +173,18 @@ public class EscribirExcelUnidadLegal {
                             if(Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())) != null){
                                 celda.setCellValue(Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())));
                             }
-                        } else {
+                        } else if (variableIge.getTipo().equals("NUMBER")) {
                             if (Boolean.parseBoolean(variableIge.getEditable())) {
                                 celda.setCellStyle(cellStyleUnlocked);
                             } else {
                                 celda.setCellStyle(cellStyleLocked);
+                            }
+                            celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
+                        }else{
+                            if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                celda.setCellStyle(cellStyleUnlockedTexto);
+                            } else {
+                                celda.setCellStyle(cellStyleLockedTexto);
                             }
                             celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
                         }
@@ -205,10 +213,12 @@ public class EscribirExcelUnidadLegal {
         Sheet hoja = libro.getSheet("Relación");//getSheetAt(2);
         hoja.protectSheet("123");
 
-        CellStyle cellStyleLocked = estiloBordeCompletoCedaEditable(libro, false);
-        CellStyle cellStyleUnlocked = estiloBordeCompletoCedaEditable(libro, true);
-        CellStyle cellStyleLockedFecha = estiloBordeCompletoCedaEditableFecha(libro, false);
-        CellStyle cellStyleUnlockedFecha = estiloBordeCompletoCedaEditableFecha(libro, true);
+        CellStyle cellStyleLocked = EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, false);
+        CellStyle cellStyleUnlocked = EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, true);
+        CellStyle cellStyleLockedFecha = EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, false);
+        CellStyle cellStyleUnlockedFecha = EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, true);
+        CellStyle cellStyleLockedTexto = EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, false);
+        CellStyle cellStyleUnlockedTexto = EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, true);
 
         int indiceRegistro = 1;
         int indiceFila = 2;
@@ -239,11 +249,18 @@ public class EscribirExcelUnidadLegal {
                             if(Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())) != null){
                                 celda.setCellValue(Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())));
                             }
-                        } else {
+                        } else if (variableIge.getTipo().equals("NUMBER")) {
                             if (Boolean.parseBoolean(variableIge.getEditable())) {
                                 celda.setCellStyle(cellStyleUnlocked);
                             } else {
                                 celda.setCellStyle(cellStyleLocked);
+                            }
+                            celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                        }else{
+                            if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                celda.setCellStyle(cellStyleUnlockedTexto);
+                            } else {
+                                celda.setCellStyle(cellStyleLockedTexto);
                             }
                             celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
                         }
@@ -271,10 +288,12 @@ public class EscribirExcelUnidadLegal {
         Sheet hoja = libro.getSheet("Historia");//.getSheetAt(3);
         hoja.protectSheet("123");
 
-        CellStyle cellStyleLocked = estiloBordeCompletoCedaEditable(libro, false);
-        CellStyle cellStyleUnlocked = estiloBordeCompletoCedaEditable(libro, true);
-        CellStyle cellStyleLockedFecha = estiloBordeCompletoCedaEditableFecha(libro, false);
-        CellStyle cellStyleUnlockedFecha = estiloBordeCompletoCedaEditableFecha(libro, true);
+        CellStyle cellStyleLocked = EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, false);
+        CellStyle cellStyleUnlocked = EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, true);
+        CellStyle cellStyleLockedFecha = EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, false);
+        CellStyle cellStyleUnlockedFecha = EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, true);
+        CellStyle cellStyleLockedTexto = EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, false);
+        CellStyle cellStyleUnlockedTexto = EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, true);
 
         int indiceRegistro = 1;
         int indiceFila = 2;
@@ -305,11 +324,18 @@ public class EscribirExcelUnidadLegal {
                             if (Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())) != null) {
                                 celda.setCellValue(Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())));
                             }
-                        } else {
+                        } else if (variableIge.getTipo().equals("NUMBER")) {
                             if (Boolean.parseBoolean(variableIge.getEditable())) {
                                 celda.setCellStyle(cellStyleUnlocked);
                             } else {
                                 celda.setCellStyle(cellStyleLocked);
+                            }
+                            celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                        }else{
+                            if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                celda.setCellStyle(cellStyleUnlockedTexto);
+                            } else {
+                                celda.setCellStyle(cellStyleLockedTexto);
                             }
                             celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
                         }
@@ -337,10 +363,12 @@ public class EscribirExcelUnidadLegal {
         Sheet hoja = libro.getSheet("Tamaño");//.getSheetAt(4);
         hoja.protectSheet("123");
 
-        CellStyle cellStyleLocked = estiloBordeCompletoCedaEditable(libro, false);
-        CellStyle cellStyleUnlocked = estiloBordeCompletoCedaEditable(libro, true);
-        CellStyle cellStyleLockedFecha = estiloBordeCompletoCedaEditableFecha(libro, false);
-        CellStyle cellStyleUnlockedFecha = estiloBordeCompletoCedaEditableFecha(libro, true);
+        CellStyle cellStyleLocked = EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, false);
+        CellStyle cellStyleUnlocked = EstiloCeldasXls.estiloBordeCompletoCedaEditable(libro, true);
+        CellStyle cellStyleLockedFecha = EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, false);
+        CellStyle cellStyleUnlockedFecha = EstiloCeldasXls.estiloBordeCompletoCedaEditableFecha(libro, true);
+        CellStyle cellStyleLockedTexto = EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, false);
+        CellStyle cellStyleUnlockedTexto = EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, true);
 
         int indiceRegistro = 1;
         int indiceFila = 2;
@@ -369,11 +397,18 @@ public class EscribirExcelUnidadLegal {
                                 celda.setCellStyle(cellStyleLockedFecha);
                             }
                             celda.setCellValue(Fecha.fomatoFechaStringToDate(getTamanoSeleccionado().get(variableIge.getColumna().trim())));
-                        } else {
+                        } else if (variableIge.getTipo().equals("NUMBER")) {
                             if (Boolean.parseBoolean(variableIge.getEditable())) {
                                 celda.setCellStyle(cellStyleUnlocked);
                             } else {
                                 celda.setCellStyle(cellStyleLocked);
+                            }
+                            celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                        }else{
+                            if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                celda.setCellStyle(cellStyleUnlockedTexto);
+                            } else {
+                                celda.setCellStyle(cellStyleLockedTexto);
                             }
                             celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
                         }
@@ -386,54 +421,6 @@ public class EscribirExcelUnidadLegal {
             indiceRegistro++;
         }
         return libro;
-    }
-
-    /**
-     * Método que permite obtener el estilo de una celda aplicando el borde
-     * completo. Incluye que la celda este bloqueada para exritura, de acuerdo
-     * al parametro.
-     *
-     * @param libro
-     * @param editable
-     * @return
-     */
-    private CellStyle estiloBordeCompletoCedaEditable(Workbook libro, boolean editable) {
-        CellStyle css = libro.createCellStyle();
-        css.setLocked((editable != true));
-        css.setBorderTop(CellStyle.BORDER_THIN);
-        css.setTopBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderLeft(CellStyle.BORDER_THIN);
-        css.setLeftBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderRight(CellStyle.BORDER_THIN);
-        css.setRightBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderBottom(CellStyle.BORDER_THIN);
-        css.setBottomBorderColor(IndexedColors.BLACK.getIndex());
-        return css;
-    }
-
-    /**
-     * Método que permite obtener el estilo de una celda aplicando el borde
-     * completo. Incluye que la celda este bloqueada para exritura, de acuerdo
-     * al parametro y con formato de fecha dd/MM/yyyy
-     *
-     * @param libro
-     * @param editable
-     * @return
-     */
-    private CellStyle estiloBordeCompletoCedaEditableFecha(Workbook libro, boolean editable) {
-        CellStyle css = libro.createCellStyle();
-        css.setLocked((editable != true));
-        short df = libro.createDataFormat().getFormat("dd/MM/yyyy");
-        css.setDataFormat(df);
-        css.setBorderTop(CellStyle.BORDER_THIN);
-        css.setTopBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderLeft(CellStyle.BORDER_THIN);
-        css.setLeftBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderRight(CellStyle.BORDER_THIN);
-        css.setRightBorderColor(IndexedColors.BLACK.getIndex());
-        css.setBorderBottom(CellStyle.BORDER_THIN);
-        css.setBottomBorderColor(IndexedColors.BLACK.getIndex());
-        return css;
     }
 
     //Métodos Set y Get de la clase

@@ -29,10 +29,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import org.apache.log4j.Logger;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -74,6 +72,8 @@ public class LeerExcel implements Serializable {
     private List<BodegaNovedad> jsonHistoria = null;
     private List<BodegaTamano> jsonTamano = null;
 
+    private String formularioActivo;
+
     public LeerExcel() {
     }
 
@@ -87,6 +87,7 @@ public class LeerExcel implements Serializable {
      */
     public void subirArchivoGrupoEmpresarial(FileUploadEvent event) throws IOException {
         setFile(event.getFile());
+        setFormularioActivo(event.getComponent().getAttributes().get("formulario")+"");
         Workbook libro = new HSSFWorkbook((FileInputStream) event.getFile().getInputstream());
 
         setSePuedeInsertarDatos(true);
@@ -363,7 +364,7 @@ public class LeerExcel implements Serializable {
                                     resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getStringCellValue() + "\"");
                                 }
                             }
-                            if (variable.getObligatoria().equals("true")) {
+                            if (esObligatoriaVariableFormulario(variable.getObligatoria())) {
                                 if (valorCelda == null || valorCelda.equals("")) {
                                     listaVariablesSinDatos.add(variable.getEtiqueta());
                                 }
@@ -394,6 +395,27 @@ public class LeerExcel implements Serializable {
             filaTemp++;
         }
         LOGGER.info(resultado.append("]"));
+        return resultado;
+    }
+
+    /**
+     * Método que permite identificar si una variable es obligatoria en un
+     * formulario determinado.
+     *
+     * @param obligatoriedad
+     * @return
+     */
+    private boolean esObligatoriaVariableFormulario(String obligatoriedad) {
+        boolean resultado = false;
+        if (obligatoriedad != null) {
+            String[] lista = obligatoriedad.split(",");
+            for (String string : lista) {
+                if (string.equals(getFormularioActivo())) {
+                    resultado = true;
+                    break;
+                }
+            }
+        }
         return resultado;
     }
 
@@ -468,6 +490,14 @@ public class LeerExcel implements Serializable {
 
     public void setInconsistenciaSeleccionada(InformeRegistroInconsistenteXls inconsistenciaSeleccionada) {
         this.inconsistenciaSeleccionada = inconsistenciaSeleccionada;
+    }
+
+    public String getFormularioActivo() {
+        return formularioActivo;
+    }
+
+    public void setFormularioActivo(String formularioActivo) {
+        this.formularioActivo = formularioActivo;
     }
 
 }
