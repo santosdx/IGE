@@ -20,7 +20,16 @@
 
             <h:outputText value="Teléfono contacto: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtTelefonoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." label ="Teléfono contacto" maxlength="100"/>
-            <p:message for="txtTelefonoContacto"/>
+            <h:panelGrid columns="2" cellpadding="0">
+                <p:message for="txtTelefonoContacto"/>
+                <p:graphicImage id="content" value="/resources/icon/icono-de-ayuda.png" />
+                <p:tooltip id="toolTipContent" for="content">
+                    <p>Puede adicionar información como el indicativo o extención <br></br>
+                        y adicionar más de un número telefonico separado por (;)</p>
+                    <p>Formato: (indicativo)telefono,extención-extención;<br></br>
+                       Ejemplo: (094)777785,2625;(091)7885287,1515-1516;</p>
+                </p:tooltip>
+            </h:panelGrid>
 
             <h:outputText value="Correo electrónico de contacto: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtCorreoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido." label ="Correo electrónico de contacto" validatorMessage="Correo electrónico de contacto incorrecto" maxlength="100">

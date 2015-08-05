@@ -12,7 +12,8 @@
     margin-bottom: 0.67em;
     margin-left: 0;
     margin-right: 0;
-    font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;
+    /*font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;*/
+    font-weight: bold;
     color: #b6014c;
 }
 .titulo-right-h1{
@@ -24,7 +25,8 @@
     margin-bottom: 0.67em;
     margin-left: 0;
     margin-right: 0;
-    font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;
+    /*font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;*/
+    font-weight: bold;
     color: #b6014c;
 }
 .titulo-center-h1{
@@ -36,7 +38,8 @@
     margin-bottom: 0.67em;
     margin-left: 0;
     margin-right: 0;
-    font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;
+    /*font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;*/
+    font-weight: bold;
     color: #b6014c;
 }
 /* Titulo de tamaño H2*/
@@ -49,7 +52,8 @@
     margin-bottom: 0.83em;
     margin-left: 0;
     margin-right: 0;
-    font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;
+    /*font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;*/
+    font-weight: bold;
     color: #b6014c;
 }
 .titulo-right-h2{
@@ -61,7 +65,8 @@
     margin-bottom: 0.83em;
     margin-left: 0;
     margin-right: 0;
-    font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;
+    /*font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;*/
+    font-weight: bold;
     color: #b6014c;
 }
 .titulo-center-h2{
@@ -73,7 +78,8 @@
     margin-bottom: 0.83em;
     margin-left: 0;
     margin-right: 0;
-    font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;
+    /*font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;*/
+    font-weight: bold;
     color: #b6014c;
 }
 /* Titulo de tamaño H3*/
@@ -86,7 +92,8 @@
     margin-bottom: 1em;
     margin-left: 0;
     margin-right: 0;
-    font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;
+    /*font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;*/
+    font-weight: bold;
     color: #b6014c;
 }
 .titulo-right-h3{
@@ -98,7 +105,8 @@
     margin-bottom: 1em;
     margin-left: 0;
     margin-right: 0;
-    font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;
+    /*font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;*/
+    font-weight: bold;
     color: #b6014c;
 }
 .titulo-center-h3{
@@ -110,7 +118,8 @@
     margin-bottom: 1em;
     margin-left: 0;
     margin-right: 0;
-    font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;
+    /*font-family: open-sans-bold,Sans-Serif, Arial, Helvetica !important;*/
+    font-weight: bold;
     color: #b6014c;
 }
 

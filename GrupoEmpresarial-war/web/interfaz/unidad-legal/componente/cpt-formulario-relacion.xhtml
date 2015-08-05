@@ -26,7 +26,8 @@
             <p:message for="cboTipoRelacion" />
 
             <p:outputLabel value="NIT de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNitControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El NIT de la controlante es requerido." label="NIT de la controlante" maxlength="30"/>
+            <p:inputText id="txtNitControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" 
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El NIT de la controlante es requerido." label="NIT de la controlante" maxlength="30"/>
             <p:message for="txtNitControlante" />
 
             <!--p:outputLabel value="Dígito de verificación: *" styleClass="etiquetaFormulario"/>
@@ -34,11 +35,13 @@
             <p:message for="txtDigitoVerificacion" /-->
 
             <p:outputLabel value="Nombre de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNombreControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido." maxlength="150" label="Nombre de la controlante"/>
+            <p:inputText id="txtNombreControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}" onblur="value = value.toUpperCase()"
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido." maxlength="150" label="Nombre de la controlante"/>
             <p:message for="txtNombreControlante" />
 
             <p:outputLabel value="Porcentaje de participación de la controlante directa: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPorcentajeParticipacionControlanteDirecta"  value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Porcentaje de participación es requerido." maxlength="20" label="Porcentaje de participación"/>
+            <p:inputText id="txtPorcentajeParticipacionControlanteDirecta"  value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}" 
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Porcentaje de participación es requerido." maxlength="20" label="Porcentaje de participación"/>
             <p:message for="txtPorcentajeParticipacionControlanteDirecta" />
 
             <!--h:outputText value="Saltar siguiente: " />

@@ -20,7 +20,8 @@
             <p:message for="txtMatriculaMercantil" />
 
             <p:outputLabel value="Tipo de establecimiento: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtTipoEstablecimiento" value="#{MbFormEstablecimiento.identificacionSeleccionada.tipoEstablecimiento}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="ElTipo de establecimiento es requerido." maxlength="60" label="Tipo de establecimiento"/>
+            <p:inputText id="txtTipoEstablecimiento" value="#{MbFormEstablecimiento.identificacionSeleccionada.tipoEstablecimiento}" onblur="value = value.toUpperCase()" 
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="ElTipo de establecimiento es requerido." maxlength="60" label="Tipo de establecimiento"/>
             <p:message for="txtTipoEstablecimiento" />
 
             <p:outputLabel value="Departamento: *" styleClass="etiquetaFormulario"/>
@@ -39,7 +40,8 @@
             <p:message for="cboMunicipio" />
 
             <p:outputLabel value="Dirección del establecimiento: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtDireccion" value="#{MbFormEstablecimiento.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerida." maxlength="150" label="Dirección del establecimiento"/>
+            <p:inputText id="txtDireccion" value="#{MbFormEstablecimiento.identificacionSeleccionada.direccion}" onblur="value = value.toUpperCase()"
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerida." maxlength="150" label="Dirección del establecimiento"/>
             <p:message for="txtDireccion" />
 
             <p:outputLabel value="Indicativo *" styleClass="etiquetaFormulario"/>

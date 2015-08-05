@@ -54,7 +54,7 @@
             <p:inputText id="txtPatrimonio" value="#{MbFormUnidadLegal.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Patrimonio es requerido." label="Patrimonio"/>
             <p:message for="txtPatrimonio" />
 
-            <p:outputLabel value="Ingresos operacionales: ($)*" styleClass="etiquetaFormulario" />
+            <p:outputLabel value="Ingresos operacionales: ($) *" styleClass="etiquetaFormulario" />
             <p:inputText id="txtIngresosOperacionales" value="#{MbFormUnidadLegal.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Ingresos operacionales son requeridos." label="Ingresos operacionales"/>
             <p:message for="txtIngresosOperacionales" />
 
@@ -78,13 +78,13 @@
             <p:inputText id="txtUtilidadOperativa" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadOperativa}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Utilidad operativa es requerida." label="Utilidad operativa"/>
             <p:message for="txtUtilidadOperativa" />
 
-            <p:outputLabel value="EBITDA: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtEbitda" value="#{MbFormUnidadLegal.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El EBITDA es requerido." label="EBITDA"/>
-            <p:message for="txtEbitda" />
-
             <p:outputLabel value="Utilidad neta: ($) *" styleClass="etiquetaFormulario" />
             <p:inputText id="txtUtilidadNeta" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Utilidad neta es requerido." label="Utilidad neta"/>
             <p:message for="txtUtilidadNeta" />
+
+            <p:outputLabel value="EBITDA: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtEbitda" value="#{MbFormUnidadLegal.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El EBITDA es requerido." label="EBITDA"/>
+            <p:message for="txtEbitda" />
 
             <!--<p:outputLabel value="Observaciones: " styleClass="etiquetaFormulario" />
             <p:inputTextarea id="txtObservaciones" value="#{MbFormUnidadLegal.tamanoSeleccionado.observaciones}" rows="6" cols="66" label="Observaciones"/>
