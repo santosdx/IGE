@@ -15,6 +15,7 @@ import com.dane.ige.utilidad.Fecha;
 import com.dane.ige.utilidad.Mensaje;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,6 +32,7 @@ import java.util.logging.Level;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -87,7 +89,7 @@ public class LeerExcel implements Serializable {
      */
     public void subirArchivoGrupoEmpresarial(FileUploadEvent event) throws IOException {
         setFile(event.getFile());
-        setFormularioActivo(event.getComponent().getAttributes().get("formulario")+"");
+        setFormularioActivo(event.getComponent().getAttributes().get("formulario") + "");
         Workbook libro = new HSSFWorkbook((FileInputStream) event.getFile().getInputstream());
 
         setSePuedeInsertarDatos(true);
@@ -99,8 +101,12 @@ public class LeerExcel implements Serializable {
             Gson gsonIdentificacion = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             Type typeIdentificacion = new TypeToken<List<BodegaIdentificacion>>() {
             }.getType();
-            jsonIdentificacion = gsonIdentificacion.fromJson(resultadoIdentificacion, typeIdentificacion);
-            LOGGER.info("Iden count:" + jsonIdentificacion.size());
+            try {
+                jsonIdentificacion = gsonIdentificacion.fromJson(resultadoIdentificacion, typeIdentificacion);
+                LOGGER.info("Iden count:" + jsonIdentificacion.size());
+            } catch (JsonSyntaxException jSyEx) {
+                LOGGER.error(jSyEx.getMessage());
+            }
         }
 
         if (libro.getSheet("Relación") != null) {
@@ -109,8 +115,12 @@ public class LeerExcel implements Serializable {
             Gson gsonRelacion = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             Type typeRelacion = new TypeToken<List<BodegaRelacion>>() {
             }.getType();
-            jsonRelacion = gsonRelacion.fromJson(resultadoRelacion, typeRelacion);
-            LOGGER.info("Rela count:" + jsonRelacion.size());
+            try {
+                jsonRelacion = gsonRelacion.fromJson(resultadoRelacion, typeRelacion);
+                LOGGER.info("Rela count:" + jsonRelacion.size());
+            } catch (JsonSyntaxException jSyEx) {
+                LOGGER.error(jSyEx.getMessage());
+            }
         }
 
         if (libro.getSheet("Historia") != null) {
@@ -119,8 +129,12 @@ public class LeerExcel implements Serializable {
             Gson gsonHistoria = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             Type typeHistoria = new TypeToken<List<BodegaNovedad>>() {
             }.getType();
-            jsonHistoria = gsonHistoria.fromJson(resultadoHistoria, typeHistoria);
-            LOGGER.info("Histo count:" + jsonHistoria.size());
+            try {
+                jsonHistoria = gsonHistoria.fromJson(resultadoHistoria, typeHistoria);
+                LOGGER.info("Histo count:" + jsonHistoria.size());
+            } catch (JsonSyntaxException jSyEx) {
+                LOGGER.error(jSyEx.getMessage());
+            }
         }
 
         if (libro.getSheet("Tamaño") != null) {
@@ -129,8 +143,12 @@ public class LeerExcel implements Serializable {
             Gson gsonTamano = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             Type typeTamano = new TypeToken<List<BodegaTamano>>() {
             }.getType();
-            jsonTamano = gsonTamano.fromJson(resultadoTamano, typeTamano);
-            LOGGER.info("Tama count:" + jsonTamano.size());
+            try {
+                jsonTamano = gsonTamano.fromJson(resultadoTamano, typeTamano);
+                LOGGER.info("Tama count:" + jsonTamano.size());
+            } catch (JsonSyntaxException jSyEx) {
+                LOGGER.error(jSyEx.getMessage());
+            }
         }
 
         //Inicia Insercciones
@@ -304,7 +322,7 @@ public class LeerExcel implements Serializable {
         for (Object sheetRow : sheetData) {
             if (filaTemp >= fila) {
 
-                List<String> listaVariablesSinDatos = new ArrayList<String>();
+                List<InformeRegistroInconsistenteXls.Inconsistencia> listaInconsistenciaVariables = new ArrayList<InformeRegistroInconsistenteXls.Inconsistencia>();
                 List list = (List) sheetRow;
                 resultadoFila = new StringBuffer();
                 resultadoFila.append("{");
@@ -346,14 +364,17 @@ public class LeerExcel implements Serializable {
                                 String fecha = null;
                                 if (cellRegistro.getCellType() == 0) {
                                     fecha = Fecha.formatFechaDateToString(cellRegistro.getDateCellValue());
+                                    valorCelda = cellRegistro.getDateCellValue() + "";
+                                } else {
+                                    fecha = Fecha.fomatoFechaStringToString(cellRegistro.getStringCellValue());
+                                    valorCelda = cellRegistro.getStringCellValue();
                                 }
                                 if (fecha != null) {
-                                    valorCelda = fecha;
+                                    //valorCelda = fecha;
                                     resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + fecha + "\"");
                                 } else {
                                     resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":" + null + "");
                                 }
-
                             } else {
                                 if (cellRegistro.getCellType() == 0) {
                                     valorCelda = cellRegistro.getNumericCellValue() + "";
@@ -364,20 +385,121 @@ public class LeerExcel implements Serializable {
                                     resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getStringCellValue() + "\"");
                                 }
                             }
+
                             if (esObligatoriaVariableFormulario(variable.getObligatoria())) {
+                                //Validar si la variable es obligatoria en el formulario.
                                 if (valorCelda == null || valorCelda.equals("")) {
-                                    listaVariablesSinDatos.add(variable.getEtiqueta());
+                                    InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Sin datos.");
+                                    listaInconsistenciaVariables.add(inconsistencia);
+                                } else {
+
+                                    if (variable.getTipo().equals("VARCHAR2")) {
+                                        //Validar si la variable contiene la longitud maxima requerida en caracteres.
+                                        if (valorCelda.length() > variable.getLongitud()) {
+                                            InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Longitud cadena maxima(" + variable.getLongitud() + ").");
+                                            listaInconsistenciaVariables.add(inconsistencia);
+                                        }
+                                    }
+                                    //Validar si la variable contiene el dato de tipo numerico.
+                                    if (variable.getTipo().equals("NUMBER")) {
+                                        if (cellRegistro.getCellType() == 0) {
+                                            if ((cellRegistro.getNumericCellValue() + "").matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
+                                                //System.out.println("Is a number");
+                                            } else {
+                                                //System.out.println("Is not a number");
+                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato debe ser numerico.");
+                                                listaInconsistenciaVariables.add(inconsistencia);
+                                            }
+                                        } else {
+                                            if (cellRegistro.getStringCellValue().matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
+                                                //System.out.println("Is a number");
+                                            } else {
+                                                //System.out.println("Is not a number");
+                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato debe ser numerico.");
+                                                listaInconsistenciaVariables.add(inconsistencia);
+                                            }
+                                        }
+                                        //Validar si la variable contiene la longitud maxima requerida en caracteres.
+                                        if (valorCelda.length() > variable.getLongitud()) {
+                                            InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Longitud cadena maxima(" + variable.getLongitud() + ").");
+                                            listaInconsistenciaVariables.add(inconsistencia);
+                                        }
+                                    }
+                                    //Validar si la variable contiene una fecha valida
+                                    if (variable.getTipo().equals("DATE")) {
+                                        String fecha = null;
+                                        if (cellRegistro.getCellType() == 0) {
+                                            fecha = Fecha.formatFechaDateToString(cellRegistro.getDateCellValue());
+                                        } else {
+                                            fecha = Fecha.fomatoFechaStringToString(cellRegistro.getStringCellValue());
+                                        }
+                                        if (fecha == null) {
+                                            InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Formato de fecha incorrecto. Ej 09/10/2012");
+                                            listaInconsistenciaVariables.add(inconsistencia);
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (valorCelda != null) {
+                                    if (!StringUtils.isBlank(valorCelda.trim())) {
+                                        if (variable.getTipo().equals("VARCHAR2")) {
+                                            //Validar si la variable contiene la longitud maxima requerida en caracteres.
+                                            if (valorCelda.length() > variable.getLongitud()) {
+                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Longitud cadena maxima(" + variable.getLongitud() + ").");
+                                                listaInconsistenciaVariables.add(inconsistencia);
+                                            }
+                                        }
+                                        //Validar si la variable contiene el dato de tipo numerico.
+                                        if (variable.getTipo().equals("NUMBER")) {
+                                            if (cellRegistro.getCellType() == 0) {
+                                                if ((cellRegistro.getNumericCellValue() + "").matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
+                                                    //System.out.println("Is a number");
+                                                } else {
+                                                    //System.out.println("Is not a number");
+                                                    InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato debe ser numerico.");
+                                                    listaInconsistenciaVariables.add(inconsistencia);
+                                                }
+                                            } else {
+                                                if (cellRegistro.getStringCellValue().matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
+                                                    //System.out.println("Is a number");
+                                                } else {
+                                                    //System.out.println("Is not a number");
+                                                    InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato debe ser numerico.");
+                                                    listaInconsistenciaVariables.add(inconsistencia);
+                                                }
+                                            }
+                                            //Validar si la variable contiene la longitud maxima requerida en caracteres.
+                                            if (valorCelda.length() > variable.getLongitud()) {
+                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Longitud cadena maxima(" + variable.getLongitud() + ").");
+                                                listaInconsistenciaVariables.add(inconsistencia);
+                                            }
+                                        }
+                                        //Validar si la variable contiene una fecha valida
+                                        if (variable.getTipo().equals("DATE")) {
+                                            String fecha = null;
+                                            if (cellRegistro.getCellType() == 0) {
+                                                fecha = Fecha.formatFechaDateToString(cellRegistro.getDateCellValue());
+                                            } else {
+                                                fecha = Fecha.fomatoFechaStringToString(cellRegistro.getStringCellValue());
+                                            }
+                                            if (fecha == null) {
+                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Formato de fecha incorrecto. Ej 09/10/2012");
+                                                listaInconsistenciaVariables.add(inconsistencia);
+                                            }
+                                        }
+                                    }
                                 }
                             }
+
                             resultadoFila.append(",");
                         }
                     }
                 }
 
-                if (listaVariablesSinDatos.size() > 0) {
+                if (listaInconsistenciaVariables.size() > 0) {
                     DecimalFormat nf = (DecimalFormat) NumberFormat.getInstance(Locale.US);
                     nf.applyPattern("####");
-                    getListaInconsistencias().add(new InformeRegistroInconsistenteXls(Integer.parseInt(nf.format(cellIndice.getNumericCellValue()) + ""), nombreHoja, listaVariablesSinDatos));
+                    getListaInconsistencias().add(new InformeRegistroInconsistenteXls(Integer.parseInt(nf.format(cellIndice.getNumericCellValue()) + ""), nombreHoja, listaInconsistenciaVariables));
                     setSePuedeInsertarDatos(false);
                 }
 

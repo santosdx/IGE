@@ -20,7 +20,7 @@
         <p:dialog id="dlReporteCargue" header="Reporte Cargar Información" widgetVar="dlgCargarXls"  appendTo="@(body)"
                   resizable="false" modal="false" width="800" height="550">
             <p:outputPanel  rendered="#{!MbLeerExcel.sePuedeInsertarDatos}">
-                <p:dataList id="dtInconsistenciasXls" value="#{MbLeerExcel.listaInconsistencias}" 
+                <!--p:dataList id="dtInconsistenciasXls" value="#{MbLeerExcel.listaInconsistencias}" 
                             var="inconsistencia" itemType="none" paginator="true" rows="22" styleClass="paginated" paginatorPosition="bottom">
                     <p:commandLink oncomplete="PF('dlgInconsistencia').show()" title="Lista Variables" update="#{frmPadre}:frmCargarArchivoXls:dtVariableInconsistencia" process="@this"
                                    styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
@@ -28,14 +28,56 @@
                         <f:setPropertyActionListener value="#{inconsistencia}" target="#{MbLeerExcel.inconsistenciaSeleccionada}" />
                         <p:outputLabel value="#{inconsistencia.id}. #{inconsistencia.origen}" />
                     </p:commandLink>
-                    <!--f:facet name="header">Lista Registros Inconsistencias</f:facet-->
+                <f:facet name="header">Lista Registros Inconsistencias</f:facet>
                     <p:outputLabel value="&nbsp;&nbsp;Hoja: #{inconsistencia.origen}" style="display:inline-block"/>
                     <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;ID #: #{inconsistencia.id}" style="display:inline-block"/>
                     <p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;Incompletos: #{inconsistencia.listaAtributosRequeridos.size()}" style="display:inline-block"/>
-                </p:dataList>
+                </p:dataList-->
+                <p:dataTable id="dtInconsistenciasXls" var="fila" value="#{MbLeerExcel.listaInconsistencias}"
+                             rowIndexVar="rowIndex" emptyMessage="La consulta no genero resultados..." paginatorPosition="bottom" 
+                             paginator="true" rows="25" scrollable="true" scrollHeight="280" 
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="25,50,100">
+
+                    <p:column headerText="#" width="25">
+                        <p:outputLabel value="#{rowIndex+1}"/>
+                    </p:column>
+                    <p:column headerText="Hoja" width="120">
+                        <p:outputLabel value="#{fila.origen}"/>
+                    </p:column>
+                    <p:column headerText="Id" width="20">
+                        <p:outputLabel value="#{fila.id}"/>
+                    </p:column>
+                    <p:column headerText="Error Variables">
+                        <!--p:dataTable var="variable" value="#{fila.listaInconsistencias}" styleClass="hide-column-names">
+                            <p:column>
+                                <p:outputLabel value="#{variable.variable}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{variable.inconsistencia}"/>
+                            </p:column>
+                        </p:dataTable-->
+                        <!--p:dataList value="#{fila.listaInconsistencias}" var="variable" type="unordered" itemType="none" 
+                                    style="padding: 0px; margin: 0px; background: none; border: none;">
+                            <h:panelGrid columns="2" cellpadding="0" border="0" cellspacing="0">
+                                <h:outputLabel value="#{variable.variable}"/>
+                                <h:outputLabel value="#{variable.inconsistencia}"/>
+                            </h:panelGrid>
+                        </p:dataList-->
+                        <div class="ui-grid ui-grid-responsive">
+                            <ui:repeat var="variable" value="#{fila.listaInconsistencias}">
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-6">&#9679; #{variable.variable}</div>
+                                    <div class="ui-grid-col-6">#{variable.inconsistencia}</div>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </p:column>
+                </p:dataTable>
                 <h3 class="titulo-left-h3">Atención:</h3>
                 <p:outputLabel value="Para poder cargar los registros y actualizar la información, cada una de las variables solicitadas como requeridas (*) para cada uno de los registros, debe ser diligenciada. Por favor ajustar los datos de cada variable para cada registro que el reporte indica y cargar de nuevo. "/>
             </p:outputPanel>
+
             <p:outputPanel  rendered="#{MbLeerExcel.sePuedeInsertarDatos}">
                 <h3 class="titulo-left-h3">Continuar:</h3>
                 <p:outputLabel value="Se ha realizado la validación de completitud en las variables requeridas de los registros del archivo. Como resultado, la información se encuentra lista para ser actualizada."/>

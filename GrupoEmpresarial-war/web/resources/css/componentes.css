@@ -31,3 +31,7 @@
     background: #484848 none repeat scroll 0 0;
     opacity: 0.8;
 }
+
+.hide-column-names table thead tr {
+    display: none;
+}

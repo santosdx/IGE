@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 /**
  * Clase que permite administrar las operaciónes del atributo fecha.
@@ -14,6 +15,8 @@ import org.apache.commons.lang3.StringUtils;
  * @author SRojasM
  */
 public class Fecha {
+
+    final static Logger LOGGER = Logger.getLogger(Fecha.class);
 
     public Fecha() {
     }
@@ -35,7 +38,32 @@ public class Fecha {
                 date = sdfDateIn.parse(fecha);
                 resultado = sdfDateOut.parse(formatFechaDateToString(date));
             } catch (ParseException ex) {
-                java.util.logging.Logger.getLogger(LeerExcel.class.getName()).log(Level.SEVERE, null, ex);
+                //java.util.logging.Logger.getLogger(LeerExcel.class.getName()).log(Level.SEVERE, null, ex);
+                LOGGER.error(ex.getMessage());
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Método que recibe una fecha en String y se convierte a String con el
+     * formato: dd/MM/yyyy
+     *
+     * @param fecha
+     * @return
+     */
+    public static String fomatoFechaStringToString(String fecha) {
+        String resultado = null;
+        SimpleDateFormat sdfDateIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+        SimpleDateFormat sdfDateOut = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        if (!StringUtils.isBlank(fecha)) {
+            try {
+                date = sdfDateIn.parse(fecha);
+                resultado = sdfDateOut.parse(formatFechaDateToString(date)).toString();
+            } catch (ParseException ex) {
+                //java.util.logging.Logger.getLogger(LeerExcel.class.getName()).log(Level.SEVERE, null, ex);
+                LOGGER.error(ex.getMessage());
             }
         }
         return resultado;
