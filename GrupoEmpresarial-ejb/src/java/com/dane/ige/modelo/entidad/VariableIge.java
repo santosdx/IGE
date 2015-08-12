@@ -51,6 +51,8 @@ public class VariableIge implements Serializable {
     private String nombreAtributoClase;
     @Column(name = "obligatoria")
     private String obligatoria;
+    @Column(name = "tabla_Referencial")
+    private String tablaReferencial;
 
     public VariableIge() {
     }
@@ -133,6 +135,14 @@ public class VariableIge implements Serializable {
 
     public void setObligatoria(String obligatoria) {
         this.obligatoria = obligatoria;
+    }
+
+    public String getTablaReferencial() {
+        return tablaReferencial;
+    }
+
+    public void setTablaReferencial(String tablaReferencial) {
+        this.tablaReferencial = tablaReferencial;
     }
 
     @Override

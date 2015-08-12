@@ -124,6 +124,168 @@ public class ListasDesplegablesFormularios {
         setListaMunicipios(eJBServicioMunicipio.findAllByDepartamentoOrderAsc(getServicioFormularioEstablecimiento().getIdentificacionSeleccionada().getDepartamento()));
     }
 
+    /**
+     * Métodod que permite buscar en un listado de paises, si contienen un pais
+     * determinado.
+     * @param paises
+     * @param pais
+     * @return 
+     */
+    public static boolean listaContieneElPais(List<Pais> paises, String pais){
+        boolean resultado=false;
+        for (Pais pais1 : paises) {
+            if(pais1.getNombre().equals(pais)){
+                resultado=true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Métodod que permite buscar en un listado de departamentos, si contienen un 
+     * departamento determinado.
+     * @param departamentos
+     * @param departamento
+     * @return 
+     */
+    public static boolean listaContieneElDepartamento(List<Departamento> departamentos, String departamento){
+        boolean resultado=false;
+        for (Departamento departamento1 : departamentos) {
+            if(departamento1.getNombre().equals(departamento)){
+                resultado=true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Métodod que permite buscar en un listado de municipios, si contienen un 
+     * municipio determinado.
+     * @param municipios
+     * @param municipio
+     * @return 
+     */
+    public static boolean listaContieneElMunicipio(List<Municipio> municipios, String municipio){
+        boolean resultado=false;
+        for (Municipio municipio1 : municipios) {
+            if(municipio1.getNombre().equals(municipio)){
+                resultado=true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Métodod que permite buscar en un listado de estados de matricula, si contienen
+     * un estado de matricula determinado.
+     * @param estadoMatriculas
+     * @param estadoMatricula
+     * @return 
+     */
+    public static boolean listaContieneElEstadoMatricula(List<EstadoMatricula> estadoMatriculas, String estadoMatricula){
+        boolean resultado=false;
+        for (EstadoMatricula estadoMatricula1 : estadoMatriculas) {
+            if(estadoMatricula1.getEstado().equals(estadoMatricula)){
+                resultado=true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Métodod que permite buscar en un listado de situaciones de control, si contienen
+     * una situacion de control determinado.
+     * @param situacionesControl
+     * @param situacionControl
+     * @return 
+     */
+    public static boolean listaContieneLaSituacionControl(List<SituacionControl> situacionesControl, String situacionControl){
+        boolean resultado=false;
+        for (SituacionControl situacionControl1 : situacionesControl) {
+            if(situacionControl1.getSituacion().equals(situacionControl)){
+                resultado=true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Métodod que permite buscar en un listado de tipos de control, si contienen
+     * un tipo de control determinado.
+     * @param tipoControles
+     * @param tipoControl
+     * @return 
+     */
+    public static boolean listaContieneElTipoControl(List<TipoControl> tipoControles, String tipoControl){
+        boolean resultado=false;
+        for (TipoControl tipoControl1 : tipoControles) {
+            if(tipoControl1.getTipo().equals(tipoControl)){
+                resultado=true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Métodod que permite buscar en un listado de tipos de empresa controlante, si contienen
+     * un tipo de empresa controlante determinado.
+     * @param tipoEmpresaControlantes
+     * @param tipoEmpresaControlante
+     * @return 
+     */
+    public static boolean listaContieneElTipoEmpresaControlante(List<TipoEmpresa> tipoEmpresaControlantes, String tipoEmpresaControlante){
+        boolean resultado=false;
+        for (TipoEmpresa tipoEmpresaControlante1 : tipoEmpresaControlantes) {
+            if(tipoEmpresaControlante1.getTipo().equals(tipoEmpresaControlante)){
+                resultado=true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Métodod que permite buscar en un listado de tipos de establecimientos, si contienen
+     * un tipo de establecimiento determinado.
+     * @param tipoEstablecimientos
+     * @param tipoEstablecimiento
+     * @return 
+     */
+    public static boolean listaContieneElTipoEstablecimiento(List<TipoEstablecimiento> tipoEstablecimientos, String tipoEstablecimiento){
+        boolean resultado=false;
+        for (TipoEstablecimiento tipoEstablecimiento1 : tipoEstablecimientos) {
+            if(tipoEstablecimiento1.getTipo().equals(tipoEstablecimiento)){
+                resultado=true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Métodod que permite buscar en un listado de tipos de organización de unidad legal,
+     * si contienen un tipo de organización de unidad legal determinado.
+     * @param tipoOrganizaciones
+     * @param tipoOrganizacion
+     * @return 
+     */
+    public static boolean listaContieneElTipoOrganizacionUnidadLegal(List<TipoOrganizacion> tipoOrganizaciones, String tipoOrganizacion){
+        boolean resultado=false;
+        for (TipoOrganizacion tipoOrganizacion1 : tipoOrganizaciones) {
+            if(tipoOrganizacion1.getTipo().equals(tipoOrganizacion)){
+                resultado=true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
     //Lista Get y Set de la clase
     public List<Pais> getListaPaises() {
         return listaPaises;
@@ -221,4 +383,77 @@ public class ListasDesplegablesFormularios {
         this.servicioFormularioEstablecimiento = servicioFormularioEstablecimiento;
     }
 
+    public PaisFacadeLocal geteJBServicioPais() {
+        return eJBServicioPais;
+    }
+
+    public void seteJBServicioPais(PaisFacadeLocal eJBServicioPais) {
+        this.eJBServicioPais = eJBServicioPais;
+    }
+
+    public DepartamentoFacadeLocal geteJBServicioDepartamento() {
+        return eJBServicioDepartamento;
+    }
+
+    public void seteJBServicioDepartamento(DepartamentoFacadeLocal eJBServicioDepartamento) {
+        this.eJBServicioDepartamento = eJBServicioDepartamento;
+    }
+
+    public EstadoMatriculaFacadeLocal geteJBServicioMatricula() {
+        return eJBServicioMatricula;
+    }
+
+    public void seteJBServicioMatricula(EstadoMatriculaFacadeLocal eJBServicioMatricula) {
+        this.eJBServicioMatricula = eJBServicioMatricula;
+    }
+
+    public MunicipioFacadeLocal geteJBServicioMunicipio() {
+        return eJBServicioMunicipio;
+    }
+
+    public void seteJBServicioMunicipio(MunicipioFacadeLocal eJBServicioMunicipio) {
+        this.eJBServicioMunicipio = eJBServicioMunicipio;
+    }
+
+    public SituacionControlFacadeLocal geteJBServicioSituacion() {
+        return eJBServicioSituacion;
+    }
+
+    public void seteJBServicioSituacion(SituacionControlFacadeLocal eJBServicioSituacion) {
+        this.eJBServicioSituacion = eJBServicioSituacion;
+    }
+
+    public TipoControlFacadeLocal geteJBServicioControl() {
+        return eJBServicioControl;
+    }
+
+    public void seteJBServicioControl(TipoControlFacadeLocal eJBServicioControl) {
+        this.eJBServicioControl = eJBServicioControl;
+    }
+
+    public TipoEmpresaFacadeLocal geteJBServicioEmpresa() {
+        return eJBServicioEmpresa;
+    }
+
+    public void seteJBServicioEmpresa(TipoEmpresaFacadeLocal eJBServicioEmpresa) {
+        this.eJBServicioEmpresa = eJBServicioEmpresa;
+    }
+
+    public TipoEstablecimientoFacadeLocal geteJBServicioEstablecimiento() {
+        return eJBServicioEstablecimiento;
+    }
+
+    public void seteJBServicioEstablecimiento(TipoEstablecimientoFacadeLocal eJBServicioEstablecimiento) {
+        this.eJBServicioEstablecimiento = eJBServicioEstablecimiento;
+    }
+
+    public TipoOrganizacionFacadeLocal geteJBServicioOrganizacion() {
+        return eJBServicioOrganizacion;
+    }
+
+    public void seteJBServicioOrganizacion(TipoOrganizacionFacadeLocal eJBServicioOrganizacion) {
+        this.eJBServicioOrganizacion = eJBServicioOrganizacion;
+    }
+
+    
 }

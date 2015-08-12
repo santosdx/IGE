@@ -1,8 +1,13 @@
 package com.dane.ige.utilidad;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.faces.bean.ManagedBean;
@@ -21,10 +26,12 @@ public class FileDownload {
     }
 
     /**
-     * Método que permite descargar un archivo a partir de su url (path) y nombre.
+     * Método que permite descargar un archivo a partir de su url (path) y
+     * nombre.
+     *
      * @param url
      * @param documento
-     * @return 
+     * @return
      */
     public StreamedContent descargarFile(String url, String documento) {
 
@@ -45,4 +52,28 @@ public class FileDownload {
         }
     }
 
+    /**
+     * Método que permite convertir un InputStream a u byte[]
+     * @param is
+     * @return
+     * @throws IOException 
+     */
+    public static byte[] inputStreamToByte(InputStream is) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int reads = is.read();
+        while (reads != -1) {
+            baos.write(reads);
+            reads = is.read();
+        }
+        return baos.toByteArray();
+    }
+
+    /**
+     * Método que permite generar un código Alpha Numerico.
+     * @return 
+     */
+    public static String generarCodigoAlphaNumerico(){
+        SecureRandom random = new SecureRandom();
+        return new BigInteger(130, random).toString(32);
+    }
 }
