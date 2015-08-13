@@ -21,7 +21,7 @@
             <p:message for="cboTipoUnidad" />
 
             <p:outputLabel value="Razón social: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtRazonSocial" value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreComercial}" 
+            <p:inputText id="txtRazonSocial" value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreRegistrado}" 
                          styleClass="valorEtiquetaFormulario" requiredMessage="La razón social es requerida." onblur="value = value.toUpperCase()" required="true" maxlength="80" label="Razón social"/>
             <p:message for="txtRazonSocial" />
 

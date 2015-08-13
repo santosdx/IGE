@@ -272,30 +272,43 @@ public class LeerExcel implements Serializable {
             LOGGER.info(idUsuario);
             LOGGER.info(codigoArchivo);
 
-            if (getServicioLogin().getUsuarioLogueado().getId().compareTo(idUsuario) == 0) {
-                if (unidad.equals("GRUPO")) {
+            if (getServicioLogin().getUsuarioLogueado().getIdIdentificacion().compareTo(idGrupo) == 0) {
+                if (getServicioLogin().getUsuarioLogueado().getId().compareTo(idUsuario) == 0) {
+                    if (unidad.equals(getFormularioActivo())) {
 
-                    ArchivoXls archivoDescargado = geteJBServicioArchivoXls().findByCodigoArchivo(codigoArchivo, "DESCARGADO");
+                        ArchivoXls archivoDescargado = geteJBServicioArchivoXls().findByCodigoArchivo(codigoArchivo, "DESCARGADO");
 
-                    if (archivoDescargado != null) {
-                        ArchivoXls archivoCargado = geteJBServicioArchivoXls().findByCodigoArchivo(codigoArchivo, "CARGADO");
-                        if (archivoCargado == null) {
-                            resultado = true;
-                            setArchivoValidoPorIdentidad(true);
+                        if (archivoDescargado != null) {
+                            ArchivoXls archivoCargado = geteJBServicioArchivoXls().findByCodigoArchivo(codigoArchivo, "CARGADO");
+                            if (archivoCargado == null) {
+                                resultado = true;
+                                setArchivoValidoPorIdentidad(true);
+                            } else {
+                                setMensajeErrorValidacionArchivo("Este archivo ya fue cargado el dia:" + archivoCargado.getFechaEvento());
+                                Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
+                            }
                         } else {
-                            setMensajeErrorValidacionArchivo("Este archivo ya fue cargado el dia:" + archivoCargado.getFechaEvento());
-                            Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
+                            setMensajeErrorValidacionArchivo("No se encontro el archivo descargado, por codigo:" + codigoArchivo);
+                            Mensaje.agregarMensajeGrowlError("Error!", getMensajeErrorValidacionArchivo());
                         }
                     } else {
-                        setMensajeErrorValidacionArchivo("No se encontro el archivo descargado, por codigo:" + codigoArchivo);
-                        Mensaje.agregarMensajeGrowlError("Error!", getMensajeErrorValidacionArchivo());
+                        if (getFormularioActivo().equals("GRUPO")) {
+                            setMensajeErrorValidacionArchivo("En esta sección debe cargar un archivo de Grupo Empresarial.");
+                            Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
+                        } else if (getFormularioActivo().equals("UNIDAD_LEGAL")) {
+                            setMensajeErrorValidacionArchivo("En esta sección debe cargar un archivo de Unidades Legales.");
+                            Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
+                        } else if (getFormularioActivo().equals("ESTABLECIMIENTO")) {
+                            setMensajeErrorValidacionArchivo("En esta sección debe cargar un archivo de Establecimientos.");
+                            Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
+                        }
                     }
                 } else {
                     setMensajeErrorValidacionArchivo("Solo el usuario que genero el archivo puede cargarlo.");
                     Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
                 }
             } else {
-                setMensajeErrorValidacionArchivo("En esta sección debe cargar un archivo de Grupo Empresarial.");
+                setMensajeErrorValidacionArchivo("El archivo que intenta cargar, no contiene información sobre el grupo empresarial asignado al usuario.");
                 Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
             }
         } else {
@@ -314,34 +327,34 @@ public class LeerExcel implements Serializable {
         Workbook libro;
         try {
             libro = new HSSFWorkbook((FileInputStream) getFile().getInputstream());
-            /*            if (libro.getSheet("Identificación") != null) {
-             //Creamos cada uno de los registros de identificación en la Tabla.
-             for (BodegaIdentificacion bodegaIdentificacion : jsonIdentificacion) {
-             geteJBServicioBodegaIdentificacion().create(bodegaIdentificacion);
-             }
-             }
+            if (libro.getSheet("Identificación") != null) {
+                //Creamos cada uno de los registros de identificación en la Tabla.
+                for (BodegaIdentificacion bodegaIdentificacion : jsonIdentificacion) {
+                    geteJBServicioBodegaIdentificacion().create(bodegaIdentificacion);
+                }
+            }
 
-             if (libro.getSheet("Relación") != null) {
-             //Creamos cada uno de los registros de relación en la Tabla.
-             for (BodegaRelacion bodegaRelacion : jsonRelacion) {
-             geteJBServicioBodegaRelacion().create(bodegaRelacion);
-             }
-             }
+            if (libro.getSheet("Relación") != null) {
+                //Creamos cada uno de los registros de relación en la Tabla.
+                for (BodegaRelacion bodegaRelacion : jsonRelacion) {
+                    geteJBServicioBodegaRelacion().create(bodegaRelacion);
+                }
+            }
 
-             if (libro.getSheet("Historia") != null) {
-             //Creamos cada uno de los reigistros de historia en la Tabla.
-             for (BodegaNovedad bodegaNovedad : jsonHistoria) {
-             geteJBServicioBodegaNovedad().create(bodegaNovedad);
-             }
-             }
+            if (libro.getSheet("Historia") != null) {
+                //Creamos cada uno de los reigistros de historia en la Tabla.
+                for (BodegaNovedad bodegaNovedad : jsonHistoria) {
+                    geteJBServicioBodegaNovedad().create(bodegaNovedad);
+                }
+            }
 
-             if (libro.getSheet("Tamaño") != null) {
-             //Creamos cada uno de los registros de tamaño en la Tabla.
-             for (BodegaTamano bodegaTamano : jsonTamano) {
-             geteJBServicioBodegaTamano().create(bodegaTamano);
-             }
-             }
-             */
+            if (libro.getSheet("Tamaño") != null) {
+                //Creamos cada uno de los registros de tamaño en la Tabla.
+                for (BodegaTamano bodegaTamano : jsonTamano) {
+                    geteJBServicioBodegaTamano().create(bodegaTamano);
+                }
+            }
+
             //Escribir los datos de cargue el la hojda de identificacion del archivo
             //La hoja 1 es la hoja de los datos de identificacion del archivo
             //Sheet hoja = (new HSSFWorkbook((FileInputStream) getFile().getInputstream())).getSheet("ID-ARCHIVO");

@@ -110,7 +110,7 @@ public class EscribirExcelUnidadLegal {
         ingresarDatosTamano(libroTemp);
 
         Long idGrupo = id;
-        String unidad = "UNIDAD LEGAL";
+        String unidad = "UNIDAD_LEGAL";
         Date fechaEvento = new Date();
         String evento = "DESCARGADO";
         Integer idUsuario = getServicioLogin().getUsuarioLogueado().getId();
