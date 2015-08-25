@@ -8,11 +8,11 @@
             <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
             <div align="center" style="height: 100px; margin: 0 auto; padding: 0; position: relative;" > 
                 <h:panelGrid id="pnlLogin" columns="2" cellpadding="5" style="margin: 0px; padding: 0px;">
-                    <h:outputLabel for="username" value="Usuario:" styleClass="etiquetaFormulario"/>
+                    <h:outputLabel for="username" value="Usuario:" styleClass="etiquetaFormularioAdministracion"/>
                     <p:inputText id="username" value="#{MbLogin.username}" 
                                  required="true" label="username" requiredMessage="Usuario requerido"/>
 
-                    <h:outputLabel for="password" value="Contraseña:" styleClass="etiquetaFormulario"/>
+                    <h:outputLabel for="password" value="Contraseña:" styleClass="etiquetaFormularioAdministracion"/>
                     <p:password id="password" value="#{MbLogin.password}" 
                                 required="true" label="password" requiredMessage="Contraseña requerida" />
                     <!--p:spacer width="10"/-->

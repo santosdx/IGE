@@ -74,11 +74,11 @@
 
                     <p:dialog header="Datos de acceso" widgetVar="dlg" resizable="false" modal="false">
                         <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputLabel for="username" value="Usuario:" styleClass="etiquetaFormulario"/>
+                            <h:outputLabel for="username" value="Usuario:" style="display: block; margin-bottom: 10px; margin-top: 5px; padding-right: 10px;  text-align: right;"/>
                             <p:inputText id="username" value="#{MbLogin.username}" 
                                          required="true" label="username" requiredMessage="Usuario requerido"/>
 
-                            <h:outputLabel for="password" value="Contraseña:" styleClass="etiquetaFormulario"/>
+                            <h:outputLabel for="password" value="Contraseña:" style="display: block; margin-bottom: 10px; margin-top: 5px; padding-right: 10px;  text-align: right;"/>
                             <p:password id="password" value="#{MbLogin.password}" 
                                         required="true" label="password" requiredMessage="Contraseña requerida" />
 

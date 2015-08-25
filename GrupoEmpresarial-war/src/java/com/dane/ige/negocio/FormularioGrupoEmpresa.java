@@ -17,6 +17,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import org.apache.log4j.Logger;
 import org.primefaces.event.FlowEvent;
 
@@ -107,6 +108,9 @@ public class FormularioGrupoEmpresa implements Serializable {
         }
     }
 
+    public void testSelected(AjaxBehaviorEvent event){
+        
+    }
     //Métodos Set y Get de la clase.
     public BodegaIdentificacionFacadeLocal geteJBServicioBodegaIdentificacion() {
         return eJBServicioBodegaIdentificacion;

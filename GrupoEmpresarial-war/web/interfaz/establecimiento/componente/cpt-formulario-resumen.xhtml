@@ -5,169 +5,174 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <p:panel header="Confirmar información" >
+    <p:panel>
         <h:panelGrid id="confirmation" columns="1" style="width: 100%;">
             <h4 class="titulo-center-h3">Información de Identificación</h4>
-            <h:panelGrid columns="2" columnClasses="label, value">
-
-                <p:outputLabel value="Nombre establecimiento:" styleClass="etiquetaFormulario"/>
+            <!--p:separator /-->
+            <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
+                <p:outputLabel value="Nombre registrado:" />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.nombreRegistrado}"/>
 
-                <p:outputLabel value="Martícula mercantil del establecimiento:" styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Martícula mercantil del establecimiento:" />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.matriculaMercantil}"/>
 
-                <p:outputLabel value="Tipo de establecimiento:" styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Tipo de establecimiento:" />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.tipoEstablecimiento}"/>
 
-                <p:outputLabel value="Departamento:" styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Departamento:" />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.departamento}"/>
 
-                <p:outputLabel value="Municipio: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Municipio: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.municipio}"/>
 
-                <p:outputLabel value="Dirección del establecimiento: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Dirección del establecimiento: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.direccion}"/>
 
-                <p:outputLabel value="Indicativo teléfono: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Indicativo teléfono: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.indicativo}"/>
 
-                <p:outputLabel value="Teléfono: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Teléfono: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.telefono}"/>
 
-                <p:outputLabel value="Estado: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Estado: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.estadoEst}"/>
 
-                <p:outputLabel value="Código de la actividad económica: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Código de la actividad económica: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadPrincipal}"/>
 
-                <p:outputLabel value="¿Es una actividad auxiliar?: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="¿Es una actividad auxiliar?: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadAuxiliarEst==true?'SI':'NO'}"/>
 
-                <p:outputLabel value="Otras actividades: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Otras actividades: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadSecundaria}"/>
 
-                <p:outputLabel value="El establecimiento es unidad auxiliar: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="El establecimiento es unidad auxiliar: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.unidadAuxiliarUl==true?'SI':'NO'}"/>
-
             </h:panelGrid>
 
             <!--h4 class="titulo-center-h3">Información de Contacto</h4>
-            <h:panelGrid columns="2" columnClasses="label, value">
-                <p:outputLabel value="Nombre de contacto: " styleClass="etiquetaFormulario"/>
+            <p:separator /
+            <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
+                <p:outputLabel value="Nombre de contacto: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto}"/>
 
-                <p:outputLabel value="Cargo de contacto: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Cargo de contacto: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto}"/>
 
-                <p:outputLabel value="Teléfono contacto: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Teléfono contacto: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefono}"/>
 
-                <p:outputLabel value="Correo electrónico de contacto: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Correo electrónico de contacto: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}"/>
 
-                <p:outputLabel value="Nombre de contacto 2: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Nombre de contacto 2: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto2}"/>
 
-                <p:outputLabel value="Cargo de contacto 2: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Cargo de contacto 2: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto2}"/>
 
-                <p:outputLabel value="Teléfono de contacto 2: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Teléfono de contacto 2: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto2}"/>
 
-                <p:outputLabel value="Correo electrónico de contacto 2: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Correo electrónico de contacto 2: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto2}"/>
 
-                <p:outputLabel value="Nombre de contacto 3: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Nombre de contacto 3: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto3}"/>
 
-                <p:outputLabel value="Cargo de contacto 3: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Cargo de contacto 3: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto3}"/>
 
-                <p:outputLabel value="Teléfono de contacto 3: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Teléfono de contacto 3: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto3}"/>
 
-                <p:outputLabel value="Correo electrónico de contacto 3: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Correo electrónico de contacto 3: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto3}"/>
             </h:panelGrid-->
 
             <!--h4 class="titulo-center-h3">Información de Relación</h4>
-            <h:panelGrid columns="2" columnClasses="label, value">
-
-                <p:outputLabel value="Situación de control: " styleClass="etiquetaFormulario"/>
+            <p:separator />
+            <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
+                <p:outputLabel value="Situación de control: " />
                 <p:outputLabel value="#{MbFormUnidadLegal.relacionSeleccionada.situacionControl}"/>
 
-                <p:outputLabel value="Tipo relación: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Tipo relación: " />
                 <p:outputLabel value="#{MbFormUnidadLegal.relacionSeleccionada.tipoRelacionUl}"/>
 
-                <p:outputLabel value="NIT de la controlante: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="NIT de la controlante: " />
                 <p:outputLabel value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}"/>
 
-                <p:outputLabel value="Nombre de la controlante: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Nombre de la controlante: " />
                 <p:outputLabel value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}"/>
 
-                <p:outputLabel value="Porcentaje de participación de la controlante directa: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Porcentaje de participación de la controlante directa: " />
                 <p:outputLabel value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}">
                     <f:convertNumber type="percent" />
                 </p:outputLabel>
-
             </h:panelGrid-->
 
             <h4 class="titulo-center-h3">Información de Historia</h4>
-            <h:panelGrid columns="2" columnClasses="label, value">
-
-                <p:outputLabel value="Fecha matrícula: " styleClass="etiquetaFormulario"/>
+            <!--p:separator /-->
+            <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
+                <p:outputLabel value="Fecha matrícula: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.novedadSeleccionada.fechaMatricula}">
                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Estado de matricula: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Estado de matricula: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.novedadSeleccionada.estadoMatricula}"/>
 
-                <p:outputLabel value="Ultimo año de renovado: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Ultimo año de renovado: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.novedadSeleccionada.ultimoAnoRenovado}"/>
 
-                <p:outputLabel value="Fecha de creación: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Fecha de creación: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.novedadSeleccionada.fechaCreacion}">
                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Fecha de inicio de actividades: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Fecha de inicio de actividades: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.novedadSeleccionada.fechaInicioActi}">
                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                 </p:outputLabel>
-
             </h:panelGrid>
 
             <h4 class="titulo-center-h3">Información de Tamaño</h4>
-            <h:panelGrid columns="2" columnClasses="label, value">
+            <!--p:separator /-->
+            <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
+                <p:outputLabel value="Activo: " style="display: block; text-align: right; width: 180px;"/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.activo}">
+                    <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                </p:outputLabel>
 
-                <p:outputLabel value="Personal ocupado: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Ingresos operacionales: " style="display: block; text-align: right; width: 180px;"/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.ingresosOperacionales}">
+                    <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                </p:outputLabel>
+
+                <p:outputLabel value="Costo de ventas: " style="display: block; text-align: right; width: 180px;"/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.costoVentasEst}">
+                    <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                </p:outputLabel>
+
+                <p:outputLabel value="Gastos operacionales: " style="display: block; text-align: right; width: 180px;"/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.gastosOperacionales}">
+                    <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                </p:outputLabel>
+
+                <p:outputLabel value="Personal ocupado: " style="display: block; text-align: right; width: 180px;"/>
                 <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.personalOcupado}"/>
 
-                <p:outputLabel value="Personal empleado: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Personal empleado: " style="display: block; text-align: right; width: 180px;"/>
                 <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.personalEmpleado}"/>
 
-                <p:outputLabel value="Personal temporal: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Personal temporal: " style="display: block; text-align: right; width: 180px;"/>
                 <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.personalTemporal}"/>
 
-                <p:outputLabel value="Número de hombres: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Número de hombres: " style="display: block; text-align: right; width: 180px;"/>
                 <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.hombresOcupados}"/>
 
-                <p:outputLabel value="Número de mujeres: " styleClass="etiquetaFormulario"/>
+                <p:outputLabel value="Número de mujeres: " style="display: block; text-align: right; width: 180px;"/>
                 <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.mujeresOcupadas}"/>
-
-                <p:outputLabel value="Activo: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.activo}"/>
-
-                <p:outputLabel value="Ingresos operacionales: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.ingresosOperacionales}"/>
-
-                <p:outputLabel value="Costo de ventas: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.costoVentasEst}"/>
-
-                <p:outputLabel value="Gastos operacionales: " styleClass="etiquetaFormulario"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.gastosOperacionales}"/>
-
             </h:panelGrid>
 
         </h:panelGrid>

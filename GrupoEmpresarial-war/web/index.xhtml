@@ -6,12 +6,9 @@
     <h:body>   
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content" >
-                <h2 class="titulo-center-h2">Proyecto de linea de investigación para el DANE sobre los grupos empresariales en Colombia.</h2>
-                <p>El proyecto....(en construcción.)</p>
-           <!--lista:unica-seleccion label="Lista frutas:" bean="#{practica.cboFrutas}" habilitarTest="true"/-->
-           <!--p:outputLabel value="#{request.contextPath} -" />
-           <p:outputLabel value="#{root} -"/>
-           <p:outputLabel value="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}"/-->
+                <!--h2 class="titulo-center-h2">Proyecto de linea de investigación para el DANE sobre los grupos empresariales en Colombia.</h2>
+                <p>El proyecto....(en construcción.)</p-->
+                <p:outputLabel value="#{aplicacionPrincipal.sistemaInfo.textoPortada}" escape="false"/>
             </ui:define>
         </ui:composition>
     </h:body>

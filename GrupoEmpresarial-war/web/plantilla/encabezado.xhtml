@@ -5,16 +5,24 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:body>   
         <ui:composition>
-            <p:graphicImage value="/resources/imagen/dane.png" />
-            <center>
+            <div class="ui-grid ui-grid-responsive">
                 <!--h:outputText value="#{nerv['header.title']}" /--> 
-                <div>
-                    <!--p:commandButton value="Login" icon="ui-icon-extlink" actionListener="#{dfView.visualizarVentanaParametrizada('/interfaz/usuario/ventana/vta-acceso-sistema',true,true,false,130,320)}"/>
-                    <p:commandButton value="Login" icon="ui-icon-extlink" actionListener="#{dfView.visualizarVentana('/interfaz/usuario/ventana/vta-acceso-sistema')}"/-->
-                    <p:outputLabel value="Bienvenid@, #{MbLogin.usuarioLogueado.nombres}" rendered="#{MbLogin.loggedIn}" 
-                                   style="display: block; width: 100%; text-align: right;"/>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3" style="text-align: left;">
+                        <p:graphicImage value="/resources/imagen/dane.png" width="320" height="87"/>
+                    </div>
+                    <div class="ui-grid-col-7">
+                        <p:outputLabel value="#{aplicacionPrincipal.sistemaInfo.tituloProyecto}" escape="false"/>
+                    </div>
+                    <div class="ui-grid-col-2" style="text-align: right;">
+                        <div style="height: 85px;-ms-display: flex;display: flex; align-items: flex-end;justify-content: flex-end;">
+                            <p:outputLabel value="Bienvenid@, #{MbLogin.usuarioLogueado.nombres}" rendered="#{MbLogin.loggedIn}"/>
+                        </div>
+                    </div>
                 </div>
-            </center>
+            </div>
+            <!--p:commandButton value="Login" icon="ui-icon-extlink" actionListener="#{dfView.visualizarVentanaParametrizada('/interfaz/usuario/ventana/vta-acceso-sistema',true,true,false,130,320)}"/>
+            <p:commandButton value="Login" icon="ui-icon-extlink" actionListener="#{dfView.visualizarVentana('/interfaz/usuario/ventana/vta-acceso-sistema')}"/-->
         </ui:composition>
     </h:body>
 </html>

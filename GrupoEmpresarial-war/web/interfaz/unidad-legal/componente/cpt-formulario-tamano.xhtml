@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <p:panel header="Información tamaño">
+    <p:panel>
         <p:tooltip />
 
         <h:panelGrid columns="3" columnClasses="label, value" >
@@ -22,69 +22,111 @@
             <p:inputText id="txtActividadSecundaria" styleClass="valorEtiquetaFormulario"/>
             <p:message for="txtActividadSecundaria" />
 -->
-            <p:outputLabel value="Personal ocupado: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtPersonalOcupado" value="#{MbFormUnidadLegal.tamanoSeleccionado.personalOcupado}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Personal ocupado es requerido." label="Personal ocupado"/>
-            <p:message for="txtPersonalOcupado" />
 
-            <p:outputLabel value="Personal empleado: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtPersonalEmpleado" value="#{MbFormUnidadLegal.tamanoSeleccionado.personalEmpleado}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Personal empleado es requerido." label="Personal empleado"/>
-            <p:message for="txtPersonalEmpleado" />
-
-            <p:outputLabel value="Personal cotizante: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtPersonalCotizante" value="#{MbFormUnidadLegal.tamanoSeleccionado.personalCotizante}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Personal cotizante es requerido." label="Personal cotizante"/>
-            <p:message for="txtPersonalCotizante" />
-
-            <p:outputLabel value="Número de hombres: " styleClass="etiquetaFormulario" />
-            <p:inputText id="txtNumeroHombres" value="#{MbFormUnidadLegal.tamanoSeleccionado.hombresOcupados}" styleClass="valorEtiquetaFormulario" required="false" requiredMessage="El Número de hombres es requerido." label="Número de hombres"/>
-            <p:message for="txtNumeroHombres" />
-
-            <p:outputLabel value="Número de mujeres: " styleClass="etiquetaFormulario" />
-            <p:inputText id="txtNumeroMujeres" value="#{MbFormUnidadLegal.tamanoSeleccionado.mujeresOcupadas}" styleClass="valorEtiquetaFormulario" required="false" requiredMessage="El Número de mujeres es requerido." label="Número de mujeres"/>
-            <p:message for="txtNumeroMujeres" />
-
-            <p:outputLabel value="Activo: ($) *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtActivo" value="#{MbFormUnidadLegal.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Activo es requerido." label="Activo"/>
+            <p:outputLabel value="Activo: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtActivo" value="#{MbFormUnidadLegal.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="El Activo es requerido." label="Activo">
+                <f:convertNumber locale="es_CO" minFractionDigits="0" />
+            </p:inputText>
             <p:message for="txtActivo" />
 
-            <p:outputLabel value="Pasivo: ($) *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtPasivo" value="#{MbFormUnidadLegal.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Pasivo es requerido." label="Pasivo"/>
+            <p:outputLabel value="Pasivo: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPasivo" value="#{MbFormUnidadLegal.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="El Pasivo es requerido." label="Pasivo">
+                <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
+            </p:inputText>
             <p:message for="txtPasivo" />
 
-            <p:outputLabel value="Patrimonio: ($) *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtPatrimonio" value="#{MbFormUnidadLegal.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Patrimonio es requerido." label="Patrimonio"/>
+            <p:outputLabel value="Patrimonio: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPatrimonio" value="#{MbFormUnidadLegal.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="El Patrimonio es requerido." label="Patrimonio">
+                <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
+            </p:inputText>
             <p:message for="txtPatrimonio" />
 
-            <p:outputLabel value="Ingresos operacionales: ($) *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtIngresosOperacionales" value="#{MbFormUnidadLegal.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Ingresos operacionales son requeridos." label="Ingresos operacionales"/>
+            <p:outputLabel value="Ingresos operacionales: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtIngresosOperacionales" value="#{MbFormUnidadLegal.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="Los Ingresos operacionales son requeridos." label="Ingresos operacionales">
+                <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
+            </p:inputText>
             <p:message for="txtIngresosOperacionales" />
 
-            <p:outputLabel value="Utilidad bruta: ($) *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtUtilidadBruta" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadBruta}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Utilidad bruta es requerido." label="Utilidad bruta"/>
+            <p:outputLabel value="Utilidad bruta: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtUtilidadBruta" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadBruta}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="La Utilidad bruta es requerido." label="Utilidad bruta">
+                <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
+            </p:inputText>
             <p:message for="txtUtilidadBruta" />
 
-            <p:outputLabel value="Gastos operacionales de administración: ($) *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtGastosOperacionalesAdminitracion" value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesAdmon}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Gastos operacionales de administración son requeridos." label="Gastos operacionales de administración"/>
+            <p:outputLabel value="Gastos operacionales de administración: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtGastosOperacionalesAdminitracion" value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesAdmon}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="Los Gastos operacionales de administración son requeridos." label="Gastos operacionales de administración">
+                <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
+            </p:inputText>
             <p:message for="txtGastosOperacionalesAdminitracion" />
 
-            <p:outputLabel value="Gastos operacionales de venta: ($) *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtGastosOperacionalesVenta" value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesVenta}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Gastos operacionales de venta son requeridos." label="Gastos operacionales de venta"/>
+            <p:outputLabel value="Gastos operacionales de venta: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtGastosOperacionalesVenta" value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesVenta}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="Los Gastos operacionales de venta son requeridos." label="Gastos operacionales de venta">
+                <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
+            </p:inputText>
             <p:message for="txtGastosOperacionalesVenta" />
 
-            <p:outputLabel value="Gastos operacionales: ($) * " styleClass="etiquetaFormulario" />
-            <p:inputText id="txtGastosOperacionales" value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionales}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="Los Gastos operacionales son requeridos." label="Gastos operacionales"/>
+            <p:outputLabel value="Gastos operacionales: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtGastosOperacionales" value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionales}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="Los Gastos operacionales son requeridos." label="Gastos operacionales">
+                <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
+            </p:inputText>
             <p:message for="txtGastosOperacionales" />
 
-            <p:outputLabel value="Utilidad operativa: ($) *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtUtilidadOperativa" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadOperativa}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Utilidad operativa es requerida." label="Utilidad operativa"/>
+            <p:outputLabel value="Utilidad operativa: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtUtilidadOperativa" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadOperativa}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="La Utilidad operativa es requerida." label="Utilidad operativa">
+                <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
+            </p:inputText>
             <p:message for="txtUtilidadOperativa" />
 
-            <p:outputLabel value="Utilidad neta: ($) *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtUtilidadNeta" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Utilidad neta es requerido." label="Utilidad neta"/>
+            <p:outputLabel value="Utilidad neta: * $" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtUtilidadNeta" value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="La Utilidad neta es requerido." label="Utilidad neta">
+                <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
+            </p:inputText>
             <p:message for="txtUtilidadNeta" />
 
             <p:outputLabel value="EBITDA: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtEbitda" value="#{MbFormUnidadLegal.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El EBITDA es requerido." label="EBITDA"/>
+            <p:inputText id="txtEbitda" value="#{MbFormUnidadLegal.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="El EBITDA es requerido." label="EBITDA"/>
             <p:message for="txtEbitda" />
+
+            <p:outputLabel value="Personal ocupado: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPersonalOcupado" value="#{MbFormUnidadLegal.tamanoSeleccionado.personalOcupado}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="El Personal ocupado es requerido." label="Personal ocupado">
+            </p:inputText>
+            <p:message for="txtPersonalOcupado" />
+
+            <p:outputLabel value="Personal empleado: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPersonalEmpleado" value="#{MbFormUnidadLegal.tamanoSeleccionado.personalEmpleado}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="El Personal empleado es requerido." label="Personal empleado">
+            </p:inputText>
+            <p:message for="txtPersonalEmpleado" />
+
+            <p:outputLabel value="Personal cotizante: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtPersonalCotizante" value="#{MbFormUnidadLegal.tamanoSeleccionado.personalCotizante}" styleClass="valorEtiquetaFormulario" 
+                         required="true" requiredMessage="El Personal cotizante es requerido." label="Personal cotizante">
+            </p:inputText>
+            <p:message for="txtPersonalCotizante" />
+
+            <p:outputLabel value="Número de hombres: " styleClass="etiquetaFormulario" />
+            <p:inputText id="txtNumeroHombres" value="#{MbFormUnidadLegal.tamanoSeleccionado.hombresOcupados}" styleClass="valorEtiquetaFormulario" 
+                         required="false" requiredMessage="El Número de hombres es requerido." label="Número de hombres">
+            </p:inputText>
+            <p:message for="txtNumeroHombres" />
+
+            <p:outputLabel value="Número de mujeres: " styleClass="etiquetaFormulario" />
+            <p:inputText id="txtNumeroMujeres" value="#{MbFormUnidadLegal.tamanoSeleccionado.mujeresOcupadas}" styleClass="valorEtiquetaFormulario" 
+                         required="false" requiredMessage="El Número de mujeres es requerido." label="Número de mujeres">
+            </p:inputText>
+            <p:message for="txtNumeroMujeres" />
 
             <!--<p:outputLabel value="Observaciones: " styleClass="etiquetaFormulario" />
             <p:inputTextarea id="txtObservaciones" value="#{MbFormUnidadLegal.tamanoSeleccionado.observaciones}" rows="6" cols="66" label="Observaciones"/>

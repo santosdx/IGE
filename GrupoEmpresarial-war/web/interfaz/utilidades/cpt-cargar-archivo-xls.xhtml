@@ -26,14 +26,14 @@
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="25,50,100">
 
-                        <p:column headerText="#" width="25">
+                        <!--p:column headerText="#" width="25">
                             <p:outputLabel value="#{rowIndex+1}"/>
+                        </p:column-->
+                        <p:column headerText="Id" width="20">
+                            <p:outputLabel value="#{fila.id}"/>
                         </p:column>
                         <p:column headerText="Hoja" width="120">
                             <p:outputLabel value="#{fila.origen}"/>
-                        </p:column>
-                        <p:column headerText="Id" width="20">
-                            <p:outputLabel value="#{fila.id}"/>
                         </p:column>
                         <p:column headerText="Error Variables">
                             <div class="ui-grid ui-grid-responsive">

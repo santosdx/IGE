@@ -5,12 +5,12 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <p:panel header="Información de identificación">
+    <p:panel>
         <p:tooltip />
 
         <h:panelGrid columns="3" columnClasses="label, value" >
 
-            <p:outputLabel  value="Nombre establecimiento:" styleClass="etiquetaFormulario"/>
+            <p:outputLabel  value="Nombre registrado:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreEstablecimiento" value="#{MbFormEstablecimiento.identificacionSeleccionada.nombreRegistrado}" styleClass="valorEtiquetaFormulario" 
                          maxlength="80" onblur="value = value.toUpperCase()" required="true" requiredMessage="El nombre del establecimiento es requerido." label="Nombre establecimiento"/>
             <p:message for="txtNombreEstablecimiento" />

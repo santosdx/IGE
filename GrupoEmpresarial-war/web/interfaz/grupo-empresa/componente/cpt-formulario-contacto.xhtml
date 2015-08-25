@@ -5,17 +5,19 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <p:panel header="Información de contacto">
+    <p:panel>
         <p:tooltip />
 
         <h:panelGrid columns="3" columnClasses="label, value" >
 
             <h:outputText value="Nombre de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNombreContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido."  label ="Nombre de contacto" maxlength="100"/>
+            <p:inputText id="txtNombreContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto}" onblur="value = value.toUpperCase()" 
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido."  label ="Nombre de contacto" maxlength="100"/>
             <p:message for="txtNombreContacto"/>
 
             <h:outputText value="Cargo de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtCargoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido." label ="Cargo de contacto" maxlength="60"/>
+            <p:inputText id="txtCargoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto}" onblur="value = value.toUpperCase()" 
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido." label ="Cargo de contacto" maxlength="60"/>
             <p:message for="txtCargoContacto"/>
 
             <h:outputText value="Teléfono contacto: *" styleClass="etiquetaFormulario"/>
@@ -33,17 +35,18 @@
 
             <h:outputText value="Correo electrónico de contacto: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtCorreoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido." label ="Correo electrónico de contacto" validatorMessage="Correo electrónico de contacto incorrecto" maxlength="100">
-                <f:validateRegex
-                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
             </p:inputText>
             <p:message for="txtCorreoContacto"/>
 
             <h:outputText value="Nombre de contacto 2: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto2}" styleClass="valorEtiquetaFormulario" label ="Nombre de contacto 2" maxlength="60"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto2}" onblur="value = value.toUpperCase()" 
+                         styleClass="valorEtiquetaFormulario" label ="Nombre de contacto 2" maxlength="60"/>
             <p:spacer/>
 
             <h:outputText value="Cargo de contacto 2: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto2}" styleClass="valorEtiquetaFormulario" label ="Cargo de contacto 2" maxlength="60"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto2}" onblur="value = value.toUpperCase()" 
+                         styleClass="valorEtiquetaFormulario" label ="Cargo de contacto 2" maxlength="60"/>
             <p:spacer/>
 
             <h:outputText value="Teléfono de contacto 2: " styleClass="etiquetaFormulario"/>
@@ -57,11 +60,13 @@
             <p:message for="txtCorreoContacto2"/>
 
             <h:outputText value="Nombre de contacto 3: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto3}" styleClass="valorEtiquetaFormulario" label ="Nombre de contacto 3" maxlength="60"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto3}" onblur="value = value.toUpperCase()" 
+                         styleClass="valorEtiquetaFormulario" label ="Nombre de contacto 3" maxlength="60"/>
             <p:spacer/>
 
             <h:outputText value="Cargo de contacto 3: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto3}" styleClass="valorEtiquetaFormulario" label ="Cargo de contacto 3" maxlength="60"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto3}" onblur="value = value.toUpperCase()" 
+                         styleClass="valorEtiquetaFormulario" label ="Cargo de contacto 3" maxlength="60"/>
             <p:spacer/>
 
             <h:outputText value="Teléfono de contacto 3: " styleClass="etiquetaFormulario"/>

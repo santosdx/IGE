@@ -18,6 +18,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import org.apache.log4j.Logger;
 import org.primefaces.event.FlowEvent;
 
@@ -62,10 +63,11 @@ public class FormularioUnidadLegal implements Serializable {
     }
 
     /**
-     * Método que permite seleccionar una unidad legal y abrir la pagina del formulario
-     * con los datos prediligenciados con la unidad seleccionada.
+     * Método que permite seleccionar una unidad legal y abrir la pagina del
+     * formulario con los datos prediligenciados con la unidad seleccionada.
+     *
      * @param idOrganizacion
-     * @return 
+     * @return
      */
     public String abrirFormularioActualizarDatos(Long idOrganizacion) {
         setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(idOrganizacion, "UNIDAD LEGAL"));
@@ -77,7 +79,8 @@ public class FormularioUnidadLegal implements Serializable {
 
     /**
      * Método que permite insertar un nuevo registro en la bodega de datos, para
-     * las tablas de identificacion, relacion, novedad y tamaño de la unidad legal.
+     * las tablas de identificacion, relacion, novedad y tamaño de la unidad
+     * legal.
      */
     public String actualizarUnidadLegal() {
         Date fechaActualizacion = new Date();
@@ -117,6 +120,10 @@ public class FormularioUnidadLegal implements Serializable {
         } else {
             return event.getNewStep();
         }
+    }
+
+    public void testSelected(AjaxBehaviorEvent event) {
+
     }
 
     //Métodos Set y Get de la clase.

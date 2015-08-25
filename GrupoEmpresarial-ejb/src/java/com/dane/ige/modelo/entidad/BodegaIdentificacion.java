@@ -524,6 +524,7 @@ public class BodegaIdentificacion implements Serializable {
         resultado.put("MUNICIPIO", Texto.blankText(municipio + ""));
         resultado.put("DIRECCION", Texto.blankText(direccion + ""));
         resultado.put("TELEFONO", Texto.blankText(telefono + ""));
+        resultado.put("INDICATIVO", Texto.blankText(indicativo + ""));
         resultado.put("PAGINA_WEB", Texto.blankText(paginaWeb + ""));
         resultado.put("CORREO_ELECTRONICO", Texto.blankText(correoElectronico + ""));
         resultado.put("REPRESENTANTE_LEGAL", Texto.blankText(representanteLegal + ""));

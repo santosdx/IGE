@@ -88,4 +88,28 @@ public class EstiloCeldasXls {
         return css;
     }
 
+    /**
+     * Método que permite obtener el estilo de una celda aplicando el borde
+     * completo. Incluye que la celda este bloqueada para exritura, de acuerdo
+     * al parametro y con formato de Numero
+     *
+     * @param libro
+     * @param editable
+     * @return
+     */
+    public static CellStyle estiloBordeCompletoCedaEditableNumero(Workbook libro, boolean editable) {
+        CellStyle css = libro.createCellStyle();
+        css.setLocked((editable != true));
+        short df = libro.createDataFormat().getFormat("0");
+        //css.setDataFormat(df);
+        css.setBorderTop(CellStyle.BORDER_THIN);
+        css.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        css.setBorderLeft(CellStyle.BORDER_THIN);
+        css.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        css.setBorderRight(CellStyle.BORDER_THIN);
+        css.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        css.setBorderBottom(CellStyle.BORDER_THIN);
+        css.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        return css;
+    }
 }

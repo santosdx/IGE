@@ -97,16 +97,16 @@ public class FormularioEstablecimiento implements Serializable {
         getIdentificacionSeleccionada().getId().setFecha(fechaActualizacion);
         getIdentificacionSeleccionada().setPersonaActualiza(getServicioLogin().getUsuarioLogueado().getNombres() + getServicioLogin().getUsuarioLogueado().getApellidos());
         geteJBServicioBodegaIdentificacion().create(identificacionSeleccionada);
-        
-         getRelacionSeleccionada().getId().setFecha(fechaActualizacion);
-         geteJBServicioBodegaRelacion().create(relacionSeleccionada);
 
-         getNovedadSeleccionada().getId().setFecha(fechaActualizacion);
-         geteJBServicioBodegaNovedad().create(novedadSeleccionada);
+        getRelacionSeleccionada().getId().setFecha(fechaActualizacion);
+        geteJBServicioBodegaRelacion().create(relacionSeleccionada);
 
-         getTamanoSeleccionado().getId().setFecha(fechaActualizacion);
-         geteJBServicioBodegaTamano().create(tamanoSeleccionado);
-         
+        getNovedadSeleccionada().getId().setFecha(fechaActualizacion);
+        geteJBServicioBodegaNovedad().create(novedadSeleccionada);
+
+        getTamanoSeleccionado().getId().setFecha(fechaActualizacion);
+        geteJBServicioBodegaTamano().create(tamanoSeleccionado);
+
         Mensaje.agregarMensajeGrowlInfo("Exito!", "Información actualizada del establecimiento.");
 
         return "/interfaz/establecimiento/itz-informe-establecimiento.xhtml";
@@ -129,6 +129,10 @@ public class FormularioEstablecimiento implements Serializable {
         } else {
             return event.getNewStep();
         }
+    }
+
+    public void testSelected(AjaxBehaviorEvent event) {
+
     }
 
     //Métodos Set y Get de la clase.

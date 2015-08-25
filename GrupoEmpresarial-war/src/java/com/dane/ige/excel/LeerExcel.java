@@ -27,6 +27,7 @@ import com.dane.ige.seguridad.Login;
 import com.dane.ige.utilidad.Fecha;
 import com.dane.ige.utilidad.FileDownload;
 import com.dane.ige.utilidad.Mensaje;
+import com.dane.ige.utilidad.Numero;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -280,13 +281,13 @@ public class LeerExcel implements Serializable {
 
                         if (archivoDescargado != null) {
                             ArchivoXls archivoCargado = geteJBServicioArchivoXls().findByCodigoArchivo(codigoArchivo, "CARGADO");
-                            if (archivoCargado == null) {
-                                resultado = true;
-                                setArchivoValidoPorIdentidad(true);
-                            } else {
-                                setMensajeErrorValidacionArchivo("Este archivo ya fue cargado el dia:" + archivoCargado.getFechaEvento());
-                                Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
-                            }
+                            //if (archivoCargado == null) {
+                            resultado = true;
+                            setArchivoValidoPorIdentidad(true);
+                            /*} else {
+                             setMensajeErrorValidacionArchivo("Este archivo ya fue cargado el dia:" + archivoCargado.getFechaEvento());
+                             Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
+                             }*/
                         } else {
                             setMensajeErrorValidacionArchivo("No se encontro el archivo descargado, por codigo:" + codigoArchivo);
                             Mensaje.agregarMensajeGrowlError("Error!", getMensajeErrorValidacionArchivo());
@@ -539,14 +540,14 @@ public class LeerExcel implements Serializable {
             if (filaTemp >= fila) {
 
                 List<InformeRegistroInconsistenteXls.Inconsistencia> listaInconsistenciaVariables = new ArrayList<InformeRegistroInconsistenteXls.Inconsistencia>();
-                List list = (List) sheetRow;
+                List listaDatosFila = (List) sheetRow;
                 resultadoFila = new StringBuffer();
                 resultadoFila.append("{");
 
-                Cell cellIndice = (Cell) list.get(0);
+                Cell cellIndice = (Cell) listaDatosFila.get(0);
                 String textoLlave = "";
-                Cell cellId = (Cell) list.get(1);
-                Cell cellFecha = (Cell) list.get(2);
+                Cell cellId = (Cell) listaDatosFila.get(1);
+                Cell cellFecha = (Cell) listaDatosFila.get(2);
                 String date = Fecha.formatFechaDateToString(new Date());
                 textoLlave = "\"id\":{\"id\":\"" + cellId.getRichStringCellValue() + "\",\"fecha\":\"" + date + "\"},";
                 resultadoFila.append(textoLlave);
@@ -558,7 +559,7 @@ public class LeerExcel implements Serializable {
 
                         if (cellEncabezado.getStringCellValue().equals(variable.getEtiqueta())) {
                             //LOGGER.info(variable.getColumna());
-                            Cell cellRegistro = (Cell) list.get(j);
+                            Cell cellRegistro = (Cell) listaDatosFila.get(j);
 
                             if (variable.getTipo().equals("NUMBER")) {
                                 if (cellRegistro.getCellType() == 0) {
@@ -566,14 +567,14 @@ public class LeerExcel implements Serializable {
                                         resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":" + null + "");
                                     } else {
                                         valorCelda = cellRegistro.getNumericCellValue() + "";
-                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getNumericCellValue() + "\"");
+                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + Numero.formatoNumeroEntero(cellRegistro.getNumericCellValue() + "")+ "\"");
                                     }
                                 } else {
                                     if ("".equals(cellRegistro.getStringCellValue() + "")) {
                                         resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":" + null + "");
                                     } else {
                                         valorCelda = cellRegistro.getStringCellValue() + "";
-                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getStringCellValue() + "\"");
+                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + Numero.formatoNumeroEntero(cellRegistro.getStringCellValue()) + "\"");
                                     }
                                 }
                             } else if (variable.getTipo().equals("DATE")) {
@@ -594,7 +595,7 @@ public class LeerExcel implements Serializable {
                             } else {
                                 if (cellRegistro.getCellType() == 0) {
                                     valorCelda = cellRegistro.getNumericCellValue() + "";
-                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getNumericCellValue() + "\"");
+                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + Numero.formatoNumeroEntero(cellRegistro.getNumericCellValue() + "") + "\"");
 
                                 } else {
                                     valorCelda = cellRegistro.getStringCellValue();
@@ -606,8 +607,26 @@ public class LeerExcel implements Serializable {
                             if (esObligatoriaVariableFormulario(variable.getObligatoria())) {
                                 //Validar si la variable es obligatoria en el formulario.
                                 if (valorCelda == null || valorCelda.equals("")) {
-                                    InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Sin datos.");
-                                    listaInconsistenciaVariables.add(inconsistencia);
+
+                                    String columnaObligatoriedad = "-";
+                                    String valorObligatoriedad = "-";
+                                    if (variable.getValidacionObligatoriedad() != null && variable.getValidacionObligatoriedad().length() > 0) {
+                                        columnaObligatoriedad = variable.getValidacionObligatoriedad().split(":")[0];
+                                        valorObligatoriedad = variable.getValidacionObligatoriedad().split(":")[1];
+                                    }
+                                    if (columnaObligatoriedad.equals("-")) {
+                                        InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Sin datos, valor requerido.");
+                                        listaInconsistenciaVariables.add(inconsistencia);
+                                    } else {
+                                        String valorBusqueda = obtenerValorColumaDeFila(columnaObligatoriedad, listaDatosFila, encabezadoXsl, columnas);
+                                        //System.out.println("[" + variable.getColumna() + "]:[" + valorBusqueda + "]------->" + columnaObligatoriedad + ":" + valorObligatoriedad);
+
+                                        if (valorObligatoriedad.toLowerCase().equals(valorBusqueda.toLowerCase())) {
+                                            InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Sin datos, valor requerido.");
+                                            listaInconsistenciaVariables.add(inconsistencia);
+                                        }
+                                    }
+
                                 } else {
 
                                     if (variable.getTipo().equals("VARCHAR2")) {
@@ -675,20 +694,25 @@ public class LeerExcel implements Serializable {
                                     }
                                     //Validar si la variable contiene el dato de tipo numerico.
                                     if (variable.getTipo().equals("NUMBER")) {
+                                        String numeroResultado = null;
                                         if (cellRegistro.getCellType() == 0) {
-                                            if ((cellRegistro.getNumericCellValue() + "").matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
+                                            numeroResultado = Numero.formatoNumeroEntero(cellRegistro.getNumericCellValue() + "") + "";
+                                            //System.out.println("----->" + numeroResultado + "");
+                                            if (numeroResultado.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
                                                 //System.out.println("Is a number");
                                             } else {
                                                 //System.out.println("Is not a number");
-                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato debe ser numerico.");
+                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato " + numeroResultado + " debe ser numerico.");
                                                 listaInconsistenciaVariables.add(inconsistencia);
                                             }
                                         } else {
-                                            if (cellRegistro.getStringCellValue().matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
+                                            numeroResultado = Numero.formatoNumeroEntero(cellRegistro.getStringCellValue()) + "";
+                                            //System.out.println("----->" + numeroResultado + "");
+                                            if (numeroResultado.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
                                                 //System.out.println("Is a number");
                                             } else {
                                                 //System.out.println("Is not a number");
-                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato debe ser numerico.");
+                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato " + numeroResultado + " debe ser numerico.");
                                                 listaInconsistenciaVariables.add(inconsistencia);
                                             }
                                         }
@@ -724,20 +748,25 @@ public class LeerExcel implements Serializable {
                                         }
                                         //Validar si la variable contiene el dato de tipo numerico.
                                         if (variable.getTipo().equals("NUMBER")) {
+                                            String numeroResultado = null;
                                             if (cellRegistro.getCellType() == 0) {
-                                                if ((cellRegistro.getNumericCellValue() + "").matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
+                                                numeroResultado = Numero.formatoNumeroEntero(cellRegistro.getNumericCellValue() + "") + "";
+                                                //System.out.println("----->" + numeroResultado + "");
+                                                if (numeroResultado.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
                                                     //System.out.println("Is a number");
                                                 } else {
                                                     //System.out.println("Is not a number");
-                                                    InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato debe ser numerico.");
+                                                    InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato " + numeroResultado + " debe ser numerico.");
                                                     listaInconsistenciaVariables.add(inconsistencia);
                                                 }
                                             } else {
-                                                if (cellRegistro.getStringCellValue().matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
+                                                numeroResultado = Numero.formatoNumeroEntero(cellRegistro.getStringCellValue()) + "";
+                                                //System.out.println("----->" + numeroResultado + "");
+                                                if (numeroResultado.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
                                                     //System.out.println("Is a number");
                                                 } else {
                                                     //System.out.println("Is not a number");
-                                                    InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato debe ser numerico.");
+                                                    InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato " + numeroResultado + " debe ser numerico.");
                                                     listaInconsistenciaVariables.add(inconsistencia);
                                                 }
                                             }
@@ -790,6 +819,63 @@ public class LeerExcel implements Serializable {
             filaTemp++;
         }
         LOGGER.info(resultado.append("]"));
+        return resultado;
+    }
+
+    /**
+     * Método que permite obtener el valor de una columna, de una fila del
+     * archivo XLS, pasando como parametro la fila con los datos, el encabezado
+     * del archivo xls, las variables y la variable o columna a buscar.
+     *
+     * @param variableBuscar
+     * @param datosFila
+     * @param encabezadoXsl
+     * @param columnas
+     * @return
+     */
+    private String obtenerValorColumaDeFila(String variableBuscar, List listaDatosFila, List encabezadoXsl, List<VariableIge> columnas) {
+        String resultado = null;
+
+        for (int j = 0; j < encabezadoXsl.size(); j++) {
+            Cell cellEncabezado = (Cell) encabezadoXsl.get(j);
+            for (VariableIge variable : columnas) {
+
+                if (cellEncabezado.getStringCellValue().equals(variable.getEtiqueta())) {
+
+                    if (variable.getColumna().equals(variableBuscar)) {
+                        //System.out.println("****->[" + variable.getColumna() + "]=[" + variableBuscar + "]");
+                        Cell cellRegistro = (Cell) listaDatosFila.get(j);
+
+                        if (variable.getTipo().equals("NUMBER")) {
+                            if (cellRegistro.getCellType() == 0) {
+                                resultado = cellRegistro.getNumericCellValue() + "";
+                            } else {
+                                resultado = cellRegistro.getStringCellValue() + "";
+                            }
+                        } else if (variable.getTipo().equals("DATE")) {
+                            String fecha = null;
+                            if (cellRegistro.getCellType() == 0) {
+                                fecha = Fecha.formatFechaDateToString(cellRegistro.getDateCellValue());
+                                resultado = cellRegistro.getDateCellValue() + "";
+                            } else {
+                                fecha = Fecha.fomatoFechaStringToString(cellRegistro.getStringCellValue());
+                                resultado = cellRegistro.getStringCellValue();
+                            }
+                        } else {
+                            if (cellRegistro.getCellType() == 0) {
+                                resultado = cellRegistro.getNumericCellValue() + "";
+                            } else {
+                                resultado = cellRegistro.getStringCellValue();
+                            }
+                        }
+                        break;
+
+                    }
+                }
+
+            }
+        }
+
         return resultado;
     }
 

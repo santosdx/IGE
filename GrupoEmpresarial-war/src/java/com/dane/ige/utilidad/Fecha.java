@@ -1,11 +1,9 @@
 package com.dane.ige.utilidad;
 
-import com.dane.ige.excel.LeerExcel;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -86,4 +84,20 @@ public class Fecha {
         return resultado;
     }
 
+    /**
+     * *
+     * Método que recibe una fecha en Date y se convierte en String con el
+     * formato: dd-MM-yyyy
+     *
+     * @param fecha
+     * @return
+     */
+    public static String formatFechaDateToStringOther(Date fecha) {
+        String resultado = null;
+        if (fecha != null) {
+            SimpleDateFormat sdfFecha = new SimpleDateFormat("dd-MM-yyyy");
+            resultado = sdfFecha.format(fecha);
+        }
+        return resultado;
+    }
 }

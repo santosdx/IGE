@@ -47,6 +47,10 @@ public class SistemaInfo implements Serializable {
     private Date fechaVigencia;
     @Column(name = "texto_bienvenida")
     private String textoBienvenida;
+    @Column(name = "texto_portada")
+    private String textoPortada;
+    @Column(name = "titulo_proyecto")
+    private String tituloProyecto;
 
     public SistemaInfo() {
     }
@@ -91,8 +95,24 @@ public class SistemaInfo implements Serializable {
         return textoBienvenida;
     }
 
+    public String getTextoPortada() {
+        return textoPortada;
+    }
+
+    public void setTextoPortada(String textoPortada) {
+        this.textoPortada = textoPortada;
+    }
+
     public void setTextoBienvenida(String textoBienvenida) {
         this.textoBienvenida = textoBienvenida;
+    }
+
+    public String getTituloProyecto() {
+        return tituloProyecto;
+    }
+
+    public void setTituloProyecto(String tituloProyecto) {
+        this.tituloProyecto = tituloProyecto;
     }
 
     @Override

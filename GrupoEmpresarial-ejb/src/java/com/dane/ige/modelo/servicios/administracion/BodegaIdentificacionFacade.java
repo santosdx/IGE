@@ -114,8 +114,8 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
             //query.setParameter("tipoOrganizacion", tipoOrganizacion);
 
             String sql = "SELECT * FROM IGE_IDENTIFICACION "
-                    + "WHERE ID_ORGANIZACION ||''||FECHA_ACTUALIZA_IDEN in ( "
-                    + "SELECT ID_ORGANIZACION ||''||FECHA AS ID FROM ( "
+                    + "WHERE ID_ORGANIZACION ||'-'||TO_CHAR(FECHA_ACTUALIZA_IDEN,'dd/MM/yyyy HH24:MI:SS') in ( "
+                    + "SELECT ID_ORGANIZACION ||'-'||TO_CHAR(FECHA,'dd/MM/yyyy HH24:MI:SS') AS ID FROM ( "
                     + "SELECT ID_ORGANIZACION, MAX (FECHA_ACTUALIZA_IDEN) AS FECHA "
                     + "FROM IGE_IDENTIFICACION "
                     + "WHERE ID_GRUPO_RELACIONADO =" + idGrupoRelacionado + " AND TIPO_ORGANIZACION='UNIDAD LEGAL' "
@@ -155,8 +155,8 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
             //query.setParameter("tipoOrganizacion", tipoOrganizacion);
 
             String sql = "SELECT * FROM IGE_IDENTIFICACION "
-                    + "WHERE ID_ORGANIZACION ||''||FECHA_ACTUALIZA_IDEN in ( "
-                    + "SELECT ID_ORGANIZACION ||''||FECHA AS ID FROM ( "
+                    + "WHERE ID_ORGANIZACION ||'-'||TO_CHAR(FECHA_ACTUALIZA_IDEN,'dd/MM/yyyy HH24:MI:SS') in ( "
+                    + "SELECT ID_ORGANIZACION ||'-'||TO_CHAR(FECHA,'dd/MM/yyyy HH24:MI:SS') AS ID FROM ( "
                     + "SELECT ID_ORGANIZACION, MAX (FECHA_ACTUALIZA_IDEN) AS FECHA "
                     + "FROM IGE_IDENTIFICACION "
                     + "WHERE ID_UL_RELACIONADA =" + idUnidadLegallacionada + " AND TIPO_ORGANIZACION='ESTABLECIMIENTO' "

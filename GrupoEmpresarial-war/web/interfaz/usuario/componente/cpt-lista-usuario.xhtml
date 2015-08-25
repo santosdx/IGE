@@ -15,9 +15,9 @@
             <p:commandLink update="#{ccFormUsuarioId}" title="Detalle..." action="#{MbAdministrarUsuario.seleccionarUsuario}"
                            styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
                 <f:setPropertyActionListener value="#{usuario}" target="#{MbAdministrarUsuario.usuarioSeleccionado}" />
-            </p:commandLink>        
+            </p:commandLink>
             <p:outputLabel value="#{usuario.nombres} "/>
-            <p:outputLabel value="#{usuario.apellidos}"/>      
+            <p:outputLabel value="#{usuario.apellidos}"/>
         </p:dataList>
     </h:form>
 </ui:composition>

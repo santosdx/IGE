@@ -5,10 +5,10 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <p:panel header="Información de identificación">
+    <p:panel>
         <p:tooltip />
 
-        <h:panelGrid columns="3">
+        <h:panelGrid id="pnFormIdentificacionUnidadLelgal" columns="3">
 
             <p:outputLabel  value="Tipo de unidad: *" styleClass="etiquetaFormulario" />
             <p:selectOneMenu id="cboTipoUnidad" value="#{MbFormUnidadLegal.identificacionSeleccionada.tipoUnidadLegal}"
@@ -20,65 +20,19 @@
             </p:selectOneMenu>
             <p:message for="cboTipoUnidad" />
 
-            <p:outputLabel value="Razón social: *" styleClass="etiquetaFormulario"/>
+            <p:outputLabel value="Nombre registrado: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtRazonSocial" value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreRegistrado}" 
                          styleClass="valorEtiquetaFormulario" requiredMessage="La razón social es requerida." onblur="value = value.toUpperCase()" required="true" maxlength="80" label="Razón social"/>
             <p:message for="txtRazonSocial" />
 
-            <p:outputLabel for="txtNit" value="NIT Unidad Legal:" styleClass="etiquetaFormulario" />
-            <h:panelGrid columns="5" >
-                <p:inputText id="txtNit" value="#{MbFormUnidadLegal.identificacionSeleccionada.nit}" requiredMessage="El Nit es requerido." required="true" style="width: 250px;" label="NIT" maxlength="30"/>
-                <p:message for="txtNit" display="tooltip"/>
-                <p:outputLabel for="txtDigitoVerificacion" value="DV:" styleClass="etiquetaFormulario"/>
-                <p:inputText id="txtDigitoVerificacion" value="#{MbFormUnidadLegal.identificacionSeleccionada.digitoVerificacion}"  maxlength="1"
-                             required="true" requiredMessage="El digito de verificación es requerido." style="width: 20px;" label="DV"/>
-                <p:message for="txtDigitoVerificacion" display="tooltip"/>
-            </h:panelGrid>
-            <p:spacer/>
-
             <p:outputLabel value="País: *" styleClass="etiquetaFormulario" />
             <p:selectOneMenu id="cboPais" value="#{MbFormUnidadLegal.identificacionSeleccionada.pais}" style="width:430px" required="true" requiredMessage="El País es requerido.">
+                <p:ajax event="change" listener="#{MbFormUnidadLegal.testSelected}" 
+                        update="pnFormIdentificacionUnidadLelgal" />
                 <f:selectItem itemLabel="País..." itemValue="" />
                 <f:selectItems value="#{MbListaDesplegable.listaPaises}" var="Pais" itemLabel="#{Pais.nombre}" itemValue="#{Pais.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboPais" />
-
-            <p:outputLabel value="Departamento: *" styleClass="etiquetaFormulario" />
-            <p:selectOneMenu id="cboDepartamento" value="#{MbFormUnidadLegal.identificacionSeleccionada.departamento}" style="width:430px" required="true" requiredMessage="El Departamento es requerido.">
-                <f:selectItem itemLabel="Departamento..." itemValue="" />
-                <p:ajax event="change" listener="#{MbListaDesplegable.seleccionDepartamentoUnidadLegal}" update="cboMunicipio"/>
-                <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
-            </p:selectOneMenu>
-            <p:message for="cboDepartamento" />
-
-            <p:outputLabel value="Municipio: *" styleClass="etiquetaFormulario" />
-            <p:selectOneMenu id="cboMunicipio" value="#{MbFormUnidadLegal.identificacionSeleccionada.municipio}" style="width:430px" required="true" requiredMessage="El Municipio es requerido.">
-                <f:selectItem itemLabel="Municipio..." itemValue="" />
-                <f:selectItems value="#{MbListaDesplegable.listaMunicipios}" var="Municipios" itemLabel="#{Municipios.nombre}" itemValue="#{Municipios.nombre}"/>
-            </p:selectOneMenu>
-            <p:message for="cboMunicipio" />
-
-            <p:outputLabel value="Dirección: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtDireccion" value="#{MbFormUnidadLegal.identificacionSeleccionada.direccion}" onblur="value = value.toUpperCase()"
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerido." maxlength="150" label="Dirección"/>
-            <p:message for="txtDireccion" />
-
-            <p:outputLabel value="Indicativo *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtIndicativoTelefono" value="#{MbFormUnidadLegal.identificacionSeleccionada.indicativo}" 
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Indicativo es requerido." label ="Indicativo " maxlength="10"/>
-            <p:message for="txtIndicativoTelefono"/>
-
-            <p:outputLabel value="Teléfono: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtTelefono" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefono}" 
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." maxlength="20" label="Teléfono"/>
-            <p:message for="txtTelefono" />
-
-            <p:outputLabel value="Correo electrónico: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtMail" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" 
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo electrónico es requerido." validatorMessage="Correo electrónico incorrecto" maxlength="100" label="Correo electrónico">
-                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-            </p:inputText>
-            <p:message for="txtMail" />
 
             <p:outputLabel value="Tipo de organización: *" styleClass="etiquetaFormulario" />
             <p:selectOneMenu id="cboTipoOrganizacion" value="#{MbFormUnidadLegal.identificacionSeleccionada.tipoOrganizacionUl}" style="width:430px" required="true" requiredMessage="El Tipo de organización es requerido.">
@@ -87,9 +41,83 @@
             </p:selectOneMenu>
             <p:message for="cboTipoOrganizacion" />
 
-            <p:outputLabel value="Es unidad auxiliar: *" styleClass="etiquetaFormulario" />
-            <p:inputSwitch id="swtUnidadAuxiliar" value="#{MbFormUnidadLegal.identificacionSeleccionada.unidadAuxiliarUl}" onLabel="SI" offLabel="NO"/>
-            <p:message for="swtUnidadAuxiliar" />
+            <p:outputLabel value="Correo electrónico: *" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtMail" value="#{MbFormUnidadLegal.identificacionSeleccionada.correoElectronico}" 
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo electrónico es requerido." validatorMessage="Correo electrónico incorrecto" maxlength="100" label="Correo electrónico">
+                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+            </p:inputText>
+            <p:message for="txtMail" />
+
+            <p:outputLabel for="txtActividadPrincipal" value="Actividad principal:" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtActividadPrincipal" value="#{MbFormUnidadLegal.identificacionSeleccionada.actividadPrincipal}" styleClass="valorEtiquetaFormulario" requiredMessage="La actividad principal es requerida." maxlength="4" label="Actividad principal" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}"/>
+            <p:message for="txtActividadPrincipal"/>
+
+            <p:outputLabel for="txtActividadSecundarias" value="Actividad secundarias:" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtActividadSecundarias" value="#{MbFormUnidadLegal.identificacionSeleccionada.actividadSecundaria}" styleClass="valorEtiquetaFormulario" requiredMessage="La actividad principal es requerida."  label="Actividad secundarias" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}"/>
+            <p:message for="txtActividadSecundarias"/>
+            
+            
+            
+            
+
+            <p:outputLabel for="txtNit" value="NIT Unidad Legal:" styleClass="etiquetaFormulario" />
+            <h:panelGrid columns="5">
+                <p:inputText id="txtNit" value="#{MbFormUnidadLegal.identificacionSeleccionada.nit}" 
+                             required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                             style="width: 250px;" label="NIT" requiredMessage="El NIT es requerido." validatorMessage="El NIT debe contener valores númericos (0-9), Ej: 890900050" maxlength="30"/>
+                <p:message for="txtNit" display="tooltip"/>
+                <p:outputLabel for="txtDigitoVerificacion" value="DV:" />
+                <p:inputText id="txtDigitoVerificacion" value="#{MbFormUnidadLegal.identificacionSeleccionada.digitoVerificacion}"  
+                             required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                             style="width: 20px;" label="DV" requiredMessage="El DV es requerido." validatorMessage="El DV debe ser un valor númerico entre 0-9, de un solo digito. Ej: 9" maxlength="1"/>
+                <p:message for="txtDigitoVerificacion" display="tooltip"/>
+            </h:panelGrid>
+            <p:spacer/>
+
+            <p:outputLabel for="cboDepartamento" value="Departamento:" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboDepartamento" value="#{MbFormUnidadLegal.identificacionSeleccionada.departamento}" style="width:430px" 
+                             required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" requiredMessage="El Departamento es requerido.">
+                <f:selectItem itemLabel="Departamento..." itemValue="" />
+                <p:ajax event="change" listener="#{MbListaDesplegable.seleccionDepartamentoUnidadLegal}" update="cboMunicipio"/>
+                <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
+            </p:selectOneMenu>
+            <p:message for="cboDepartamento"/>
+
+            <p:outputLabel for="cboMunicipio" value="Municipio:" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboMunicipio" value="#{MbFormUnidadLegal.identificacionSeleccionada.municipio}" style="width:430px" 
+                             required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" requiredMessage="El Municipio es requerido." >
+                <f:selectItem itemLabel="Municipio..." itemValue="" />
+                <f:selectItems value="#{MbListaDesplegable.listaMunicipios}" var="Municipios" itemLabel="#{Municipios.nombre}" itemValue="#{Municipios.nombre}"/>
+            </p:selectOneMenu>
+            <p:message for="cboMunicipio"/>
+
+            <p:outputLabel for="txtDireccion" value="Dirección:" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtDireccion" value="#{MbFormUnidadLegal.identificacionSeleccionada.direccion}" onblur="value = value.toUpperCase()" 
+                         styleClass="valorEtiquetaFormulario" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         requiredMessage="La Dirección es requerido." maxlength="150" label="Dirección"/>
+            <p:message for="txtDireccion"/>
+
+            <p:outputLabel for="txtIndicativoTelefono" value="Indicativo:" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtIndicativoTelefono" value="#{MbFormUnidadLegal.identificacionSeleccionada.indicativo}" 
+                         styleClass="valorEtiquetaFormulario" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         requiredMessage="El Indicativo es requerido." label ="Indicativo " maxlength="10" />
+            <p:message for="txtIndicativoTelefono"/>
+
+            <p:outputLabel for="txtTelefono" value="Teléfono:" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtTelefono" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefono}" 
+                         styleClass="valorEtiquetaFormulario" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         requiredMessage="El Teléfono es requerido." maxlength="20" label="Teléfono" />
+            <p:message for="txtTelefono"/>
+
+            <p:outputLabel for="swtUnidadAuxiliar" value="Es unidad auxiliar:" styleClass="etiquetaFormulario" />
+            <p:inputSwitch id="swtUnidadAuxiliar" value="#{MbFormUnidadLegal.identificacionSeleccionada.unidadAuxiliarUl}" onLabel="SI" offLabel="NO" 
+                           required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}"/>
+            <p:message for="swtUnidadAuxiliar"/>
 
             <!--
             <h:outputText value="Sector institucional: " styleClass="etiquetaFormulario" />
@@ -106,29 +134,34 @@
             </p:selectOneMenu>
             -->
 
-            <p:outputLabel value="Orientada al mercado: *" styleClass="etiquetaFormulario" />
-            <p:inputSwitch id="swtOrientadaMercado" value="#{MbFormUnidadLegal.identificacionSeleccionada.orientadaMercadoUl}" onLabel="SI" offLabel="NO"/>
-            <p:message for="swtOrientadaMercado" />
+            <p:outputLabel for="swtOrientadaMercado" value="Orientada al mercado:" styleClass="etiquetaFormulario" />
+            <p:inputSwitch id="swtOrientadaMercado" value="#{MbFormUnidadLegal.identificacionSeleccionada.orientadaMercadoUl}" onLabel="SI" offLabel="NO" 
+                           required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}"/>
+            <p:message for="swtOrientadaMercado"/>
 
-            <p:outputLabel value="Nombre de contacto: *" styleClass="etiquetaFormulario" />
+            <p:outputLabel for="txtNombreContacto" value="Nombre de contacto:" styleClass="etiquetaFormulario" />
             <p:inputText id="txtNombreContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreContacto}" onblur="value = value.toUpperCase()"
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre de contacto es requerido." maxlength="100" label="Nombre de contacto"/>
-            <p:message for="txtNombreContacto" />
+                         styleClass="valorEtiquetaFormulario" requiredMessage="El Nombre de contacto es requerido." maxlength="100" label="Nombre de contacto" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}"/>
+            <p:message for="txtNombreContacto"/>
 
-            <p:outputLabel value="Cargo: *" styleClass="etiquetaFormulario" />
+            <p:outputLabel for="txtCargoContacto" value="Cargo:" styleClass="etiquetaFormulario" />
             <p:inputText id="txtCargoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.cargoContacto}" onblur="value = value.toUpperCase()"
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido." maxlength="60" label="Cargo"/>
-            <p:message for="txtCargoContacto" />
+                         styleClass="valorEtiquetaFormulario" requiredMessage="El Cargo es requerido." maxlength="60" label="Cargo" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}"/>
+            <p:message for="txtCargoContacto"/>
 
-            <p:outputLabel value="Teléfono de contacto: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtTelefonoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." maxlength="100" label="Teléfono de contacto"/>
-            <p:message for="txtTelefonoContacto" />
+            <p:outputLabel for="txtTelefonoContacto" value="Teléfono de contacto:" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtTelefonoContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" requiredMessage="El Teléfono es requerido." maxlength="100" label="Teléfono de contacto" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}"/>
+            <p:message for="txtTelefonoContacto"/>
 
-            <p:outputLabel value="Correo electrónico de contacto: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtMailContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido." validatorMessage="Correo electrónico de contacto incorrecto" maxlength="80" label="Correo electrónico de contacto">
-                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+            <p:outputLabel for="txtMailContacto" value="Correo electrónico de contacto:" styleClass="etiquetaFormulario" />
+            <p:inputText id="txtMailContacto" value="#{MbFormUnidadLegal.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" requiredMessage="El Correo es requerido." validatorMessage="Correo electrónico de contacto incorrecto" maxlength="80" label="Correo electrónico de contacto" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}">
+                <f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)?" />
             </p:inputText>
-            <p:message for="txtMailContacto" />
+            <p:message for="txtMailContacto"/>
 
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{MbFormUnidadLegal.skip}" /-->

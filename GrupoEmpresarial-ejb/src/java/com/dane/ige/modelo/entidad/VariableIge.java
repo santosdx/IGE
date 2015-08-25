@@ -53,7 +53,9 @@ public class VariableIge implements Serializable {
     private String obligatoria;
     @Column(name = "tabla_Referencial")
     private String tablaReferencial;
-
+    @Column(name = "validacion_obligatoriedad")
+    private String validacionObligatoriedad;
+    
     public VariableIge() {
     }
 
@@ -145,6 +147,15 @@ public class VariableIge implements Serializable {
         this.tablaReferencial = tablaReferencial;
     }
 
+    public String getValidacionObligatoriedad() {
+        return validacionObligatoriedad;
+    }
+
+    public void setValidacionObligatoriedad(String validacionObligatoriedad) {
+        this.validacionObligatoriedad = validacionObligatoriedad;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

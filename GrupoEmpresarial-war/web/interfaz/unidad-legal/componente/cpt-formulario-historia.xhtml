@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <p:panel header="Información historia">
+    <p:panel>
         <p:tooltip />
 
         <h:panelGrid columns="3" columnClasses="label, value" >
@@ -29,8 +29,9 @@
             <p:message for="cboEstadoMatricula" />
 
             <p:outputLabel value="Ultimo año renovado: *" styleClass="etiquetaFormulario" />
-            <p:inputText id="txtUltimoAnoRenovado"  value="#{MbFormUnidadLegal.novedadSeleccionada.ultimoAnoRenovado}" style="width:145px" required="true" requiredMessage="El Ultimo año renovado es requerido." label="Ultimo año renovado">
-            <f:validateLength minimum="4" maximum="4"/> 
+            <p:inputText id="txtUltimoAnoRenovado"  value="#{MbFormUnidadLegal.novedadSeleccionada.ultimoAnoRenovado}" style="width:145px" required="true" requiredMessage="El Ultimo año renovado es requerido." 
+                         label="Ultimo año renovado" maxlength="4">
+                <f:validateLength minimum="4" maximum="4"/> 
             </p:inputText> 
             <p:message for="txtUltimoAnoRenovado" />
 
