@@ -73,6 +73,7 @@ public class FormularioGrupoEmpresa implements Serializable {
 
         getIdentificacionSeleccionada().getId().setFecha(fechaActualizacion);
         getIdentificacionSeleccionada().setPersonaActualiza(getServicioLogin().getUsuarioLogueado().getNombres() + getServicioLogin().getUsuarioLogueado().getApellidos());
+        getIdentificacionSeleccionada().setOrigenActualizacion("Formulario Web");
         geteJBServicioBodegaIdentificacion().create(identificacionSeleccionada);
 
         getRelacionSeleccionada().getId().setFecha(fechaActualizacion);

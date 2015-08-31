@@ -11,8 +11,8 @@
             <!--p:separator /-->
             <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
 
-                <p:outputLabel value="Tipo de unidad:" />
-                <p:outputLabel value="#{MbFormUnidadLegal.identificacionSeleccionada.tipoUnidadLegal}"/>
+                <!--p:outputLabel value="Tipo de unidad:" />
+                <p:outputLabel value="#{MbFormUnidadLegal.identificacionSeleccionada.tipoUnidadLegal}"/-->
 
                 <p:outputLabel value="Nombre registrado:" />
                 <p:outputLabel value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreRegistrado}"/>
@@ -134,9 +134,9 @@
                 </p:outputLabel>
             </h:panelGrid>
 
-            <h4 class="titulo-center-h3">Información de Historia</h4>
+            <!--h4 class="titulo-center-h3">Información de Historia</h4-->
             <!--p:separator /-->
-            <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
+            <!--h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
                 <p:outputLabel value="Fecha de configuración de control: " />
                 <p:outputLabel value="#{MbFormUnidadLegal.novedadSeleccionada.fechaConfiguracion}">
                     <f:convertDateTime pattern="dd/MM/yyyy"/>
@@ -162,81 +162,83 @@
                 <p:outputLabel value="#{MbFormUnidadLegal.novedadSeleccionada.fechaInicioActi}">
                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                 </p:outputLabel>
-            </h:panelGrid>
+            </h:panelGrid-->
 
             <h4 class="titulo-center-h3">Información de Tamaño</h4>
             <!--p:separator /-->
             <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
-                <p:outputLabel value="Información con corte a: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.infoCorte}"/>
+                <!--p:outputLabel value="Información con corte a: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.infoCorte}"/-->
 
-                <p:outputLabel value="Activo: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.activo}">
+                <p:outputLabel value="Activo: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.activo}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Pasivo: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.pasivo}">
+                <p:outputLabel value="Pasivo: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.pasivo}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Patrimonio: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.patrimonio}">
+                <p:outputLabel value="Patrimonio: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.patrimonio}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Ingresos operacionales: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.ingresosOperacionales}">
+                <p:outputLabel value="Ingresos operacionales: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.ingresosOperacionales}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Utilidad bruta: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadBruta}">
+                <p:outputLabel value="Utilidad bruta: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadBruta}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Gastos operacionales de administración: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesAdmon}">
+                <p:outputLabel value="Gastos operacionales de administración: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesAdmon}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Gastos operacionales de venta: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesVenta}">
+                <p:outputLabel value="Gastos operacionales de venta: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesVenta}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Gastos operacionales: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionales}">
+                <p:outputLabel value="Gastos operacionales: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionales}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Utilidad operativa: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadOperativa}">
+                <p:outputLabel value="Utilidad operativa: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadOperativa}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Utilidad neta: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadNeta}">
+                <p:outputLabel value="Utilidad neta: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadNeta}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="EBITDA: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.ebitda}"/>
+                <p:outputLabel value="EBITDA: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.ebitda}" style="display: block; text-align: right; width: 180px;">
+                    <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                </p:outputLabel>
 
-                <p:outputLabel value="Personal ocupado: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.personalOcupado}"/>
+                <p:outputLabel value="Personal ocupado: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.personalOcupado}" style="display: block; text-align: right; width: 180px;"/>
 
-                <p:outputLabel value="Personal empleado: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.personalEmpleado}"/>
+                <p:outputLabel value="Personal empleado: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.personalEmpleado}" style="display: block; text-align: right; width: 180px;"/>
 
-                <p:outputLabel value="Personal cotizante: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.personalCotizante}"/>
+                <p:outputLabel value="Personal cotizante: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.personalCotizante}" style="display: block; text-align: right; width: 180px;"/>
 
-                <p:outputLabel value="Número de hombres: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.hombresOcupados}"/>
+                <p:outputLabel value="Número de hombres: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.hombresOcupados}" style="display: block; text-align: right; width: 180px;"/>
 
-                <p:outputLabel value="Número de mujeres: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.mujeresOcupadas}"/>
+                <p:outputLabel value="Número de mujeres: " />
+                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.mujeresOcupadas}" style="display: block; text-align: right; width: 180px;"/>
 
                 <!--p:outputLabel value="Observaciones: " />
                 <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.observaciones}"/-->

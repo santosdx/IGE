@@ -25,7 +25,6 @@ import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.VariableIgeFacadeLocal;
 import com.dane.ige.seguridad.Login;
 import com.dane.ige.utilidad.Fecha;
-import com.dane.ige.utilidad.FileDownload;
 import com.dane.ige.utilidad.Mensaje;
 import com.dane.ige.utilidad.Numero;
 import com.google.gson.Gson;
@@ -549,7 +548,7 @@ public class LeerExcel implements Serializable {
                 Cell cellId = (Cell) listaDatosFila.get(1);
                 Cell cellFecha = (Cell) listaDatosFila.get(2);
                 String date = Fecha.formatFechaDateToString(new Date());
-                textoLlave = "\"id\":{\"id\":\"" + cellId.getRichStringCellValue() + "\",\"fecha\":\"" + date + "\"},";
+                textoLlave = "\"id\":{\"id\":\"" + cellId.getRichStringCellValue() + "\",\"fecha\":\"" + date + "\"},\"origenActualizacion\":\"Archivo XLS\",";
                 resultadoFila.append(textoLlave);
 
                 for (int j = columna + 2; j < encabezadoXsl.size(); j++) {
@@ -567,14 +566,14 @@ public class LeerExcel implements Serializable {
                                         resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":" + null + "");
                                     } else {
                                         valorCelda = cellRegistro.getNumericCellValue() + "";
-                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + Numero.formatoNumeroEntero(cellRegistro.getNumericCellValue() + "")+ "\"");
+                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + Numero.formatoNumeroEntero(valorCelda) + "\"");
                                     }
                                 } else {
                                     if ("".equals(cellRegistro.getStringCellValue() + "")) {
                                         resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":" + null + "");
                                     } else {
                                         valorCelda = cellRegistro.getStringCellValue() + "";
-                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + Numero.formatoNumeroEntero(cellRegistro.getStringCellValue()) + "\"");
+                                        resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + Numero.formatoNumeroEntero(valorCelda) + "\"");
                                     }
                                 }
                             } else if (variable.getTipo().equals("DATE")) {
@@ -595,11 +594,11 @@ public class LeerExcel implements Serializable {
                             } else {
                                 if (cellRegistro.getCellType() == 0) {
                                     valorCelda = cellRegistro.getNumericCellValue() + "";
-                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + Numero.formatoNumeroEntero(cellRegistro.getNumericCellValue() + "") + "\"");
+                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + Numero.formatoNumeroEntero(valorCelda) + "\"");
 
                                 } else {
                                     valorCelda = cellRegistro.getStringCellValue();
-                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + cellRegistro.getStringCellValue() + "\"");
+                                    resultadoFila.append("\"" + variable.getNombreAtributoClase() + "\":\"" + valorCelda + "\"");
                                 }
                             }
 
@@ -614,14 +613,19 @@ public class LeerExcel implements Serializable {
                                         columnaObligatoriedad = variable.getValidacionObligatoriedad().split(":")[0];
                                         valorObligatoriedad = variable.getValidacionObligatoriedad().split(":")[1];
                                     }
+
                                     if (columnaObligatoriedad.equals("-")) {
                                         InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Sin datos, valor requerido.");
                                         listaInconsistenciaVariables.add(inconsistencia);
                                     } else {
-                                        String valorBusqueda = obtenerValorColumaDeFila(columnaObligatoriedad, listaDatosFila, encabezadoXsl, columnas);
-                                        //System.out.println("[" + variable.getColumna() + "]:[" + valorBusqueda + "]------->" + columnaObligatoriedad + ":" + valorObligatoriedad);
-
-                                        if (valorObligatoriedad.toLowerCase().equals(valorBusqueda.toLowerCase())) {
+                                        String valorBusqueda = obtenerValorColumaDeFila(columnaObligatoriedad, filaTemp);
+                                        //System.out.println("(" + filaTemp + ")[" + variable.getColumna() + "]:[" + valorBusqueda + "] -> " + columnaObligatoriedad + ":" + valorObligatoriedad);
+                                        if (valorBusqueda != null && !StringUtils.isBlank(valorBusqueda)) {
+                                            if (valorObligatoriedad.toLowerCase().equals(valorBusqueda.toLowerCase())) {
+                                                InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Sin datos, valor requerido.");
+                                                listaInconsistenciaVariables.add(inconsistencia);
+                                            }
+                                        } else {
                                             InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Sin datos, valor requerido.");
                                             listaInconsistenciaVariables.add(inconsistencia);
                                         }
@@ -833,49 +837,73 @@ public class LeerExcel implements Serializable {
      * @param columnas
      * @return
      */
-    private String obtenerValorColumaDeFila(String variableBuscar, List listaDatosFila, List encabezadoXsl, List<VariableIge> columnas) {
+    private String obtenerValorColumaDeFila(String variableBuscar, int indiceRegistro) {
         String resultado = null;
+        boolean contieneVariableBuscar = false;
+        try {
+            Workbook libro = new HSSFWorkbook((FileInputStream) getFile().getInputstream());
+            String[] hojas = {"Identificación", "Relación", "Historia", "Tamaño"};
+            String[] grupoVariables = {"IDENTIFICACION", "RELACION", "NOVEDAD", "TAMAÑO"};
 
-        for (int j = 0; j < encabezadoXsl.size(); j++) {
-            Cell cellEncabezado = (Cell) encabezadoXsl.get(j);
-            for (VariableIge variable : columnas) {
+            int indiceHoja = 0;
 
-                if (cellEncabezado.getStringCellValue().equals(variable.getEtiqueta())) {
+            for (String hojaNombre : hojas) {
+                System.out.println("(" + indiceRegistro + ")*************[" + hojaNombre + "]");
+                if (contieneVariableBuscar == false) {
 
-                    if (variable.getColumna().equals(variableBuscar)) {
-                        //System.out.println("****->[" + variable.getColumna() + "]=[" + variableBuscar + "]");
-                        Cell cellRegistro = (Cell) listaDatosFila.get(j);
+                    List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo(grupoVariables[indiceHoja]);
+                    List listaTemp = leerArchivoXls((FileInputStream) getFile().getInputstream(), hojaNombre);
+                    //List listaTemp = obtenerListaDatosHojaXls(libro.getSheet(hojaNombre));
+                    List listaDatosFila = (List) listaTemp.get(indiceRegistro);
+                    List encabezadoXsl = (List) listaTemp.get(1);
 
-                        if (variable.getTipo().equals("NUMBER")) {
-                            if (cellRegistro.getCellType() == 0) {
-                                resultado = cellRegistro.getNumericCellValue() + "";
-                            } else {
-                                resultado = cellRegistro.getStringCellValue() + "";
+                    for (int j = 0; j < encabezadoXsl.size(); j++) {
+                        Cell cellEncabezado = (Cell) encabezadoXsl.get(j);
+                        for (VariableIge variable : columnas) {
+
+                            if (cellEncabezado.getStringCellValue().equals(variable.getEtiqueta())) {
+
+                                if (variable.getColumna().equals(variableBuscar)) {
+                                    System.out.println("*->[" + variable.getColumna() + "]=[" + variableBuscar + "]");
+                                    Cell cellRegistro = (Cell) listaDatosFila.get(j);
+
+                                    if (variable.getTipo().equals("NUMBER")) {
+                                        if (cellRegistro.getCellType() == 0) {
+                                            resultado = cellRegistro.getNumericCellValue() + "";
+                                        } else {
+                                            resultado = cellRegistro.getStringCellValue() + "";
+                                        }
+                                    } else if (variable.getTipo().equals("DATE")) {
+                                        String fecha = null;
+                                        if (cellRegistro.getCellType() == 0) {
+                                            fecha = Fecha.formatFechaDateToString(cellRegistro.getDateCellValue());
+                                            resultado = cellRegistro.getDateCellValue() + "";
+                                        } else {
+                                            fecha = Fecha.fomatoFechaStringToString(cellRegistro.getStringCellValue());
+                                            resultado = cellRegistro.getStringCellValue();
+                                        }
+                                    } else {
+                                        if (cellRegistro.getCellType() == 0) {
+                                            resultado = cellRegistro.getNumericCellValue() + "";
+                                        } else {
+                                            resultado = cellRegistro.getStringCellValue();
+                                        }
+                                    }
+                                    contieneVariableBuscar = true;
+                                    break;
+                                }
                             }
-                        } else if (variable.getTipo().equals("DATE")) {
-                            String fecha = null;
-                            if (cellRegistro.getCellType() == 0) {
-                                fecha = Fecha.formatFechaDateToString(cellRegistro.getDateCellValue());
-                                resultado = cellRegistro.getDateCellValue() + "";
-                            } else {
-                                fecha = Fecha.fomatoFechaStringToString(cellRegistro.getStringCellValue());
-                                resultado = cellRegistro.getStringCellValue();
-                            }
-                        } else {
-                            if (cellRegistro.getCellType() == 0) {
-                                resultado = cellRegistro.getNumericCellValue() + "";
-                            } else {
-                                resultado = cellRegistro.getStringCellValue();
-                            }
+
                         }
-                        break;
-
                     }
+
+                    indiceHoja++;
                 }
-
             }
+        } catch (IOException ex) {
+            //java.util.logging.Logger.getLogger(LeerExcel.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.warn(ex);
         }
-
         return resultado;
     }
 

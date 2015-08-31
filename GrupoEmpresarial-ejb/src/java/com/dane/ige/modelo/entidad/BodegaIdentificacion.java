@@ -49,7 +49,7 @@ public class BodegaIdentificacion implements Serializable {
     @Column(name = "nit")
     private Long nit;
     @Column(name = "matricula_mercantil")
-    private Long matriculaMercantil;
+    private String matriculaMercantil;
     @Column(name = "digito_verificacion")
     private Long digitoVerificacion;
     @Column(name = "pais")
@@ -120,6 +120,8 @@ public class BodegaIdentificacion implements Serializable {
 
     @Column(name = "persona_actualiza")
     private String personaActualiza;
+    @Column(name = "origen_actualizacion")
+    private String origenActualizacion;
 
     public BodegaIdentificacion() {
     }
@@ -196,11 +198,11 @@ public class BodegaIdentificacion implements Serializable {
         this.nit = nit;
     }
 
-    public Long getMatriculaMercantil() {
+    public String getMatriculaMercantil() {
         return matriculaMercantil;
     }
 
-    public void setMatriculaMercantil(Long matriculaMercantil) {
+    public void setMatriculaMercantil(String matriculaMercantil) {
         this.matriculaMercantil = matriculaMercantil;
     }
 
@@ -484,6 +486,15 @@ public class BodegaIdentificacion implements Serializable {
         this.personaActualiza = personaActualiza;
     }
 
+    public String getOrigenActualizacion() {
+        return origenActualizacion;
+    }
+
+    public void setOrigenActualizacion(String origenActualizacion) {
+        this.origenActualizacion = origenActualizacion;
+    }
+
+    
     //--
     @Override
     public int hashCode() {
@@ -551,6 +562,7 @@ public class BodegaIdentificacion implements Serializable {
         resultado.put("TELEFONO_CONTACTO3", Texto.blankText(telefonoContacto3 + ""));
         resultado.put("MAIL_CONTACTO3", Texto.blankText(mailContacto3 + ""));
         resultado.put("PERSONA_ACTUALIZA", Texto.blankText(personaActualiza + ""));
+        resultado.put("ORIGEN_ACTUALIZACION", Texto.blankText(origenActualizacion + ""));
         return resultado;
     }
 

@@ -15,14 +15,20 @@ public class Numero {
     }
 
     /**
-     * Método que recibe un valor numerico en String y le da un formato de entero,
-     * sin coma, punto o exponente.
+     * Método que recibe un valor numerico en String y le da un formato de
+     * entero, sin coma, punto o exponente.
+     *
      * @param numero
-     * @return 
+     * @return
      */
-    public static String formatoNumeroEntero(String numero){
-        String resultado=null;
-        resultado = Double.valueOf(numero).longValue() + "";
+    public static String formatoNumeroEntero(String numero) {
+        String resultado = null;
+        try {
+            resultado = Double.valueOf(numero).longValue() + "";
+        } catch (NumberFormatException nfEx) {
+            resultado = numero;
+            LOGGER.warn(nfEx);
+        }
         return resultado;
     }
 }

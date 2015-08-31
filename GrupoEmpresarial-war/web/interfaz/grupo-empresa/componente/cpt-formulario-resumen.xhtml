@@ -176,7 +176,9 @@
                 </p:outputLabel>
 
                 <p:outputLabel value="EBITDA: " />
-                <p:outputLabel value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ebitda}"  style="display: block; text-align: right; width: 180px;"/>
+                <p:outputLabel value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ebitda}"  style="display: block; text-align: right; width: 180px;">
+                    <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                </p:outputLabel>
 
                 <p:outputLabel value="Personal ocupado: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.tamanoSeleccionado.personalOcupado}"  style="display: block; text-align: right; width: 180px;"/>
@@ -187,8 +189,8 @@
                 <p:outputLabel value="Número de mujeres ocupados: " />
                 <p:outputLabel value="#{MbFormGrupoEmpresa.tamanoSeleccionado.mujeresOcupadas}"  style="display: block; text-align: right; width: 180px;"/>
 
-                <!--p:outputLabel value="Observaciones: " />
-                <p:outputLabel value="#{MbFormGrupoEmpresa.tamanoSeleccionado.observaciones}"/-->
+                <p:outputLabel value="Observaciones: " />
+                <p:outputLabel value="#{MbFormGrupoEmpresa.tamanoSeleccionado.observaciones}"/>
             </h:panelGrid>
 
         </h:panelGrid>

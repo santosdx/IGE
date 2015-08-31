@@ -34,8 +34,8 @@
                 <p:outputLabel value="Teléfono: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.telefono}"/>
 
-                <p:outputLabel value="Estado: " />
-                <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.estadoEst}"/>
+                <!--p:outputLabel value="Estado: " />
+                <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.estadoEst}"/-->
 
                 <p:outputLabel value="Código de la actividad económica: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadPrincipal}"/>
@@ -111,9 +111,9 @@
                 </p:outputLabel>
             </h:panelGrid-->
 
-            <h4 class="titulo-center-h3">Información de Historia</h4>
+            <!--h4 class="titulo-center-h3">Información de Historia</h4-->
             <!--p:separator /-->
-            <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
+            <!--h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
                 <p:outputLabel value="Fecha matrícula: " />
                 <p:outputLabel value="#{MbFormEstablecimiento.novedadSeleccionada.fechaMatricula}">
                     <f:convertDateTime pattern="dd/MM/yyyy"/>
@@ -134,45 +134,45 @@
                 <p:outputLabel value="#{MbFormEstablecimiento.novedadSeleccionada.fechaInicioActi}">
                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                 </p:outputLabel>
-            </h:panelGrid>
+            </h:panelGrid-->
 
             <h4 class="titulo-center-h3">Información de Tamaño</h4>
             <!--p:separator /-->
             <h:panelGrid columns="2" columnClasses="etiquetaFormularioReporte, valorEtiquetaFormularioReporte" style="width: 100%;">
-                <p:outputLabel value="Activo: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.activo}">
+                <p:outputLabel value="Activo: "/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.activo}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Ingresos operacionales: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.ingresosOperacionales}">
+                <p:outputLabel value="Ingresos operacionales: "/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.ingresosOperacionales}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Costo de ventas: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.costoVentasEst}">
+                <p:outputLabel value="Costo de ventas: "/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.costoVentasEst}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Gastos operacionales: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.gastosOperacionales}">
+                <p:outputLabel value="Gastos operacionales: "/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.gastosOperacionales}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 
-                <p:outputLabel value="Personal ocupado: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.personalOcupado}"/>
+                <p:outputLabel value="Personal ocupado: "/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.personalOcupado}" style="display: block; text-align: right; width: 180px;"/>
 
-                <p:outputLabel value="Personal empleado: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.personalEmpleado}"/>
+                <p:outputLabel value="Personal empleado: "/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.personalEmpleado}" style="display: block; text-align: right; width: 180px;"/>
 
-                <p:outputLabel value="Personal temporal: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.personalTemporal}"/>
+                <p:outputLabel value="Personal temporal: "/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.personalTemporal}" style="display: block; text-align: right; width: 180px;"/>
 
-                <p:outputLabel value="Número de hombres: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.hombresOcupados}"/>
+                <p:outputLabel value="Número de hombres: "/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.hombresOcupados}" style="display: block; text-align: right; width: 180px;"/>
 
-                <p:outputLabel value="Número de mujeres: " style="display: block; text-align: right; width: 180px;"/>
-                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.mujeresOcupadas}"/>
+                <p:outputLabel value="Número de mujeres: "/>
+                <p:outputLabel value="#{MbFormEstablecimiento.tamanoSeleccionado.mujeresOcupadas}" style="display: block; text-align: right; width: 180px;"/>
             </h:panelGrid>
 
         </h:panelGrid>

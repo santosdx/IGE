@@ -38,7 +38,7 @@
             <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaNovedad}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de novedad es requerido." label="Fecha de novedad"/>
 
             <h:outputText value="ID de grupo involucrado en la novedad: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.novedadSeleccionada.idGrupoNovedad}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El ID es requerido." label="ID de grupo involucrado en la novedad"/>
+            <p:inputText value="#{MbFormGrupoEmpresa.novedadSeleccionada.idGrupoNovedad}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El ID es requerido." label="ID de grupo involucrado en la novedad" maxlength="19"/>
 
             <h:outputText value="Fecha de cierre: " styleClass="etiquetaFormulario"/>
             <p:calendar value="#{MbFormGrupoEmpresa.novedadSeleccionada.fechaCierre}" locale="de" navigator="true" pattern="dd/MM/yyyy" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Fecha de cierre es requerido." label="Fecha de cierre"/>

@@ -32,8 +32,6 @@ public class Municipio implements Serializable {
     private Integer id;
     @Column(name = "MUNICIPIO_NOMBRE")
     private String nombre;
-    @Column(name = "ID_DEPARTAMENTO")
-    private Integer idDepartamento;
     @Column(name = "DEPARTAMENTO_NOMBRE")
     private String departamento;
 
@@ -63,14 +61,6 @@ public class Municipio implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = WordUtils.capitalize(nombre.trim());
-    }
-
-    public Integer getIdDepartamento() {
-        return idDepartamento;
-    }
-
-    public void setIdDepartamento(Integer idDepartamento) {
-        this.idDepartamento = idDepartamento;
     }
 
     public String getDepartamento() {

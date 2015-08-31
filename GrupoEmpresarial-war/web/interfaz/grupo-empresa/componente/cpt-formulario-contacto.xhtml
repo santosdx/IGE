@@ -12,20 +12,20 @@
 
             <h:outputText value="Nombre de contacto: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto}" onblur="value = value.toUpperCase()" 
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido."  label ="Nombre de contacto" maxlength="100"/>
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido."  label ="Nombre de contacto" maxlength="99"/>
             <p:message for="txtNombreContacto"/>
 
             <h:outputText value="Cargo de contacto: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtCargoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto}" onblur="value = value.toUpperCase()" 
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido." label ="Cargo de contacto" maxlength="60"/>
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Cargo es requerido." label ="Cargo de contacto" maxlength="80"/>
             <p:message for="txtCargoContacto"/>
 
             <h:outputText value="Teléfono contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtTelefonoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." label ="Teléfono contacto" maxlength="100"/>
+            <p:inputText id="txtTelefonoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." label ="Teléfono contacto" maxlength="199"/>
             <h:panelGrid columns="2" cellpadding="0">
                 <p:message for="txtTelefonoContacto"/>
-                <p:graphicImage id="content" value="/resources/icon/icono-de-ayuda.png" />
-                <p:tooltip id="toolTipContent" for="content">
+                <p:graphicImage id="imgAyudaTelefonoContacto1" value="/resources/icon/icono-de-ayuda.png" />
+                <p:tooltip for="imgAyudaTelefonoContacto1">
                     <p>Puede adicionar información como el indicativo o extención <br></br>
                         y adicionar más de un número telefonico separado por (;)</p>
                     <p>Formato: (indicativo)telefono,extención-extención;<br></br>
@@ -34,47 +34,63 @@
             </h:panelGrid>
 
             <h:outputText value="Correo electrónico de contacto: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtCorreoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido." label ="Correo electrónico de contacto" validatorMessage="Correo electrónico de contacto incorrecto" maxlength="100">
+            <p:inputText id="txtCorreoContacto" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Correo es requerido." label ="Correo electrónico de contacto" validatorMessage="Correo electrónico de contacto incorrecto" maxlength="79">
                 <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
             </p:inputText>
             <p:message for="txtCorreoContacto"/>
 
             <h:outputText value="Nombre de contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto2}" onblur="value = value.toUpperCase()" 
-                         styleClass="valorEtiquetaFormulario" label ="Nombre de contacto 2" maxlength="60"/>
+                         styleClass="valorEtiquetaFormulario" label ="Nombre de contacto 2" maxlength="99"/>
             <p:spacer/>
 
             <h:outputText value="Cargo de contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto2}" onblur="value = value.toUpperCase()" 
-                         styleClass="valorEtiquetaFormulario" label ="Cargo de contacto 2" maxlength="60"/>
+                         styleClass="valorEtiquetaFormulario" label ="Cargo de contacto 2" maxlength="79"/>
             <p:spacer/>
 
             <h:outputText value="Teléfono de contacto 2: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto2}" styleClass="valorEtiquetaFormulario" label ="Teléfono contacto 2" maxlength="100"/>
-            <p:spacer/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto2}" styleClass="valorEtiquetaFormulario" label ="Teléfono contacto 2" maxlength="199"/>
+            <h:panelGrid columns="2" cellpadding="0">
+                <p:graphicImage id="imgAyudaTelefonoContacto2" value="/resources/icon/icono-de-ayuda.png" />
+                <p:tooltip for="imgAyudaTelefonoContacto2">
+                    <p>Puede adicionar información como el indicativo o extención <br></br>
+                        y adicionar más de un número telefonico separado por (;)</p>
+                    <p>Formato: (indicativo)telefono,extención-extención;<br></br>
+                       Ejemplo: (094)777785,2625;(091)7885287,1515-1516;</p>
+                </p:tooltip>
+            </h:panelGrid>
 
             <h:outputText value="Correo electrónico de contacto 2: " styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtCorreoContacto2" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto2}" styleClass="valorEtiquetaFormulario" label ="Correo electrónico de contacto 2" validatorMessage="Correo electrónico de contacto incorrecto" maxlength="80">
+            <p:inputText id="txtCorreoContacto2" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto2}" styleClass="valorEtiquetaFormulario" label ="Correo electrónico de contacto 2" validatorMessage="Correo electrónico de contacto incorrecto" maxlength="79">
                 <f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)?" />
             </p:inputText>
             <p:message for="txtCorreoContacto2"/>
 
             <h:outputText value="Nombre de contacto 3: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto3}" onblur="value = value.toUpperCase()" 
-                         styleClass="valorEtiquetaFormulario" label ="Nombre de contacto 3" maxlength="60"/>
+                         styleClass="valorEtiquetaFormulario" label ="Nombre de contacto 3" maxlength="99"/>
             <p:spacer/>
 
             <h:outputText value="Cargo de contacto 3: " styleClass="etiquetaFormulario"/>
             <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto3}" onblur="value = value.toUpperCase()" 
-                         styleClass="valorEtiquetaFormulario" label ="Cargo de contacto 3" maxlength="60"/>
+                         styleClass="valorEtiquetaFormulario" label ="Cargo de contacto 3" maxlength="79"/>
             <p:spacer/>
 
             <h:outputText value="Teléfono de contacto 3: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto3}" styleClass="valorEtiquetaFormulario" label ="Teléfono contacto 3" maxlength="100"/>
-            <p:spacer/>
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.telefonoContacto3}" styleClass="valorEtiquetaFormulario" label ="Teléfono contacto 3" maxlength="199"/>
+            <h:panelGrid columns="2" cellpadding="0">
+                <p:graphicImage id="imgAyudaTelefonoContacto3" value="/resources/icon/icono-de-ayuda.png" />
+                <p:tooltip for="imgAyudaTelefonoContacto3">
+                    <p>Puede adicionar información como el indicativo o extención <br></br>
+                        y adicionar más de un número telefonico separado por (;)</p>
+                    <p>Formato: (indicativo)telefono,extención-extención;<br></br>
+                       Ejemplo: (094)777785,2625;(091)7885287,1515-1516;</p>
+                </p:tooltip>
+            </h:panelGrid>
 
             <h:outputText value="Correo electrónico de contacto 3: " styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtCorreoContacto3" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto3}" styleClass="valorEtiquetaFormulario" label ="Correo electrónico de contacto 2" validatorMessage="Correo electrónico de contacto incorrecto" maxlength="80">
+            <p:inputText id="txtCorreoContacto3" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.mailContacto3}" styleClass="valorEtiquetaFormulario" label ="Correo electrónico de contacto 2" validatorMessage="Correo electrónico de contacto incorrecto" maxlength="79">
                 <f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)?" />
             </p:inputText>
             <p:message for="txtCorreoContacto3"/>

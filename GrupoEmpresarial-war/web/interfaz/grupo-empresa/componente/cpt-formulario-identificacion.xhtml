@@ -12,19 +12,28 @@
 
             <p:outputLabel value="Nombre Comercial: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreComercial" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreComercial}" label = "Nombre Comercial" styleClass="valorEtiquetaFormulario" 
-                         onblur="value = value.toUpperCase()" required="true" requiredMessage="El Nombre Comercial es requerido." maxlength="150" />
+                         onblur="value = value.toUpperCase()" required="true" requiredMessage="El Nombre Comercial es requerido." maxlength="299" />
             <p:message for="txtNombreComercial" />
 
             <p:outputLabel value="Nombre registrado:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreRegistrado" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreRegistrado}" label ="Nombre registrado" styleClass="valorEtiquetaFormulario" 
-                         onblur="value = value.toUpperCase()" required="true" requiredMessage="El Nombre Registrado es requerido." maxlength="150"/>
+                         onblur="value = value.toUpperCase()" required="true" requiredMessage="El Nombre Registrado es requerido." maxlength="299" />
             <p:message for="txtNombreRegistrado"/>
 
             <p:outputLabel value="Presidente: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtPresidente" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.representanteLegal}" styleClass="valorEtiquetaFormulario" onblur="value = value.toUpperCase()" 
-                         required="true" requiredMessage="El Presidente es requerido." maxlength="100" label ="Presidente"/>
+                         required="true" requiredMessage="El Presidente es requerido." maxlength="99" label ="Presidente"/>
             <p:message for="txtPresidente" />
-            
+
+            <p:outputLabel value="País de la controlante: *" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboPais" value="#{MbFormGrupoEmpresa.relacionSeleccionada.paisControlante}" style="width:430px" required="true" requiredMessage="El Pais es requerido.">
+                <p:ajax event="change" listener="#{MbFormGrupoEmpresa.testSelected}" 
+                        update="pnFormIdentificacionGrupoEmpresa" />
+                <f:selectItem itemLabel="País..." itemValue="" />
+                <f:selectItems value="#{MbListaDesplegable.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
+            </p:selectOneMenu>
+            <p:message for="cboPais"/>
+
             <p:outputLabel value="Tipo de conglomerado: *" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboTipoConglomerado"  value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoCongromelado}" style="width:430px" required="true" requiredMessage="El Tipo Conglomerado es requerido." >
                 <f:selectItem itemLabel="Conglomerado..." itemValue="" />
@@ -60,18 +69,9 @@
                            value="#{MbFormGrupoEmpresa.relacionSeleccionada.consorcioUnidadesTempGe}" />
             <p:message for="swtConsorcios"/>
 
-            <p:outputLabel value="País de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboPais" value="#{MbFormGrupoEmpresa.relacionSeleccionada.paisControlante}" style="width:430px" required="true" requiredMessage="El Pais es requerido.">
-                <p:ajax event="change" listener="#{MbFormGrupoEmpresa.testSelected}" 
-                        update="pnFormIdentificacionGrupoEmpresa" />
-                <f:selectItem itemLabel="País..." itemValue="" />
-                <f:selectItems value="#{MbListaDesplegable.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
-            </p:selectOneMenu>
-            <p:message for="cboPais"/>
-            
             <p:outputLabel value="Página web: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtPaginaWeb" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.paginaWeb}" styleClass="valorEtiquetaFormulario" 
-                          required="true" requiredMessage="La Página Web es requerida." maxlength="100" label ="Página web"/>
+                          required="true" requiredMessage="La Página Web es requerida." maxlength="99" label ="Página web"/>
             <p:message for="txtPaginaWeb"/>
 
             
@@ -82,7 +82,7 @@
             <h:panelGrid columns="5">
                 <p:inputText id="txtNit" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nit}" label="NIT" style="width: 250px;" 
                              required="#{MbFormGrupoEmpresa.relacionSeleccionada.paisControlante =='COLOMBIA' ? true : false}" 
-                             requiredMessage="El NIT es requerido." validatorMessage="El NIT debe contener valores númericos (0-9), Ej: 890900050" maxlength="30" >
+                             requiredMessage="El NIT es requerido." validatorMessage="El NIT debe contener valores númericos (0-9), Ej: 890900050" maxlength="15" >
                 </p:inputText>
                 <p:message for="txtNit" display="tooltip"/>
                 <p:outputLabel for="txtDigitoVerificacion" value="DV:" />
@@ -120,13 +120,13 @@
             <p:outputLabel for="txtDireccionSedePrincipal" value="Dirección sede principal:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtDireccionSedePrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario" 
                          required="#{MbFormGrupoEmpresa.relacionSeleccionada.paisControlante =='COLOMBIA' ? true : false}" 
-                         requiredMessage="La Dirección es requerida." maxlength="150" label ="Dirección sede principal" />
+                         requiredMessage="La Dirección es requerida." maxlength="149" label ="Dirección sede principal" />
             <p:message for="txtDireccionSedePrincipal"/>
 
             <p:outputLabel for="txtIndicativoTelefonoPrincipal" value="Indicativo sede principal:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtIndicativoTelefonoPrincipal" value="#{MbFormGrupoEmpresa.identificacionSeleccionada.indicativo}" styleClass="valorEtiquetaFormulario" 
                          required="#{MbFormGrupoEmpresa.relacionSeleccionada.paisControlante =='COLOMBIA' ? true : false}" 
-                         requiredMessage="El Indicativo es requerido." label ="Indicativo sede principal" maxlength="10"/>
+                         requiredMessage="El Indicativo es requerido." label ="Indicativo sede principal" maxlength="19"/>
             <p:message for="txtIndicativoTelefonoPrincipal"/>
 
             <p:outputLabel for="txtTelefonoPrincipal" value="Teléfono sede principal:" styleClass="etiquetaFormulario" />

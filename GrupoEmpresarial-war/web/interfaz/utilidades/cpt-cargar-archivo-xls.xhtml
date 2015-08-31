@@ -23,19 +23,36 @@
                     <p:dataTable id="dtInconsistenciasXls" var="fila" value="#{MbLeerExcel.listaInconsistencias}"
                                  rowIndexVar="rowIndex" emptyMessage="La consulta no genero resultados..." paginatorPosition="bottom" 
                                  paginator="true" rows="25" scrollable="true" scrollHeight="280" 
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
                                  rowsPerPageTemplate="25,50,100">
-
-                        <!--p:column headerText="#" width="25">
+                        <!--f:facet name="{Exporters}">
+                            <h:commandLink>
+                                <p:graphicImage value="/resources/icon/pdf.png" width="24"/>
+                                <p:dataExporter type="pdf" target="dtInconsistenciasXls" fileName="ReporteInconsistencias"/>
+                            </h:commandLink>
+                        </f:facet-->
+                        <!--p:column width="25">
+                            <f:facet name="header">
+                                <h:outputText value="#" />
+                            </f:facet>
                             <p:outputLabel value="#{rowIndex+1}"/>
                         </p:column-->
-                        <p:column headerText="Id" width="20">
+                        <p:column width="20">
+                            <f:facet name="header">
+                                <h:outputText value="Id" />
+                            </f:facet>
                             <p:outputLabel value="#{fila.id}"/>
                         </p:column>
-                        <p:column headerText="Hoja" width="120">
+                        <p:column width="120">
+                            <f:facet name="header">
+                                <h:outputText value="Hoja" />
+                            </f:facet>
                             <p:outputLabel value="#{fila.origen}"/>
                         </p:column>
-                        <p:column headerText="Error Variables">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Error Variables" />
+                            </f:facet>
                             <div class="ui-grid ui-grid-responsive">
                                 <ui:repeat var="variable" value="#{fila.listaInconsistencias}">
                                     <div class="ui-grid-row">

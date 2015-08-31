@@ -25,10 +25,18 @@
             </p:selectOneMenu>
             <p:message for="cboTipoRelacion" />
 
-            <p:outputLabel value="NIT de la controlante: *" styleClass="etiquetaFormulario"/>
+            <p:outputLabel value="NIT de la controlante:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNitControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" 
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El NIT de la controlante es requerido." label="NIT de la controlante" maxlength="30"/>
-            <p:message for="txtNitControlante" />
+                         styleClass="valorEtiquetaFormulario" required="false" requiredMessage="El NIT de la controlante es requerido." label="NIT de la controlante" maxlength="99"/>
+            <h:panelGrid columns="2" cellpadding="0">
+                <p:message for="txtNitControlante" />
+                <p:graphicImage id="imgAyudaNitControlante" value="/resources/icon/icono-de-ayuda.png" />
+                <p:tooltip for="imgAyudaNitControlante">
+                    <p>Si la unidad legal es controlada por más de un Grupo Empresarial, puede <br></br>
+                        ingresar el NIT y el digito de verificación de las controlantes.</p>
+                    <p>Ejemplo: 999999999-1, 999999999-1 </p>
+                </p:tooltip>
+            </h:panelGrid>
 
             <!--p:outputLabel value="Dígito de verificación: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtDigitoVerificacion" styleClass="valorEtiquetaFormulario"/>
@@ -36,14 +44,30 @@
 
             <p:outputLabel value="Nombre de la controlante: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}" onblur="value = value.toUpperCase()"
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido." maxlength="150" label="Nombre de la controlante"/>
-            <p:message for="txtNombreControlante" />
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido." maxlength="900" label="Nombre de la controlante"/>
+            <h:panelGrid columns="2" cellpadding="0">
+                <p:message for="txtNombreControlante" />
+                <p:graphicImage id="imgAyudaNombreControlante" value="/resources/icon/icono-de-ayuda.png" />
+                <p:tooltip for="imgAyudaNombreControlante">
+                    <p>Si la unidad legal es controlada por más de un Grupo Empresarial,<br></br>
+                        puede ingresar los nombres de todos los grupos.</p>
+                    <p>Ejemplo: Grupo A, Grupo B </p>
+                </p:tooltip>
+            </h:panelGrid>
 
             <p:outputLabel value="Porcentaje de participación de la controlante directa: *" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtPorcentajeParticipacionControlanteDirecta"  value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}" 
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Porcentaje de participación es requerido." maxlength="3" label="Porcentaje de participación">
+                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Porcentaje de participación es requerido." maxlength="59" label="Porcentaje de participación">
             </p:inputText>
-            <p:message for="txtPorcentajeParticipacionControlanteDirecta" />
+            <h:panelGrid columns="2" cellpadding="0">
+                <p:message for="txtPorcentajeParticipacionControlanteDirecta" />
+                <p:graphicImage id="imgAyudaPorcentajeControlante" value="/resources/icon/icono-de-ayuda.png" />
+                <p:tooltip for="imgAyudaPorcentajeControlante">
+                    <p>Si la unidad legal es controlada por más de un Grupo Empresarial,<br></br>
+                        puede ingresar los porcentajes de participación de cada uno.</p>
+                    <p>Ejemplo: 10%, 80% </p>
+                </p:tooltip>
+            </h:panelGrid>
 
             <!--h:outputText value="Saltar siguiente: " />
             <h:selectBooleanCheckbox value="#{practica.skip}" /-->
