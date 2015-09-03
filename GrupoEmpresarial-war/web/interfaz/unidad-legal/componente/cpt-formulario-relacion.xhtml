@@ -10,24 +10,33 @@
 
         <h:panelGrid columns="3" columnClasses="label, value" >
 
-            <p:outputLabel value="Situación de control: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboSituacionControl" value="#{MbFormUnidadLegal.relacionSeleccionada.situacionControl}" style="width:430px" required="true" requiredMessage="La Situación de control es requerido.">
+            <p:outputLabel for="cboSituacionControl" value="Situación de control:" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboSituacionControl" required="true" style="width:430px"
+                             value="#{MbFormUnidadLegal.relacionSeleccionada.situacionControl}" 
+                             requiredMessage="La situación de control es requerido.">
                 <f:selectItem itemLabel="Relación..." itemValue="" />
-                <f:selectItems value="#{MbListaDesplegable.listaSituaciones}" var="SituacionControl" itemLabel="#{SituacionControl.situacion}" itemValue="#{SituacionControl.situacion}"/>
+                <f:selectItems value="#{MbListaDesplegable.listaSituaciones}" var="SituacionControl" 
+                               itemLabel="#{SituacionControl.situacion}" itemValue="#{SituacionControl.situacion}"/>
             </p:selectOneMenu>
             <p:message for="cboSituacionControl" />
 
-            <p:outputLabel value="Tipo de relación: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboTipoRelacion" value="#{MbFormUnidadLegal.relacionSeleccionada.tipoRelacionUl}" style="width:430px" required="true" requiredMessage="El Tipo de relación es requerido.">
+            <p:outputLabel for="cboTipoRelacion" value="Tipo de relación:" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboTipoRelacion" required="true" style="width:430px" 
+                             value="#{MbFormUnidadLegal.relacionSeleccionada.tipoRelacionUl}" 
+                             requiredMessage="El tipo de relación es requerido.">
                 <f:selectItem itemLabel="Relación..." itemValue="" />
-                <f:selectItem itemLabel="FILIAL" itemValue="FILIAL" />
-                <f:selectItem itemLabel="SUBSIDIARIA" itemValue="SUBSIDIARIA" />
+                <f:selectItems value="#{MbListaDesplegable.listaRelaciones}" var="TipoRelacion" 
+                               itemLabel="#{TipoRelacion.tipo}" itemValue="#{TipoRelacion.tipo}"/>
             </p:selectOneMenu>
             <p:message for="cboTipoRelacion" />
 
             <p:outputLabel value="NIT de la controlante:" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNitControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" 
-                         styleClass="valorEtiquetaFormulario" required="false" requiredMessage="El NIT de la controlante es requerido." label="NIT de la controlante" maxlength="99"/>
+            <p:inputText id="txtNitControlante" required="false" label="NIT de la controlante" maxlength="99"
+                         value="#{MbFormUnidadLegal.relacionSeleccionada.nitControlante}" styleClass="valorEtiquetaFormulario"
+                         requiredMessage="El NIT de la controlante es requerido." 
+                         validatorMessage="Formato de NIT incorrecto, Ejemplo: 999999999-1, 999999999-1">
+                <f:validateRegex pattern="(^[0-9,-]+$)?" />
+            </p:inputText>
             <h:panelGrid columns="2" cellpadding="0">
                 <p:message for="txtNitControlante" />
                 <p:graphicImage id="imgAyudaNitControlante" value="/resources/icon/icono-de-ayuda.png" />
@@ -42,22 +51,27 @@
             <p:inputText id="txtDigitoVerificacion" styleClass="valorEtiquetaFormulario"/>
             <p:message for="txtDigitoVerificacion" /-->
 
-            <p:outputLabel value="Nombre de la controlante: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNombreControlante" value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}" onblur="value = value.toUpperCase()"
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Nombre es requerido." maxlength="900" label="Nombre de la controlante"/>
+            <p:outputLabel for="txtNombreControlante" value="Nombre de la controlante:" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtNombreControlante" label="Nombre de la controlante" required="true" maxlength="900"
+                         value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}" 
+                         onblur="value = value.toUpperCase()" styleClass="valorEtiquetaFormulario"
+                         requiredMessage="El nombre es requerido."/>
             <h:panelGrid columns="2" cellpadding="0">
                 <p:message for="txtNombreControlante" />
                 <p:graphicImage id="imgAyudaNombreControlante" value="/resources/icon/icono-de-ayuda.png" />
                 <p:tooltip for="imgAyudaNombreControlante">
                     <p>Si la unidad legal es controlada por más de un Grupo Empresarial,<br></br>
                         puede ingresar los nombres de todos los grupos.</p>
-                    <p>Ejemplo: Grupo A, Grupo B </p>
+                    <p>Ejemplo: Controlante A; Controlante B </p>
                 </p:tooltip>
             </h:panelGrid>
 
             <p:outputLabel value="Porcentaje de participación de la controlante directa: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPorcentajeParticipacionControlanteDirecta"  value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}" 
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Porcentaje de participación es requerido." maxlength="59" label="Porcentaje de participación">
+            <p:inputText id="txtPorcentajeParticipacionControlanteDirecta" required="true" label="Porcentaje de participación" maxlength="59"
+                         value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}" styleClass="valorEtiquetaFormulario"
+                         requiredMessage="El porcentaje de participación es requerido." 
+                         validatorMessage="Formato de datos incorrecto, Ejemplo: 0,5-0,5">
+                <f:validateRegex pattern="^[0-9,-]+$" />
             </p:inputText>
             <h:panelGrid columns="2" cellpadding="0">
                 <p:message for="txtPorcentajeParticipacionControlanteDirecta" />
@@ -65,7 +79,7 @@
                 <p:tooltip for="imgAyudaPorcentajeControlante">
                     <p>Si la unidad legal es controlada por más de un Grupo Empresarial,<br></br>
                         puede ingresar los porcentajes de participación de cada uno.</p>
-                    <p>Ejemplo: 10%, 80% </p>
+                    <p>Ejemplo: 0,5-0,5 </p>
                 </p:tooltip>
             </h:panelGrid>
 

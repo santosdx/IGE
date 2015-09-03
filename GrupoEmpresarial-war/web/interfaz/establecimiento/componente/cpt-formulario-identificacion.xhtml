@@ -10,48 +10,66 @@
 
         <h:panelGrid columns="3" columnClasses="label, value" >
 
-            <p:outputLabel  value="Nombre registrado:" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNombreEstablecimiento" value="#{MbFormEstablecimiento.identificacionSeleccionada.nombreRegistrado}" styleClass="valorEtiquetaFormulario" 
-                         maxlength="299" onblur="value = value.toUpperCase()" required="true" requiredMessage="El nombre registrado es requerido." label="Nombre registrado"/>
+            <p:outputLabel for="txtNombreEstablecimiento" value="Nombre registrado:" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtNombreEstablecimiento" label="Nombre registrado" required="true" maxlength="299"
+                         value="#{MbFormEstablecimiento.identificacionSeleccionada.nombreRegistrado}" styleClass="valorEtiquetaFormulario" 
+                         onblur="value = value.toUpperCase().trim()" requiredMessage="El nombre registrado es requerido." />
             <p:message for="txtNombreEstablecimiento" />
 
-            <p:outputLabel value="Martícula mercantil del establecimiento: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtMatriculaMercantil" value="#{MbFormEstablecimiento.identificacionSeleccionada.matriculaMercantil}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Martícula mercantil del establecimiento es requerida." maxlength="19" label="Martícula mercantil del establecimiento"/>
+            <p:outputLabel for="txtMatriculaMercantil" value="Martícula mercantil del establecimiento:" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtMatriculaMercantil" label="Martícula mercantil del establecimiento" required="true" maxlength="19"
+                         value="#{MbFormEstablecimiento.identificacionSeleccionada.matriculaMercantil}" styleClass="valorEtiquetaFormulario"  
+                         requiredMessage="La martícula mercantil del establecimiento es requerida."
+                         onblur="value = value.trim()"/>
             <p:message for="txtMatriculaMercantil" />
 
-            <p:outputLabel value="Tipo de establecimiento: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboTipoEstablecimiento" value="#{MbFormEstablecimiento.identificacionSeleccionada.tipoEstablecimiento}" style="width:430px" required="true" requiredMessage="El Tipo de establecimieto es requerido.">
+            <p:outputLabel for="cboTipoEstablecimiento" value="Tipo de establecimiento:" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboTipoEstablecimiento" required="true" 
+                             value="#{MbFormEstablecimiento.identificacionSeleccionada.tipoEstablecimiento}" style="width:430px" 
+                             requiredMessage="El tipo de establecimieto es requerido.">
                 <f:selectItem itemLabel="Establecimiento..." itemValue="" />
-                <f:selectItems value="#{MbListaDesplegable.listaEstablecimeintos}" var="Establecimiento" itemLabel="#{Establecimiento.tipo}" itemValue="#{Establecimiento.tipo}"/>
+                <f:selectItems value="#{MbListaDesplegable.listaEstablecimeintos}" var="Establecimiento" 
+                               itemLabel="#{Establecimiento.tipo}" itemValue="#{Establecimiento.tipo}"/>
             </p:selectOneMenu>
             <p:message for="cboTipoEstablecimiento" />
 
-            <p:outputLabel value="Departamento: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboDepartamento" value="#{MbFormEstablecimiento.identificacionSeleccionada.departamento}" style="width:430px" required="true" requiredMessage="El Departamento es requerido.">
+            <p:outputLabel for="cboDepartamento" value="Departamento:" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboDepartamento" required="true" 
+                             value="#{MbFormEstablecimiento.identificacionSeleccionada.departamento}" style="width:430px" 
+                             requiredMessage="El departamento es requerido.">
                 <f:selectItem itemLabel="Departamento..." itemValue="" />
                 <p:ajax event="change" listener="#{MbListaDesplegable.seleccionDepartamentoEstablecimiento}" update="cboMunicipio"/>
-                <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
+                <f:selectItems value="#{MbListaDesplegable.listaDepartamentos}" var="Departamento" 
+                               itemLabel="#{Departamento.nombre}" itemValue="#{Departamento.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboDepartamento" />
 
-            <p:outputLabel value="Municipio: *" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboMunicipio" value="#{MbFormEstablecimiento.identificacionSeleccionada.municipio}" style="width:430px" required="true" requiredMessage="El Municipio es requerido.">
+            <p:outputLabel for="cboMunicipio" value="Municipio:" styleClass="etiquetaFormulario"/>
+            <p:selectOneMenu id="cboMunicipio" required="true" 
+                             value="#{MbFormEstablecimiento.identificacionSeleccionada.municipio}" style="width:430px" 
+                             requiredMessage="El municipio es requerido.">
                 <f:selectItem itemLabel="Municipio..." itemValue="" />
-                <f:selectItems value="#{MbListaDesplegable.listaMunicipios}" var="Municipio" itemLabel="#{Municipio.nombre}" itemValue="#{Municipio.nombre}"/>
+                <f:selectItems value="#{MbListaDesplegable.listaMunicipios}" var="Municipio" 
+                               itemLabel="#{Municipio.nombre}" itemValue="#{Municipio.nombre}"/>
             </p:selectOneMenu>
             <p:message for="cboMunicipio" />
 
-            <p:outputLabel value="Dirección del establecimiento: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtDireccion" value="#{MbFormEstablecimiento.identificacionSeleccionada.direccion}" onblur="value = value.toUpperCase()"
-                         styleClass="valorEtiquetaFormulario" required="true" requiredMessage="La Dirección es requerida." maxlength="299" label="Dirección del establecimiento"/>
+            <p:outputLabel for="txtDireccion" value="Dirección del establecimiento:" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtDireccion" label="Dirección del establecimiento" required="true" maxlength="299"
+                         value="#{MbFormEstablecimiento.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario"
+                         onblur="value = value.toUpperCase().trim()" requiredMessage="La dirección es requerida."/>
             <p:message for="txtDireccion" />
 
-            <p:outputLabel value="Indicativo *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtIndicativoTelefono" value="#{MbFormEstablecimiento.identificacionSeleccionada.indicativo}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Indicativo es requerido." label ="Indicativo " maxlength="9"/>
+            <p:outputLabel for="txtIndicativoTelefono" value="Indicativo" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtIndicativoTelefono" label ="Indicativo " required="true"  maxlength="9" 
+                         value="#{MbFormEstablecimiento.identificacionSeleccionada.indicativo}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="El indicativo es requerido." />
             <p:message for="txtIndicativoTelefono"/>
 
-            <p:outputLabel value="Teléfono: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtTelefono" value="#{MbFormEstablecimiento.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Teléfono es requerido." maxlength="29" label="Teléfono"/>
+            <p:outputLabel for="txtTelefono" value="Teléfono:" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtTelefono" label="Teléfono" required="true" maxlength="29"
+                         value="#{MbFormEstablecimiento.identificacionSeleccionada.telefono}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="El teléfono es requerido."/>
             <p:message for="txtTelefono" />
 
             <!--p:outputLabel value="Estado: *" styleClass="etiquetaFormulario"/>
@@ -62,13 +80,21 @@
             </p:selectOneMenu>
             <p:message for="cboEstado" /-->
 
-            <p:outputLabel value="Código de la actividad económica: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtCodigoActividadEconomica" value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadPrincipal}" styleClass="valorEtiquetaFormulario" required="true" requiredMessage="El Código de la actividad económica es requerido." 
-                         label="Código de la actividad económica"  maxlength="4"/>
+            <p:outputLabel for="txtCodigoActividadEconomica" value="Código de la actividad económica:" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtCodigoActividadEconomica" required="true" label="Código de la actividad económica"  maxlength="4"
+                         value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadPrincipal}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="El código de la actividad económica es requerido." 
+                         validatorMessage="Formato de actividad incorrecto, Ej: 0189">
+                <f:validateRegex pattern="^[0-9]+$" />
+            </p:inputText>
             <p:message for="txtCodigoActividadEconomica" />
 
             <p:outputLabel value="Otras actividades:" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtOtrasActividades" value="#{MbFormEstablecimiento.identificacionSeleccionada.otrasActividadesEst}" styleClass="valorEtiquetaFormulario" required="false" maxlength="39" label="Otras actividades"/>
+            <p:inputText id="txtOtrasActividades" label="Otras actividades" required="false" maxlength="39" 
+                         value="#{MbFormEstablecimiento.identificacionSeleccionada.otrasActividadesEst}" styleClass="valorEtiquetaFormulario" 
+                         validatorMessage="Caracteres numericos [0-9] y la [,] para separara cada actividad.">
+                <f:validateRegex pattern="(^[0-9,]+$)?" />
+            </p:inputText>
             <h:panelGrid>
                 <p:message for="txtOtrasActividades" />
                 <p:graphicImage id="imgAyudaOtraActividade" value="/resources/icon/icono-de-ayuda.png" />
@@ -80,11 +106,13 @@
             </h:panelGrid>
 
             <p:outputLabel value="¿Es una actividad auxiliar?: *" styleClass="etiquetaFormulario"/>
-            <p:inputSwitch id="txtEsUnaActividadAuxiliar" value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadAuxiliarEst}" onLabel="SI" offLabel="NO"/>
+            <p:inputSwitch id="txtEsUnaActividadAuxiliar" onLabel="SI" offLabel="NO"
+                           value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadAuxiliarEst}" />
             <p:message for="txtEsUnaActividadAuxiliar" />
 
             <p:outputLabel value="El establecimiento es unidad auxiliar: *" styleClass="etiquetaFormulario"/>
-            <p:inputSwitch id="txtEsUnidadAuxiliar" value="#{MbFormEstablecimiento.identificacionSeleccionada.unidadAuxiliarUl}" onLabel="SI" offLabel="No"/>
+            <p:inputSwitch id="txtEsUnidadAuxiliar" onLabel="SI" offLabel="No"
+                           value="#{MbFormEstablecimiento.identificacionSeleccionada.unidadAuxiliarUl}" />
             <p:message for="txtEsUnidadAuxiliar" />
 
             <!--h:outputText value="Saltar siguiente: " />

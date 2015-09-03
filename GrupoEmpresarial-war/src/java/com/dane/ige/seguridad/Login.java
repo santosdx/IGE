@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -33,6 +34,7 @@ import org.primefaces.model.menu.MenuModel;
  *
  * @author srojasm
  */
+//@ManagedBean(name = "MbLogin")
 @SessionScoped
 public class Login implements Serializable {
 
@@ -69,7 +71,8 @@ public class Login implements Serializable {
      *
      * @param event
      */
-    public void login(ActionEvent event) {
+    //public void login(ActionEvent event) {
+    public void login() {
 
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         String ctxPath = ((ServletContext) ctx.getContext()).getContextPath();
@@ -83,9 +86,9 @@ public class Login implements Serializable {
         if (usuarioLogueado != null) {
             if (getUsuarioLogueado().getPerfil() == null) {
                 message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un perfil");
-            } else if(getUsuarioLogueado().getIdIdentificacion() == null){
+            } else if (getUsuarioLogueado().getIdIdentificacion() == null) {
                 message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un grupo empresarial");
-            }else{
+            } else {
                 setLoggedIn(true);
                 message = construirMenuLogin();
             }
@@ -99,9 +102,11 @@ public class Login implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
 
         if (isLoggedIn()) {
+            System.out.println("Login-OK");
             context.addCallbackParam("view", ctxPath + "/index.xhtml");
         }
     }
+
 
     /**
      * Método que permite contruir dinamicamente el menú principal del

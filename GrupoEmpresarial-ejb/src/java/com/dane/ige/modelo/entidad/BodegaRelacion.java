@@ -53,8 +53,6 @@ public class BodegaRelacion implements Serializable {
     private String nombreControlante;
     @Column(name = "porcentaje_controlante_ul")
     private String porcentajeControlanteul;
-    @Column(name = "perfilador")
-    private String perfilador;
 
     public BodegaRelacion() {
     }
@@ -171,14 +169,6 @@ public class BodegaRelacion implements Serializable {
         this.porcentajeControlanteul = porcentajeControlanteul;
     }
 
-    public String getPerfilador() {
-        return perfilador;
-    }
-
-    public void setPerfilador(String perfilador) {
-        this.perfilador = perfilador;
-    }
-
     //--
     @Override
     public int hashCode() {
@@ -214,7 +204,6 @@ public class BodegaRelacion implements Serializable {
         resultado.put("NIT_CONTROLANTE", Texto.blankText(nitControlante + ""));
         resultado.put("NOMBRE_CONTROLANTE", Texto.blankText(nombreControlante + ""));
         resultado.put("PORCENTAJE_CONTROLANTE_UL", Texto.blankText(porcentajeControlanteul + ""));
-        resultado.put("PERFILADOR", Texto.blankText(perfilador + ""));
         return resultado;
     }
 

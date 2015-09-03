@@ -63,7 +63,7 @@ public class BodegaIdentificacion implements Serializable {
     @Column(name = "telefono")
     private Long telefono;
     @Column(name = "indicativo")
-    private String indicativo;
+    private Long indicativo;
     @Column(name = "pagina_web")
     private String paginaWeb;
     @Column(name = "correo_electronico")
@@ -71,7 +71,7 @@ public class BodegaIdentificacion implements Serializable {
     @Column(name = "representante_legal")
     private String representanteLegal;
     @Column(name = "actividad_principal")
-    private Long actividadPrincipal;
+    private String actividadPrincipal;
     @Column(name = "actividad_secundaria")
     private String actividadSecundaria;
     @Column(name = "unidad_auxiliar_ul")
@@ -254,11 +254,11 @@ public class BodegaIdentificacion implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getIndicativo() {
+    public Long getIndicativo() {
         return indicativo;
     }
 
-    public void setIndicativo(String indicativo) {
+    public void setIndicativo(Long indicativo) {
         this.indicativo = indicativo;
     }
 
@@ -286,11 +286,11 @@ public class BodegaIdentificacion implements Serializable {
         this.representanteLegal = representanteLegal;
     }
 
-    public Long getActividadPrincipal() {
+    public String getActividadPrincipal() {
         return actividadPrincipal;
     }
 
-    public void setActividadPrincipal(Long actividadPrincipal) {
+    public void setActividadPrincipal(String actividadPrincipal) {
         this.actividadPrincipal = actividadPrincipal;
     }
 

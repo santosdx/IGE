@@ -7,12 +7,12 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <f:facet name="first">
-                <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-            </f:facet>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        </f:facet>
 
-            <link type="image/vnd.microsoft.icon" rel="shortcut icon" href="resources/icon/dane.ico"/>
+        <link type="image/vnd.microsoft.icon" rel="shortcut icon" href="resources/icon/dane.ico"/>
 
         <h:outputStylesheet library="css" name="general.css" />
         <h:outputStylesheet library="css" name="titulos.css" />
@@ -34,45 +34,46 @@
             </p:layoutUnit-->
 
             <p:layoutUnit position="center" >
+                <h:form id="frmLogin">
+                    <!--div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2"></div>
+                            <div class="ui-grid-col-3" style="text-align: right;">
+                                <p:graphicImage value="/resources/imagen/acceso.png" width="160" height="160"/>
+                            </div>
+                            <div class="ui-grid-col-4" style="text-align: left;">
+                                <ui:include src="interfaz/usuario/componente/cpt-acceso-sistema.xhtml"/>
+                            </div>
+                            <div class="ui-grid-col-3"></div>
+                        </div>
+                    </div>
+                    <div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-3"></div>
+                            <div class="ui-grid-col-6">
+                                <h3 class="titulo-left-h3">Atención</h3>
+                                <p>El este contenido está restringido por reserva del propietario del servicio; Si usted es un usuario autorizado, por favor ingrese los datos de usuario y contraseña asignados en sus las credenciales. </p>
+                            </div>
+                            <div class="ui-grid-col-3"></div>
+                        </div>
+                    </div-->
 
-                <!--div class="ui-grid ui-grid-responsive">
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2"></div>
-                        <div class="ui-grid-col-3" style="text-align: right;">
-                            <p:graphicImage value="/resources/imagen/acceso.png" width="160" height="160"/>
-                        </div>
-                        <div class="ui-grid-col-4" style="text-align: left;">
-                            <ui:include src="interfaz/usuario/componente/cpt-acceso-sistema.xhtml"/>
-                        </div>
-                        <div class="ui-grid-col-3"></div>
-                    </div>
-                </div>
-                <div class="ui-grid ui-grid-responsive">
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-3"></div>
-                        <div class="ui-grid-col-6">
-                            <h3 class="titulo-left-h3">Atención</h3>
-                            <p>El este contenido está restringido por reserva del propietario del servicio; Si usted es un usuario autorizado, por favor ingrese los datos de usuario y contraseña asignados en sus las credenciales. </p>
-                        </div>
-                        <div class="ui-grid-col-3"></div>
-                    </div>
-                </div-->
-                <h:form>
                     <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
                     <div class="ui-grid ui-grid-responsive">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">&nbsp;</div>
                             <div class="ui-grid-col-8">
                                 <p:outputLabel value="#{aplicacionPrincipal.sistemaInfo.textoBienvenida}" escape="false"/>
-                                    <center>
-                                        <p:commandButton value="Ingresar" id="btnIngresar" onclick="PF('dlg').show()" icon="fa-share"/>
-                                    </center>    
+                                <center>
+                                    <p:commandButton value="Ingresar" id="btnIngresar" onclick="PF('dlg').show()" icon="fa-share"/>
+                                </center>
                             </div>
                             <div class="ui-grid-col-2">&nbsp;</div>
                         </div>
                     </div>
 
                     <p:dialog header="Datos de acceso" widgetVar="dlg" resizable="false" modal="false">
+
                         <h:panelGrid columns="2" cellpadding="5">
                             <h:outputLabel for="username" value="Usuario:" style="display: block; margin-bottom: 10px; margin-top: 5px; padding-right: 10px;  text-align: right;"/>
                             <p:inputText id="username" value="#{MbLogin.username}" 
@@ -83,25 +84,25 @@
                                         required="true" label="password" requiredMessage="Contraseña requerida" />
 
                             <f:facet name="footer">
-                                <p:commandButton value="Aceptar" update="growl" actionListener="#{MbLogin.login}" 
-                                                 oncomplete="manejarLogin(xhr, status, args)" 
-                                                 style="float: right;"/>
+                                <p:commandButton id="btnLogin" value="Aceptar" update="growl" style="float: right;"
+                                                 action="#{MbLogin.login}" oncomplete="manejarLogin(xhr, status, args)"/>
                             </f:facet>  
                         </h:panelGrid>
+
                     </p:dialog>
-
-                    <script type="text/javascript">
-                        function manejarLogin(xhr, status, args) {
-                            if (args.loggedIn) {
-                                PF('dlg').hide();
-                                setTimeout(function () {
-                                    window.location = args.view;
-                                }, 500);
-                            }
-                        }
-                    </script>
-
                 </h:form>
+                <script type="text/javascript">
+                    function manejarLogin(xhr, status, args) {
+                        if (args.loggedIn) {
+                            PF('dlg').hide();
+                            setTimeout(function() {
+                                window.location = args.view;
+                            }, 500);
+                        }
+                    }
+                </script>
+
+
             </p:layoutUnit>
 
             <p:layoutUnit position="south" closable="true" collapsible="true" styleClass="cajaPiePagina">

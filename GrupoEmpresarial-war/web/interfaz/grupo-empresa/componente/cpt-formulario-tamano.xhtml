@@ -11,13 +11,14 @@
         <h:panelGrid columns="3">
 
             <!--
-            <h:outputText value="Información con corte a: " styleClass="etiquetaFormulario"/>
+            <p:outputLabel value="Información con corte a: " styleClass="etiquetaFormulario"/>
             <p:inputText styleClass="valorEtiquetaFormulario"/>
             -->
 
-            <h:outputText value="Activo: * $" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtActivo" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario" label="Activo" maxlength="19"
-                         required="true" requiredMessage="El Activo es requerido." validatorMessage="Los Activos debe contener valores númericos (0-9). Ej: 7500400" >
+            <p:outputLabel for="txtActivo" value="Activo: $" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtActivo" label="Activo" required="true" maxlength="19" 
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.activo}" styleClass="valorEtiquetaFormulario"
+                          requiredMessage="Los activos son requeridos." validatorMessage="Los activos debe contener valores númericos (0-9). Ej: 7500400" >
                 <f:convertNumber locale="es_CO" minFractionDigits="0" />
             </p:inputText>
             <h:panelGrid columns="2" cellpadding="0">
@@ -28,64 +29,73 @@
                 </p:tooltip>
             </h:panelGrid>
 
-            <h:outputText value="Pasivo: * $" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPasivo" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario" label="Pasivo"  maxlength="19"
-                         required="true" requiredMessage="El Pasivo es requerido." validatorMessage="El Pasivo debe contener valores númericos (0-9). Ej: 7500400" >
+            <p:outputLabel for="txtPasivo" value="Pasivo: $" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtPasivo" label="Pasivo" required="true" maxlength="19"
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.pasivo}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="El pasivo es requerido." validatorMessage="El pasivo debe contener valores númericos (0-9). Ej: 7500400" >
                 <f:convertNumber locale="es_CO" minFractionDigits="0" />
             </p:inputText>
             <p:message for="txtPasivo" />
 
-            <h:outputText value="Patrimonio: * $" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPatrimonio" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario" label="Patrimonio"  maxlength="19"
-                         required="true" requiredMessage="El Patrimonio es requerido." validatorMessage="El Patrimonio debe contener valores númericos (0-9). Ej: 7500400" >
+            <p:outputLabel for="txtPatrimonio" value="Patrimonio: $" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtPatrimonio" label="Patrimonio" required="true" maxlength="19"
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.patrimonio}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="El patrimonio es requerido." validatorMessage="El patrimonio debe contener valores númericos (0-9). Ej: 7500400" >
                 <f:convertNumber locale="es_CO" minFractionDigits="0" />
             </p:inputText>
             <p:message for="txtPatrimonio" />
 
-            <h:outputText value="Ingresos operacionales: * $" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtIngresosOperacionales" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario" label="Ingresos operacionales"  maxlength="19"
-                         required="true" requiredMessage="Los Ingresos operacionales son requeridos." validatorMessage="Los Ingresos Operacionales debe contener valores númericos (0-9). Ej: 7500400">
+            <p:outputLabel for="txtIngresosOperacionales" value="Ingresos operacionales: $" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtIngresosOperacionales" label="Ingresos operacionales" required="true" maxlength="19"
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ingresosOperacionales}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="Los ingresos operacionales son requeridos." validatorMessage="Los ingresos Operacionales debe contener valores númericos (0-9). Ej: 7500400">
                 <f:convertNumber locale="es_CO" minFractionDigits="0" />
             </p:inputText>
             <p:message for="txtIngresosOperacionales" />
 
-            <h:outputText value="Gastos operacionales: * $" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtGastosOperacionales" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.gastosOperacionales}" styleClass="valorEtiquetaFormulario" label="Gastos operacionales"  maxlength="19"
-                         required="true" requiredMessage="Los Gastos operacionales son requeridos." validatorMessage="Los Gsatos Operacionales debe contener valores númericos (0-9). Ej: 7500400">
+            <p:outputLabel for="txtGastosOperacionales" value="Gastos operacionales: $" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtGastosOperacionales" label="Gastos operacionales" required="true" maxlength="19"
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.gastosOperacionales}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="Los gastos operacionales son requeridos." validatorMessage="Los gsatos Operacionales debe contener valores númericos (0-9). Ej: 7500400">
                 <f:convertNumber locale="es_CO" minFractionDigits="0" />
             </p:inputText>
             <p:message for="txtGastosOperacionales" />
 
-            <h:outputText value="Utilidad neta: * $" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtUtilidadNeta" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario" label="Utilidad neta"  maxlength="19"
-                         required="true" requiredMessage="La Utilidad neta es requerida." validatorMessage="La Utilidad Neta debe contener valores númericos (0-9). Ej: 7500400">
+            <p:outputLabel for="txtUtilidadNeta" value="Utilidad neta: $" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtUtilidadNeta" label="Utilidad neta" required="true" maxlength="19"
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="La Utilidad neta es requerida." validatorMessage="La Utilidad Neta debe contener valores númericos (0-9). Ej: 7500400">
                 <f:convertNumber locale="es_CO" minFractionDigits="0" />
             </p:inputText>
             <p:message for="txtUtilidadNeta" />
 
-            <h:outputText value="EBITDA: * $" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtEbitada" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario" label="EBITDA"  maxlength="19"
-                         required="true" requiredMessage="El EBITDA es requerido." validatorMessage="El EBITDA debe contener valores númericos (0-9). Ej: 7500400">
+            <p:outputLabel for="txtEbitada" value="EBITDA: $" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtEbitada" label="EBITDA" required="true" maxlength="19"
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="El EBITDA es requerido." validatorMessage="El EBITDA debe contener valores númericos (0-9). Ej: 7500400">
                 <f:convertNumber locale="es_CO" minFractionDigits="0" />
             </p:inputText>
             <p:message for="txtEbitada" />
 
-            <h:outputText value="Personal ocupado: *" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtPersonalOcupado" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.personalOcupado}" styleClass="valorEtiquetaFormulario" label="Personal ocupado" maxlength="9"
-                         required="true" requiredMessage="El Personal ocupado es requerido." validatorMessage="El Personal Ocupado debe contener valores númericos (0-9). Ej: 100" />
+            <p:outputLabel for="txtPersonalOcupado" value="Personal ocupado:" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtPersonalOcupado" label="Personal ocupado" required="true" maxlength="9"
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.personalOcupado}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="El personal ocupado es requerido." validatorMessage="El personal Ocupado debe contener valores númericos (0-9). Ej: 100" />
             <p:message for="txtPersonalOcupado" />
 
-            <h:outputText value="Número de hombres ocupados: " styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNumeroHombresOcupados" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.hombresOcupados}" styleClass="valorEtiquetaFormulario" label="Número de hombres ocupados" maxlength="9"
-                         required="false" requiredMessage="El Número de hombres ocupados es requerido." validatorMessage="El Número de Hombres Ocupados debe contener valores númericos (0-9). Ej: 100" />
+            <p:outputLabel for="txtNumeroHombresOcupados" value="Número de hombres ocupados: " styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtNumeroHombresOcupados" label="Número de hombres ocupados" required="false" maxlength="9"
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.hombresOcupados}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="El número de hombres ocupados es requerido." validatorMessage="El número de Hombres Ocupados debe contener valores númericos (0-9). Ej: 100" />
             <p:message for="txtNumeroHombresOcupados" />
 
-            <h:outputText value="Número de mujeres ocupadas: " styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtNumeroMujeresOcupadas" value="#{MbFormGrupoEmpresa.tamanoSeleccionado.mujeresOcupadas}" styleClass="valorEtiquetaFormulario" label="Número de mujeres ocupadas" maxlength="9"
-                         required="false" requiredMessage="El Número de mujeres ocupadas es requerido." validatorMessage="El Número de Mujeres Ocupadas debe contener valores númericos (0-9). Ej: 100" />
+            <p:outputLabel for="txtNumeroMujeresOcupadas" value="Número de mujeres ocupadas: " styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtNumeroMujeresOcupadas" label="Número de mujeres ocupadas" required="false" maxlength="9"
+                         value="#{MbFormGrupoEmpresa.tamanoSeleccionado.mujeresOcupadas}" styleClass="valorEtiquetaFormulario" 
+                         requiredMessage="El número de mujeres ocupadas es requerido." validatorMessage="El número de Mujeres Ocupadas debe contener valores númericos (0-9). Ej: 100" />
             <p:message for="txtNumeroMujeresOcupadas" />
 
-            <h:outputText value="Observaciones: " styleClass="etiquetaFormulario" />
+            <p:outputLabel value="Observaciones: " styleClass="etiquetaFormulario" />
             <p:inputTextarea value="#{MbFormGrupoEmpresa.tamanoSeleccionado.observaciones}" rows="10" cols="66" label="Observaciones" maxlength="800"/>
 
         </h:panelGrid>

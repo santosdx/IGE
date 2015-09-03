@@ -5,19 +5,23 @@ import com.dane.ige.modelo.entidad.EstadoMatricula;
 import com.dane.ige.modelo.entidad.Municipio;
 import com.dane.ige.modelo.entidad.Pais;
 import com.dane.ige.modelo.entidad.SituacionControl;
+import com.dane.ige.modelo.entidad.TipoConglomerado;
 import com.dane.ige.modelo.entidad.TipoControl;
 import com.dane.ige.modelo.entidad.TipoEmpresa;
 import com.dane.ige.modelo.entidad.TipoEstablecimiento;
 import com.dane.ige.modelo.entidad.TipoOrganizacion;
+import com.dane.ige.modelo.entidad.TipoRelacion;
 import com.dane.ige.modelo.local.administracion.DepartamentoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.EstadoMatriculaFacadeLocal;
 import com.dane.ige.modelo.local.administracion.MunicipioFacadeLocal;
 import com.dane.ige.modelo.local.administracion.PaisFacadeLocal;
 import com.dane.ige.modelo.local.administracion.SituacionControlFacadeLocal;
+import com.dane.ige.modelo.local.administracion.TipoConglomeradoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.TipoControlFacadeLocal;
 import com.dane.ige.modelo.local.administracion.TipoEmpresaFacadeLocal;
 import com.dane.ige.modelo.local.administracion.TipoEstablecimientoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.TipoOrganizacionFacadeLocal;
+import com.dane.ige.modelo.local.administracion.TipoRelacionFacadeLocal;
 import com.dane.ige.negocio.FormularioEstablecimiento;
 import com.dane.ige.negocio.FormularioGrupoEmpresa;
 import com.dane.ige.negocio.FormularioUnidadLegal;
@@ -53,7 +57,11 @@ public class ListasDesplegablesFormularios {
     @EJB
     private SituacionControlFacadeLocal eJBServicioSituacion;
     @EJB
+    private TipoRelacionFacadeLocal eJBServicioRelacion;
+    @EJB
     private TipoControlFacadeLocal eJBServicioControl;
+    @EJB
+    private TipoConglomeradoFacadeLocal eJBServicioConglomerado;
     @EJB
     private TipoEmpresaFacadeLocal eJBServicioEmpresa;
     @EJB
@@ -66,7 +74,9 @@ public class ListasDesplegablesFormularios {
     private List<EstadoMatricula> listaMatriculas;
     private List<Municipio> listaMunicipios;
     private List<SituacionControl> listaSituaciones;
+    private List<TipoRelacion> listaRelaciones;
     private List<TipoControl> listaControles;
+    private List<TipoConglomerado> listaConglomerados;
     private List<TipoEmpresa> listaEmpresas;
     private List<TipoEstablecimiento> listaEstablecimeintos;
     private List<TipoOrganizacion> listaOrganizaciones;
@@ -87,7 +97,9 @@ public class ListasDesplegablesFormularios {
         setListaDepartamentos(eJBServicioDepartamento.findAllInOrderByNameAsc());
         setListaMatriculas(eJBServicioMatricula.findAllInOrderByNameAsc());
         setListaMunicipios(eJBServicioMunicipio.findAllInOrderByNameAsc());
+        setListaRelaciones(eJBServicioRelacion.findAllInOrderByNameAsc());
         setListaSituaciones(eJBServicioSituacion.findAllInOrderByNameAsc());
+        setListaConglomerados(eJBServicioConglomerado.findAllInOrderByNameAsc());
         setListaControles(eJBServicioControl.findAllInOrderByNameAsc());
         setListaEmpresas(eJBServicioEmpresa.findAllInOrderByNameAsc());
         setListaEstablecimeintos(eJBServicioEstablecimiento.findAllInOrderByNameAsc());
@@ -95,30 +107,33 @@ public class ListasDesplegablesFormularios {
     }
 
     /**
-     * Método listener que se dispara al seleccionar un item de la lista de 
-     * departamentos, permitiendo consultar y cargar el listado de municipios
-     * de acuerdo al departamento seleccionado del Formulario Grupo Empresarial
-     * @param event 
+     * Método listener que se dispara al seleccionar un item de la lista de
+     * departamentos, permitiendo consultar y cargar el listado de municipios de
+     * acuerdo al departamento seleccionado del Formulario Grupo Empresarial
+     *
+     * @param event
      */
     public void seleccionDepartamentoGrupoEmpresarial(AjaxBehaviorEvent event) {
         setListaMunicipios(eJBServicioMunicipio.findAllByDepartamentoOrderAsc(getServicioFormularioGrupoEmpresa().getIdentificacionSeleccionada().getDepartamento()));
     }
 
     /**
-     * Método listener que se dispara al seleccionar un item de la lista de 
-     * departamentos, permitiendo consultar y cargar el listado de municipios
-     * de acuerdo al departamento seleccionado del Formulario Unidad Legal
-     * @param event 
+     * Método listener que se dispara al seleccionar un item de la lista de
+     * departamentos, permitiendo consultar y cargar el listado de municipios de
+     * acuerdo al departamento seleccionado del Formulario Unidad Legal
+     *
+     * @param event
      */
     public void seleccionDepartamentoUnidadLegal(AjaxBehaviorEvent event) {
         setListaMunicipios(eJBServicioMunicipio.findAllByDepartamentoOrderAsc(getServicioFormularioUnidadLegal().getIdentificacionSeleccionada().getDepartamento()));
     }
 
     /**
-     * Método listener que se dispara al seleccionar un item de la lista de 
-     * departamentos, permitiendo consultar y cargar el listado de municipios
-     * de acuerdo al departamento seleccionado del Formulario Establecimiento
-     * @param event 
+     * Método listener que se dispara al seleccionar un item de la lista de
+     * departamentos, permitiendo consultar y cargar el listado de municipios de
+     * acuerdo al departamento seleccionado del Formulario Establecimiento
+     *
+     * @param event
      */
     public void seleccionDepartamentoEstablecimiento(AjaxBehaviorEvent event) {
         setListaMunicipios(eJBServicioMunicipio.findAllByDepartamentoOrderAsc(getServicioFormularioEstablecimiento().getIdentificacionSeleccionada().getDepartamento()));
@@ -127,15 +142,16 @@ public class ListasDesplegablesFormularios {
     /**
      * Métodod que permite buscar en un listado de paises, si contienen un pais
      * determinado.
+     *
      * @param paises
      * @param pais
-     * @return 
+     * @return
      */
-    public static boolean listaContieneElPais(List<Pais> paises, String pais){
-        boolean resultado=false;
+    public static boolean listaContieneElPais(List<Pais> paises, String pais) {
+        boolean resultado = false;
         for (Pais pais1 : paises) {
-            if(pais1.getNombre().equals(pais)){
-                resultado=true;
+            if (pais1.getNombre().equals(pais)) {
+                resultado = true;
                 break;
             }
         }
@@ -143,17 +159,18 @@ public class ListasDesplegablesFormularios {
     }
 
     /**
-     * Métodod que permite buscar en un listado de departamentos, si contienen un 
-     * departamento determinado.
+     * Métodod que permite buscar en un listado de departamentos, si contienen
+     * un departamento determinado.
+     *
      * @param departamentos
      * @param departamento
-     * @return 
+     * @return
      */
-    public static boolean listaContieneElDepartamento(List<Departamento> departamentos, String departamento){
-        boolean resultado=false;
+    public static boolean listaContieneElDepartamento(List<Departamento> departamentos, String departamento) {
+        boolean resultado = false;
         for (Departamento departamento1 : departamentos) {
-            if(departamento1.getNombre().equals(departamento)){
-                resultado=true;
+            if (departamento1.getNombre().equals(departamento)) {
+                resultado = true;
                 break;
             }
         }
@@ -161,17 +178,18 @@ public class ListasDesplegablesFormularios {
     }
 
     /**
-     * Métodod que permite buscar en un listado de municipios, si contienen un 
+     * Métodod que permite buscar en un listado de municipios, si contienen un
      * municipio determinado.
+     *
      * @param municipios
      * @param municipio
-     * @return 
+     * @return
      */
-    public static boolean listaContieneElMunicipio(List<Municipio> municipios, String municipio){
-        boolean resultado=false;
+    public static boolean listaContieneElMunicipio(List<Municipio> municipios, String municipio) {
+        boolean resultado = false;
         for (Municipio municipio1 : municipios) {
-            if(municipio1.getNombre().equals(municipio)){
-                resultado=true;
+            if (municipio1.getNombre().equals(municipio)) {
+                resultado = true;
                 break;
             }
         }
@@ -179,17 +197,18 @@ public class ListasDesplegablesFormularios {
     }
 
     /**
-     * Métodod que permite buscar en un listado de estados de matricula, si contienen
-     * un estado de matricula determinado.
+     * Métodod que permite buscar en un listado de estados de matricula, si
+     * contienen un estado de matricula determinado.
+     *
      * @param estadoMatriculas
      * @param estadoMatricula
-     * @return 
+     * @return
      */
-    public static boolean listaContieneElEstadoMatricula(List<EstadoMatricula> estadoMatriculas, String estadoMatricula){
-        boolean resultado=false;
+    public static boolean listaContieneElEstadoMatricula(List<EstadoMatricula> estadoMatriculas, String estadoMatricula) {
+        boolean resultado = false;
         for (EstadoMatricula estadoMatricula1 : estadoMatriculas) {
-            if(estadoMatricula1.getEstado().equals(estadoMatricula)){
-                resultado=true;
+            if (estadoMatricula1.getEstado().equals(estadoMatricula)) {
+                resultado = true;
                 break;
             }
         }
@@ -197,17 +216,18 @@ public class ListasDesplegablesFormularios {
     }
 
     /**
-     * Métodod que permite buscar en un listado de situaciones de control, si contienen
-     * una situacion de control determinado.
+     * Métodod que permite buscar en un listado de situaciones de control, si
+     * contienen una situacion de control determinado.
+     *
      * @param situacionesControl
      * @param situacionControl
-     * @return 
+     * @return
      */
-    public static boolean listaContieneLaSituacionControl(List<SituacionControl> situacionesControl, String situacionControl){
-        boolean resultado=false;
+    public static boolean listaContieneLaSituacionControl(List<SituacionControl> situacionesControl, String situacionControl) {
+        boolean resultado = false;
         for (SituacionControl situacionControl1 : situacionesControl) {
-            if(situacionControl1.getSituacion().equals(situacionControl)){
-                resultado=true;
+            if (situacionControl1.getSituacion().equals(situacionControl)) {
+                resultado = true;
                 break;
             }
         }
@@ -215,17 +235,18 @@ public class ListasDesplegablesFormularios {
     }
 
     /**
-     * Métodod que permite buscar en un listado de tipos de control, si contienen
-     * un tipo de control determinado.
+     * Métodod que permite buscar en un listado de tipos de control, si
+     * contienen un tipo de control determinado.
+     *
      * @param tipoControles
      * @param tipoControl
-     * @return 
+     * @return
      */
-    public static boolean listaContieneElTipoControl(List<TipoControl> tipoControles, String tipoControl){
-        boolean resultado=false;
+    public static boolean listaContieneElTipoControl(List<TipoControl> tipoControles, String tipoControl) {
+        boolean resultado = false;
         for (TipoControl tipoControl1 : tipoControles) {
-            if(tipoControl1.getTipo().equals(tipoControl)){
-                resultado=true;
+            if (tipoControl1.getTipo().equals(tipoControl)) {
+                resultado = true;
                 break;
             }
         }
@@ -233,17 +254,18 @@ public class ListasDesplegablesFormularios {
     }
 
     /**
-     * Métodod que permite buscar en un listado de tipos de empresa controlante, si contienen
-     * un tipo de empresa controlante determinado.
+     * Métodod que permite buscar en un listado de tipos de empresa controlante,
+     * si contienen un tipo de empresa controlante determinado.
+     *
      * @param tipoEmpresaControlantes
      * @param tipoEmpresaControlante
-     * @return 
+     * @return
      */
-    public static boolean listaContieneElTipoEmpresaControlante(List<TipoEmpresa> tipoEmpresaControlantes, String tipoEmpresaControlante){
-        boolean resultado=false;
+    public static boolean listaContieneElTipoEmpresaControlante(List<TipoEmpresa> tipoEmpresaControlantes, String tipoEmpresaControlante) {
+        boolean resultado = false;
         for (TipoEmpresa tipoEmpresaControlante1 : tipoEmpresaControlantes) {
-            if(tipoEmpresaControlante1.getTipo().equals(tipoEmpresaControlante)){
-                resultado=true;
+            if (tipoEmpresaControlante1.getTipo().equals(tipoEmpresaControlante)) {
+                resultado = true;
                 break;
             }
         }
@@ -251,17 +273,18 @@ public class ListasDesplegablesFormularios {
     }
 
     /**
-     * Métodod que permite buscar en un listado de tipos de establecimientos, si contienen
-     * un tipo de establecimiento determinado.
+     * Métodod que permite buscar en un listado de tipos de establecimientos, si
+     * contienen un tipo de establecimiento determinado.
+     *
      * @param tipoEstablecimientos
      * @param tipoEstablecimiento
-     * @return 
+     * @return
      */
-    public static boolean listaContieneElTipoEstablecimiento(List<TipoEstablecimiento> tipoEstablecimientos, String tipoEstablecimiento){
-        boolean resultado=false;
+    public static boolean listaContieneElTipoEstablecimiento(List<TipoEstablecimiento> tipoEstablecimientos, String tipoEstablecimiento) {
+        boolean resultado = false;
         for (TipoEstablecimiento tipoEstablecimiento1 : tipoEstablecimientos) {
-            if(tipoEstablecimiento1.getTipo().equals(tipoEstablecimiento)){
-                resultado=true;
+            if (tipoEstablecimiento1.getTipo().equals(tipoEstablecimiento)) {
+                resultado = true;
                 break;
             }
         }
@@ -269,17 +292,19 @@ public class ListasDesplegablesFormularios {
     }
 
     /**
-     * Métodod que permite buscar en un listado de tipos de organización de unidad legal,
-     * si contienen un tipo de organización de unidad legal determinado.
+     * Métodod que permite buscar en un listado de tipos de organización de
+     * unidad legal, si contienen un tipo de organización de unidad legal
+     * determinado.
+     *
      * @param tipoOrganizaciones
      * @param tipoOrganizacion
-     * @return 
+     * @return
      */
-    public static boolean listaContieneElTipoOrganizacionUnidadLegal(List<TipoOrganizacion> tipoOrganizaciones, String tipoOrganizacion){
-        boolean resultado=false;
+    public static boolean listaContieneElTipoOrganizacionUnidadLegal(List<TipoOrganizacion> tipoOrganizaciones, String tipoOrganizacion) {
+        boolean resultado = false;
         for (TipoOrganizacion tipoOrganizacion1 : tipoOrganizaciones) {
-            if(tipoOrganizacion1.getTipo().equals(tipoOrganizacion)){
-                resultado=true;
+            if (tipoOrganizacion1.getTipo().equals(tipoOrganizacion)) {
+                resultado = true;
                 break;
             }
         }
@@ -333,6 +358,22 @@ public class ListasDesplegablesFormularios {
 
     public void setListaControles(List<TipoControl> listaControles) {
         this.listaControles = listaControles;
+    }
+
+    public List<TipoConglomerado> getListaConglomerados() {
+        return listaConglomerados;
+    }
+
+    public void setListaConglomerados(List<TipoConglomerado> listaConglomerados) {
+        this.listaConglomerados = listaConglomerados;
+    }
+
+    public TipoConglomeradoFacadeLocal geteJBServicioConglomerado() {
+        return eJBServicioConglomerado;
+    }
+
+    public void seteJBServicioConglomerado(TipoConglomeradoFacadeLocal eJBServicioConglomerado) {
+        this.eJBServicioConglomerado = eJBServicioConglomerado;
     }
 
     public List<TipoEmpresa> getListaEmpresas() {
@@ -453,6 +494,22 @@ public class ListasDesplegablesFormularios {
 
     public void seteJBServicioOrganizacion(TipoOrganizacionFacadeLocal eJBServicioOrganizacion) {
         this.eJBServicioOrganizacion = eJBServicioOrganizacion;
+    }
+
+    public TipoRelacionFacadeLocal geteJBServicioRelacion() {
+        return eJBServicioRelacion;
+    }
+
+    public void seteJBServicioRelacion(TipoRelacionFacadeLocal eJBServicioRelacion) {
+        this.eJBServicioRelacion = eJBServicioRelacion;
+    }
+
+    public List<TipoRelacion> getListaRelaciones() {
+        return listaRelaciones;
+    }
+
+    public void setListaRelaciones(List<TipoRelacion> listaRelaciones) {
+        this.listaRelaciones = listaRelaciones;
     }
 
     
