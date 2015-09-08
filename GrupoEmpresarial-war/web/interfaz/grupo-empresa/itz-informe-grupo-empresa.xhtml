@@ -40,7 +40,7 @@
                                 <p:commandButton value="Formulario" action="/interfaz/grupo-empresa/itz-formulario-grupo-empresa.xhtml" ajax="false"/>
                             </div>
                         </div>
-                        <div class="ui-grid-row">
+                        <!--div class="ui-grid-row">
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Actualizar información desde archivo XLS</h4>
                                 <p>En esta sección el usuario puede descargar un archivo XLS, que contiene la información del grupo empresarial, la cual podra
@@ -56,30 +56,18 @@
                                    <ui:param name="formulario" value="GRUPO" />
                                </ui:include>
                            </div>
-                        </div>
+                        </div-->
                     </div>
 
                     <p:dialog id="dlgReportePdf" header="Reporte Grupo Empresa" widgetVar="dlg"  appendTo="@(body)"
                               resizable="false" modal="true" width="800" height="550">
                         <p:outputPanel deferred="true">
-
                             <!--p:media value="#{MbReporteGrupoEmpresa.contenido}" cache="false" width="756" height="525" player="pdf" >
                                 Su navegador no puede visualizar pdf.
                                 <br></br>
                                 <br></br>
                                 #{MbReporteGrupoEmpresa.listaErrores}
                             </p:media-->
-                            <!--iframe width="756" height="200" src="#{MbReporteGrupoEmpresa.urlArchivoTemporal}" frameborder="0"/>
-                            <p>Otro</p>
-                            <object type="application/pdf" data="#{MbReporteGrupoEmpresa.urlArchivoTemporal}#toolbar=0" width="756" height="200">
-                                Su navegador no puede visualizar PDF, <a href="#{MbReporteGrupoEmpresa.urlArchivoTemporal}">Click</a> para descargar reporte.
-                            </object>
-                            <form>
-                                <p:commandButton value="Descargar Reporte" ajax="false" style="float: right;" 
-                                                 onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                                    <p:fileDownload value="#{MbFileDownloadView.descargarFile(MbReporteGrupoEmpresa.urlArchivoTemporal, MbReporteGrupoEmpresa.nombreArchivoTemporal)}" />
-                                </p:commandButton>
-                            </form-->
                             <pe:documentViewer height="535" value="#{MbReporteGrupoEmpresa.contenido}"/>
                         </p:outputPanel>
                     </p:dialog>
