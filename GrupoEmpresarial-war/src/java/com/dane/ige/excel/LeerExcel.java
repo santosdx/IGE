@@ -68,6 +68,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class LeerExcel implements Serializable {
 
     final static Logger LOGGER = Logger.getLogger(LeerExcel.class);
+
     @EJB
     private VariableIgeFacadeLocal eJBServicioVariableIge;
     @EJB
@@ -619,7 +620,7 @@ public class LeerExcel implements Serializable {
                                         listaInconsistenciaVariables.add(inconsistencia);
                                     } else {
                                         String valorBusqueda = obtenerValorColumaDeFila(columnaObligatoriedad, filaTemp);
-                                        ////System.out.println("(" + filaTemp + ")[" + variable.getColumna() + "]:[" + valorBusqueda + "] -> " + columnaObligatoriedad + ":" + valorObligatoriedad);
+                                        ////LOGGER.info(.out.println("(" + filaTemp + ")[" + variable.getColumna() + "]:[" + valorBusqueda + "] -> " + columnaObligatoriedad + ":" + valorObligatoriedad);
                                         if (valorBusqueda != null && !StringUtils.isBlank(valorBusqueda)) {
                                             if (valorObligatoriedad.toLowerCase().equals(valorBusqueda.toLowerCase())) {
                                                 InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Sin datos, valor requerido.");
@@ -701,7 +702,7 @@ public class LeerExcel implements Serializable {
                                         String numeroResultado = null;
                                         if (cellRegistro.getCellType() == 0) {
                                             numeroResultado = Numero.formatoNumeroEntero(cellRegistro.getNumericCellValue() + "") + "";
-                                            ////System.out.println("----->" + numeroResultado + "");
+                                            //LOGGER.info("----->" + numeroResultado + "");
                                             if (numeroResultado.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
                                                 //"Is a number";
                                             } else {
@@ -711,7 +712,7 @@ public class LeerExcel implements Serializable {
                                             }
                                         } else {
                                             numeroResultado = Numero.formatoNumeroEntero(cellRegistro.getStringCellValue()) + "";
-                                            ////System.out.println("----->" + numeroResultado + "");
+                                            ////LOGGER.info(.out.println("----->" + numeroResultado + "");
                                             if (numeroResultado.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
                                                 //"Is a number";
                                             } else {
@@ -755,21 +756,21 @@ public class LeerExcel implements Serializable {
                                             String numeroResultado = null;
                                             if (cellRegistro.getCellType() == 0) {
                                                 numeroResultado = Numero.formatoNumeroEntero(cellRegistro.getNumericCellValue() + "") + "";
-                                                ////System.out.println("----->" + numeroResultado + "");
+                                                ////LOGGER.info(.out.println("----->" + numeroResultado + "");
                                                 if (numeroResultado.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
-                                                    ////System.out.println("Is a number");
+                                                    ////LOGGER.info(.out.println("Is a number");
                                                 } else {
-                                                    ////System.out.println("Is not a number");
+                                                    ////LOGGER.info(.out.println("Is not a number");
                                                     InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato " + numeroResultado + " debe ser numerico.");
                                                     listaInconsistenciaVariables.add(inconsistencia);
                                                 }
                                             } else {
                                                 numeroResultado = Numero.formatoNumeroEntero(cellRegistro.getStringCellValue()) + "";
-                                                ////System.out.println("----->" + numeroResultado + "");
+                                                ////LOGGER.info(.out.println("----->" + numeroResultado + "");
                                                 if (numeroResultado.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {
-                                                    ////System.out.println("Is a number");
+                                                    ////LOGGER.info(.out.println("Is a number");
                                                 } else {
-                                                    ////System.out.println("Is not a number");
+                                                    ////LOGGER.info(.out.println("Is not a number");
                                                     InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "El dato " + numeroResultado + " debe ser numerico.");
                                                     listaInconsistenciaVariables.add(inconsistencia);
                                                 }
@@ -848,7 +849,7 @@ public class LeerExcel implements Serializable {
             int indiceHoja = 0;
 
             for (String hojaNombre : hojas) {
-                //System.out.println("(" + indiceRegistro + ")*************[" + hojaNombre + "]");
+                //LOGGER.info(.out.println("(" + indiceRegistro + ")*************[" + hojaNombre + "]");
                 if (contieneVariableBuscar == false) {
 
                     List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo(grupoVariables[indiceHoja]);
@@ -864,7 +865,7 @@ public class LeerExcel implements Serializable {
                             if (cellEncabezado.getStringCellValue().equals(variable.getEtiqueta())) {
 
                                 if (variable.getColumna().equals(variableBuscar)) {
-                                    //System.out.println("*->[" + variable.getColumna() + "]=[" + variableBuscar + "]");
+                                    //LOGGER.info(.out.println("*->[" + variable.getColumna() + "]=[" + variableBuscar + "]");
                                     Cell cellRegistro = (Cell) listaDatosFila.get(j);
 
                                     if (variable.getTipo().equals("NUMBER")) {

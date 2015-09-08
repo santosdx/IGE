@@ -184,7 +184,6 @@ public class ConexionBd {
 
             if (dataSource != null) {
                 myConec = (Connection) dataSource.getConnection();
-                //System.out.println("++++++++ "+elSql);
                 try {
                     theJudgment = myConec.prepareStatement(elSql);
                     resultQuery = theJudgment.executeQuery();

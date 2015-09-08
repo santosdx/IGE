@@ -9,8 +9,10 @@ import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
 import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.VariableIgeFacadeLocal;
 import com.dane.ige.seguridad.Login;
+import com.dane.ige.utilidad.ArchivoProperties;
 import com.dane.ige.utilidad.Fecha;
 import com.dane.ige.utilidad.FileDownload;
+import com.dane.ige.utilidad.Mensaje;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,6 +48,7 @@ public class EscribirExcelGrupoEmpresa {
     @EJB
     private VariableIgeFacadeLocal eJBServicioVariableIge;
     private StreamedContent file;
+    private String passwordShee = "123";
 
     @EJB
     private BodegaIdentificacionFacadeLocal eJBServicioBodegaIdentificacion;
@@ -69,10 +72,15 @@ public class EscribirExcelGrupoEmpresa {
     public EscribirExcelGrupoEmpresa() {
     }
 
-    public void generarArchivoXls(String urlArchivo, String nombreArchivo, Long id, String unidad) {
+    public void generarArchivoXls(Long id, String unidad) {
+//        MbEscribirExcelGrupoEmpresa.generarArchivoXls(resourcePath['plantilla.grupoEmpresarial.path'], 
+//                                                      resourcePath['plantilla.grupoEmpresarial.archivo'], 
+//                                                      MbLogin.usuarioLogueado.idIdentificacion,'GRUPO')
+        String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("plantilla.grupoEmpresarial.path");
+        String nombreArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("plantilla.grupoEmpresarial.archivo");
         try {
-            LOGGER.info(urlArchivo);
-            LOGGER.info(nombreArchivo);
+            //LOGGER.info(urlArchivo);
+            //LOGGER.info(nombreArchivo);
 
             String filename = urlArchivo + nombreArchivo;
             FileInputStream fis = new FileInputStream(filename);
@@ -81,10 +89,12 @@ public class EscribirExcelGrupoEmpresa {
             escribirLibroXls(workbook, nombreArchivo, id, unidad);
 
         } catch (FileNotFoundException ex) {
-            LOGGER.warn(ex.getMessage());
+            LOGGER.warn("[84] EscribirExcelGrupoEmpresa.java -> "+ex.getMessage());
+            Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            LOGGER.warn(ex.getMessage());
+            LOGGER.warn("[87] EscribirExcelGrupoEmpresa.java -> "+ex.getMessage());
+            Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -98,6 +108,8 @@ public class EscribirExcelGrupoEmpresa {
     private void escribirLibroXls(Workbook libro, String nombreArchivo, Long id, String unidad) {
         //Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
         //String unidad = "GRUPO";
+        String tempPathFile = ArchivoProperties.obtenerPropertieFilePathProperties("sistema.tempFile.path");
+        nombreArchivo = getServicioLogin().getUsuarioLogueado().getId()+"-"+nombreArchivo;
 
         setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerMapIdentificacionByIdTipoOrganizacion(id, unidad));
         Workbook libroTemp = ingresarDatosIdentificacion(libro);
@@ -119,7 +131,7 @@ public class EscribirExcelGrupoEmpresa {
         ingresarIdentificacionArchivoGenerado(libro, idGrupo, unidad, fechaEvento, evento, idUsuario, codigoArchivo);
 
         try {
-            File temp = File.createTempFile(nombreArchivo, ".xls");
+            File temp = new File(tempPathFile+nombreArchivo);
             FileOutputStream elFichero = new FileOutputStream(temp);
             libro.write(elFichero);
 
@@ -137,7 +149,8 @@ public class EscribirExcelGrupoEmpresa {
             geteJBServicioArchivoXls().create(archivoXls);
 
         } catch (IOException e) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.warn("[150] EscribirExcelGrupoEmpresa.java -> "+e.getMessage());
+            Mensaje.agregarMensajeGrowlError("Error!", e.getMessage());
         }
     }
 
@@ -151,7 +164,7 @@ public class EscribirExcelGrupoEmpresa {
     private Workbook ingresarIdentificacionArchivoGenerado(Workbook libro, Long idGrupo, String unidad, Date fechaEvento, String evento, Integer idUsuario, String codigoArchivo) {
         //La hoja 1 es la hoja de los datos de identificacion del archivo
         Sheet hoja = libro.getSheet("ID-ARCHIVO");
-        hoja.protectSheet("123");
+        hoja.protectSheet(passwordShee);
 
         Row fila1 = hoja.getRow(1);
         Cell ID_GRUPO = fila1.getCell(1);
@@ -191,7 +204,7 @@ public class EscribirExcelGrupoEmpresa {
         //La hoja 1 es la hoja de los datos de identificacion
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("IDENTIFICACION");
         Sheet hoja = libro.getSheet("Identificación");//getSheetAt(1);
-        hoja.protectSheet("123");
+        hoja.protectSheet(passwordShee);
 
         Row encabezadoXsl = hoja.getRow(1);
         Iterator cells = encabezadoXsl.cellIterator();
@@ -234,7 +247,7 @@ public class EscribirExcelGrupoEmpresa {
         //La hoja 2 es la hoja de los datos de relación
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("RELACION");
         Sheet hoja = libro.getSheet("Relación");//getSheetAt(2);
-        hoja.protectSheet("123");
+        hoja.protectSheet(passwordShee);
 
         Row encabezadoXsl = hoja.getRow(1);
         Iterator cells = encabezadoXsl.cellIterator();
@@ -278,7 +291,7 @@ public class EscribirExcelGrupoEmpresa {
         //La hoja 3 es la hoja de los datos de eventos
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("NOVEDAD");
         Sheet hoja = libro.getSheet("Historia");//.getSheetAt(3);
-        hoja.protectSheet("123");
+        hoja.protectSheet(passwordShee);
         Row encabezadoXsl = hoja.getRow(1);
         Iterator cells = encabezadoXsl.cellIterator();
         int indiceColumna = 0;
@@ -320,7 +333,7 @@ public class EscribirExcelGrupoEmpresa {
         //La hoja 3 es la hoja de los datos de tamaño
         List<VariableIge> columnas = geteJBServicioVariableIge().buscarVariableByGrupo("TAMAÑO");
         Sheet hoja = libro.getSheet("Tamaño");//.getSheetAt(4);
-        hoja.protectSheet("123");
+        hoja.protectSheet(passwordShee);
 
         Row encabezadoXsl = hoja.getRow(1);
         Iterator cells = encabezadoXsl.cellIterator();

@@ -15,7 +15,7 @@
         <h:outputStylesheet library="css" name="general.css" />
         <h:outputStylesheet library="css" name="titulos.css" />
         <h:outputStylesheet library="css" name="componentes.css" />
-        <title>#{nerv['sistema.title']}</title>
+        <title>#{resourceSistema['sistema.title']}</title>
     </h:head>
 
     <h:body>
@@ -26,7 +26,7 @@
                 <ui:include src="/plantilla/encabezado.xhtml" />
             </p:layoutUnit>
 
-            <p:layoutUnit position="west" size="250" header="#{nerv['menu.title']}" collapsible="true">
+            <p:layoutUnit position="west" size="250" header="#{resourceSistema['menu.title']}" collapsible="true">
                 <ui:include src="/plantilla/menu.xhtml" />
             </p:layoutUnit>
 

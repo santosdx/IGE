@@ -10,8 +10,10 @@ import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
 import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.VariableIgeFacadeLocal;
 import com.dane.ige.seguridad.Login;
+import com.dane.ige.utilidad.ArchivoProperties;
 import com.dane.ige.utilidad.Fecha;
 import com.dane.ige.utilidad.FileDownload;
+import com.dane.ige.utilidad.Mensaje;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -73,10 +75,13 @@ public class EscribirExcelUnidadLegal {
     public EscribirExcelUnidadLegal() {
     }
 
-    public void generarArchivoXls(String urlArchivo, String nombreArchivo) {
+    public void generarArchivoXls() {
+        //MbEscribirExcelUnidadLegal.generarArchivoXls(resourcePath['plantilla.unidadLegal.path'], resourcePath['plantilla.unidadLegal.archivo'])
+        String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("plantilla.unidadLegal.path");
+        String nombreArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("plantilla.unidadLegal.archivo");
         try {
-            LOGGER.info(urlArchivo);
-            LOGGER.info(nombreArchivo);
+            //LOGGER.info(urlArchivo);
+            //LOGGER.info(nombreArchivo);
 
             String filename = urlArchivo + nombreArchivo;
             FileInputStream fis = new FileInputStream(filename);
@@ -85,10 +90,12 @@ public class EscribirExcelUnidadLegal {
             escribirLibroXls(workbook, nombreArchivo);
 
         } catch (FileNotFoundException ex) {
-            LOGGER.warn(ex.getMessage());
+            LOGGER.warn("[89] EscribirExcelUnidadLegal.java -> "+ex.getMessage());
+            Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            LOGGER.warn(ex.getMessage());
+            LOGGER.warn("[93] EscribirExcelUnidadLegal.java -> "+ex.getMessage());
+            Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -102,6 +109,8 @@ public class EscribirExcelUnidadLegal {
      */
     private void escribirLibroXls(Workbook libro, String nombreArchivo) {
         Long id = getServicioLogin().getUsuarioLogueado().getIdIdentificacion();
+        String tempPathFile = ArchivoProperties.obtenerPropertieFilePathProperties("sistema.tempFile.path");
+        nombreArchivo = getServicioLogin().getUsuarioLogueado().getId()+"-"+nombreArchivo;
 
         setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(id));
 
@@ -119,7 +128,8 @@ public class EscribirExcelUnidadLegal {
         ingresarIdentificacionArchivoGenerado(libro, idGrupo, unidad, fechaEvento, evento, idUsuario, codigoArchivo);
 
         try {
-            File temp = File.createTempFile(nombreArchivo, ".xls");
+            //File temp = File.createTempFile(nombreArchivo, ".xls");
+            File temp = new File(tempPathFile+nombreArchivo);
             FileOutputStream elFichero = new FileOutputStream(temp);
             libro.write(elFichero);
 
@@ -137,7 +147,8 @@ public class EscribirExcelUnidadLegal {
             geteJBServicioArchivoXls().create(archivoXls);
 
         } catch (IOException e) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.warn("[143] EscribirExcelUnidadLegal.java -> "+e.getMessage());
+            Mensaje.agregarMensajeGrowlError("Error!", e.getMessage());
         }
     }
 

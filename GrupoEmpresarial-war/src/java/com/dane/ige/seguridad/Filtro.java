@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 /**
  * Servlet Filter implementation class LoginFilter
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author srojasm
  */
 public class Filtro implements Filter {
+
+    final static Logger LOGGER = Logger.getLogger(Filtro.class);
 
     /**
      * Default constructor.
@@ -69,16 +72,16 @@ public class Filtro implements Filter {
         try {
             urlStr = req.getRequestURL().toString();//.toLowerCase();
             boolean noProteger = noProteger(urlStr);
-            System.out.println(urlStr + " - Acceso desprotegido? [" + noProteger + "]");
+            //LOGGER.info(" - Acceso desprotegido? [" + noProteger + "] -> " +urlStr);
 
             //Si no requiere protección continúo normalmente.
             if (noProteger(urlStr)) {
-                System.out.println("Si no requiere protección continúo normalmente.");
+                //LOGGER.info("Si no requiere protección continúo normalmente.");
                 chain.doFilter(request, response);
                 return;
             }
         } catch (FacesException ex) {
-            System.out.println("Error Servidor -> " + ex);
+            LOGGER.info("Error Servidor -> " + ex);
             res.sendRedirect(req.getContextPath() + "/pagina-error/500.xhtml");
             return;
         }
@@ -86,13 +89,13 @@ public class Filtro implements Filter {
               //El usuario no está logueado
         if (loginBean != null) {
             if (loginBean.isLoggedIn() == false) {
-                System.out.println("El usuario no está logueado Caso-A");
+                LOGGER.info("El usuario no está logueado (Is Logged In = false)");
                 res.sendRedirect(req.getContextPath() + "/login.xhtml");
                 //res.sendRedirect(req.getContextPath() + "/index.xhtml");
                 return;
             }
         } else {
-            System.out.println("El usuario no está logueado Caso-B");
+            LOGGER.info("El usuario no está logueado (Bean Login = null)");
             res.sendRedirect(req.getContextPath() + "/login.xhtml");
             //res.sendRedirect(req.getContextPath() + "/index.xhtml");
             return;

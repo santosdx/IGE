@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -16,6 +17,9 @@ import javax.persistence.Query;
  */
 @Stateless
 public class PerfilPermisoFacade extends AbstractFacade<PerfilPermiso> implements PerfilPermisoFacadeLocal {
+
+    final static Logger LOGGER = Logger.getLogger(PerfilPermisoFacade.class);
+
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
 
@@ -51,7 +55,7 @@ public class PerfilPermisoFacade extends AbstractFacade<PerfilPermiso> implement
                 resultado = listaResultado.get(0);
             }            
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         } 
         return resultado;
     }
@@ -70,7 +74,7 @@ public class PerfilPermisoFacade extends AbstractFacade<PerfilPermiso> implement
             query.setParameter("idPerfil", idPerfil);
             resultado = query.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     } 

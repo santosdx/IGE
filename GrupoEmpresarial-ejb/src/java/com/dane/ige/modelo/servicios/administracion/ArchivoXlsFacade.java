@@ -3,13 +3,13 @@ package com.dane.ige.modelo.servicios.administracion;
 import com.dane.ige.modelo.fachada.AbstractFacade;
 import com.dane.ige.modelo.local.administracion.ArchivoXlsFacadeLocal;
 import com.dane.ige.modelo.entidad.ArchivoXls;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,6 +17,8 @@ import javax.persistence.Query;
  */
 @Stateless(name = "EJBServicioArchivoXls")
 public class ArchivoXlsFacade extends AbstractFacade<ArchivoXls> implements ArchivoXlsFacadeLocal {
+
+    final static Logger LOGGER = Logger.getLogger(ArchivoXlsFacade.class);
 
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
@@ -45,7 +47,7 @@ public class ArchivoXlsFacade extends AbstractFacade<ArchivoXls> implements Arch
                 resultado = listaResultado.get(0);
             }
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }

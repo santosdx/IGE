@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,6 +18,8 @@ import javax.persistence.Query;
  */
 @Stateless(name = "EJBServicioModulo")
 public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacadeLocal {
+
+    final static Logger LOGGER = Logger.getLogger(ModuloFacade.class);
 
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
@@ -46,7 +49,7 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
             em.flush();
             resultado = modulo.getId();
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }
@@ -66,7 +69,7 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
                 resultado = listaResultado.get(0);
             }
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }
@@ -95,7 +98,7 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
                 resultado = listaResultado;
             }
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }
@@ -123,7 +126,7 @@ public class ModuloFacade extends AbstractFacade<Modulo> implements ModuloFacade
                 resultado = listaResultado;
             }
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }

@@ -14,14 +14,13 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.menu.DefaultMenuItem;
@@ -39,6 +38,7 @@ import org.primefaces.model.menu.MenuModel;
 public class Login implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    final static Logger LOGGER = Logger.getLogger(Login.class);
 
     @EJB
     private UsuarioFacadeLocal eJBServicioUsuario;
@@ -76,14 +76,14 @@ public class Login implements Serializable {
 
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         String ctxPath = ((ServletContext) ctx.getContext()).getContextPath();
-        //System.out.println("ctxPath:"+ctxPath);
+        //LOGGER.info("ctxPath:"+ctxPath);
 
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage message = null;
 
         setUsuarioLogueado(geteJBServicioUsuario().buscarUsuarioByNicknamePassword(username, password));
 
-        if (usuarioLogueado != null) {
+        if (getUsuarioLogueado() != null) {
             if (getUsuarioLogueado().getPerfil() == null) {
                 message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un perfil");
             } else if (getUsuarioLogueado().getIdIdentificacion() == null) {
@@ -102,7 +102,8 @@ public class Login implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
 
         if (isLoggedIn()) {
-            System.out.println("Login-OK");
+            //LOGGER.info("Login-OK");
+            LOGGER.info("El usuario ("+getUsuarioLogueado().getNickname()+") "+getUsuarioLogueado().getNombres() +" "+ getUsuarioLogueado().getApellidos() +", ingreso al sistema");
             context.addCallbackParam("view", ctxPath + "/index.xhtml");
         }
     }
@@ -241,7 +242,6 @@ public class Login implements Serializable {
     public void abrirVentanaLogin() {
         Ventana acceso = new Ventana();
         acceso.visualizarVentanaParametrizada("/interfaz/usuario/ventana/vta-acceso-sistema", true, true, false, 140L, 320L);
-        System.out.println("sii..");
     }
 
     /**

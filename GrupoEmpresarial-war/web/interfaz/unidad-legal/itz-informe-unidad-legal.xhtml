@@ -2,11 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
 
-      xmlns:p="http://primefaces.org/ui">
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
+                <p:dialog modal="true" widgetVar="statusDialog" header="Estado" draggable="false" closable="false" resizable="false" appendTo="@(body)">
+                    <p:graphicImage name="imagen/ajax-donwload.gif" />
+                </p:dialog>
+
                 <h:form id="frmInfUnidadLegal" style="height: 88%; padding-right: 2%; padding-left: 2%;" >
                     <p:growl id="msnInforUnidadLegal" showDetail="true" />
                     <h3 class="titulo-center-h3">INFORMACIÓN DE LAS UNIDADES LEGALES</h3>
@@ -19,11 +24,11 @@
                                 <p>En esta sección el usuario puede generar un reporte en formato PDF, donde se describe todos los datos de la unidades legales del grupo empresarial.</p>
                                 <p:commandButton id="btnGenerarReporteUnidadLegal" value="Generar reporte" rendered="#{aplicacionPrincipal.browserName != 'Internet Explorer'}"
                                                  update="dlgReportePdf" oncomplete="PF('dlg').show();"
-                                                 actionListener="#{MbReporteUnidadLegal.generarReporteUnidadesLegalesPdf(nerv['reporte.unidadLegales.path'], nerv['reporte.unidadLegales.archivo'])}"/>
+                                                 actionListener="#{MbReporteUnidadLegal.generarReporteUnidadesLegalesPdf()}"/>
                                 <!--p:media value="#{MbReporteUnidadLegal.contenido}" cache="false" width="100%" height="90%" player="pdf"/-->
                                 <p:commandButton id="btnDescargarReporteUnidadLegal" value="Descargar" ajax="false" 
                                                  rendered="#{aplicacionPrincipal.browserName eq 'Internet Explorer'}" 
-                                                 actionListener="#{MbReporteUnidadLegal.generarReporteUnidadesLegalesPdf(nerv['reporte.unidadLegales.path'], nerv['reporte.unidadLegales.archivo'])}"
+                                                 actionListener="#{MbReporteUnidadLegal.generarReporteUnidadesLegalesPdf()}"
                                                  onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
                                     <p:fileDownload value="#{MbReporteUnidadLegal.contenido}" />
                                 </p:commandButton>
@@ -49,10 +54,19 @@
                                         </p:column>
                                         <p:column headerText="">
                                             <p:commandLink update="frmInfUnidadLegal:dlgReportePdf" oncomplete="PF('dlg').show();" 
-                                                           actionListener="#{MbReporteUnidadLegal.generarReporteUnidadLegalPdf(nerv['reporte.unidadLegal.path'], nerv['reporte.unidadLegal.archivo'],fila.id.id)}" >
+                                                           actionListener="#{MbReporteUnidadLegal.generarReporteUnidadLegalPdf(fila.id.id)}" 
+                                                           rendered="#{aplicacionPrincipal.browserName != 'Internet Explorer'}">
                                                 <!--h:outputText value="Reporte de datos" /-->
                                                 <div class="ui-grid-col-3"><i class="fa fa-fw fa-file-pdf-o"></i>Reporte</div>
                                             </p:commandLink>
+                                            <p:commandLink actionListener="#{MbReporteUnidadLegal.generarReporteUnidadLegalPdf(fila.id.id)}" 
+                                                           rendered="#{aplicacionPrincipal.browserName eq 'Internet Explorer'}"
+                                                           onclick="PrimeFaces.monitorDownload(start, stop);" ajax="false" >
+                                                <!--h:outputText value="Reporte de datos" /-->
+                                                <div class="ui-grid-col-3"><i class="fa fa-fw fa-file-pdf-o"></i>Descargar</div>
+                                                <p:fileDownload value="#{MbReporteUnidadLegal.contenido}" />
+                                            </p:commandLink>
+
                                             <p:commandLink action="#{MbFormUnidadLegal.abrirFormularioActualizarDatos(fila.id.id)}" ajax="false">
                                                 <!--h:outputText value="Formulario actualización datos" /-->
                                                 <div class="ui-grid-col-3"><i class="fa fa-fw fa-edit"></i>Formulario</div>
@@ -68,7 +82,7 @@
                                 <p>En esta sección el usuario puede descargar un archivo XLS, que contiene el listado de unidades legales del grupo empresarial, la cual podra
                                     actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
                                 <p:commandButton id="btnGenerarXlsUnidadLelgal" value="Generar Excel" ajax="false" 
-                                                 actionListener="#{MbEscribirExcelUnidadLegal.generarArchivoXls(nerv['plantilla.unidadLegal.path'], nerv['plantilla.unidadLegal.archivo'])}"
+                                                 actionListener="#{MbEscribirExcelUnidadLegal.generarArchivoXls()}"
                                                  onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
                                     <p:fileDownload value="#{MbEscribirExcelUnidadLegal.file}" />
                                 </p:commandButton>
@@ -86,7 +100,13 @@
                         <!--p:panelGrid id="pnlReportePdf" columns="1" style="width: 100%; height: 100%">
                             </p:panelGrid-->
                         <p:outputPanel deferred="true">
-                            <p:media value="#{MbReporteUnidadLegal.contenido}" cache="false" width="756" height="550" player="pdf"/>
+                            <!--p:media value="#{MbReporteUnidadLegal.contenido}" cache="false" width="756" height="550" player="pdf">
+                                <br></br>
+                                <br></br>
+                                #{MbReporteUnidadLegal.listaErrores}
+                            </p:media-->
+                            <pe:documentViewer height="535" value="#{MbReporteUnidadLegal.contenido}"/>
+                            #{MbReporteUnidadLegal.listaErrores}
                         </p:outputPanel>
                     </p:dialog>
 
@@ -104,10 +124,15 @@
                     </p:blockUI>
                 </h:form>
 
-                <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
-                    <p:graphicImage name="imagen/ajax-donwload.gif" />
-                </p:dialog>
+                <script type="text/javascript">
+                    function start() {
+                        PF('statusDialog').show();
+                    }
 
+                    function stop() {
+                        PF('statusDialog').hide();
+                    }
+                </script>
             </ui:define>
         </ui:composition>
     </h:body>

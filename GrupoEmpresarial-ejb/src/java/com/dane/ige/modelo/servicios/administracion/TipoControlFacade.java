@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,6 +18,8 @@ import javax.persistence.Query;
  */
 @Stateless(name = "EJBServicioControl")
 public class TipoControlFacade extends AbstractFacade<TipoControl> implements TipoControlFacadeLocal {
+
+    final static Logger LOGGER = Logger.getLogger(TipoControlFacade.class);
 
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
@@ -42,7 +45,7 @@ public class TipoControlFacade extends AbstractFacade<TipoControl> implements Ti
                 resultado = listaResultado;
             }
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }

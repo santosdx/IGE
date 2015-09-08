@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,6 +18,8 @@ import javax.persistence.Query;
  */
 @Stateless(name = "EJBServicioMunicipio")
 public class MunicipioFacade extends AbstractFacade<Municipio> implements MunicipioFacadeLocal {
+
+    final static Logger LOGGER = Logger.getLogger(MunicipioFacade.class);
 
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
@@ -42,7 +45,7 @@ public class MunicipioFacade extends AbstractFacade<Municipio> implements Munici
                 resultado = listaResultado;
             }
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }
@@ -67,7 +70,7 @@ public class MunicipioFacade extends AbstractFacade<Municipio> implements Munici
                 resultado = listaResultado;
             }
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }

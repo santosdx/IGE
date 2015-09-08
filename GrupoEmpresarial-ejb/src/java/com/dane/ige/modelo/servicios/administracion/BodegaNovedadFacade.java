@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -18,6 +19,8 @@ import javax.persistence.Query;
  */
 @Stateless(name = "EJBServicioBodegaNovedad")
 public class BodegaNovedadFacade extends AbstractFacade<BodegaNovedad> implements BodegaNovedadFacadeLocal {
+
+    final static Logger LOGGER = Logger.getLogger(BodegaNovedadFacade.class);
 
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
@@ -57,7 +60,7 @@ public class BodegaNovedadFacade extends AbstractFacade<BodegaNovedad> implement
                 resultado = listaResultado.get(0);
             }
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }
@@ -83,7 +86,7 @@ public class BodegaNovedadFacade extends AbstractFacade<BodegaNovedad> implement
                 resultado = listaResultado.get(0).toMap();
             }
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+             LOGGER.warn(e.getMessage());
         }
         return resultado;
     }

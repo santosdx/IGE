@@ -3,6 +3,7 @@ import com.dane.ige.modelo.entidad.SistemaInfo;
 import com.dane.ige.modelo.fachada.AbstractFacade;
 import java.util.Collections;
 import java.util.List;
+import org.apache.log4j.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,9 @@ import javax.persistence.Query;
  */
 @Stateless(name = "EJBServicioSistemaInfo")
 public class SistemaInfoFacade extends AbstractFacade<SistemaInfo> implements SistemaInfoFacadeLocal {
+
+    final static Logger LOGGER = Logger.getLogger(SistemaInfoFacade.class);
+
     @PersistenceContext(unitName = "GrupoEmpresarial-ejbPU")
     private EntityManager em;
 
@@ -41,9 +45,9 @@ public class SistemaInfoFacade extends AbstractFacade<SistemaInfo> implements Si
             } else {
                 objSistema = listaDatos.get(0);
             }
-            System.out.println("Versión: "+ objSistema.getVersion());
+            LOGGER.info("Versión del Aplicativo: "+ objSistema.getVersion());
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            LOGGER.warn(e.getMessage());
         } 
         return objSistema;
     }

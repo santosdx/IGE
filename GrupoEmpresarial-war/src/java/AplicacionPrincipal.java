@@ -1,10 +1,11 @@
-package com.dane.main;
+
+
+
 
 import com.dane.ige.modelo.entidad.SistemaInfo;
 import com.dane.ige.modelo.local.administracion.SistemaInfoFacadeLocal;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;

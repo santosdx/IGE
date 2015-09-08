@@ -12,8 +12,12 @@
  
     <application> 
         <resource-bundle>
-            <base-name>com.dane.main.sistema</base-name>
-            <var>nerv</var>
+            <base-name>sistema</base-name>
+            <var>resourceSistema</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>path</base-name>
+            <var>resourcePath</var>
         </resource-bundle>
         <action-listener>org.primefaces.application.DialogActionListener</action-listener>
         <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
