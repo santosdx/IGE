@@ -64,6 +64,7 @@ public class Filtro implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
+
         Login loginBean = (Login) req.getSession().getAttribute("MbLogin");
 
         //Proceso la URL que está requiriendo el cliente
@@ -130,16 +131,16 @@ public class Filtro implements Filter {
         if (urlStr.indexOf("/resources/") != -1) {
             return true;
         }
-        if (urlStr.indexOf("/GrupoEmpresarial-war/index.xhtml") != -1) {
+        if (urlStr.indexOf("/GrupoEmpresarial/index.xhtml") != -1) {
             return true;
         }
-        if (urlStr.indexOf("/GrupoEmpresarial-war/login.xhtml") != -1) {
+        if (urlStr.indexOf("/GrupoEmpresarial/login.xhtml") != -1) {
             return true;
         }
-        if (urlStr.indexOf("/GrupoEmpresarial-war/interfaz/usuario/ventana/vta-acceso-sistema.xhtml") != -1) {
+        if (urlStr.indexOf("/GrupoEmpresarial/interfaz/usuario/ventana/vta-acceso-sistema.xhtml") != -1) {
             return true;
         }
-        if (urlStr.indexOf("/GrupoEmpresarial-war/interfaz/usuario/ventana/cpt-acceso-sistema.xhtml") != -1) {
+        if (urlStr.indexOf("/GrupoEmpresarial/interfaz/usuario/ventana/cpt-acceso-sistema.xhtml") != -1) {
             return true;
         }
         if (urlStr.indexOf("/pagina-error/") != -1) {

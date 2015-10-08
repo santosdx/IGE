@@ -1,0 +1,19 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:form>
+        <p:growl id="msnIdlMonitor" showDetail="true" sticky="true" />
+
+        <p:idleMonitor timeout="#{(session.maxInactiveInterval * 1000)-20000}">
+            <p:ajax event="idle" listener="#{idleMonitorView.onIdle}" update="msnIdlMonitor" />
+            <p:ajax event="active" listener="#{idleMonitorView.onActive}" update="msnIdlMonitor" />
+        </p:idleMonitor>
+
+    </h:form>
+
+</ui:composition>

@@ -144,9 +144,6 @@ public class EscribirExcelEstablecimiento {
             libro.write(elFichero);
 
             setFile(new DefaultStreamedContent(new FileInputStream(temp), "application/vnd.ms-excel", nombreArchivo));
-            elFichero.close();
-            temp.deleteOnExit();
-            temp.delete();
 
             //Copiamos el archivo xls y lo convertimos a byte[]
             StreamedContent fileCopy = new DefaultStreamedContent(new FileInputStream(temp), "application/vnd.ms-excel", nombreArchivo);
@@ -156,6 +153,9 @@ public class EscribirExcelEstablecimiento {
             ArchivoXls archivoXls = new ArchivoXls(idGrupo, unidad, fechaEvento, evento, idUsuario, codigoArchivo, archivo);
             geteJBServicioArchivoXls().create(archivoXls);
 
+            elFichero.close();
+            temp.deleteOnExit();
+            temp.delete();
         } catch (IOException e) {
             LOGGER.warn("[152] EscribirExcelEstablecimiento.java -> "+e.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", e.getMessage());
