@@ -76,6 +76,11 @@ public class EscribirExcelEstablecimiento {
     private Map<String, String> relacionSeleccionada;
     private Map<String, String> tamanoSeleccionado;
 
+    private boolean contieneRegistrosIdentificacion;
+    private boolean contieneRegistrosRelacion;
+    private boolean contieneRegistrosHistoria;
+    private boolean contieneRegistrosTamano;
+
     public EscribirExcelEstablecimiento() {
     }
 
@@ -94,11 +99,11 @@ public class EscribirExcelEstablecimiento {
             escribirLibroXls(workbook, nombreArchivo);
 
         } catch (FileNotFoundException ex) {
-            LOGGER.warn("[92] EscribirExcelEstablecimiento.java -> "+ex.getMessage());
+            LOGGER.warn("[92] EscribirExcelEstablecimiento.java -> " + ex.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            LOGGER.warn("[96] EscribirExcelEstablecimiento.java -> "+ex.getMessage());
+            LOGGER.warn("[96] EscribirExcelEstablecimiento.java -> " + ex.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,7 +119,7 @@ public class EscribirExcelEstablecimiento {
     private void escribirLibroXls(Workbook libro, String nombreArchivo) {
         Long id = getServicioFormEstablecimiento().getIdIdentificacionSeleccionada();
         String tempPathFile = ArchivoProperties.obtenerPropertieFilePathProperties("sistema.tempFile.path");
-        nombreArchivo = getServicioLogin().getUsuarioLogueado().getId()+"-"+nombreArchivo;
+        nombreArchivo = getServicioLogin().getUsuarioLogueado().getId() + "-" + nombreArchivo;
 
         setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(id));
 
@@ -128,7 +133,6 @@ public class EscribirExcelEstablecimiento {
          excel.visualizarDatosXls(excel.obtenerListaDatosHojaXls(libroTemp.getSheetAt(1)));
          excel.visualizarDatosXls(excel.obtenerListaDatosHojaXls(libroTemp.getSheetAt(2)));
          */
-
         Long idGrupo = getServicioLogin().getUsuarioLogueado().getIdIdentificacion();
         String unidad = "ESTABLECIMIENTO";
         Date fechaEvento = new Date();
@@ -139,7 +143,7 @@ public class EscribirExcelEstablecimiento {
 
         try {
             //File temp = File.createTempFile(nombreArchivo, ".xls");
-            File temp = new File(tempPathFile+nombreArchivo);
+            File temp = new File(tempPathFile + nombreArchivo);
             FileOutputStream elFichero = new FileOutputStream(temp);
             libro.write(elFichero);
 
@@ -155,9 +159,8 @@ public class EscribirExcelEstablecimiento {
 
             elFichero.close();
             temp.deleteOnExit();
-            temp.delete();
         } catch (IOException e) {
-            LOGGER.warn("[152] EscribirExcelEstablecimiento.java -> "+e.getMessage());
+            LOGGER.warn("[152] EscribirExcelEstablecimiento.java -> " + e.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", e.getMessage());
         }
     }
@@ -176,7 +179,7 @@ public class EscribirExcelEstablecimiento {
 
         Row fila1 = hoja.getRow(1);
         Cell ID_GRUPO = fila1.getCell(1);
-        ID_GRUPO.setCellValue(idGrupo+"");
+        ID_GRUPO.setCellValue(idGrupo + "");
 
         Row fila2 = hoja.getRow(2);
         Cell UNIDAD = fila2.getCell(1);
@@ -192,7 +195,7 @@ public class EscribirExcelEstablecimiento {
 
         Row fila5 = hoja.getRow(5);
         Cell ID_USUARIO = fila5.getCell(1);
-        ID_USUARIO.setCellValue(idUsuario+"");
+        ID_USUARIO.setCellValue(idUsuario + "");
 
         Row fila6 = hoja.getRow(6);
         Cell CODIGO_ARCHIVO = fila6.getCell(1);
@@ -237,43 +240,54 @@ public class EscribirExcelEstablecimiento {
             celdaIndice.setCellStyle(cellStyleLocked);
             celdaIndice.setCellValue(indiceRegistro);
 
-            while (cells.hasNext()) {
+            if (getIdentificacionSeleccionada() != null) {
 
-                Cell cell = (Cell) cells.next();
-                for (VariableIge variableIge : columnas) {
-                    if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
-                        Cell celda = fila.createCell(indiceColumna);
-                        if (variableIge.getTipo().equals("DATE")) {
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlockedFecha);
+                while (cells.hasNext()) {
+
+                    Cell cell = (Cell) cells.next();
+                    for (VariableIge variableIge : columnas) {
+                        if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
+                            Cell celda = fila.createCell(indiceColumna);
+                            if (variableIge.getTipo().equals("DATE")) {
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlockedFecha);
+                                } else {
+                                    celda.setCellStyle(cellStyleLockedFecha);
+                                }
+                                if (Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())) != null) {
+                                    celda.setCellValue(Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())));
+                                }
+                            } else if (variableIge.getTipo().equals("NUMBER")) {
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlocked);
+                                } else {
+                                    celda.setCellStyle(cellStyleLocked);
+                                }
+                                celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
                             } else {
-                                celda.setCellStyle(cellStyleLockedFecha);
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlockedTexto);
+                                } else {
+                                    celda.setCellStyle(cellStyleLockedTexto);
+                                }
+                                //celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
+                                String valor = getIdentificacionSeleccionada().get(variableIge.getColumna().trim());
+                                if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                                    celda.setCellValue(valor.replace(" ", "_"));
+                                } else {
+                                    celda.setCellValue(valor);
+                                }
                             }
-                            if(Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())) != null){
-                                celda.setCellValue(Fecha.fomatoFechaStringToDate(getIdentificacionSeleccionada().get(variableIge.getColumna().trim())));
-                            }
-                        } else if (variableIge.getTipo().equals("NUMBER")) {
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlocked);
-                            } else {
-                                celda.setCellStyle(cellStyleLocked);
-                            }
-                            celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
-                        }else{
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlockedTexto);
-                            } else {
-                                celda.setCellStyle(cellStyleLockedTexto);
-                            }
-                            celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
+                            break;
                         }
-                        break;
                     }
+                    indiceColumna++;
                 }
-                indiceColumna++;
+                indiceFila++;
+                indiceRegistro++;
+            } else {
+                LOGGER.warn("Sin datos IDENTIFICACIÓN el registro: " + unidad.getId().getId());
             }
-            indiceFila++;
-            indiceRegistro++;
         }
 
         return libro;
@@ -303,6 +317,7 @@ public class EscribirExcelEstablecimiento {
         int indiceFila = 2;
         for (BodegaIdentificacion unidad : getListaIdentificacion()) {
             setRelacionSeleccionada(geteJBServicioBodegaRelacion().obtenerMapRelacionGrupoEmpresaById(unidad.getId().getId()));
+
             Row encabezadoXsl = hoja.getRow(1);
             Iterator cells = encabezadoXsl.cellIterator();
 
@@ -313,43 +328,54 @@ public class EscribirExcelEstablecimiento {
             celdaIndice.setCellStyle(cellStyleLocked);
             celdaIndice.setCellValue(indiceRegistro);
 
-            while (cells.hasNext()) {
+            if (getRelacionSeleccionada() != null) {
 
-                Cell cell = (Cell) cells.next();
-                for (VariableIge variableIge : columnas) {
-                    if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
-                        Cell celda = fila.createCell(indiceColumna);
-                        if (variableIge.getTipo().equals("DATE")) {
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlockedFecha);
+                while (cells.hasNext()) {
+
+                    Cell cell = (Cell) cells.next();
+                    for (VariableIge variableIge : columnas) {
+                        if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
+                            Cell celda = fila.createCell(indiceColumna);
+                            if (variableIge.getTipo().equals("DATE")) {
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlockedFecha);
+                                } else {
+                                    celda.setCellStyle(cellStyleLockedFecha);
+                                }
+                                if (Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())) != null) {
+                                    celda.setCellValue(Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())));
+                                }
+                            } else if (variableIge.getTipo().equals("NUMBER")) {
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlocked);
+                                } else {
+                                    celda.setCellStyle(cellStyleLocked);
+                                }
+                                celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
                             } else {
-                                celda.setCellStyle(cellStyleLockedFecha);
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlockedTexto);
+                                } else {
+                                    celda.setCellStyle(cellStyleLockedTexto);
+                                }
+                                //celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                                String valor = getRelacionSeleccionada().get(variableIge.getColumna().trim());
+                                if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                                    celda.setCellValue(valor.replace(" ", "_"));
+                                } else {
+                                    celda.setCellValue(valor);
+                                }
                             }
-                            if(Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())) != null){
-                                celda.setCellValue(Fecha.fomatoFechaStringToDate(getRelacionSeleccionada().get(variableIge.getColumna().trim())));
-                            }
-                        } else if (variableIge.getTipo().equals("NUMBER")) {
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlocked);
-                            } else {
-                                celda.setCellStyle(cellStyleLocked);
-                            }
-                            celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
-                        }else{
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlockedTexto);
-                            } else {
-                                celda.setCellStyle(cellStyleLockedTexto);
-                            }
-                            celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                            break;
                         }
-                        break;
                     }
+                    indiceColumna++;
                 }
-                indiceColumna++;
+                indiceFila++;
+                indiceRegistro++;
+            } else {
+                LOGGER.warn("Sin datos RELACIÓN el registro: " + unidad.getId().getId());
             }
-            indiceFila++;
-            indiceRegistro++;
         }
         return libro;
     }
@@ -378,6 +404,7 @@ public class EscribirExcelEstablecimiento {
         int indiceFila = 2;
         for (BodegaIdentificacion unidad : getListaIdentificacion()) {
             setNovedadSeleccionada(geteJBServicioBodegaNovedad().obtenerMapNovedadGrupoEmpresaById(unidad.getId().getId()));
+
             Row encabezadoXsl = hoja.getRow(1);
             Iterator cells = encabezadoXsl.cellIterator();
 
@@ -388,43 +415,54 @@ public class EscribirExcelEstablecimiento {
             celdaIndice.setCellStyle(cellStyleLocked);
             celdaIndice.setCellValue(indiceRegistro);
 
-            while (cells.hasNext()) {
+            if (getNovedadSeleccionada() != null) {
 
-                Cell cell = (Cell) cells.next();
-                for (VariableIge variableIge : columnas) {
-                    if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
-                        Cell celda = fila.createCell(indiceColumna);
-                        if (variableIge.getTipo().equals("DATE")) {
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlockedFecha);
+                while (cells.hasNext()) {
+
+                    Cell cell = (Cell) cells.next();
+                    for (VariableIge variableIge : columnas) {
+                        if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
+                            Cell celda = fila.createCell(indiceColumna);
+                            if (variableIge.getTipo().equals("DATE")) {
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlockedFecha);
+                                } else {
+                                    celda.setCellStyle(cellStyleLockedFecha);
+                                }
+                                if (Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())) != null) {
+                                    celda.setCellValue(Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())));
+                                }
+                            } else if (variableIge.getTipo().equals("NUMBER")) {
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlocked);
+                                } else {
+                                    celda.setCellStyle(cellStyleLocked);
+                                }
+                                celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
                             } else {
-                                celda.setCellStyle(cellStyleLockedFecha);
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlockedTexto);
+                                } else {
+                                    celda.setCellStyle(cellStyleLockedTexto);
+                                }
+                                //celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                                String valor = getNovedadSeleccionada().get(variableIge.getColumna().trim());
+                                if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                                    celda.setCellValue(valor.replace(" ", "_"));
+                                } else {
+                                    celda.setCellValue(valor);
+                                }
                             }
-                            if (Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())) != null) {
-                                celda.setCellValue(Fecha.fomatoFechaStringToDate(getNovedadSeleccionada().get(variableIge.getColumna().trim())));
-                            }
-                        } else if (variableIge.getTipo().equals("NUMBER")) {
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlocked);
-                            } else {
-                                celda.setCellStyle(cellStyleLocked);
-                            }
-                            celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
-                        }else{
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlockedTexto);
-                            } else {
-                                celda.setCellStyle(cellStyleLockedTexto);
-                            }
-                            celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                            break;
                         }
-                        break;
                     }
+                    indiceColumna++;
                 }
-                indiceColumna++;
+                indiceFila++;
+                indiceRegistro++;
+            } else {
+                LOGGER.warn("Sin datos IDENTIFICACIÓN el registro: " + unidad.getId().getId());
             }
-            indiceFila++;
-            indiceRegistro++;
         }
         return libro;
     }
@@ -453,6 +491,7 @@ public class EscribirExcelEstablecimiento {
         int indiceFila = 2;
         for (BodegaIdentificacion unidad : getListaIdentificacion()) {
             setTamanoSeleccionado(geteJBServicioBodegaTamano().obtenerMapTamanoGrupoEmpresaById(unidad.getId().getId()));
+
             Row encabezadoXsl = hoja.getRow(1);
             Iterator cells = encabezadoXsl.cellIterator();
 
@@ -463,45 +502,55 @@ public class EscribirExcelEstablecimiento {
             celdaIndice.setCellStyle(cellStyleLocked);
             celdaIndice.setCellValue(indiceRegistro);
 
-            while (cells.hasNext()) {
+            if (getTamanoSeleccionado() != null) {
 
-                Cell cell = (Cell) cells.next();
-                for (VariableIge variableIge : columnas) {
-                    if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
-                        Cell celda = fila.createCell(indiceColumna);
-                        if (variableIge.getTipo().equals("DATE")) {
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlockedFecha);
+                while (cells.hasNext()) {
+
+                    Cell cell = (Cell) cells.next();
+                    for (VariableIge variableIge : columnas) {
+                        if (cell.getStringCellValue().trim().toLowerCase().equals(variableIge.getEtiqueta().trim().toLowerCase())) {
+                            Cell celda = fila.createCell(indiceColumna);
+                            if (variableIge.getTipo().equals("DATE")) {
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlockedFecha);
+                                } else {
+                                    celda.setCellStyle(cellStyleLockedFecha);
+                                }
+                                celda.setCellValue(Fecha.fomatoFechaStringToDate(getTamanoSeleccionado().get(variableIge.getColumna().trim())));
+                            } else if (variableIge.getTipo().equals("NUMBER")) {
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlocked);
+                                } else {
+                                    celda.setCellStyle(cellStyleLocked);
+                                }
+                                celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
                             } else {
-                                celda.setCellStyle(cellStyleLockedFecha);
+                                if (Boolean.parseBoolean(variableIge.getEditable())) {
+                                    celda.setCellStyle(cellStyleUnlockedTexto);
+                                } else {
+                                    celda.setCellStyle(cellStyleLockedTexto);
+                                }
+                                //celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                                String valor = getTamanoSeleccionado().get(variableIge.getColumna().trim());
+                                if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                                    celda.setCellValue(valor.replace(" ", "_"));
+                                } else {
+                                    celda.setCellValue(valor);
+                                }
                             }
-                            celda.setCellValue(Fecha.fomatoFechaStringToDate(getTamanoSeleccionado().get(variableIge.getColumna().trim())));
-                        } else if (variableIge.getTipo().equals("NUMBER")) {
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlocked);
-                            } else {
-                                celda.setCellStyle(cellStyleLocked);
-                            }
-                            celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
-                        }else{
-                            if (Boolean.parseBoolean(variableIge.getEditable())) {
-                                celda.setCellStyle(cellStyleUnlockedTexto);
-                            } else {
-                                celda.setCellStyle(cellStyleLockedTexto);
-                            }
-                            celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                            break;
                         }
-                        break;
                     }
+                    indiceColumna++;
                 }
-                indiceColumna++;
+                indiceFila++;
+                indiceRegistro++;
+            } else {
+                LOGGER.warn("Sin datos IDENTIFICACIÓN el registro: " + unidad.getId().getId());
             }
-            indiceFila++;
-            indiceRegistro++;
         }
         return libro;
     }
-
 
     //Métodos Set y Get de la clase
     public VariableIgeFacadeLocal geteJBServicioVariableIge() {
@@ -614,6 +663,38 @@ public class EscribirExcelEstablecimiento {
 
     public void setServicioLogin(Login servicioLogin) {
         this.servicioLogin = servicioLogin;
+    }
+
+    public boolean isContieneRegistrosIdentificacion() {
+        return contieneRegistrosIdentificacion;
+    }
+
+    public void setContieneRegistrosIdentificacion(boolean contieneRegistrosIdentificacion) {
+        this.contieneRegistrosIdentificacion = contieneRegistrosIdentificacion;
+    }
+
+    public boolean isContieneRegistrosRelacion() {
+        return contieneRegistrosRelacion;
+    }
+
+    public void setContieneRegistrosRelacion(boolean contieneRegistrosRelacion) {
+        this.contieneRegistrosRelacion = contieneRegistrosRelacion;
+    }
+
+    public boolean isContieneRegistrosHistoria() {
+        return contieneRegistrosHistoria;
+    }
+
+    public void setContieneRegistrosHistoria(boolean contieneRegistrosHistoria) {
+        this.contieneRegistrosHistoria = contieneRegistrosHistoria;
+    }
+
+    public boolean isContieneRegistrosTamano() {
+        return contieneRegistrosTamano;
+    }
+
+    public void setContieneRegistrosTamano(boolean contieneRegistrosTamano) {
+        this.contieneRegistrosTamano = contieneRegistrosTamano;
     }
 
 }

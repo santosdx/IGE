@@ -172,7 +172,6 @@ public class ReporteEstablecimiento implements Serializable {
                 exporter.exportReport();
 
                 setContenido(new DefaultStreamedContent(new FileInputStream(temp), "application/pdf", "Reporte Establecimientos.pdf"));
-                temp.delete();
                 temp.deleteOnExit();
                 //LOGGER.info("setContenido");
             } catch (JRException e) {
@@ -238,7 +237,6 @@ public class ReporteEstablecimiento implements Serializable {
             exporter.exportReport();
 
             setContenido(new DefaultStreamedContent(new FileInputStream(temp), "application/pdf", "Reporte Establecimientos.pdf"));
-            temp.delete();
             temp.deleteOnExit();
             //LOGGER.info("setContenido");
         } catch (JRException e) {

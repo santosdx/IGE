@@ -166,7 +166,6 @@ public class ReporteUnidadLegal implements Serializable {
             exporter.exportReport();
 
             setContenido(new DefaultStreamedContent(new FileInputStream(temp), "application/pdf", "Reporte Unidad Legal.pdf"));
-            temp.delete();
             temp.deleteOnExit();
             //LOGGER.info("setContenido");
         } catch (JRException e) {
@@ -230,7 +229,6 @@ public class ReporteUnidadLegal implements Serializable {
             exporter.exportReport();
 
             setContenido(new DefaultStreamedContent(new FileInputStream(temp), "application/pdf", "Reporte Unidad Legal.pdf"));
-            temp.delete();
             temp.deleteOnExit();
             //LOGGER.info("setContenido");
         } catch (JRException e) {

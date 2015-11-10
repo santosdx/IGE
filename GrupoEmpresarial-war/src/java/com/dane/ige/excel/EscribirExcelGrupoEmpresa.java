@@ -89,11 +89,11 @@ public class EscribirExcelGrupoEmpresa {
             escribirLibroXls(workbook, nombreArchivo, id, unidad);
 
         } catch (FileNotFoundException ex) {
-            LOGGER.warn("[84] EscribirExcelGrupoEmpresa.java -> "+ex.getMessage());
+            LOGGER.warn("[84] EscribirExcelGrupoEmpresa.java -> " + ex.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            LOGGER.warn("[87] EscribirExcelGrupoEmpresa.java -> "+ex.getMessage());
+            LOGGER.warn("[87] EscribirExcelGrupoEmpresa.java -> " + ex.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,7 +109,7 @@ public class EscribirExcelGrupoEmpresa {
         //Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
         //String unidad = "GRUPO";
         String tempPathFile = ArchivoProperties.obtenerPropertieFilePathProperties("sistema.tempFile.path");
-        nombreArchivo = getServicioLogin().getUsuarioLogueado().getId()+"-"+nombreArchivo;
+        nombreArchivo = getServicioLogin().getUsuarioLogueado().getId() + "-" + nombreArchivo;
 
         setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerMapIdentificacionByIdTipoOrganizacion(id, unidad));
         Workbook libroTemp = ingresarDatosIdentificacion(libro);
@@ -131,7 +131,7 @@ public class EscribirExcelGrupoEmpresa {
         ingresarIdentificacionArchivoGenerado(libro, idGrupo, unidad, fechaEvento, evento, idUsuario, codigoArchivo);
 
         try {
-            File temp = new File(tempPathFile+nombreArchivo);
+            File temp = new File(tempPathFile + nombreArchivo);
             FileOutputStream elFichero = new FileOutputStream(temp);
             libro.write(elFichero);
 
@@ -147,9 +147,8 @@ public class EscribirExcelGrupoEmpresa {
 
             elFichero.close();
             temp.deleteOnExit();
-            temp.delete();
         } catch (IOException e) {
-            LOGGER.warn("[150] EscribirExcelGrupoEmpresa.java -> "+e.getMessage());
+            LOGGER.warn("[150] EscribirExcelGrupoEmpresa.java -> " + e.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", e.getMessage());
         }
     }
@@ -168,7 +167,7 @@ public class EscribirExcelGrupoEmpresa {
 
         Row fila1 = hoja.getRow(1);
         Cell ID_GRUPO = fila1.getCell(1);
-        ID_GRUPO.setCellValue(idGrupo+"");
+        ID_GRUPO.setCellValue(idGrupo + "");
 
         Row fila2 = hoja.getRow(2);
         Cell UNIDAD = fila2.getCell(1);
@@ -184,7 +183,7 @@ public class EscribirExcelGrupoEmpresa {
 
         Row fila5 = hoja.getRow(5);
         Cell ID_USUARIO = fila5.getCell(1);
-        ID_USUARIO.setCellValue(idUsuario+"");
+        ID_USUARIO.setCellValue(idUsuario + "");
 
         Row fila6 = hoja.getRow(6);
         Cell CODIGO_ARCHIVO = fila6.getCell(1);
@@ -225,7 +224,12 @@ public class EscribirExcelGrupoEmpresa {
                         celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
                     } else {
                         celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                        celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
+                        String valor = getIdentificacionSeleccionada().get(variableIge.getColumna().trim());
+                        if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                            celda.setCellValue(valor.replace(" ", "_"));
+                        } else {
+                            celda.setCellValue(valor);
+                        }
                     }
                     break;
                 }
@@ -269,7 +273,13 @@ public class EscribirExcelGrupoEmpresa {
                         celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
                     } else {
                         celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                        celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                        //celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                        String valor = getRelacionSeleccionada().get(variableIge.getColumna().trim());
+                        if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                            celda.setCellValue(valor.replace(" ", "_"));
+                        } else {
+                            celda.setCellValue(valor);
+                        }
                     }
                     break;
                 }
@@ -311,7 +321,13 @@ public class EscribirExcelGrupoEmpresa {
                         celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
                     } else {
                         celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                        celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                        //celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                        String valor = getNovedadSeleccionada().get(variableIge.getColumna().trim());
+                        if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                            celda.setCellValue(valor.replace(" ", "_"));
+                        } else {
+                            celda.setCellValue(valor);
+                        }
                     }
                     break;
                 }
@@ -354,7 +370,13 @@ public class EscribirExcelGrupoEmpresa {
                         celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
                     } else {
                         celda.setCellStyle(EstiloCeldasXls.estiloBordeCompletoCedaEditableTexto(libro, Boolean.parseBoolean(variableIge.getEditable())));
-                        celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                        //celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                        String valor = getTamanoSeleccionado().get(variableIge.getColumna().trim());
+                        if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                            celda.setCellValue(valor.replace(" ", "_"));
+                        } else {
+                            celda.setCellValue(valor);
+                        }
                     }
                     break;
                 }

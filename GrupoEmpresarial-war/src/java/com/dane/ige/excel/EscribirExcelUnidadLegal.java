@@ -145,7 +145,6 @@ public class EscribirExcelUnidadLegal {
 
             elFichero.close();
             temp.deleteOnExit();
-            temp.delete();
         } catch (IOException e) {
             LOGGER.warn("[143] EscribirExcelUnidadLegal.java -> "+e.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", e.getMessage());
@@ -255,7 +254,13 @@ public class EscribirExcelUnidadLegal {
                             } else {
                                 celda.setCellStyle(cellStyleLockedTexto);
                             }
-                            celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
+                            //celda.setCellValue(getIdentificacionSeleccionada().get(variableIge.getColumna().trim()));
+                            String valor = getIdentificacionSeleccionada().get(variableIge.getColumna().trim());
+                            if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                                celda.setCellValue(valor.replace(" ", "_"));
+                            } else {
+                                celda.setCellValue(valor);
+                            }
                         }
                         break;
                     }
@@ -331,7 +336,13 @@ public class EscribirExcelUnidadLegal {
                             } else {
                                 celda.setCellStyle(cellStyleLockedTexto);
                             }
-                            celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                            //celda.setCellValue(getRelacionSeleccionada().get(variableIge.getColumna().trim()));
+                            String valor = getRelacionSeleccionada().get(variableIge.getColumna().trim());
+                            if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                                celda.setCellValue(valor.replace(" ", "_"));
+                            } else {
+                                celda.setCellValue(valor);
+                            }
                         }
                         break;
                     }
@@ -406,7 +417,13 @@ public class EscribirExcelUnidadLegal {
                             } else {
                                 celda.setCellStyle(cellStyleLockedTexto);
                             }
-                            celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                            //celda.setCellValue(getNovedadSeleccionada().get(variableIge.getColumna().trim()));
+                            String valor = getNovedadSeleccionada().get(variableIge.getColumna().trim());
+                            if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                                celda.setCellValue(valor.replace(" ", "_"));
+                            } else {
+                                celda.setCellValue(valor);
+                            }
                         }
                         break;
                     }
@@ -479,7 +496,13 @@ public class EscribirExcelUnidadLegal {
                             } else {
                                 celda.setCellStyle(cellStyleLockedTexto);
                             }
-                            celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                            //celda.setCellValue(getTamanoSeleccionado().get(variableIge.getColumna().trim()));
+                            String valor = getTamanoSeleccionado().get(variableIge.getColumna().trim());
+                            if ((variableIge.getColumna().toUpperCase()).contains("DEPARTAMENTO")) {
+                                celda.setCellValue(valor.replace(" ", "_"));
+                            } else {
+                                celda.setCellValue(valor);
+                            }
                         }
                         break;
                     }

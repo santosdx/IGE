@@ -289,7 +289,8 @@ public class LeerExcel implements Serializable {
                              Mensaje.agregarMensajeGrowlError("Atención!", getMensajeErrorValidacionArchivo());
                              }*/
                         } else {
-                            setMensajeErrorValidacionArchivo("No se encontro el archivo descargado, por codigo:" + codigoArchivo);
+                            //setMensajeErrorValidacionArchivo("No se encontro el archivo descargado, por codigo:" + codigoArchivo);
+                            setMensajeErrorValidacionArchivo("El archivo que intenta subir, no corresponde al archivo descargado.");
                             Mensaje.agregarMensajeGrowlError("Error!", getMensajeErrorValidacionArchivo());
                         }
                     } else {
@@ -648,7 +649,7 @@ public class LeerExcel implements Serializable {
                                                 }
                                             }
                                             if (variable.getTablaReferencial().equals("IGE_DEPARTAMENTO")) {
-                                                if (!ListasDesplegablesFormularios.listaContieneElDepartamento(listaDepartamentos, valorCelda)) {
+                                                if (!ListasDesplegablesFormularios.listaContieneElDepartamento(listaDepartamentos, valorCelda.replace("_", " "))) {
                                                     InformeRegistroInconsistenteXls.Inconsistencia inconsistencia = new InformeRegistroInconsistenteXls.Inconsistencia(listaInconsistenciaVariables.size(), variable.getEtiqueta(), "Nombre del departamento inconrrecto.");
                                                     listaInconsistenciaVariables.add(inconsistencia);
                                                 }
