@@ -103,11 +103,10 @@ public class Login implements Serializable {
 
         if (isLoggedIn()) {
             //LOGGER.info("Login-OK");
-            LOGGER.info("El usuario ("+getUsuarioLogueado().getNickname()+") "+getUsuarioLogueado().getNombres() +" "+ getUsuarioLogueado().getApellidos() +", ingreso al sistema");
+            LOGGER.info("El usuario (" + getUsuarioLogueado().getNickname() + ") " + getUsuarioLogueado().getNombres() + " " + getUsuarioLogueado().getApellidos() + ", ingreso al sistema");
             context.addCallbackParam("view", ctxPath + "/index.xhtml");
         }
     }
-
 
     /**
      * Método que permite contruir dinamicamente el menú principal del
@@ -126,11 +125,13 @@ public class Login implements Serializable {
             DefaultMenuItem itemHome = new DefaultMenuItem("Inicio");
             itemHome.setUrl("/index.xhtml");
             itemHome.setIcon("ui-icon-home");
+            //itemHome.setStyle("#{view.viewId == '/index.xhtml' ? 'background:#B6014C !important; color:#FFFFFF;' : ''}");
             getModeloMenu().addElement(itemHome);
 
             DefaultMenuItem itemGuia = new DefaultMenuItem("Guía de Usuario");
             itemGuia.setUrl("/interfaz/usuario/itz-guial-usuario.xhtml");
             itemGuia.setIcon("fa fa-book");
+            //itemGuia.setStyle("#{view.viewId == '/interfaz/usuario/itz-guial-usuario.xhtml' ? 'background:#B6014C !important; color:#FFFFFF;' : ''}");
             getModeloMenu().addElement(itemGuia);
 
             for (Modulo modulo : getListaModulos()) {
@@ -143,6 +144,7 @@ public class Login implements Serializable {
                             DefaultMenuItem item = new DefaultMenuItem(permiso.getPermiso());
                             if (permiso.getUrl() != null) {
                                 item.setUrl(permiso.getUrl());
+                                //item.setStyle("#{view.viewId == '" + permiso.getUrl() + "' ? 'background:#B6014C !important; color:#FFFFFF;' : ''}");
                             }
                             if (permiso.getComando() != null && !StringUtils.isEmpty(permiso.getComando())) {
                                 item.setCommand(permiso.getComando());

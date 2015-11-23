@@ -36,7 +36,11 @@ public class MunicipioFacade extends AbstractFacade<Municipio> implements Munici
      public List<Municipio> findAllInOrderByNameAsc(){
         List<Municipio> resultado = new ArrayList<Municipio>();
         try {
-            Query query = em.createNamedQuery(Municipio.FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC);
+            String sql ="SELECT id_municipio, REPLACE(municipio_nombre,'_',' ') as municipio_nombre, departamento_nombre  "
+                    + "FROM ige_municipio ORDER BY municipio_nombre ASC";
+            //Query query = em.createNamedQuery(Municipio.FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC);
+            Query query = em.createNativeQuery(sql,Municipio.class);
+
             List<Municipio> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
             if (listaResultado.isEmpty()) {
@@ -59,8 +63,14 @@ public class MunicipioFacade extends AbstractFacade<Municipio> implements Munici
      public List<Municipio> findAllByDepartamentoOrderAsc(String departamento){
         List<Municipio> resultado = new ArrayList<Municipio>();
         try {
-            Query query = em.createNamedQuery(Municipio.FINE_BYE_FIND_ALL_BY_DEPARTAMENTO_ORDER_ASC);
-            query.setParameter("departamento", departamento);
+            String sql ="SELECT id_municipio, REPLACE(municipio_nombre,'_',' ') as municipio_nombre, departamento_nombre " +
+                        "FROM ige_municipio " +
+                        "WHERE departamento_nombre = '"+departamento.replace(" ", "_")+"'" +
+                        "ORDER BY municipio_nombre ASC ";
+
+            //Query query = em.createNamedQuery(Municipio.FINE_BYE_FIND_ALL_BY_DEPARTAMENTO_ORDER_ASC);
+            Query query = em.createNativeQuery(sql,Municipio.class);
+            //query.setParameter("departamento", departamento);
 
             List<Municipio> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();

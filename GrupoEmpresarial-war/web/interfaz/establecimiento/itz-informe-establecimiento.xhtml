@@ -64,23 +64,23 @@
                                         <p:column headerText="Establecimiento">
                                             <p:outputLabel value="#{fila.nombreRegistrado}"/>
                                         </p:column>
-                                        <p:column headerText="">
+                                        <p:column headerText="" style="width:190px;">
                                             <p:commandLink update="frmInfEstablecimiento:dlgReportePdf" oncomplete="PF('dlg').show();" 
                                                  actionListener="#{MbReporteEstablecimiento.generarReporteEstablecimientoPdf(fila.id.id)}" 
                                                   rendered="#{aplicacionPrincipal.browserName != 'Internet Explorer'}">
                                                 <!--h:outputText value="Reporte de datos" /-->
-                                                <div class="ui-grid-col-3"><i class="fa fa-fw fa-file-pdf-o"></i>Reporte</div>
+                                                <i class="fa fa-fw fa-file-pdf-o"></i>Reporte
                                             </p:commandLink>
                                             <p:commandLink actionListener="#{MbReporteEstablecimiento.generarReporteEstablecimientoPdf(fila.id.id)}" 
                                                             rendered="#{aplicacionPrincipal.browserName eq 'Internet Explorer'}"
                                                             onclick="PrimeFaces.monitorDownload(start, stop);" ajax="false" >
                                                 <!--h:outputText value="Reporte de datos" /-->
-                                                <div class="ui-grid-col-3"><i class="fa fa-fw fa-file-pdf-o"></i>Descargar</div>
+                                                <i class="fa fa-fw fa-file-pdf-o"></i>Descargar
                                                 <p:fileDownload value="#{MbReporteEstablecimiento.contenido}" />
                                             </p:commandLink>
                                             <p:commandLink action="#{MbFormEstablecimiento.abrirFormularioActualizarDatos(fila.id.id)}" ajax="false">
                                                 <!--h:outputText value="Formulario actualización datos" /-->
-                                                <div class="ui-grid-col-3"><i class="fa fa-fw fa-edit"></i>Formulario</div>
+                                                <i class="fa fa-fw fa-edit"></i>Formulario
                                             </p:commandLink>
                                         </p:column>
                                     </p:dataTable>

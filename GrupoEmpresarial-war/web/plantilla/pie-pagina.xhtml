@@ -9,15 +9,25 @@
                 <div class="ui-grid ui-grid-responsive">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12">
-                        <h:outputText value="#{aplicacionPrincipal.sistemaInfo.sistema} V.(#{aplicacionPrincipal.sistemaInfo.version})"/>
+                            <h:outputText value="#{aplicacionPrincipal.sistemaInfo.sistema} V.(#{aplicacionPrincipal.sistemaInfo.version})"/>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <h:outputText value="#{resourceSistema['footer.copyright']}" />
+                        </div>
                     </div>
                 </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-12">
-                        <h:outputText value="#{resourceSistema['footer.copyright']}" />
-                    </div>
+
+                <!-- DolarWeb Start>
+                <div id="DolarCO3">
+                    <h2>
+                        <a href="http://dolar.wilkinsonpc.com.co/">Dolar Hoy</a>
+                    </h2>
+                    <a href="http://dolar.wilkinsonpc.com.co/indicadores-economicos-dolar.html">Indicadores Economicos</a>
                 </div>
-                </div>
+                <script type="text/javascript" src="http://dolar.wilkinsonpc.com.co/js/dolar-cop-usd-3.js"></script>
+                < DolarWeb End -->
             </center>
         </ui:composition>
     </h:body>

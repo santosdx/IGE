@@ -6,7 +6,7 @@
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
-                <h:form style="padding-right: 2%; padding-left: 2%;">
+                <h:form id="frmRegistroUnidadLegal" style="padding-right: 2%; padding-left: 2%;">
                     <h3 class="titulo-center-h3">FORMULARIO DE ACTUALIZACIÓN DE LA UNIDAD LEGAL</h3>
                     <p:spacer  height="10"/>
                     <p:growl id="gwFormUnidadLegal" sticky="true" showDetail="true" life="6000" />
@@ -36,7 +36,7 @@
                         <p:tab id="confirm" title="Confirmar datos">
                             <ui:include src="componente/cpt-formulario-resumen.xhtml"/>
                             <hr class="lineaGradian"/>
-                            <p:commandButton value="Actualizar Datos" action="#{MbFormUnidadLegal.actualizarUnidadLegal}" style="float: right; top: 3px;">
+                            <p:commandButton id="btnActualizar" value="Actualizar Datos" action="#{MbFormUnidadLegal.actualizarUnidadLegal}" style="float: right; top: 3px;">
                                 <p:confirm header="Confirmación" icon="ui-icon-alert" message="Esta a punto de actualizar la información, desea continuar?"/>
                             </p:commandButton>
                         </p:tab>
@@ -44,11 +44,15 @@
                     </p:wizard>
 
                     <p:confirmDialog global="true" showEffect="fade" >
-                        <p:commandButton value="Aceptar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton  value="Aceptar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                         <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
 
                 </h:form>
+                <p:blockUI block="frmRegistroUnidadLegal" widgetVar="blockUI" trigger="frmRegistroUnidadLegal:btnActualizar">
+                    Guardando datos...<br />
+                    <p:graphicImage name="imagen/ajax-loading.gif"/>
+                </p:blockUI>
             </ui:define>
         </ui:composition>
     </h:body>
