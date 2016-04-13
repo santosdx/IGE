@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_municipio
  *
  * @author srojasm
  */

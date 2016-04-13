@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_tipo_conglomerado
  *
  * @author srojasm
  */
@@ -18,8 +19,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @NamedQueries({
     @NamedQuery(name = "TipoConglomerado.findAllInOrderByNameAsc", query = "SELECT u FROM TipoConglomerado u order by u.tipo"),
     @NamedQuery(name = "TipoConglomerado.findById", query = "SELECT u FROM TipoConglomerado u WHERE u.id = :id")})
-    
- 
+
 public class TipoConglomerado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +31,7 @@ public class TipoConglomerado implements Serializable {
     private Integer id;
     @Column(name = "TIPO_CONGLOMERADO")
     private String tipo;
-    
+
     public TipoConglomerado() {
     }
 

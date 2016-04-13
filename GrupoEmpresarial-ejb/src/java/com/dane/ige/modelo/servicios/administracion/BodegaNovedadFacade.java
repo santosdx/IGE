@@ -14,6 +14,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase BodegaNovedad como parametro y que implementa la interfaz
+ * BodegaNovedadFacadeLocal, para brindar los servicios sobre el acceso a los
+ * datos a la tabla ige_novedad.
  *
  * @author srojasm
  */
@@ -39,7 +43,7 @@ public class BodegaNovedadFacade extends AbstractFacade<BodegaNovedad> implement
      * empresarial por el ID
      *
      * @param id
-     * @return
+     * @return BodegaNovedad
      */
     @Override
     public BodegaNovedad obtenerNovedadGrupoEmpresaById(Long id) {
@@ -65,6 +69,14 @@ public class BodegaNovedadFacade extends AbstractFacade<BodegaNovedad> implement
         return resultado;
     }
 
+    /**
+     * Método que permite realizar la consulta a la base de datos enviando como
+     * parametro el ID de la unidad en la tabla Novedad, y retornando el listado
+     * de atributos y valor en un Map.
+     *
+     * @param id
+     * @return Map<String, String>
+     */
     @Override
     public Map<String, String> obtenerMapNovedadGrupoEmpresaById(Long id) {
         Map<String, String> resultado = null;
@@ -86,7 +98,7 @@ public class BodegaNovedadFacade extends AbstractFacade<BodegaNovedad> implement
                 resultado = listaResultado.get(0).toMap();
             }
         } catch (Exception e) {
-             LOGGER.warn(e.getMessage());
+            LOGGER.warn(e.getMessage());
         }
         return resultado;
     }

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad VariableIge como servicio.
  *
  * @author srojasm
  */

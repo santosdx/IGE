@@ -122,6 +122,12 @@
                         Generando archivo...<br />
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>
+                    
+                    <p:notificationBar position="bottom" effect="slide" styleClass="top" autoDisplay="#{MbFormGrupoEmpresa.identificacionSeleccionada == null}" widgetVar="bar">
+                        <h:outputText value="Atención!" style="font-size:20px;" />
+                        <br></br>
+                        <h:outputText value="El usuario no tiene asignado un Grupo Empresarial o el asignado no existe." style="font-size:16px;" />
+                    </p:notificationBar>
                 </h:form>
 
                 <script type="text/javascript">

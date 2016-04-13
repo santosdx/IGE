@@ -29,6 +29,8 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
+ * Clase que administra los metodos, funciones y procesos necesarios para la
+ * generación del reporte de las unidades legales.
  *
  * @author SRojasM
  */
@@ -48,8 +50,8 @@ public class ReporteUnidadLegal implements Serializable {
     }
 
     /**
-     * Método que permite generar el reporte con JasperReport sobre la información
-     * del listado de unidades legales y exportarlo a un arhivo PDF.
+     * Método que permite generar el reporte con JasperReport sobre la
+     * información del listado de unidades legales y exportarlo a un arhivo PDF.
      */
     public void generarReporteUnidadesLegalesPdf() {
         String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("reporte.unidadLegales.path");
@@ -90,8 +92,8 @@ public class ReporteUnidadLegal implements Serializable {
     }
 
     /**
-     * Método que permite generar el reporte con JasperReport sobre la información
-     * de una unidad legal y exportarlo a un arhivo PDF.
+     * Método que permite generar el reporte con JasperReport sobre la
+     * información de una unidad legal y exportarlo a un arhivo PDF.
      */
     public void generarReporteUnidadLegalPdf(Long idOrganizacion) {
         String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("reporte.unidadLegal.path");

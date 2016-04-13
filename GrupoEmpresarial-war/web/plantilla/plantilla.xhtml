@@ -23,6 +23,7 @@
         <h:body>
             <ui:debug/>
             <p:layout fullPage="true">
+                <!--ui:include src="../interfaz/utilidades/cpt-ExceptionHandler.xhtml"/-->
                 <ui:include src="../interfaz/utilidades/cpt-IdleMonitor.xhtml"/>
                 <p:layoutUnit position="north" size="100" closable="true" collapsible="false">
                     <ui:include src="encabezado.xhtml" />
@@ -30,7 +31,7 @@
 
                 <!--p:layoutUnit position="west" size="250" header="#{resourceSistema['menu.title']}" collapsible="true"-->
                 <p:layoutUnit position="west" header="&nbsp;" size="250" collapsible="true">
-                <!--p:layoutUnit position="west" size="250" collapsible="false"-->
+                    <!--p:layoutUnit position="west" size="250" collapsible="false"-->
                     <ui:include src="menu.xhtml" />
                 </p:layoutUnit>
 
@@ -43,7 +44,6 @@
                 </p:layoutUnit>
 
             </p:layout>
-
         </h:body>
 
     </f:view>

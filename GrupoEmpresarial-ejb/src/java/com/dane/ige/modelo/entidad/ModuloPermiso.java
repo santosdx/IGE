@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
+ * Clase Entity que representa la tabla ige_modulo_permiso
  *
  * @author srojasm
  */
@@ -23,11 +24,12 @@ import javax.persistence.Table;
     @NamedQuery(name = "ModuloPermiso.findByIdModuloIdPermiso", query = "SELECT u FROM ModuloPermiso u WHERE u.idModulo = :idModulo AND u.idPermiso = :idPermiso"),
     @NamedQuery(name = "ModuloPermiso.deleteAllModuloPermisoByIdModulo", query = "DELETE FROM ModuloPermiso p WHERE p.idModulo = :idModulo")})
 public class ModuloPermiso implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final String FINE_BYE_IDMODULO_IDPERMISO = "ModuloPermiso.findByIdModuloIdPermiso";
     public static final String DELETE_ALL_MODULO_PERMISOS_BY_IDMODULO = "ModuloPermiso.deleteAllModuloPermisoByIdModulo";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO_PERMISO")
     @SequenceGenerator(name = "SEQ_MODULO_PERMISO", sequenceName = "seq_id_ige_modulo_permiso", allocationSize = 1)
@@ -37,7 +39,7 @@ public class ModuloPermiso implements Serializable {
     private int idModulo;
     @Column(name = "id_ige_permiso")
     private int idPermiso;
-    
+
     public ModuloPermiso() {
     }
 
@@ -49,7 +51,7 @@ public class ModuloPermiso implements Serializable {
         this.idModulo = idModulo;
         this.idPermiso = idPermiso;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -70,8 +72,6 @@ public class ModuloPermiso implements Serializable {
         this.idPermiso = idPermiso;
     }
 
-    
-    
     public void setId(Integer id) {
         this.id = id;
     }
@@ -100,5 +100,5 @@ public class ModuloPermiso implements Serializable {
     public String toString() {
         return "com.nerv.sai.modelo.entidad.ModuloPermiso[ id=" + id + " ]";
     }
-    
+
 }

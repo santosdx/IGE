@@ -9,6 +9,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
+ * Clase Entity que representa la tabla ige_variable
  *
  * @author srojasm
  */
@@ -55,7 +56,7 @@ public class VariableIge implements Serializable {
     private String tablaReferencial;
     @Column(name = "validacion_obligatoriedad")
     private String validacionObligatoriedad;
-    
+
     public VariableIge() {
     }
 
@@ -155,7 +156,6 @@ public class VariableIge implements Serializable {
         this.validacionObligatoriedad = validacionObligatoriedad;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;

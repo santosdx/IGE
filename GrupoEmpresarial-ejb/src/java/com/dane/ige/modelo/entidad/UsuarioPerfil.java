@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
+ * Clase Entity que representa la tabla ige_usuario_perfil
  *
  * @author srojasm
  */
@@ -24,10 +25,11 @@ import javax.persistence.Table;
     @NamedQuery(name = "UsuarioPerfil.findByIdPerfil", query = "SELECT u FROM UsuarioPerfil u WHERE u.idPerfil = :idPerfil"),
     @NamedQuery(name = "UsuarioPerfil.findByIdUsuarioIdPerfil", query = "SELECT u FROM UsuarioPerfil u WHERE u.idUsuario = :idUsuario AND u.idPerfil = :idPerfil")})
 public class UsuarioPerfil implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final String FINE_BYE_IDUSUARIO_IDPERFIL = "UsuarioPerfil.findByIdUsuarioIdPerfil";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUARIO_PERFIL")
     @SequenceGenerator(name = "SEQ_USUARIO_PERFIL", sequenceName = "seq_id_ige_usuario_perfil", allocationSize = 1)
@@ -49,7 +51,7 @@ public class UsuarioPerfil implements Serializable {
         this.idUsuario = idUsuario;
         this.idPerfil = idPerfil;
     }
-    
+
     public UsuarioPerfil(Integer id, int idUsuario, int idPerfil) {
         this.id = id;
         this.idUsuario = idUsuario;
@@ -104,5 +106,5 @@ public class UsuarioPerfil implements Serializable {
     public String toString() {
         return "com.nerv.sai.modelo.entidad.UsuarioPerfil[ id=" + id + " ]";
     }
-    
+
 }

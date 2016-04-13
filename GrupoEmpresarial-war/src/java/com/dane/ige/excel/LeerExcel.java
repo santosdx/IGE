@@ -60,6 +60,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 /**
+ * Clase que contiene las funcionalidades de lectura de los archivos Excel (xls)
+ * validando la calidad de los datos, los datos obligatorios, la estructura del
+ * archivo y realizando el proceso de actualización o inserción de los mismos en
+ * las tablas de la base de datos.
  *
  * @author SRojasM
  */

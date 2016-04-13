@@ -13,6 +13,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase TipoControl como parametro y que implementa la interfaz
+ * TipoControlFacadeLocal, para brindar los servicios sobre el acceso a los
+ * datos a la tabla ige_tipo_control.
  *
  * @author srojasm
  */
@@ -32,8 +36,14 @@ public class TipoControlFacade extends AbstractFacade<TipoControl> implements Ti
     public TipoControlFacade() {
         super(TipoControl.class);
     }
-    
-     public List<TipoControl> findAllInOrderByNameAsc(){
+
+    /**
+     * Método que permite realizar la consulta a la base de datos y retornar el
+     * listado de Tipo de Relación ordenado por el nombre.
+     *
+     * @return List[TipoControl]
+     */
+    public List<TipoControl> findAllInOrderByNameAsc() {
         List<TipoControl> resultado = new ArrayList<TipoControl>();
         try {
             Query query = em.createNamedQuery(TipoControl.FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC);

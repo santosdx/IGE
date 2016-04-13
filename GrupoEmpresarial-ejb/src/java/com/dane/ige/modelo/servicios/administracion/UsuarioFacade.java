@@ -12,6 +12,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase Usuario como parametro y que implementa la interfaz
+ * UsuarioFacadeLocal, para brindar los servicios sobre el acceso a los datos a
+ * la tabla ige_usuario.
  *
  * @author srojasm
  */
@@ -38,7 +42,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
      * caso de error, u otra inconsistencia, retornara -1.
      *
      * @param usuario
-     * @return
+     * @return Integer
      */
     @Override
     public Integer createAndGetKey(Usuario usuario) {
@@ -58,7 +62,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
      * usuarios, pasando como parametro el nickname.
      *
      * @param nickname
-     * @return
+     * @return Usuario
      */
     @Override
     public Usuario buscarUsuarioByNickname(String nickname) {
@@ -86,7 +90,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
      *
      * @param nickname
      * @param password
-     * @return
+     * @return Usuario
      */
     @Override
     public Usuario buscarUsuarioByNicknamePassword(String nickname, String password) {
@@ -95,6 +99,32 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
             Query query = em.createNamedQuery(Usuario.FINE_BYE_NICKNAME_PASSWORD);
             query.setParameter("nickname", nickname);
             query.setParameter("password", password);
+
+            List<Usuario> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado.get(0);
+            }
+        } catch (Exception e) {
+            LOGGER.warn(e.getMessage());
+        }
+        return resultado;
+    }
+
+    /**
+     * Método que permit consultar un usuario por el correo electronico,
+     * confirmando que el correo existe.
+     *
+     * @param correo
+     * @return Usuario
+     */
+    public Usuario buscarUsuarioByCorreo(String correo) {
+        Usuario resultado = null;
+        try {
+            Query query = em.createNamedQuery(Usuario.FINE_BYE_CORREO);
+            query.setParameter("correo", correo.toUpperCase());
 
             List<Usuario> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();

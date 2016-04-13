@@ -21,10 +21,11 @@ public class FileUpload {
 
     /**
      * Método que permite subir un documento en una ruta expecifica.
+     *
      * @param pathAlmacenar
      * @param nombreArchivo
      * @param documento
-     * @return 
+     * @return boolean
      */
     public boolean subirDocumento(String pathAlmacenar, String nombreArchivo, InputStream documento) {
         boolean resultado = false;

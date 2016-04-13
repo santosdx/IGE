@@ -13,14 +13,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
+ * Clase Entity que representa la tabla ige_relacion
  *
  * @author srojasm
  */
 @Entity
 @Table(name = "ige_relacion")
 @NamedQueries({
-    @NamedQuery(name = "BodegaRelacion.findAll", query = "SELECT m FROM BodegaRelacion m"), 
-    //@NamedQuery(name = "BodegaRelacion.findById", query = "SELECT m FROM BodegaRelacion m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")
+    @NamedQuery(name = "BodegaRelacion.findAll", query = "SELECT m FROM BodegaRelacion m"), //@NamedQuery(name = "BodegaRelacion.findById", query = "SELECT m FROM BodegaRelacion m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")
 })
 public class BodegaRelacion implements Serializable {
 

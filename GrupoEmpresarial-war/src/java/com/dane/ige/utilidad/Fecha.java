@@ -1,6 +1,5 @@
 package com.dane.ige.utilidad;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +23,7 @@ public class Fecha {
      * formato: dd/MM/yyyy
      *
      * @param fecha
-     * @return
+     * @return Date
      */
     public static Date fomatoFechaStringToDate(String fecha) {
         Date resultado = null;
@@ -48,7 +47,7 @@ public class Fecha {
      * formato: dd/MM/yyyy
      *
      * @param fecha
-     * @return
+     * @return String
      */
     public static String fomatoFechaStringToString(String fecha) {
         String resultado = null;
@@ -73,7 +72,7 @@ public class Fecha {
      * formato: dd/MM/yyyy
      *
      * @param fecha
-     * @return
+     * @return String
      */
     public static String formatFechaDateToString(Date fecha) {
         String resultado = null;
@@ -90,7 +89,7 @@ public class Fecha {
      * formato: dd-MM-yyyy
      *
      * @param fecha
-     * @return
+     * @return String
      */
     public static String formatFechaDateToStringOther(Date fecha) {
         String resultado = null;

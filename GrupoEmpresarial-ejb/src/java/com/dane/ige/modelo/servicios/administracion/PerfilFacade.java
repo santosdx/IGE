@@ -12,6 +12,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase Perfil como parametro y que implementa la interfaz
+ * PerfilFacadeLocal, para brindar los servicios sobre el acceso a los datos a
+ * la tabla ige_perfil.
  *
  * @author srojasm
  */
@@ -33,11 +37,12 @@ public class PerfilFacade extends AbstractFacade<Perfil> implements PerfilFacade
     }
 
     /**
-     * Método que permite crear un registro en la entidad perfil y retorna el
-     * id o llave con el cual se ingreso a la base de datos ese registro.
-     * En caso de error, u otra inconsistencia, retornara -1.
+     * Método que permite crear un registro en la entidad perfil y retorna el id
+     * o llave con el cual se ingreso a la base de datos ese registro. En caso
+     * de error, u otra inconsistencia, retornara -1.
+     *
      * @param perfil
-     * @return 
+     * @return Integer
      */
     @Override
     public Integer createAndGetKey(Perfil perfil) {
@@ -48,12 +53,20 @@ public class PerfilFacade extends AbstractFacade<Perfil> implements PerfilFacade
             resultado = perfil.getId();
         } catch (Exception e) {
             LOGGER.warn(e.getMessage());
-        } 
+        }
         return resultado;
     }
-    
+
+    /**
+     * Método que permite realizar la consulta a la base de datos en el listado
+     * de perfiles y retornar el registro de un perfil como resultado del envio
+     * del nombre como parametro
+     *
+     * @param perfil
+     * @return Perfil
+     */
     @Override
-    public Perfil buscarPerfilByPerfil(String perfil) {        
+    public Perfil buscarPerfilByPerfil(String perfil) {
         Perfil resultado = null;
         try {
             Query query = em.createNamedQuery(Perfil.FINE_BYE_PERFIL);
@@ -65,10 +78,10 @@ public class PerfilFacade extends AbstractFacade<Perfil> implements PerfilFacade
                 return null;
             } else {
                 resultado = listaResultado.get(0);
-            }            
+            }
         } catch (Exception e) {
             LOGGER.warn(e.getMessage());
-        } 
+        }
         return resultado;
     }
 }

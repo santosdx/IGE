@@ -67,7 +67,7 @@ public class FormularioUnidadLegal implements Serializable {
      * formulario con los datos prediligenciados con la unidad seleccionada.
      *
      * @param idOrganizacion
-     * @return
+     * @return String
      */
     public String abrirFormularioActualizarDatos(Long idOrganizacion) {
         setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(idOrganizacion, "UNIDAD LEGAL"));

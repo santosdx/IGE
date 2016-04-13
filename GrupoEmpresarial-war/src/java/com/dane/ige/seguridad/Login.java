@@ -6,6 +6,7 @@ import com.dane.ige.modelo.entidad.Usuario;
 import com.dane.ige.modelo.local.administracion.ModuloFacadeLocal;
 import com.dane.ige.modelo.local.administracion.ModuloPermisoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.UsuarioFacadeLocal;
+import com.dane.ige.utilidad.ArchivoProperties;
 import com.dane.ige.utilidad.Ventana;
 import java.io.IOException;
 import java.io.Serializable;
@@ -29,7 +30,8 @@ import org.primefaces.model.menu.DefaultSubMenu;
 import org.primefaces.model.menu.MenuModel;
 
 /**
- * Clase de acceso.
+ * Clase que contiene todos los metodos, funciones y algoritmos para el proceso
+ * de acceso al aplicativo.
  *
  * @author srojasm
  */
@@ -58,7 +60,6 @@ public class Login implements Serializable {
     private MenuModel modeloMenu;
 
     public Login() {
-
     }
 
     @PostConstruct
@@ -68,8 +69,7 @@ public class Login implements Serializable {
 
     /**
      * Metodo que permite iniciar una sesion para el usuario en la aplicacion.
-     *
-     * @param event
+     * 
      */
     //public void login(ActionEvent event) {
     public void login() {
@@ -81,16 +81,30 @@ public class Login implements Serializable {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage message = null;
 
-        setUsuarioLogueado(geteJBServicioUsuario().buscarUsuarioByNicknamePassword(username, password));
+        //setUsuarioLogueado(geteJBServicioUsuario().buscarUsuarioByNicknamePassword(username, password));
+        Usuario usuarioResultado = geteJBServicioUsuario().buscarUsuarioByNickname(username);
 
+        String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
+        ClaseDESBase64 obj = new ClaseDESBase64(key);
+        String contrasenDesencriptada = obj.desencriptar(usuarioResultado.getPassword());
+
+        if (contrasenDesencriptada != null && contrasenDesencriptada.equals(password)) {
+            setUsuarioLogueado(usuarioResultado);
+        }
         if (getUsuarioLogueado() != null) {
-            if (getUsuarioLogueado().getPerfil() == null) {
-                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un perfil");
-            } else if (getUsuarioLogueado().getIdIdentificacion() == null) {
-                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un grupo empresarial");
+            if (getUsuarioLogueado().getEstado().equals("ACTIVO")) {
+                if (getUsuarioLogueado().getPerfil() == null) {
+                    message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un perfil");
+                } else if (getUsuarioLogueado().getIdIdentificacion() == null) {
+                    message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un grupo empresarial");
+                } else {
+                    setLoggedIn(true);
+                    message = construirMenuLogin();
+                }
             } else {
-                setLoggedIn(true);
-                message = construirMenuLogin();
+                setLoggedIn(false);
+                context.addCallbackParam("loggedIn", isLoggedIn());
+                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de acceso", "El usuario esta " + getUsuarioLogueado().getEstado());
             }
         } else {
             setLoggedIn(false);
@@ -129,7 +143,7 @@ public class Login implements Serializable {
             getModeloMenu().addElement(itemHome);
 
             DefaultMenuItem itemGuia = new DefaultMenuItem("Guía de Usuario");
-            itemGuia.setUrl("/interfaz/usuario/itz-guial-usuario.xhtml");
+            itemGuia.setUrl("/interfaz/usuario/itz-guia-usuario.xhtml");
             itemGuia.setIcon("fa fa-book");
             //itemGuia.setStyle("#{view.viewId == '/interfaz/usuario/itz-guial-usuario.xhtml' ? 'background:#B6014C !important; color:#FFFFFF;' : ''}");
             getModeloMenu().addElement(itemGuia);
@@ -155,6 +169,7 @@ public class Login implements Serializable {
                             }
 
                             item.setAjax((permiso.getAjax() != 0));
+                            item.setTarget(permiso.getTarget());
                             //item.setIcon("ui-icon-home");
                             submenu.addElement(item);
                             //item.setDisabled(true);
@@ -223,15 +238,17 @@ public class Login implements Serializable {
      * Metodo que permite cerrar la sesion del usuario.
      */
     public void logout() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        session.invalidate();
-        setLoggedIn(false);
-        FacesContext contex = FacesContext.getCurrentInstance();
         try {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            session.invalidate();
+            setLoggedIn(false);
+            FacesContext contex = FacesContext.getCurrentInstance();
             //contex.getExternalContext().redirect("index.xhtml");
             contex.getExternalContext().redirect("login.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException nex) {
+            LOGGER.warn("Variable session is " + nex.getMessage());
         }
     }
 
@@ -239,7 +256,6 @@ public class Login implements Serializable {
      * Metodo que permite abrir una ventana con el componente login, para el
      * inicio de session.
      *
-     * @param componente
      */
     public void abrirVentanaLogin() {
         Ventana acceso = new Ventana();
@@ -251,7 +267,7 @@ public class Login implements Serializable {
      */
     public void cerrarVentanaLogin() {
         Ventana acceso = new Ventana();
-        acceso.cerrarCentanaParametrizada("/interfaz/usuario/ventana/vta-acceso-sistema");
+        acceso.cerrarVentanaParametrizada("/interfaz/usuario/ventana/vta-acceso-sistema");
     }
 
     //Lista métodos Set y Get de la clase

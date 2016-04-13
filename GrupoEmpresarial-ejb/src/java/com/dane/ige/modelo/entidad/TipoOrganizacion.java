@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_tipo_organizacion_ul
  *
  * @author srojasm
  */
@@ -18,8 +19,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @NamedQueries({
     @NamedQuery(name = "TipoOrganizacion.findAllInOrderByNameAsc", query = "SELECT u FROM TipoOrganizacion u order by u.tipo"),
     @NamedQuery(name = "TipoOrganizacion.findById", query = "SELECT u FROM TipoOrganizacion u WHERE u.id = :id")})
-    
- 
+
 public class TipoOrganizacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +31,7 @@ public class TipoOrganizacion implements Serializable {
     private Integer id;
     @Column(name = "TIPO_ORGANIZACION_UL")
     private String tipo;
-    
+
     public TipoOrganizacion() {
     }
 

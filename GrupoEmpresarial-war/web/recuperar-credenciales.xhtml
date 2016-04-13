@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        </f:facet>
+
+        <link type="image/vnd.microsoft.icon" rel="shortcut icon" href="resources/icon/dane.ico"/>
+
+        <h:outputStylesheet library="css" name="general.css" />
+        <h:outputStylesheet library="css" name="titulos.css" />
+        <h:outputStylesheet library="css" name="componentes.css" />
+        <title>#{resourceSistema['sistema.title']}</title>
+    </h:head>
+
+    <h:body>
+
+        <ui:debug/>
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                <ui:include src="/plantilla/encabezado.xhtml" />
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" >
+                <h:form id="frmRecuperarCredenciales" >
+                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                    <div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">&nbsp;</div>
+                            <div class="ui-grid-col-8">
+                                <h2 class="titulo-center-h2">Recuperación de Credenciales</h2> 
+                                <p>Si el usuario presenta inconvenientes con sus credenciales de acceso (usuario y/o contraseña) a la hora de ingresar al aplicativo, puede solicitar al administrador de la plataforma la recuperación de los datos enviando el correo electrónico registrado durante la inscripción. </p>
+                                <h:panelGrid columns="3" cellpadding="5">
+                                    <h:outputLabel for="txtCorreo" value="Correo:" />
+                                    <p:inputText id="txtCorreo" value="#{MbRecuperarCredenciales.correo}"
+                                                 required="true" label="Correo" requiredMessage="Correo requerido"/>
+                                    <p:commandButton id="btnRecuperarCredenciales" value="Enviar" update="growl,txtCorreo"
+                                                     actionListener="#{MbRecuperarCredenciales.recuperarCredenciales}"/>
+                                </h:panelGrid>
+                                <p>Si persisten los problemas o presenta inquietud o sugerencia puede escribir al servicio de soporte al siguiente correo electrónico, srojasm@dane.gov.co</p>
+                                <br></br>
+                                <br></br>
+                                 <p:link  outcome="/login.xhtml"  value="Página principal..."
+                                             style="text-decoration: none; outline: none; color: #25AAE1;" />
+                            </div>
+                            <div class="ui-grid-col-2">&nbsp;</div>
+                        </div>
+                    </div>
+
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" closable="true" collapsible="true" styleClass="cajaPiePagina">
+                <ui:include src="/plantilla/pie-pagina.xhtml" />
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+</html>

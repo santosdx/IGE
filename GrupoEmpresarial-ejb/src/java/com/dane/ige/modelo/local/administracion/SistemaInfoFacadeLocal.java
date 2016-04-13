@@ -1,10 +1,11 @@
 package com.dane.ige.modelo.local.administracion;
 
-
-
 import com.dane.ige.modelo.entidad.SistemaInfo;
+import java.sql.SQLException;
 import java.util.List;
 import javax.ejb.Local;
+import javax.resource.ResourceException;
+import org.hibernate.exception.GenericJDBCException;
 
 /**
  *
@@ -26,7 +27,9 @@ public interface SistemaInfoFacadeLocal {
     List<SistemaInfo> findRange(int[] range);
 
     int count();
-    
-    public SistemaInfo obtenerUltimaVersion();
-    
+
+    SistemaInfo obtenerUltimaVersion();
+
+    boolean testConexion() throws ResourceException;
+
 }

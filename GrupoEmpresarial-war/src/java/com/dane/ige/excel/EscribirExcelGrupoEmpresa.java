@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -36,12 +37,15 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
+ * Clase que contiene las funcionalidades de escritura del archivo Excel (xls)
+ * de los registros para la unidad de Grupo Empresarial con la información de
+ * las tablas de: (identificacion, relacion, novedad y tamaño).
  *
  * @author SRojasM
  */
 @ManagedBean(name = "MbEscribirExcelGrupoEmpresa")
 @ViewScoped
-public class EscribirExcelGrupoEmpresa {
+public class EscribirExcelGrupoEmpresa  implements Serializable{
 
     final static Logger LOGGER = Logger.getLogger(EscribirExcelGrupoEmpresa.class);
 
@@ -72,6 +76,14 @@ public class EscribirExcelGrupoEmpresa {
     public EscribirExcelGrupoEmpresa() {
     }
 
+    /**
+     * Método principal que agrupa las funciones de generación de archivo xls
+     * con la infgormacion de (identificacion, relacion, novedad y tamaño) para
+     * los grupos empresariales.
+     *
+     * @param id
+     * @param unidad
+     */
     public void generarArchivoXls(Long id, String unidad) {
 //        MbEscribirExcelGrupoEmpresa.generarArchivoXls(resourcePath['plantilla.grupoEmpresarial.path'], 
 //                                                      resourcePath['plantilla.grupoEmpresarial.archivo'], 

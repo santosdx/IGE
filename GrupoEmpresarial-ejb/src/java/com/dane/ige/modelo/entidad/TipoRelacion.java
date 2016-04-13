@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_tipo_relacion
  *
  * @author srojasm
  */
@@ -18,8 +19,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @NamedQueries({
     @NamedQuery(name = "TipoRelacion.findAllInOrderByNameAsc", query = "SELECT u FROM TipoRelacion u order by u.tipo"),
     @NamedQuery(name = "TipoRelacion.findById", query = "SELECT u FROM TipoRelacion u WHERE u.id = :id")})
-    
- 
+
 public class TipoRelacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +31,7 @@ public class TipoRelacion implements Serializable {
     private Integer id;
     @Column(name = "TIPO_RELACION")
     private String tipo;
-    
+
     public TipoRelacion() {
     }
 

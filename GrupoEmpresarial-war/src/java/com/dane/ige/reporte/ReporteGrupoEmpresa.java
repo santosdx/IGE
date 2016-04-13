@@ -29,12 +29,14 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
+ * Clase que administra los metodos, funciones y procesos necesarios para la
+ * generación del reporte de los grupos empresariales.
  *
  * @author SRojasM
  */
 @ManagedBean(name = "MbReporteGrupoEmpresa")
 @SessionScoped
-public class ReporteGrupoEmpresa implements Serializable{
+public class ReporteGrupoEmpresa implements Serializable {
 
     final static Logger LOGGER = Logger.getLogger(ReporteGrupoEmpresa.class);
 
@@ -48,8 +50,8 @@ public class ReporteGrupoEmpresa implements Serializable{
     }
 
     /**
-     * Método que permite generar el reporte con JasperReport sobre la información
-     * del grupo empresarial y exportarlo a un arhivo PDF.
+     * Método que permite generar el reporte con JasperReport sobre la
+     * información del grupo empresarial y exportarlo a un arhivo PDF.
      */
     public void generarReportePdf() {
         String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("reporte.grupoEmpresarial.path");
@@ -90,9 +92,11 @@ public class ReporteGrupoEmpresa implements Serializable{
     }
 
     /**
-     * El metodo se da de baja por que la implementación se realizo con la creación
-     * de archivos en el cliente, lo que genera inseguridad para los datos.
-     * @deprecated 
+     * El metodo se da de baja por que la implementación se realizo con la
+     * creación de archivos en el cliente, lo que genera inseguridad para los
+     * datos.
+     *
+     * @deprecated
      */
     public void generarReportePdf2() {
         //resourcePath['reporte.grupoEmpresarial.path'], resourcePath['reporte.grupoEmpresarial.archivo']
@@ -111,7 +115,7 @@ public class ReporteGrupoEmpresa implements Serializable{
             connection = new ConexionBd(ConexionBd.getJndi_Sid_Desarrollo());
             //File temp = File.createTempFile(getNombreArchivoTemporal(), ".pdf");
             //File temp = File.createTempFile("ReporteGrupoEmpresarial_", ".pdf", new File(tempPathFile));
-            String reportName = getServicioLogin().getUsuarioLogueado().getId()+"-Reporte Grupo Empresarial.pdf";
+            String reportName = getServicioLogin().getUsuarioLogueado().getId() + "-Reporte Grupo Empresarial.pdf";
             File temp = new File(tempPathFile + reportName);
 
             Map parameters = new HashMap();

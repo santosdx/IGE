@@ -14,6 +14,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase BodegaIdentificacion como parametro y que implementa la interfaz
+ * BodegaIdentificacionFacadeLocal, para brindar los servicios sobre el acceso a
+ * los datos a la tabla ige_identificacion.
  *
  * @author srojasm
  */
@@ -39,7 +43,8 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
      * tipo de unidad pasando como parametro el ID del grupo empresarial.
      *
      * @param id
-     * @return
+     * @param tipoOrganizacion
+     * @return BodegaIdentificacion
      */
     @Override
     public BodegaIdentificacion obtenerIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion) {
@@ -68,10 +73,12 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
     }
 
     /**
-     * Método que permite obtener un Map con los datos de identificación del grupo.
+     * Método que permite obtener un Map con los datos de identificación del
+     * grupo.
+     *
      * @param id
      * @param tipoOrganizacion
-     * @return 
+     * @return Map<String, String>
      */
     @Override
     public Map<String, String> obtenerMapIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion) {
@@ -105,8 +112,8 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
      * Método que permite obtener el listado de registros de identificación de
      * unidad legal pasando como parametro el ID del grupo empresarial.
      *
-     * @param id
-     * @return
+     * @param idGrupoRelacionado
+     * @return List BodegaIdentificacion
      */
     @Override
     public List<BodegaIdentificacion> obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado) {
@@ -146,8 +153,8 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
      * la unidad establecimiento pasando como parametro el ID del grupo
      * empresarial.
      *
-     * @param id
-     * @return
+     * @param idUnidadLegallacionada
+     * @return List-BodegaIdentificacion
      */
     @Override
     public List<BodegaIdentificacion> obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(Long idUnidadLegallacionada) {

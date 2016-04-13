@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad Modulo como servicio.
  *
  * @author srojasm
  */
@@ -12,7 +14,7 @@ import javax.ejb.Local;
 public interface ModuloFacadeLocal {
 
     void create(Modulo modulo);
-    
+
     public Integer createAndGetKey(Modulo modulo);
 
     void edit(Modulo modulo);
@@ -26,8 +28,10 @@ public interface ModuloFacadeLocal {
     List<Modulo> findRange(int[] range);
 
     int count();
-    
+
     public Modulo buscarModuloByModulo(String modulo);
+
     public List<Modulo> getModulesPerfilByIdPerfil(int idPerfil);
+
     public List<Modulo> getModulesPerfil();
 }

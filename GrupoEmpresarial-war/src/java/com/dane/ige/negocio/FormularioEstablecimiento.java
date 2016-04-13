@@ -76,7 +76,7 @@ public class FormularioEstablecimiento implements Serializable {
      * seleccionado.
      *
      * @param idOrganizacion
-     * @return
+     * @return String
      */
     public String abrirFormularioActualizarDatos(Long idOrganizacion) {
         setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(idOrganizacion, "ESTABLECIMIENTO"));
@@ -133,7 +133,6 @@ public class FormularioEstablecimiento implements Serializable {
     }
 
     public void testSelected(AjaxBehaviorEvent event) {
-
     }
 
     //Métodos Set y Get de la clase.

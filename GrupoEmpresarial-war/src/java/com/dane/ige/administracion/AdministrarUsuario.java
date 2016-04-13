@@ -4,7 +4,11 @@ import com.dane.ige.modelo.entidad.Usuario;
 import com.dane.ige.modelo.entidad.UsuarioPerfil;
 import com.dane.ige.modelo.local.administracion.UsuarioFacadeLocal;
 import com.dane.ige.modelo.local.administracion.UsuarioPerfilFacadeLocal;
+import com.dane.ige.seguridad.ClaseDESBase64;
+import com.dane.ige.utilidad.ArchivoProperties;
 import com.dane.ige.utilidad.Mensaje;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -20,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 @ManagedBean(name = "MbAdministrarUsuario")
 @ViewScoped
-public class AdministrarUsuario {
+public class AdministrarUsuario  implements Serializable{
 
     final static Logger LOGGER = Logger.getLogger(AdministrarUsuario.class);
 
@@ -65,6 +69,11 @@ public class AdministrarUsuario {
         if (getUsuarioSeleccionado().getNickname() != null) {
             if (geteJBServicioUsuario().buscarUsuarioByNickname(getUsuarioSeleccionado().getNickname()) == null) {
 
+                String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
+                ClaseDESBase64 obj = new ClaseDESBase64(key);
+                String contrasenDesencriptada = obj.encriptar(getUsuarioSeleccionado().getPassword());
+                getUsuarioSeleccionado().setPassword(contrasenDesencriptada);
+
                 Integer idUsuario = geteJBServicioUsuario().createAndGetKey(getUsuarioSeleccionado());
                 Integer idPerfil = getServicioPerfil().getPerfilSeleccionado().getId();
 
@@ -91,6 +100,18 @@ public class AdministrarUsuario {
      */
     public void actualziarUsuario() {
         if (getUsuarioSeleccionado().getId() != null) {
+
+            //Validamos si el usuario sera inactivado para registrar la fecha
+            if (!getUsuarioSeleccionado().getEstado().equals("ACTIVO")) {
+                getUsuarioSeleccionado().setFechaFinActividad(new Date());
+            } else {
+                getUsuarioSeleccionado().setFechaFinActividad(null);
+            }
+
+            String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
+            ClaseDESBase64 obj = new ClaseDESBase64(key);
+            String contrasenDesencriptada = obj.encriptar(getUsuarioSeleccionado().getPassword());
+            getUsuarioSeleccionado().setPassword(contrasenDesencriptada);
 
             geteJBServicioUsuario().edit(getUsuarioSeleccionado());
 
@@ -130,6 +151,10 @@ public class AdministrarUsuario {
      * @param usuario
      */
     public void actualziarUsuarioPerfil(Usuario usuario) {
+        String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
+        ClaseDESBase64 obj = new ClaseDESBase64(key);
+        String contrasenDesencriptada = obj.encriptar(usuario.getPassword());
+        usuario.setPassword(contrasenDesencriptada);
         geteJBServicioUsuario().edit(usuario);
         //LOGGER.info("actualizo usuario");
         Mensaje.agregarMensajeGrowlInfo("Exito!", "Usuario actualizado.");

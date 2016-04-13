@@ -7,6 +7,7 @@ import com.dane.ige.modelo.local.administracion.ModuloPermisoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.PerfilPermisoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.PermisoFacadeLocal;
 import com.dane.ige.utilidad.Mensaje;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -17,92 +18,95 @@ import org.apache.log4j.Logger;
 
 /**
  * Clase que maneja la entidad Permiso y la Vista de administración de Permiso.
+ *
  * @author srojasm
  */
 @ManagedBean(name = "MbAdministrarPermiso")
 @ViewScoped
-public class AdministrarPermiso {
+public class AdministrarPermiso  implements Serializable{
+
     @EJB
     private PermisoFacadeLocal eJBServicioPermiso;
-    
+
     @EJB
     private PerfilPermisoFacadeLocal eJBServicioPerfilPermiso;
-    
+
     @EJB
     private ModuloPermisoFacadeLocal eJBServicioModuloPermiso;
-    
+
     final static Logger LOGGER = Logger.getLogger(AdministrarPermiso.class);
-    
+
     private boolean esNuevoPermiso;
-    
+
     private List<Permiso> listaPermisos;
     private Permiso permisoSeleccionado;
     private List<Permiso> listaPermisosSeleccionados;
-    
-    public AdministrarPermiso(){
-        
+
+    public AdministrarPermiso() {
+
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         inicializarVariables();
     }
 
-     /**
-     * Método que permite inicializar las variables necesarias para el funcionamiento
-     * de los metos de crear y actualiar.
+    /**
+     * Método que permite inicializar las variables necesarias para el
+     * funcionamiento de los metos de crear y actualiar.
      */
-    private void inicializarVariables(){
+    private void inicializarVariables() {
         setListaPermisos(geteJBServicioPermiso().findAll());
         setPermisoSeleccionado(new Permiso(null, null));
         setListaPermisosSeleccionados(new ArrayList<Permiso>());
         setEsNuevoPermiso(true);
     }
-    
+
     /**
      * Metodo que permite crear un nuevo permiso.
      */
-    public void nuevoPermiso(){
-        if(getPermisoSeleccionado().getPermiso() != null){
-            if(geteJBServicioPermiso().buscarPermisoByPermiso(getPermisoSeleccionado().getPermiso()) == null){
+    public void nuevoPermiso() {
+        if (getPermisoSeleccionado().getPermiso() != null) {
+            if (geteJBServicioPermiso().buscarPermisoByPermiso(getPermisoSeleccionado().getPermiso()) == null) {
                 geteJBServicioPermiso().create(getPermisoSeleccionado());
                 inicializarVariables();
                 //LOGGER.info("nuevo Permiso");
                 Mensaje.agregarMensajeGrowlInfo("Exito!", "Nuevo permiso agregado.");
-            }else{
+            } else {
                 //LOGGER.info("el Permiso ya existe");
                 Mensaje.agregarMensajeGrowlWarn("Atención!", "El permiso ya existe.");
             }
-        }else{
+        } else {
             //LOGGER.info("ingresar datos Permiso");
             Mensaje.agregarMensajeGrowlWarn("Atención!", "Debe ingresar los datos.");
-        }        
-    }    
-    
+        }
+    }
+
     /**
      * Metodo que permite actualizar los datos de un permiso.
      */
-    public void actualziarPermiso(){
-        if(getPermisoSeleccionado().getId() != null){          
+    public void actualziarPermiso() {
+        if (getPermisoSeleccionado().getId() != null) {
             geteJBServicioPermiso().edit(getPermisoSeleccionado());
             inicializarVariables();
             //LOGGER.info("actualizo Permiso");
             Mensaje.agregarMensajeGrowlInfo("Exito!", "Permiso actualizado.");
-        }else{
+        } else {
             //LOGGER.info("seleccionar Permiso");
             Mensaje.agregarMensajeGrowlWarn("Atención!", "Debe seleccionar un Permiso.");
-        }        
+        }
     }
-    
+
     /**
      * Método que permite asignar los permisos a un rol.
+     *
      * @param idPerfil
-     * @param lista 
-     */    
-    public void adicionarPermisosPerfil(Integer idPerfil, List<Permiso> lista){
+     * @param lista
+     */
+    public void adicionarPermisosPerfil(Integer idPerfil, List<Permiso> lista) {
         geteJBServicioPerfilPermiso().eliminarPermisosPerfil(idPerfil);
-        
-        if(lista.size()>0){
+
+        if (lista.size() > 0) {
             for (Permiso item : lista) {
                 geteJBServicioPerfilPermiso().create(new PerfilPermiso(item.getId(), idPerfil));
             }
@@ -111,36 +115,38 @@ public class AdministrarPermiso {
 
     /**
      * Método que permite asignar los permisos a un modulo.
+     *
      * @param idModulo
-     * @param lista 
-     */    
-    public void adicionarPermisosModulo(Integer idModulo, List<Permiso> lista){
+     * @param lista
+     */
+    public void adicionarPermisosModulo(Integer idModulo, List<Permiso> lista) {
         geteJBServicioModuloPermiso().eliminarModuloPermiso(idModulo);
 
-        if(lista.size()>0){
+        if (lista.size() > 0) {
             for (Permiso item : lista) {
-                geteJBServicioModuloPermiso().create(new ModuloPermiso(idModulo,item.getId()));
+                geteJBServicioModuloPermiso().create(new ModuloPermiso(idModulo, item.getId()));
             }
         }
-    }    
-    
+    }
+
     /**
      * Método que retorna un permiso, del listado de permisos de a cuerdo al id
      * enviado como parametro.
+     *
      * @param id
-     * @return 
-     */    
-    public Permiso getPermisoById(Integer id){
+     * @return Permiso
+     */
+    public Permiso getPermisoById(Integer id) {
         Permiso resultado = null;
         for (Permiso item : getListaPermisos()) {
-            if(id.compareTo(item.getId())==0){
+            if (id.compareTo(item.getId()) == 0) {
                 resultado = item;
             }
         }
         return resultado;
-    }    
+    }
     // Métodos Set y Get para los atributos de la clase
-    
+
     public PermisoFacadeLocal geteJBServicioPermiso() {
         return eJBServicioPermiso;
     }
@@ -198,7 +204,4 @@ public class AdministrarPermiso {
         this.eJBServicioModuloPermiso = eJBServicioModuloPermiso;
     }
 
-    
-    
-    
 }

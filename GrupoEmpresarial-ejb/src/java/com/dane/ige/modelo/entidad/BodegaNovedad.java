@@ -16,14 +16,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * Clase Entity que representa la tabla ige_novedad
  *
  * @author srojasm
  */
 @Entity
 @Table(name = "ige_novedad")
 @NamedQueries({
-    @NamedQuery(name = "BodegaNovedad.findAll", query = "SELECT m FROM BodegaNovedad m"), 
-    //@NamedQuery(name = "BodegaNovedad.findById",query = "SELECT m FROM BodegaNovedad m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")
+    @NamedQuery(name = "BodegaNovedad.findAll", query = "SELECT m FROM BodegaNovedad m"), //@NamedQuery(name = "BodegaNovedad.findById",query = "SELECT m FROM BodegaNovedad m WHERE m.id.id = :id AND ROWNUM<=1 ORDER BY m.id.fecha DESC")
 })
 public class BodegaNovedad implements Serializable {
 

@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_pais
  *
  * @author srojasm
  */
@@ -18,8 +19,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @NamedQueries({
     @NamedQuery(name = "Pais.findAllInOrderByNameAsc", query = "SELECT u FROM Pais u order by u.nombre"),
     @NamedQuery(name = "Pais.findById", query = "SELECT u FROM Pais u WHERE u.id = :id")})
-    
- 
+
 public class Pais implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +31,7 @@ public class Pais implements Serializable {
     private Integer id;
     @Column(name = "PAIS_NOMBRE")
     private String nombre;
-    
+
     public Pais() {
     }
 
@@ -86,5 +86,4 @@ public class Pais implements Serializable {
         return "com.nerv.sai.modelo.entidad.Pais[ id=" + id + " ]";
     }
 
-  
 }

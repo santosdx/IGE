@@ -1,6 +1,7 @@
 package com.dane.ige.modelo.entidad;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,21 +16,24 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_usuario
  *
  * @author srojasm
  */
 @Entity
 @Table(name = "ige_usuario")
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u order by u.nombres"),
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u order by u.nombres ASC"),
     @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
     @NamedQuery(name = "Usuario.findByNickname", query = "SELECT u FROM Usuario u WHERE u.nickname = :nickname"),
     @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
     @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
-    @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo"),
+    @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE UPPER(u.correo) = :correo"),
     @NamedQuery(name = "Usuario.findByNicknamePassword", query = "SELECT u FROM Usuario u WHERE u.nickname = :nickname AND u.password = :password")})
 public class Usuario implements Serializable {
 
@@ -37,6 +41,7 @@ public class Usuario implements Serializable {
 
     public static final String FINE_BYE_NICKNAME = "Usuario.findByNickname";
     public static final String FINE_BYE_NICKNAME_PASSWORD = "Usuario.findByNicknamePassword";
+    public static final String FINE_BYE_CORREO = "Usuario.findByCorreo";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUARIO")
@@ -55,6 +60,11 @@ public class Usuario implements Serializable {
     private String correo;
     @Column(name = "ige_iden_id_organizacion")
     private Long idIdentificacion;
+    @Column(name = "estado")
+    private String estado;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha_fin_actividad")
+    private Date fechaFinActividad;
     /*
      @OneToOne
      @JoinColumn(name = "id_ige_usuario", referencedColumnName = "id_ige_usuario", insertable = false, updatable = false)
@@ -145,6 +155,22 @@ public class Usuario implements Serializable {
 
     public void setIdIdentificacion(Long idIdentificacion) {
         this.idIdentificacion = idIdentificacion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Date getFechaFinActividad() {
+        return fechaFinActividad;
+    }
+
+    public void setFechaFinActividad(Date fechaFinActividad) {
+        this.fechaFinActividad = fechaFinActividad;
     }
 
     /*

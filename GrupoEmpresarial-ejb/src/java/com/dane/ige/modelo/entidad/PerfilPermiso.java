@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
+ * Clase Entity que representa la tabla ige_perfil_permiso
  *
  * @author srojasm
  */
@@ -23,12 +24,12 @@ import javax.persistence.Table;
     @NamedQuery(name = "PerfilPermiso.findByIdPermisoIdPerfil", query = "SELECT u FROM PerfilPermiso u WHERE u.idPermiso = :idPermiso AND u.idPerfil = :idPerfil"),
     @NamedQuery(name = "PerfilPermiso.deleteAllPermisoPerfilByIdPerfil", query = "DELETE FROM PerfilPermiso p WHERE p.idPerfil = :idPerfil")})
 public class PerfilPermiso implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final String FINE_BYE_IDPERMISO_IDPERFIL = "PerfilPermiso.findByIdPermisoIdPerfil";
     public static final String DELETE_ALL_PERMISOS_PERFIL_BY_IDPERFIL = "PerfilPermiso.deleteAllPermisoPerfilByIdPerfil";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PERFIL_PERMISO")
     @SequenceGenerator(name = "SEQ_PERFIL_PERMISO", sequenceName = "seq_id_ige_perfil_permiso", allocationSize = 1)
@@ -43,10 +44,10 @@ public class PerfilPermiso implements Serializable {
     }
 
     public PerfilPermiso(Integer idPermiso, int idPerfil) {
-        this.idPermiso=idPermiso;
-        this.idPerfil=idPerfil;
+        this.idPermiso = idPermiso;
+        this.idPerfil = idPerfil;
     }
-    
+
     public PerfilPermiso(Integer id) {
         this.id = id;
     }
@@ -75,8 +76,6 @@ public class PerfilPermiso implements Serializable {
         this.idPerfil = idPerfil;
     }
 
-    
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -101,5 +100,5 @@ public class PerfilPermiso implements Serializable {
     public String toString() {
         return "com.nerv.sai.modelo.entidad.PerfilPermiso[ id=" + id + " ]";
     }
-    
+
 }

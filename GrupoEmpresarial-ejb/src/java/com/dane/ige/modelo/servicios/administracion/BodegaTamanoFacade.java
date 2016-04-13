@@ -14,6 +14,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase BodegaTamano como parametro y que implementa la interfaz
+ * BodegaTamanoFacadeLocal, para brindar los servicios sobre el acceso a los
+ * datos a la tabla ige_tamano.
  *
  * @author srojasm
  */
@@ -39,7 +43,7 @@ public class BodegaTamanoFacade extends AbstractFacade<BodegaTamano> implements 
      * por el ID
      *
      * @param id
-     * @return
+     * @return BodegaTamano
      */
     @Override
     public BodegaTamano obtenerTamanoGrupoEmpresaById(Long id) {
@@ -65,6 +69,14 @@ public class BodegaTamanoFacade extends AbstractFacade<BodegaTamano> implements 
         return resultado;
     }
 
+    /**
+     * Método que permite realizar la consulta a la base de datos enviando como
+     * parametro el ID de la unidad en la tabla Identificación, y retornando el
+     * listado de atributos y valor en un Map.
+     *
+     * @param id
+     * @return Map<String, String>
+     */
     @Override
     public Map<String, String> obtenerMapTamanoGrupoEmpresaById(Long id) {
         Map<String, String> resultado = null;

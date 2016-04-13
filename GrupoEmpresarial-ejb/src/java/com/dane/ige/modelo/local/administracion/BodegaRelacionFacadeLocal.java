@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad BodegaRelacion como servicio.
  *
  * @author srojasm
  */
@@ -15,7 +17,6 @@ public interface BodegaRelacionFacadeLocal {
     void create(BodegaRelacion relacion);
 
     //public Long createAndGetKey(BodegaRelacion relacion);
-
     void edit(BodegaRelacion relacion);
 
     void remove(BodegaRelacion relacion);

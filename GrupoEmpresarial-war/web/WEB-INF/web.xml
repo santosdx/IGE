@@ -4,7 +4,7 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <session-config>
-        <session-timeout>45</session-timeout>
+        <session-timeout>8</session-timeout>
     </session-config>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -71,7 +71,16 @@
         <param-name>primefaces.UPLOADER</param-name>
         <param-value>commons</param-value>
     </context-param>
-
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/pagina-error/404.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/pagina-error/500.xhtml</location>
+    </error-page>
+    
     <filter>
         <filter-name>Filtro</filter-name>
         <filter-class>com.dane.ige.seguridad.Filtro</filter-class>
@@ -84,4 +93,5 @@
         <filter-name>Filtro</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
 </web-app>

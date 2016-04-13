@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad UsuarioPerfil como servicio.
  *
  * @author srojasm
  */
@@ -24,7 +26,7 @@ public interface UsuarioPerfilFacadeLocal {
     List<UsuarioPerfil> findRange(int[] range);
 
     int count();
-    
+
     public UsuarioPerfil buscarAsignacionUsuarioPerfil(int idUsuario, int idPerfil);
-   
+
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad TipoRelacion como servicio.
  *
  * @author srojasm
  */
@@ -12,9 +14,9 @@ import javax.ejb.Local;
 public interface TipoRelacionFacadeLocal {
 
     void create(TipoRelacion tipo);
-    
+
     void edit(TipoRelacion tipo);
-        
+
     void remove(TipoRelacion tipo);
 
     TipoRelacion find(Object id);

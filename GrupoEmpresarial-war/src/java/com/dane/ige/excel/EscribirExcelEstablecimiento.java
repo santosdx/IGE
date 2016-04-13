@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -39,12 +40,15 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
+ * Clase que contiene las funcionalidades de escritura del archivo Excel (xls)
+ * de los registros para la unidad de Establecimiento con la información de las
+ * tablas de: (identificacion, relacion, novedad y tamaño).
  *
  * @author SRojasM
  */
 @ManagedBean(name = "MbEscribirExcelEstablecimiento")
 @ViewScoped
-public class EscribirExcelEstablecimiento {
+public class EscribirExcelEstablecimiento  implements Serializable{
 
     final static Logger LOGGER = Logger.getLogger(EscribirExcelEstablecimiento.class);
 
@@ -84,6 +88,11 @@ public class EscribirExcelEstablecimiento {
     public EscribirExcelEstablecimiento() {
     }
 
+    /**
+     * Método principal que agrupa las funciones de generación de archivo xls
+     * con la infgormacion de (identificacion, relacion, novedad y tamaño) para
+     * los establecimientos.
+     */
     public void generarArchivoXls() {
         //MbEscribirExcelEstablecimiento.generarArchivoXls(resourcePath['plantilla.establecimiento.path'], resourcePath['plantilla.establecimiento.archivo'])
         String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("plantilla.establecimiento.path");

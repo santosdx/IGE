@@ -84,6 +84,8 @@
                                         required="true" label="password" requiredMessage="Contraseña requerida" />
 
                             <f:facet name="footer">
+                                <p:link  outcome="/recuperar-credenciales.xhtml"  value="Recuperar credenciales"
+                                        style="text-decoration: none; outline: none; color: #25AAE1;" />
                                 <p:commandButton id="btnLogin" value="Aceptar" update="growl" style="float: right;"
                                                  action="#{MbLogin.login}" oncomplete="manejarLogin(xhr, status, args)"/>
                             </f:facet>  
@@ -101,7 +103,6 @@
                         }
                     }
                 </script>
-
 
             </p:layoutUnit>
 

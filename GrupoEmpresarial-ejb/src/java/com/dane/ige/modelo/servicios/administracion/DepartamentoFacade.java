@@ -13,6 +13,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase Departamento como parametro y que implementa la interfaz
+ * DepartamentoFacadeLocal, para brindar los servicios sobre el acceso a los
+ * datos a la tabla ige_departamento.
  *
  * @author srojasm
  */
@@ -32,13 +36,19 @@ public class DepartamentoFacade extends AbstractFacade<Departamento> implements 
     public DepartamentoFacade() {
         super(Departamento.class);
     }
-    
-     public List<Departamento> findAllInOrderByNameAsc(){
+
+    /**
+     * Método que permite realizar la consulta a la base de datos y retornar el
+     * listado de Departamentos ordenado por el nombre.
+     *
+     * @return List[Departamento]
+     */
+    public List<Departamento> findAllInOrderByNameAsc() {
         List<Departamento> resultado = new ArrayList<Departamento>();
         try {
             String sql = "SELECT id_departamento, REPLACE(departamento_nombre,'_',' ') as departamento_nombre  FROM ige_departamento ORDER BY departamento_nombre ASC";
             //Query query = em.createNamedQuery(Departamento.FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC);
-            Query query = em.createNativeQuery(sql,Departamento.class);
+            Query query = em.createNativeQuery(sql, Departamento.class);
             List<Departamento> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
             if (listaResultado.isEmpty()) {

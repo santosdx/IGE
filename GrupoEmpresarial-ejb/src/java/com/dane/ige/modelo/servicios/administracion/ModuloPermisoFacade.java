@@ -12,6 +12,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase ModuloPermiso como parametro y que implementa la interfaz
+ * ModuloPermisoFacadeLocal, para brindar los servicios sobre el acceso a los
+ * datos a la tabla ige_modulo_permiso.
  *
  * @author srojasm
  */
@@ -32,6 +36,15 @@ public class ModuloPermisoFacade extends AbstractFacade<ModuloPermiso> implement
         super(ModuloPermiso.class);
     }
 
+    /**
+     * Método que permite realizar la consulta a la base de datos y buscar la
+     * asiganación de los modulos por permiso, enviando como parametro el ID del
+     * modulo y el ID del permiso.
+     *
+     * @param idModulo
+     * @param idPermiso
+     * @return ModuloPermiso
+     */
     @Override
     public ModuloPermiso buscarAsignacionModuloPermiso(int idModulo, int idPermiso) {
         ModuloPermiso resultado = null;
@@ -53,6 +66,13 @@ public class ModuloPermisoFacade extends AbstractFacade<ModuloPermiso> implement
         return resultado;
     }
 
+    /**
+     * Método que permite eliminar la asignación del modulo a un permiso en la
+     * base de datos, enviando como parametro el ID del modulo.
+     *
+     * @param idModulo
+     * @return int
+     */
     @Override
     public int eliminarModuloPermiso(int idModulo) {
         int resultado = 0;

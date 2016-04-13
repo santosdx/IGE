@@ -13,6 +13,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase TipoEstablecimiento como parametro y que implementa la interfaz
+ * TipoEstablecimientoFacadeLocal, para brindar los servicios sobre el acceso a
+ * los datos a la tabla ige_tipo_establecimiento.
  *
  * @author srojasm
  */
@@ -32,8 +36,14 @@ public class TipoEstablecimientoFacade extends AbstractFacade<TipoEstablecimient
     public TipoEstablecimientoFacade() {
         super(TipoEstablecimiento.class);
     }
-    
-     public List<TipoEstablecimiento> findAllInOrderByNameAsc(){
+
+    /**
+     * Método que permite realizar la consulta a la base de datos y retornar el
+     * listado de Tipo de Establecimiento ordenado por el nombre.
+     *
+     * @return List[TipoEstablecimiento]
+     */
+    public List<TipoEstablecimiento> findAllInOrderByNameAsc() {
         List<TipoEstablecimiento> resultado = new ArrayList<TipoEstablecimiento>();
         try {
             Query query = em.createNamedQuery(TipoEstablecimiento.FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC);

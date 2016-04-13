@@ -16,6 +16,12 @@ import org.apache.log4j.Logger;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+/**
+ * Clase que administra los métodos para el comportamiento de descargar
+ * archivos.
+ *
+ * @author SRojasM
+ */
 @ManagedBean(name = "MbFileDownloadView")
 public class FileDownload {
 
@@ -31,7 +37,7 @@ public class FileDownload {
      *
      * @param url
      * @param documento
-     * @return
+     * @return StreamedContent
      */
     public StreamedContent descargarFile(String url, String documento) {
 
@@ -54,9 +60,10 @@ public class FileDownload {
 
     /**
      * Método que permite convertir un InputStream a u byte[]
+     *
      * @param is
-     * @return
-     * @throws IOException 
+     * @return byte[]
+     * @throws IOException
      */
     public static byte[] inputStreamToByte(InputStream is) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -70,9 +77,10 @@ public class FileDownload {
 
     /**
      * Método que permite generar un código Alpha Numerico.
-     * @return 
+     *
+     * @return String
      */
-    public static String generarCodigoAlphaNumerico(){
+    public static String generarCodigoAlphaNumerico() {
         SecureRandom random = new SecureRandom();
         return new BigInteger(130, random).toString(32);
     }

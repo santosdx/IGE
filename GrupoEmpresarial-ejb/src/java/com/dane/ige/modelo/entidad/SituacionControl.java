@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_situacion_control
  *
  * @author srojasm
  */
@@ -18,8 +19,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @NamedQueries({
     @NamedQuery(name = "SituacionControl.findAllInOrderByNameAsc", query = "SELECT u FROM SituacionControl u order by u.situacion"),
     @NamedQuery(name = "SituacionControl.findById", query = "SELECT u FROM SituacionControl u WHERE u.id = :id")})
-    
- 
+
 public class SituacionControl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +31,7 @@ public class SituacionControl implements Serializable {
     private Integer id;
     @Column(name = "SITUACION_CONTROL")
     private String situacion;
-    
+
     public SituacionControl() {
     }
 

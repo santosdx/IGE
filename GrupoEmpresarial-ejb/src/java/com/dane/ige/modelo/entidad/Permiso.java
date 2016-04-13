@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
+ * Clase Entity que representa la tabla ige_permiso
  *
  * @author srojasm
  */
@@ -49,6 +50,8 @@ public class Permiso implements Serializable {
     private Integer orden;
     @Column(name = "visible")
     private String visible;
+    @Column(name = "target")
+    private String target;
 
     public Permiso() {
     }
@@ -139,6 +142,14 @@ public class Permiso implements Serializable {
 
     public void setVisible(String visible) {
         this.visible = visible;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     @Override

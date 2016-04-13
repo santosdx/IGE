@@ -1,0 +1,100 @@
+package com.dane.ige.utilidad;
+
+import com.dane.ige.seguridad.Login;
+import java.io.IOException;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+//import javax.swing.Timer;
+
+/**
+ *
+ * @author SRojasM
+ */
+@ManagedBean
+@SessionScoped
+public class IdleMonitorView {
+
+    private int horaIniciaInactividad = 0;
+    private int minutosIniciaInactividad = 0;
+    private Timer timer;
+    private TimerTask TareaLogout;
+
+    public void onIdleTemp(Long tiempo) {
+        Calendar fechaHora = new GregorianCalendar();
+        horaIniciaInactividad = fechaHora.getTime().getHours();
+        minutosIniciaInactividad = fechaHora.getTime().getMinutes();
+
+        /*
+         int timpoSalir = Integer.parseInt(((tiempo / 2) - 30000)+"");
+         Timer timer = new Timer(timpoSalir, new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+         Login login = new Login();
+         login.logout();
+         }
+         });
+         timer.start();
+         */
+        crearTareaLogout();
+        timer = new Timer();
+        Long timpoSalir = ((tiempo / 2) - 30000); //con 30 segundos antes de cerrar la sesión automaticamente
+        //Long timpoSalir = ((tiempo / 2) + 30000); //con 30 segundos despues de cerrar la sesión automaticamente
+        //60000 milisegundos = 1 minuto
+        timer.schedule(new NextTask(), timpoSalir);
+        //Mensaje.agregarMensajeGrowlInfo("Sin actividad", "Hay alguien ahí!  "+horaIniciaInactividad+":"+minutosIniciaInactividad);
+    }
+
+    public void onIdle() {
+        Mensaje.agregarMensajeGrowlInfo("Sin actividad", "Hay alguien ahí!");
+        Login login = new Login();
+        login.logout();
+    }
+
+    public void onActive() {
+        eliminarTareaLogout();
+        Mensaje.agregarMensajeGrowlInfo("Bienvenido de regreso", "Continua trabajando.");
+    }
+
+    private void crearTareaLogout() {
+        TareaLogout = new TimerTask() {
+            public void run() {
+                try {
+                    //Login login = new Login();
+                    //login.logout();
+                    //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+                    FacesContext contex = FacesContext.getCurrentInstance();
+                    contex.getExternalContext().redirect("login.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(IdleMonitorView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+    }
+
+    private void eliminarTareaLogout() {
+        timer.cancel();
+        //TareaLogout = null;
+    }
+
+    class NextTask extends TimerTask {
+
+        @Override
+        public void run() {
+            Login login = new Login();
+            login.logout();
+            System.out.println("Terminated the Timer Thread!");
+            timer.cancel(); // Terminate the thread
+        }
+    }
+
+}

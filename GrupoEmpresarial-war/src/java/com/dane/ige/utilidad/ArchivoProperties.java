@@ -23,7 +23,7 @@ public class ArchivoProperties {
      * obtener el valor de una propiedad a partir de su llave.
      *
      * @param propiedad
-     * @return
+     * @return String [valor de la propiedad]
      */
     public static String obtenerPropertieFilePathProperties(String propiedad) {
         String resultado = null;
@@ -52,15 +52,15 @@ public class ArchivoProperties {
                 //System.out.println(resultado);
             }
         } catch (FileNotFoundException ex) {
-            LOGGER.warn("Line[71]" + ex);
+            LOGGER.warn("Line[55]" + ex);
         } catch (IOException ex) {
-            LOGGER.warn("Line[73]" + ex);
+            LOGGER.warn("Line[57]" + ex);
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (IOException ex) {
-                    LOGGER.warn("Line[79]" + ex);
+                    LOGGER.warn("Line[65]" + ex);
                 }
             }
         }

@@ -1,6 +1,9 @@
 package com.dane.ige.seguridad;
 
+import com.dane.ige.modelo.entidad.Permiso;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.FacesException;
 import javax.servlet.Filter;
@@ -14,7 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 /**
- * Servlet Filter implementation class LoginFilter
+ * Servlet Filter, clase que funciona como filtro para las peticiones que
+ * realiza la aplicación; cualquier petición acceso o solicitud que no esten
+ * registradas para funcionar sin que exista un acceso previo en el aplicativo
+ * seran canceladas
  *
  * @author srojasm
  */
@@ -64,7 +70,6 @@ public class Filtro implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-
         Login loginBean = (Login) req.getSession().getAttribute("MbLogin");
 
         //Proceso la URL que está requiriendo el cliente
@@ -87,7 +92,7 @@ public class Filtro implements Filter {
             return;
         }
 
-              //El usuario no está logueado
+        //El usuario no está logueado
         if (loginBean != null) {
             if (loginBean.isLoggedIn() == false) {
                 LOGGER.info("El usuario no está logueado (Is Logged In = false)");
@@ -103,7 +108,26 @@ public class Filtro implements Filter {
         }
         //El recurso requiere protección, pero el usuario ya está logueado.
 
-        chain.doFilter(request, response);
+        //LOGGER.info("Si requiere protección evaluamos los accesos.");
+        boolean tieneAcceso = false;
+        List<Permiso> permisos = new ArrayList<Permiso>();
+        permisos = loginBean.getUsuarioLogueado().getPerfil().getPermisos();
+        for (Permiso permiso : permisos) {
+            if (permiso.getUrl() != null) {
+                if (urlStr.contains(permiso.getUrl())) {
+                    tieneAcceso = true;
+                    break;
+                }
+            }
+        }
+        if (tieneAcceso == true) {
+            chain.doFilter(request, response);
+            return;
+        } else {
+            LOGGER.info("Accesos denegado en: " + urlStr);
+            res.sendRedirect(req.getContextPath() + "/pagina-error/acceso-denegado.xhtml");
+            return;
+        }
     }
 
     /**
@@ -137,13 +161,25 @@ public class Filtro implements Filter {
         if (urlStr.indexOf("/GrupoEmpresarial/login.xhtml") != -1) {
             return true;
         }
+        if (urlStr.indexOf("/GrupoEmpresarial/recuperar-credenciales.xhtml") != -1) {
+            return true;
+        }
+        if (urlStr.indexOf("/GrupoEmpresarial/interfaz/usuario/itz-guia-usuario.xhtml") != -1) {
+            return true;
+        }
         if (urlStr.indexOf("/GrupoEmpresarial/interfaz/usuario/ventana/vta-acceso-sistema.xhtml") != -1) {
             return true;
         }
         if (urlStr.indexOf("/GrupoEmpresarial/interfaz/usuario/ventana/cpt-acceso-sistema.xhtml") != -1) {
             return true;
         }
-        if (urlStr.indexOf("/pagina-error/") != -1) {
+        if (urlStr.indexOf("/GrupoEmpresarial/interfaz/documentacion/java-war/") != -1) {
+            return true;
+        }
+        if (urlStr.indexOf("/GrupoEmpresarial/interfaz/documentacion/java-ejb/") != -1) {
+            return true;
+        }
+        if (urlStr.indexOf("/GrupoEmpresarial/pagina-error/") != -1) {
             return true;
         }
         return false;

@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * Clase Entity que representa la tabla ige_archivo_xls
  *
  * @author srojasm
  */

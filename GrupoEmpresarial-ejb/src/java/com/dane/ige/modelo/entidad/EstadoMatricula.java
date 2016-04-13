@@ -1,23 +1,16 @@
 package com.dane.ige.modelo.entidad;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_estado_matricula
  *
  * @author srojasm
  */
@@ -26,8 +19,7 @@ import org.apache.commons.lang3.text.WordUtils;
 @NamedQueries({
     @NamedQuery(name = "EstadoMatricula.findAllInOrderByNameAsc", query = "SELECT u FROM EstadoMatricula u order by u.estado"),
     @NamedQuery(name = "EstadoMatricula.findById", query = "SELECT u FROM EstadoMatricula u WHERE u.id = :id")})
-    
- 
+
 public class EstadoMatricula implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +31,7 @@ public class EstadoMatricula implements Serializable {
     private Integer id;
     @Column(name = "ESTADO_MATRICULA")
     private String estado;
-    
+
     public EstadoMatricula() {
     }
 

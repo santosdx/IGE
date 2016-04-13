@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad PerfilPermiso como servicio.
  *
  * @author srojasm
  */
@@ -24,8 +26,8 @@ public interface PerfilPermisoFacadeLocal {
     List<PerfilPermiso> findRange(int[] range);
 
     int count();
-    
+
     public PerfilPermiso buscarAsignacionPermisoPerfil(int idPermiso, int idPerfil);
-    
+
     public int eliminarPermisosPerfil(int idPerfil);
 }

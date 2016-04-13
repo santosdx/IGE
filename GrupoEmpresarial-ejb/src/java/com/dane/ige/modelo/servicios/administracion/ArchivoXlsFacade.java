@@ -12,6 +12,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase ArchivoXls como parametro y que implementa la interfaz
+ * ArchivoXlsFacadeLocal, para brindar los servicios sobre el acceso a los datos
+ * a la tabla ige_archivo_xls.
  *
  * @author srojasm
  */
@@ -32,6 +36,15 @@ public class ArchivoXlsFacade extends AbstractFacade<ArchivoXls> implements Arch
         super(ArchivoXls.class);
     }
 
+    /**
+     * Método que permite realizar la consulta a la base de datos y retornar el
+     * registro del Archivo Xls enviando como parametro el código del archivo y
+     * el evento, (carga o descarga).
+     *
+     * @param codigoArchivo
+     * @param evento
+     * @return ArchivoXls
+     */
     public ArchivoXls findByCodigoArchivo(String codigoArchivo, String evento) {
         ArchivoXls resultado = new ArchivoXls();
         try {

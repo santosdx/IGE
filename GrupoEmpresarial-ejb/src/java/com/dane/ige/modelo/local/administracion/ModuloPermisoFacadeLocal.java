@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad ModuloPermiso como servicio.
  *
  * @author srojasm
  */
@@ -24,21 +26,23 @@ public interface ModuloPermisoFacadeLocal {
     List<ModuloPermiso> findRange(int[] range);
 
     int count();
-    
+
     /**
      * Método que retorna la asignación de un permiso a un módulo, pasando como
      * parametro el id del permiso y el id del modulo.
+     *
      * @param idModulo
      * @param idPermiso
-     * @return 
+     * @return ModuloPermiso
      */
     public ModuloPermiso buscarAsignacionModuloPermiso(int idModulo, int idPermiso);
 
-     /**
+    /**
      * Método que elimina todas la asignaciones de permisos a un módulo, pasando
      * como parametro el id del módulo.
+     *
      * @param idModulo
-     * @return 
+     * @return int
      */
     public int eliminarModuloPermiso(int idModulo);
 }

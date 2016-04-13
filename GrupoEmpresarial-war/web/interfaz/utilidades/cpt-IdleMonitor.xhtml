@@ -5,15 +5,39 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-
     <h:form>
         <p:growl id="msnIdlMonitor" showDetail="true" sticky="true" />
 
-        <p:idleMonitor timeout="#{(session.maxInactiveInterval * 1000)-20000}">
-            <p:ajax event="idle" listener="#{idleMonitorView.onIdle}" update="msnIdlMonitor" />
-            <p:ajax event="active" listener="#{idleMonitorView.onActive}" update="msnIdlMonitor" />
+        <!--
+        session.maxInactiveInterval retorna los minutos de el tiempo de sesión mutiplicado por (60),
+        entregando el tiempo en segundos. Ej: 10m = 600 sg
+        La inactividad se dispara faltando 300sg es decir 5 minutos para cerrarse la sesión.
+        -->
+        <p:idleMonitor timeout="#{((session.maxInactiveInterval*1000)-(300*1000))}">
+            <!--
+            El timeout del p:idleMonitor funciona en milisegundos, por eso la necesidad de multiplicar por 1000
+            -->
+            <p:ajax event="idle" listener="#{idleMonitorView.onIdle(session.maxInactiveInterval-300)}" 
+                    update="dlgMensajeInactividad,txtInactividad" oncomplete="PF('dlg').show(); PF('wvPollLogout').start();" />
+            <p:ajax event="active" listener="#{idleMonitorView.onActive}" oncomplete="PF('wvPollLogout').stop()" update="msnIdlMonitor" />
         </p:idleMonitor>
 
+        <p:poll id="pollLogout" widgetVar="wvPollLogout" interval="60" 
+                listener="#{idleMonitorView.intervaloPollCerrarSesion}" update="txtInactividad" autoStart="false" />
+
+        <p:dialog id="dlgMensajeInactividad" header="" widgetVar="dlg" appendTo="@(body)"
+                  resizable="false" modal="true" width="400" height="220" closable="false" showHeader="false" >
+            <p:outputPanel deferred="true">
+                <div class="ui-grid-col-3" style="text-align: center; width: 100%;" >
+                    <p:graphicImage value="/resources/imagen/hibernar.png" />
+                    <h3>Inactividad!</h3>
+                    <h:outputText id="txtInactividad" value="Se ha detectado inactividad por #{idleMonitorView.tiempoInactivo} minutos;
+                                  El sistema cerrara la sesión automáticamente en #{idleMonitorView.minutosCerrarSesion} minutos." />
+                    <br></br><br></br>
+                    <p:commandButton value="Continuar"  onclick="PF('dlg').hide()"/>
+                </div>
+            </p:outputPanel>
+        </p:dialog>
     </h:form>
 
 </ui:composition>

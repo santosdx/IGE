@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <h:body>
+        <ui:composition template="/plantilla/plantilla_blank.xhtml">
+            <ui:define name="content">
+                <p:outputLabel value="Documentación de la Base de Datos" styleClass="titulo-right-h2"/>
+                <h:form  style=" height: 100%; text-align: center; width: 100%;" >
+                    <p:outputPanel deferred="true">
+                        <!--object type="application/pdf" data="/GrupoEmpresarial/resources/pdf/BASE_DATOS_GRUPOS_EMPRESARIALES_V0.pdf?pfdrid_c=true" height="100%" width="100%" internalinstanceid="4">
+                            Su navegador no puede mostrar pdf, <a href="/GrupoEmpresarial/resources/pdf/BASE_DATOS_GRUPOS_EMPRESARIALES_V0.pdf">click</a>  descargar pdf lugar.
+                        </object>
+                        <h:graphicImage value="/resources/imagen-negocio/FuenteModeloBD.png" style="height: 600px; width: 400px" /-->
+                    </p:outputPanel>
+
+                    <p:tabView>
+                        <p:tab title="Diccionario de Base de Datos">
+                            <h:panelGrid columns="1" cellpadding="0">
+                                <pe:documentViewer width="1000" height="600" url="/resources/pdf/BASE_DATOS_GRUPOS_EMPRESARIALES_V0.pdf"/>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Esquema de Base de Datos">
+                            <h:panelGrid columns="1" cellpadding="10">
+                                <p:lightBox styleClass="imagebox" id="lighbox1" > 
+                                    <h:outputLink value="/GrupoEmpresarial/resources/imagen-negocio/FuenteModeloBD-1.png" title="Tablas Core">
+                                        <h:graphicImage value="/resources/imagen-negocio/miniaturas-base-datos/FuenteModeloBD-1.png" id="baseDatos1" style="height: 295px; width: 480px" />
+                                        <p>Estas tres tablas principales almacenan la información sobre los grupos empresariales, unidad legal y establecimientos; Guardando la relación historia mediante registros únicos en cada actualización que se realiza con el formulario electrónico.</p>
+                                    </h:outputLink>
+                                    <h:outputLink value="/GrupoEmpresarial/resources/imagen-negocio/FuenteModeloBD-2.png" title="Tablas Referenciales">
+                                        <h:graphicImage value="/resources/imagen-negocio/miniaturas-base-datos/FuenteModeloBD-2.png" id="baseDatos2" style="height: 295px; width: 480px"/>
+                                        <p>Las tablas referenciales almacenan todos los datos de referencia necesarios para la actualización de la información mediante el formulario Web; Tablas como departamento, municipio, país, tipo de unidad, situación de control entre otras.</p>
+                                    </h:outputLink>
+                                    <h:outputLink value="/GrupoEmpresarial/resources/imagen-negocio/FuenteModeloBD-3.png" title="Tablas Aplicativo">
+                                        <h:graphicImage value="/resources/imagen-negocio/miniaturas-base-datos/FuenteModeloBD-3.png" id="baseDatos3" style="height: 295px; width: 480px" />
+                                        <p>Las tablas del aplicativo son las que contienen los parámetros para el funcionamiento del formulario web; parametrización de roles, usuarios, permisos y demás.</p>
+                                    </h:outputLink>
+                                </p:lightBox>
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

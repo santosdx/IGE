@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -38,12 +39,15 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
+ * Clase que contiene las funcionalidades de escritura del archivo Excel (xls)
+ * de los registros para la Unidad Legal con la información de las tablas de:
+ * (identificacion, relacion, novedad y tamaño).
  *
  * @author SRojasM
  */
 @ManagedBean(name = "MbEscribirExcelUnidadLegal")
 @ViewScoped
-public class EscribirExcelUnidadLegal {
+public class EscribirExcelUnidadLegal  implements Serializable{
 
     final static Logger LOGGER = Logger.getLogger(EscribirExcelUnidadLegal.class);
 
@@ -75,6 +79,11 @@ public class EscribirExcelUnidadLegal {
     public EscribirExcelUnidadLegal() {
     }
 
+    /**
+     * Método principal que agrupa las funciones de generación de archivo xls
+     * con la infgormacion de (identificacion, relacion, novedad y tamaño) para
+     * las Unidades Legales.
+     */
     public void generarArchivoXls() {
         //MbEscribirExcelUnidadLegal.generarArchivoXls(resourcePath['plantilla.unidadLegal.path'], resourcePath['plantilla.unidadLegal.archivo'])
         String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("plantilla.unidadLegal.path");
@@ -90,11 +99,11 @@ public class EscribirExcelUnidadLegal {
             escribirLibroXls(workbook, nombreArchivo);
 
         } catch (FileNotFoundException ex) {
-            LOGGER.warn("[89] EscribirExcelUnidadLegal.java -> "+ex.getMessage());
+            LOGGER.warn("[89] EscribirExcelUnidadLegal.java -> " + ex.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            LOGGER.warn("[93] EscribirExcelUnidadLegal.java -> "+ex.getMessage());
+            LOGGER.warn("[93] EscribirExcelUnidadLegal.java -> " + ex.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", ex.getMessage());
             //java.util.logging.Logger.getLogger(EscribirExcelGrupoEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -110,7 +119,7 @@ public class EscribirExcelUnidadLegal {
     private void escribirLibroXls(Workbook libro, String nombreArchivo) {
         Long id = getServicioLogin().getUsuarioLogueado().getIdIdentificacion();
         String tempPathFile = ArchivoProperties.obtenerPropertieFilePathProperties("sistema.tempFile.path");
-        nombreArchivo = getServicioLogin().getUsuarioLogueado().getId()+"-"+nombreArchivo;
+        nombreArchivo = getServicioLogin().getUsuarioLogueado().getId() + "-" + nombreArchivo;
 
         setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(id));
 
@@ -129,7 +138,7 @@ public class EscribirExcelUnidadLegal {
 
         try {
             //File temp = File.createTempFile(nombreArchivo, ".xls");
-            File temp = new File(tempPathFile+nombreArchivo);
+            File temp = new File(tempPathFile + nombreArchivo);
             FileOutputStream elFichero = new FileOutputStream(temp);
             libro.write(elFichero);
 
@@ -146,7 +155,7 @@ public class EscribirExcelUnidadLegal {
             elFichero.close();
             temp.deleteOnExit();
         } catch (IOException e) {
-            LOGGER.warn("[143] EscribirExcelUnidadLegal.java -> "+e.getMessage());
+            LOGGER.warn("[143] EscribirExcelUnidadLegal.java -> " + e.getMessage());
             Mensaje.agregarMensajeGrowlError("Error!", e.getMessage());
         }
     }
@@ -165,7 +174,7 @@ public class EscribirExcelUnidadLegal {
 
         Row fila1 = hoja.getRow(1);
         Cell ID_GRUPO = fila1.getCell(1);
-        ID_GRUPO.setCellValue(idGrupo+"");
+        ID_GRUPO.setCellValue(idGrupo + "");
 
         Row fila2 = hoja.getRow(2);
         Cell UNIDAD = fila2.getCell(1);
@@ -181,7 +190,7 @@ public class EscribirExcelUnidadLegal {
 
         Row fila5 = hoja.getRow(5);
         Cell ID_USUARIO = fila5.getCell(1);
-        ID_USUARIO.setCellValue(idUsuario+"");
+        ID_USUARIO.setCellValue(idUsuario + "");
 
         Row fila6 = hoja.getRow(6);
         Cell CODIGO_ARCHIVO = fila6.getCell(1);

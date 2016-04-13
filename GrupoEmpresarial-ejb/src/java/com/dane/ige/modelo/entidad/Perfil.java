@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_perfil
  *
  * @author srojasm
  */
@@ -54,7 +55,7 @@ public class Perfil implements Serializable {
             joinColumns = @JoinColumn(name = "id_ige_perfil"),
             inverseJoinColumns = @JoinColumn(name = "id_ige_permiso")
     )
-    @OrderBy(value="orden")
+    @OrderBy(value = "orden")
     private List<Permiso> permisos;
 
     public Perfil() {

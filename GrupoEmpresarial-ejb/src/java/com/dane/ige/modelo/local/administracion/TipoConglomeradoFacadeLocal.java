@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad TipoConglomerado como servicio.
  *
  * @author srojasm
  */
@@ -12,9 +14,9 @@ import javax.ejb.Local;
 public interface TipoConglomeradoFacadeLocal {
 
     void create(TipoConglomerado tipo);
-    
+
     void edit(TipoConglomerado tipo);
-        
+
     void remove(TipoConglomerado tipo);
 
     TipoConglomerado find(Object id);

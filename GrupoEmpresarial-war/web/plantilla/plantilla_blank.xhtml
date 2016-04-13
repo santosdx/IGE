@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <f:facet name="first">
+                <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+            </f:facet>
+
+            <link type="image/vnd.microsoft.icon" rel="shortcut icon" href="resources/icon/dane.ico"/>
+
+            <h:outputStylesheet library="css" name="general.css" />
+            <h:outputStylesheet library="css" name="titulos.css" />
+            <h:outputStylesheet library="css" name="componentes.css" />
+            <title>#{resourceSistema['sistema.title']}</title>
+        </h:head>
+
+        <h:body>
+            <ui:debug/>
+            <p:layout fullPage="true">
+                <ui:include src="../interfaz/utilidades/cpt-IdleMonitor.xhtml"/>
+                <p:layoutUnit id="contenedorCentral" position="center">
+                    <ui:insert name="content" />
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+
+    </f:view>
+</html>

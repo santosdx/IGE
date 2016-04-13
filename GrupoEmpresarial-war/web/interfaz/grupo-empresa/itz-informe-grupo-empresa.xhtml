@@ -37,7 +37,8 @@
                                 <h4 class="titulo-left-h3">Actualizar información desde formulario</h4>
                                 <p>En esta sección el usuario puede actualizar los datos en linea directamente desde un formulario electronico, el cual
                                     presenta los datos del grupo empresarial prediligenciados.</p>
-                                <p:commandButton value="Formulario" action="/interfaz/grupo-empresa/itz-formulario-grupo-empresa.xhtml" ajax="false"/>
+                                <p:commandButton value="Formulario" action="/interfaz/grupo-empresa/itz-formulario-grupo-empresa.xhtml" 
+                                                 disabled="#{MbFormGrupoEmpresa.identificacionSeleccionada == null}" ajax="false"/>
                             </div>
                         </div>
                         <!--div class="ui-grid-row">
@@ -66,8 +67,8 @@
                                 Su navegador no puede visualizar pdf.
                                 <br></br>
                                 <br></br>
-                                #{MbReporteGrupoEmpresa.listaErrores}
-                            </p:media-->
+                            #{MbReporteGrupoEmpresa.listaErrores}
+                        </p:media-->
                             <pe:documentViewer height="535" value="#{MbReporteGrupoEmpresa.contenido}"/>
                         </p:outputPanel>
                     </p:dialog>
@@ -85,6 +86,11 @@
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI-->
 
+                    <p:notificationBar position="bottom" effect="slide" styleClass="top" autoDisplay="#{MbFormGrupoEmpresa.identificacionSeleccionada == null}" widgetVar="bar">
+                        <h:outputText value="Atención!" style="font-size:20px;" />
+                        <br></br>
+                        <h:outputText value="El usuario no tiene asignado un Grupo Empresarial o el asignado no existe." style="font-size:16px;" />
+                    </p:notificationBar>
                 </h:form>
 
                 <script type="text/javascript">

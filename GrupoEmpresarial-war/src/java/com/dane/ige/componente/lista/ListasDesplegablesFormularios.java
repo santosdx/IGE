@@ -25,6 +25,7 @@ import com.dane.ige.modelo.local.administracion.TipoRelacionFacadeLocal;
 import com.dane.ige.negocio.FormularioEstablecimiento;
 import com.dane.ige.negocio.FormularioGrupoEmpresa;
 import com.dane.ige.negocio.FormularioUnidadLegal;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -42,7 +43,7 @@ import org.apache.log4j.Logger;
  */
 @ManagedBean(name = "MbListaDesplegable")
 @ViewScoped
-public class ListasDesplegablesFormularios {
+public class ListasDesplegablesFormularios  implements Serializable{
 
     final static Logger LOGGER = Logger.getLogger(FormularioGrupoEmpresa.class);
 
@@ -145,7 +146,7 @@ public class ListasDesplegablesFormularios {
      *
      * @param paises
      * @param pais
-     * @return
+     * @return boolean
      */
     public static boolean listaContieneElPais(List<Pais> paises, String pais) {
         boolean resultado = false;
@@ -164,7 +165,7 @@ public class ListasDesplegablesFormularios {
      *
      * @param departamentos
      * @param departamento
-     * @return
+     * @return boolean
      */
     public static boolean listaContieneElDepartamento(List<Departamento> departamentos, String departamento) {
         boolean resultado = false;
@@ -183,7 +184,7 @@ public class ListasDesplegablesFormularios {
      *
      * @param municipios
      * @param municipio
-     * @return
+     * @return boolean
      */
     public static boolean listaContieneElMunicipio(List<Municipio> municipios, String municipio) {
         boolean resultado = false;
@@ -202,7 +203,7 @@ public class ListasDesplegablesFormularios {
      *
      * @param estadoMatriculas
      * @param estadoMatricula
-     * @return
+     * @return boolean
      */
     public static boolean listaContieneElEstadoMatricula(List<EstadoMatricula> estadoMatriculas, String estadoMatricula) {
         boolean resultado = false;
@@ -221,7 +222,7 @@ public class ListasDesplegablesFormularios {
      *
      * @param situacionesControl
      * @param situacionControl
-     * @return
+     * @return boolean
      */
     public static boolean listaContieneLaSituacionControl(List<SituacionControl> situacionesControl, String situacionControl) {
         boolean resultado = false;
@@ -240,7 +241,7 @@ public class ListasDesplegablesFormularios {
      *
      * @param tipoControles
      * @param tipoControl
-     * @return
+     * @return boolean
      */
     public static boolean listaContieneElTipoControl(List<TipoControl> tipoControles, String tipoControl) {
         boolean resultado = false;
@@ -259,7 +260,7 @@ public class ListasDesplegablesFormularios {
      *
      * @param tipoEmpresaControlantes
      * @param tipoEmpresaControlante
-     * @return
+     * @return boolean
      */
     public static boolean listaContieneElTipoEmpresaControlante(List<TipoEmpresa> tipoEmpresaControlantes, String tipoEmpresaControlante) {
         boolean resultado = false;
@@ -278,7 +279,7 @@ public class ListasDesplegablesFormularios {
      *
      * @param tipoEstablecimientos
      * @param tipoEstablecimiento
-     * @return
+     * @return boolean
      */
     public static boolean listaContieneElTipoEstablecimiento(List<TipoEstablecimiento> tipoEstablecimientos, String tipoEstablecimiento) {
         boolean resultado = false;
@@ -298,7 +299,7 @@ public class ListasDesplegablesFormularios {
      *
      * @param tipoOrganizaciones
      * @param tipoOrganizacion
-     * @return
+     * @return boolean
      */
     public static boolean listaContieneElTipoOrganizacionUnidadLegal(List<TipoOrganizacion> tipoOrganizaciones, String tipoOrganizacion) {
         boolean resultado = false;
@@ -512,5 +513,4 @@ public class ListasDesplegablesFormularios {
         this.listaRelaciones = listaRelaciones;
     }
 
-    
 }

@@ -4,6 +4,7 @@ import com.dane.ige.modelo.entidad.Modulo;
 import com.dane.ige.modelo.entidad.Permiso;
 import com.dane.ige.modelo.local.administracion.ModuloFacadeLocal;
 import com.dane.ige.utilidad.Mensaje;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -15,106 +16,107 @@ import org.apache.log4j.Logger;
 
 /**
  * Clase que maneja la entidad Modulo y la Vista de administración de Modulo.
+ *
  * @author srojasm
  */
 @ManagedBean(name = "MbAdministrarModulo")
 @ViewScoped
-public class AdministrarModulo {
+public class AdministrarModulo implements Serializable{
+
     @EJB
     private ModuloFacadeLocal eJBServicioModulo;
-    
+
     final static Logger LOGGER = Logger.getLogger(AdministrarModulo.class);
 
     @ManagedProperty("#{MbAdministrarPermiso}")
     private AdministrarPermiso servicioPermiso;
-    
+
     private boolean esNuevoModulo;
-    
+
     private List<Modulo> listaModulos;
     private Modulo moduloSeleccionado;
-    
-    public AdministrarModulo(){
-        
+
+    public AdministrarModulo() {
+
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         inicializarVariables();
     }
 
     /**
-     * Método que permite inicializar las variables necesarias para el funcionamiento
-     * de los metos de crear y actualiar.
-     */        
-    private void inicializarVariables(){
+     * Método que permite inicializar las variables necesarias para el
+     * funcionamiento de los metos de crear y actualiar.
+     */
+    private void inicializarVariables() {
         setListaModulos(geteJBServicioModulo().findAll());
         setModuloSeleccionado(new Modulo(null, null));
         setEsNuevoModulo(true);
     }
-    
+
     /**
      * Método que permite crear un nuevo módulo en el sistema.
      */
-    public void nuevoModulo(){        
-        if(getModuloSeleccionado().getModulo() != null){
-            if(geteJBServicioModulo().buscarModuloByModulo(getModuloSeleccionado().getModulo()) == null){               
-                                
-                Integer idModulo = geteJBServicioModulo().createAndGetKey(getModuloSeleccionado());      
-            
-                if(getServicioPermiso().getListaPermisosSeleccionados() != null){                
-                    getServicioPermiso().adicionarPermisosModulo(idModulo, getServicioPermiso().getListaPermisosSeleccionados());                
-                }                              
-                
+    public void nuevoModulo() {
+        if (getModuloSeleccionado().getModulo() != null) {
+            if (geteJBServicioModulo().buscarModuloByModulo(getModuloSeleccionado().getModulo()) == null) {
+
+                Integer idModulo = geteJBServicioModulo().createAndGetKey(getModuloSeleccionado());
+
+                if (getServicioPermiso().getListaPermisosSeleccionados() != null) {
+                    getServicioPermiso().adicionarPermisosModulo(idModulo, getServicioPermiso().getListaPermisosSeleccionados());
+                }
+
                 inicializarVariables();
                 //LOGGER.info("nuevo Modulo");
                 Mensaje.agregarMensajeGrowlInfo("Exito!", "Nuevo Modulo agregado.");
-            }else{
+            } else {
                 //LOGGER.info("el Modulo ya existe");
                 Mensaje.agregarMensajeGrowlWarn("Atención!", "El Modulo ya existe.");
             }
-        }else{
+        } else {
             //LOGGER.info("ingresar datos Modulo");
             Mensaje.agregarMensajeGrowlWarn("Atención!", "Debe ingresar los datos.");
-        }        
-    }    
-    
+        }
+    }
+
     /**
      * Método que permite editar un mulo en el sistema
      */
-    public void actualziarModulo(){
-        if(getModuloSeleccionado().getId() != null){
-            if(getServicioPermiso().getListaPermisosSeleccionados() != null){
-                getServicioPermiso().adicionarPermisosModulo(getModuloSeleccionado().getId(), getServicioPermiso().getListaPermisosSeleccionados());                
-            }            
+    public void actualziarModulo() {
+        if (getModuloSeleccionado().getId() != null) {
+            if (getServicioPermiso().getListaPermisosSeleccionados() != null) {
+                getServicioPermiso().adicionarPermisosModulo(getModuloSeleccionado().getId(), getServicioPermiso().getListaPermisosSeleccionados());
+            }
             geteJBServicioModulo().edit(getModuloSeleccionado());
             inicializarVariables();
             //LOGGER.info("actualizo Modulo");
             Mensaje.agregarMensajeGrowlInfo("Exito!", "Modulo actualizado.");
-        }else{
+        } else {
             //LOGGER.info("seleccionar Modulo");
             Mensaje.agregarMensajeGrowlWarn("Atención!", "Debe seleccionar un Modulo.");
-        }        
+        }
     }
 
-   /**
+    /**
      * Método que permite seleccionar en la lista de modulo, el módulo a editar
+     *
      * @param modulo
      */
-    public void seleccionarPerfil(Modulo modulo){
+    public void seleccionarPerfil(Modulo modulo) {
         setModuloSeleccionado(modulo);
-        
-        if(getModuloSeleccionado().getPermisos() !=null && !getModuloSeleccionado().getPermisos().isEmpty()){
-            getServicioPermiso().setListaPermisosSeleccionados(getModuloSeleccionado().getPermisos());  
-        }else{
+
+        if (getModuloSeleccionado().getPermisos() != null && !getModuloSeleccionado().getPermisos().isEmpty()) {
+            getServicioPermiso().setListaPermisosSeleccionados(getModuloSeleccionado().getPermisos());
+        } else {
             getServicioPermiso().setListaPermisosSeleccionados(new ArrayList<Permiso>());
         }
-                
-        LOGGER.info("Módulo seleccionado: "+getModuloSeleccionado().getId());
-    }    
-    
-    
+
+        LOGGER.info("Módulo seleccionado: " + getModuloSeleccionado().getId());
+    }
+
     // Métodos Set y Get para los atributos de la clase
-    
     public ModuloFacadeLocal geteJBServicioModulo() {
         return eJBServicioModulo;
     }
@@ -155,7 +157,5 @@ public class AdministrarModulo {
     public void setServicioPermiso(AdministrarPermiso servicioPermiso) {
         this.servicioPermiso = servicioPermiso;
     }
-    
-    
-    
+
 }

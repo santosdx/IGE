@@ -58,9 +58,13 @@ public class FormularioGrupoEmpresa implements Serializable {
         Long id = Long.parseLong(getServicioLogin().getUsuarioLogueado().getIdIdentificacion() + "");
 
         setIdentificacionSeleccionada(geteJBServicioBodegaIdentificacion().obtenerIdentificacionByIdTipoOrganizacion(id, "GRUPO"));
-        setRelacionSeleccionada(geteJBServicioBodegaRelacion().obtenerRelacionGrupoEmpresaById(id));
-        setNovedadSeleccionada(geteJBServicioBodegaNovedad().obtenerNovedadGrupoEmpresaById(id));
-        setTamanoSeleccionado(geteJBServicioBodegaTamano().obtenerTamanoGrupoEmpresaById(id));
+        if(getIdentificacionSeleccionada() != null){
+            setRelacionSeleccionada(geteJBServicioBodegaRelacion().obtenerRelacionGrupoEmpresaById(id));
+            setNovedadSeleccionada(geteJBServicioBodegaNovedad().obtenerNovedadGrupoEmpresaById(id));
+            setTamanoSeleccionado(geteJBServicioBodegaTamano().obtenerTamanoGrupoEmpresaById(id));
+        }else{
+            //Mensaje.agregarMensajeGrowlWarn("Atención!", "El usuario no tiene asignado un Grupo Empresarial o el asignado no existe.");
+        }
     }
 
     /**

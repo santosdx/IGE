@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad BodegaTamano como servicio.
  *
  * @author srojasm
  */

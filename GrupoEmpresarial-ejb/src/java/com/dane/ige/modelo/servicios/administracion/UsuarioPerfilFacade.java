@@ -12,6 +12,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase UsuarioPerfil como parametro y que implementa la interfaz
+ * UsuarioPerfilFacadeLocal, para brindar los servicios sobre el acceso a los
+ * datos a la tabla ige_usuario_perfil.
  *
  * @author srojasm
  */
@@ -38,7 +42,7 @@ public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implement
      *
      * @param idUsuario
      * @param idPerfil
-     * @return
+     * @return UsuarioPerfil
      */
     @Override
     public UsuarioPerfil buscarAsignacionUsuarioPerfil(int idUsuario, int idPerfil) {

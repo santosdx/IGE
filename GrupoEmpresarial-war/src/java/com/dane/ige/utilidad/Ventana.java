@@ -44,7 +44,12 @@ public class Ventana implements Serializable {
         RequestContext.getCurrentInstance().openDialog(componente, options, null);
     }
 
-    public void cerrarCentanaParametrizada(String componente){
+    /**
+     * Función que permite cerrar la ventana modal parametrizada
+     *
+     * @param componente
+     */
+    public void cerrarVentanaParametrizada(String componente) {
         RequestContext.getCurrentInstance().closeDialog(componente);
     }
 }

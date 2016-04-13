@@ -5,15 +5,15 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Workbook;
 
 /**
- *  Clase que administra los estilos para las celdas en la generación del los
+ * Clase que administra los estilos para las celdas en la generación del los
  * archivos Xls
+ *
  * @author SRojasM
  */
 public class EstiloCeldasXls {
 
     public EstiloCeldasXls() {
     }
-
 
     /**
      * Método que permite obtener el estilo de una celda aplicando el borde
@@ -22,7 +22,7 @@ public class EstiloCeldasXls {
      *
      * @param libro
      * @param editable
-     * @return
+     * @return CellStyle
      */
     public static CellStyle estiloBordeCompletoCedaEditable(Workbook libro, boolean editable) {
         CellStyle css = libro.createCellStyle();
@@ -45,7 +45,7 @@ public class EstiloCeldasXls {
      *
      * @param libro
      * @param editable
-     * @return
+     * @return CellStyle
      */
     public static CellStyle estiloBordeCompletoCedaEditableFecha(Workbook libro, boolean editable) {
         CellStyle css = libro.createCellStyle();
@@ -70,7 +70,7 @@ public class EstiloCeldasXls {
      *
      * @param libro
      * @param editable
-     * @return
+     * @return CellStyle
      */
     public static CellStyle estiloBordeCompletoCedaEditableTexto(Workbook libro, boolean editable) {
         CellStyle css = libro.createCellStyle();
@@ -95,7 +95,7 @@ public class EstiloCeldasXls {
      *
      * @param libro
      * @param editable
-     * @return
+     * @return CellStyle
      */
     public static CellStyle estiloBordeCompletoCedaEditableNumero(Workbook libro, boolean editable) {
         CellStyle css = libro.createCellStyle();

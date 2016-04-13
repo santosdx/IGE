@@ -12,6 +12,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase VariableIge como parametro y que implementa la interfaz
+ * VariableIgeFacadeLocal, para brindar los servicios sobre el acceso a los
+ * datos a la tabla ige_variable.
  *
  * @author srojasm
  */
@@ -32,10 +36,23 @@ public class VariableIgeFacade extends AbstractFacade<VariableIge> implements Va
         super(VariableIge.class);
     }
 
+    /**
+     * Método que permite crear una variable y retornar el ID asignado.
+     *
+     * @param variableIge
+     * @return Integer
+     */
     public Integer createAndGetKey(VariableIge variableIge) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    /**
+     * Método que permite consultar en la tabla variables el listado de
+     * registros de un grupo determinado.
+     *
+     * @param grupo
+     * @return List[VariableIge]
+     */
     @Override
     public List<VariableIge> buscarVariableByGrupo(String grupo) {
         List<VariableIge> resultado = null;

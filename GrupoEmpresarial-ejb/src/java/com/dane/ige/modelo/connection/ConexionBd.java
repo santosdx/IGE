@@ -166,7 +166,7 @@ public class ConexionBd {
      *
      * @param elSql
      * @param atributo
-     * @return
+     * @return String
      */
     public static String ejecutarSql(String elSql, String atributo) {
 

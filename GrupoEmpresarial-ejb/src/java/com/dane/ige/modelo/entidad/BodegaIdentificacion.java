@@ -13,6 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
+ * Clase Entity que representa la tabla ige_identificacion
  *
  * @author srojasm
  */
@@ -494,7 +495,6 @@ public class BodegaIdentificacion implements Serializable {
         this.origenActualizacion = origenActualizacion;
     }
 
-    
     //--
     @Override
     public int hashCode() {

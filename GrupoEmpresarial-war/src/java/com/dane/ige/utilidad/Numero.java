@@ -3,7 +3,7 @@ package com.dane.ige.utilidad;
 import org.apache.log4j.Logger;
 
 /**
- * Clase que permite administrar las operaciónes del atributo fecha.
+ * Clase que permite administrar las operaciónes del atributo número.
  *
  * @author SRojasM
  */
@@ -19,7 +19,7 @@ public class Numero {
      * entero, sin coma, punto o exponente.
      *
      * @param numero
-     * @return
+     * @return String
      */
     public static String formatoNumeroEntero(String numero) {
         String resultado = null;

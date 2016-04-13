@@ -1,11 +1,12 @@
 package com.dane.ige.modelo.local.administracion;
 
 import com.dane.ige.modelo.entidad.Departamento;
-import com.dane.ige.modelo.entidad.Pais;
 import java.util.List;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad Departamento como servicio.
  *
  * @author srojasm
  */
@@ -13,9 +14,9 @@ import javax.ejb.Local;
 public interface DepartamentoFacadeLocal {
 
     void create(Departamento departamento);
-    
+
     void edit(Departamento departamento);
-        
+
     void remove(Departamento departamento);
 
     Departamento find(Object id);
@@ -25,7 +26,7 @@ public interface DepartamentoFacadeLocal {
     List<Departamento> findRange(int[] range);
 
     int count();
-    
+
     List<Departamento> findAllInOrderByNameAsc();
-    
+
 }

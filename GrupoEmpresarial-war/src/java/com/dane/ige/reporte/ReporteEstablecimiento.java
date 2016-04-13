@@ -30,6 +30,8 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
+ * Clase que administra los metodos, funciones y procesos necesarios para la
+ * generación del reporte de los establecimientos.
  *
  * @author SRojasM
  */
@@ -49,8 +51,9 @@ public class ReporteEstablecimiento implements Serializable {
     }
 
     /**
-     * Método que permite generar el reporte con JasperReport sobre la información
-     * del listado de estalecimientos de una unidad legal y exportarlo a un arhivo PDF.
+     * Método que permite generar el reporte con JasperReport sobre la
+     * información del listado de estalecimientos de una unidad legal y
+     * exportarlo a un arhivo PDF.
      */
     public void generarReporteEstablecimientosPdf() {
         String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("reporte.establecimientos.path");
@@ -95,8 +98,8 @@ public class ReporteEstablecimiento implements Serializable {
     }
 
     /**
-     * Método que permite generar el reporte con JasperReport sobre la información
-     * de un establecimiento y exportarlo a un arhivo PDF.
+     * Método que permite generar el reporte con JasperReport sobre la
+     * información de un establecimiento y exportarlo a un arhivo PDF.
      */
     public void generarReporteEstablecimientoPdf(Long idOrganizacion) {
         String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("reporte.establecimiento.path");

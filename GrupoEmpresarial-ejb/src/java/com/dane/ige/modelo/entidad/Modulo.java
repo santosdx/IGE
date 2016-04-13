@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
+ * Clase Entity que representa la tabla ige_modulo
  *
  * @author srojasm
  */
@@ -29,13 +30,14 @@ import org.apache.commons.lang3.text.WordUtils;
 @NamedQueries({
     @NamedQuery(name = "Modulo.findAll", query = "SELECT m FROM Modulo m"),
     @NamedQuery(name = "Modulo.findById", query = "SELECT m FROM Modulo m WHERE m.id = :id"),
-    @NamedQuery(name = "Modulo.findByModulo", query = "SELECT m FROM Modulo m WHERE m.modulo = :modulo"),    
+    @NamedQuery(name = "Modulo.findByModulo", query = "SELECT m FROM Modulo m WHERE m.modulo = :modulo"),
     @NamedQuery(name = "Modulo.findByDescripcion", query = "SELECT m FROM Modulo m WHERE m.descripcion = :descripcion")})
 public class Modulo implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final String FINE_BYE_MODULO = "Modulo.findByModulo";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MODULO")
     @SequenceGenerator(name = "SEQ_MODULO", sequenceName = "seq_id_ige_modulo", allocationSize = 1)
@@ -49,7 +51,6 @@ public class Modulo implements Serializable {
     private Integer orden;
     @Column(name = "visible")
     private Boolean visible;
-
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -66,7 +67,7 @@ public class Modulo implements Serializable {
         this.id = id;
     }
 
-    public Modulo(String modulo, String descripcion) {        
+    public Modulo(String modulo, String descripcion) {
         this.modulo = modulo;
         this.descripcion = descripcion;
     }
@@ -119,7 +120,7 @@ public class Modulo implements Serializable {
 
     public List<Permiso> getPermisos() {
         List<Permiso> lista = new ArrayList<Permiso>(permisos);
-        Collections.copy(lista, permisos);       
+        Collections.copy(lista, permisos);
         return lista;
     }
 
@@ -127,8 +128,6 @@ public class Modulo implements Serializable {
         this.permisos = permisos;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -153,5 +152,5 @@ public class Modulo implements Serializable {
     public String toString() {
         return "com.nerv.sai.modelo.entidad.Modulo[ id=" + id + " ]";
     }
-    
+
 }

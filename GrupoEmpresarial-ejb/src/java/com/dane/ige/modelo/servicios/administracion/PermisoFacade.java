@@ -12,6 +12,10 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 /**
+ * Clase que se describe como servicio y que extiende de la clase AbstractFacade
+ * con la clase Permiso como parametro y que implementa la interfaz
+ * PermisoFacadeLocal, para brindar los servicios sobre el acceso a los datos a
+ * la tabla ige_permiso.
  *
  * @author srojasm
  */
@@ -32,6 +36,14 @@ public class PermisoFacade extends AbstractFacade<Permiso> implements PermisoFac
         super(Permiso.class);
     }
 
+    /**
+     * Método que permite realizar la consulta a la base de datos en el listado
+     * de permisos y retornar el registro de acuerdo al nombre del permiso
+     * enviado como parametro
+     *
+     * @param permiso
+     * @return Permiso
+     */
     @Override
     public Permiso buscarPermisoByPermiso(String permiso) {
         Permiso resultado = null;
@@ -52,6 +64,14 @@ public class PermisoFacade extends AbstractFacade<Permiso> implements PermisoFac
         return resultado;
     }
 
+    /**
+     * Método que permite realizar la consulta a la base de datos en el listado
+     * de permisos y retornar el listado de permisos de acuerdo al ID del perfil
+     * al cual estan asiganados y que se envia como parametro.
+     *
+     * @param idPerfil
+     * @return List[Permiso]
+     */
     @Override
     public List<Permiso> buscarPermisosUsuarioByidPerfil(Integer idPerfil) {
         List<Permiso> resultado = null;

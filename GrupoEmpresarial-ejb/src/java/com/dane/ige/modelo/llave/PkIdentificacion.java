@@ -8,6 +8,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * Clase que representa la llave principal PrimariKey de la tabla
+ * ige_identificacion
  *
  * @author SRojasM
  */

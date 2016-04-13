@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
+ * Interfaz que describe todos los metodos que podran ser implementados para la
+ * entidad Usuario como servicio.
  *
  * @author srojasm
  */
@@ -12,11 +14,11 @@ import javax.ejb.Local;
 public interface UsuarioFacadeLocal {
 
     void create(Usuario usuario);
-    
+
     public Integer createAndGetKey(Usuario usuario);
 
     void edit(Usuario usuario);
-        
+
     void remove(Usuario usuario);
 
     Usuario find(Object id);
@@ -26,7 +28,10 @@ public interface UsuarioFacadeLocal {
     List<Usuario> findRange(int[] range);
 
     int count();
-    
-    public Usuario buscarUsuarioByNickname(String nickname);
-    public Usuario buscarUsuarioByNicknamePassword(String nickname, String password);
+
+    Usuario buscarUsuarioByNickname(String nickname);
+
+    Usuario buscarUsuarioByNicknamePassword(String nickname, String password);
+
+    Usuario buscarUsuarioByCorreo(String correo);
 }
