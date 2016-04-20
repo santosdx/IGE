@@ -66,19 +66,20 @@
                                         </p:column>
                                         <p:column headerText="" style="width:190px;">
                                             <p:commandLink update="frmInfEstablecimiento:dlgReportePdf" oncomplete="PF('dlg').show();" 
-                                                 actionListener="#{MbReporteEstablecimiento.generarReporteEstablecimientoPdf(fila.id.id)}" 
-                                                  rendered="#{aplicacionPrincipal.browserName != 'Internet Explorer'}">
+                                                           actionListener="#{MbReporteEstablecimiento.generarReporteEstablecimientoPdf(fila.id.id)}" 
+                                                           rendered="#{aplicacionPrincipal.browserName != 'Internet Explorer'}">
                                                 <!--h:outputText value="Reporte de datos" /-->
                                                 <i class="fa fa-fw fa-file-pdf-o"></i>Reporte
                                             </p:commandLink>
                                             <p:commandLink actionListener="#{MbReporteEstablecimiento.generarReporteEstablecimientoPdf(fila.id.id)}" 
-                                                            rendered="#{aplicacionPrincipal.browserName eq 'Internet Explorer'}"
-                                                            onclick="PrimeFaces.monitorDownload(start, stop);" ajax="false" >
+                                                           rendered="#{aplicacionPrincipal.browserName eq 'Internet Explorer'}"
+                                                           onclick="PrimeFaces.monitorDownload(start, stop);" ajax="false" >
                                                 <!--h:outputText value="Reporte de datos" /-->
                                                 <i class="fa fa-fw fa-file-pdf-o"></i>Descargar
                                                 <p:fileDownload value="#{MbReporteEstablecimiento.contenido}" />
                                             </p:commandLink>
-                                            <p:commandLink action="#{MbFormEstablecimiento.abrirFormularioActualizarDatos(fila.id.id)}" ajax="false">
+                                            <p:commandLink action="#{MbFormEstablecimiento.abrirFormularioActualizarDatos(fila.id.id)}" ajax="false" 
+                                                           rendered="#{MbLogin.usuarioLogueado.nivelPermiso=='ESCRITURA'}">
                                                 <!--h:outputText value="Formulario actualización datos" /-->
                                                 <i class="fa fa-fw fa-edit"></i>Formulario
                                             </p:commandLink>
@@ -89,19 +90,23 @@
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
-                                <h4 class="titulo-left-h3">Actualizar información desde archivo XLS</h4>
-                                <p>En esta sección el usuario puede descargar un archivo XLS, que contiene la información del grupo empresarial, la cual podra
-                                    actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
-                                <p:commandButton id="btnGenerarXlsEstablecimiento" value="Generar Excel" ajax="false"  disabled="#{empty MbFormEstablecimiento.listaIdentificacion}" 
-                                                 actionListener="#{MbEscribirExcelEstablecimiento.generarArchivoXls()}"
-                                                 onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s" update="msnInforUnidadLegal">
-                                    <p:fileDownload value="#{MbEscribirExcelEstablecimiento.file}" />
-                                </p:commandButton>
-                                <p>Subir el archivo con la ifnromación de los establecimientos diligenciados para actualizar los datos.</p>
-                                <ui:include src="../utilidades/cpt-cargar-archivo-xls.xhtml" >
-                                    <ui:param name="frmPadre" value="frmInfEstablecimiento" />
-                                    <ui:param name="formulario" value="ESTABLECIMIENTO" />
-                                </ui:include>
+                                <p:outputPanel rendered="#{MbLogin.usuarioLogueado.nivelPermiso=='ESCRITURA'}">
+
+                                    <h4 class="titulo-left-h3">Actualizar información desde archivo XLS</h4>
+                                    <p>En esta sección el usuario puede descargar un archivo XLS, que contiene la información del grupo empresarial, la cual podra
+                                        actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
+                                    <p:commandButton id="btnGenerarXlsEstablecimiento" value="Generar Excel" ajax="false"  disabled="#{empty MbFormEstablecimiento.listaIdentificacion}" 
+                                                     actionListener="#{MbEscribirExcelEstablecimiento.generarArchivoXls()}"
+                                                     onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s" update="msnInforUnidadLegal">
+                                        <p:fileDownload value="#{MbEscribirExcelEstablecimiento.file}" />
+                                    </p:commandButton>
+                                    <p>Subir el archivo con la ifnromación de los establecimientos diligenciados para actualizar los datos.</p>
+                                    <ui:include src="../utilidades/cpt-cargar-archivo-xls.xhtml" >
+                                        <ui:param name="frmPadre" value="frmInfEstablecimiento" />
+                                        <ui:param name="formulario" value="ESTABLECIMIENTO" />
+                                    </ui:include>
+
+                                </p:outputPanel>
                             </div>
                         </div>
                     </div>
@@ -114,8 +119,8 @@
                             <!--p:media value="#{MbReporteEstablecimiento.contenido}" cache="false" width="756" height="550" player="pdf">
                                 <br></br>
                                 <br></br>
-                                #{MbReporteEstablecimiento.listaErrores}
-                            </p:media-->
+                            #{MbReporteEstablecimiento.listaErrores}
+                        </p:media-->
                             <pe:documentViewer height="535" value="#{MbReporteEstablecimiento.contenido}"/>
                             #{MbReporteEstablecimiento.listaErrores}
                         </p:outputPanel>

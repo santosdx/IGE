@@ -36,6 +36,7 @@
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
+
                                 <h4 class="titulo-left-h3">Actualizar información desde formulario</h4>
                                 <p:outputPanel deferred="true">
                                     <p:dataTable id="dtUnidadLegal" var="fila" value="#{MbFormUnidadLegal.listaIdentificacion}"
@@ -67,30 +68,36 @@
                                                 <p:fileDownload value="#{MbReporteUnidadLegal.contenido}" />
                                             </p:commandLink>
 
-                                            <p:commandLink action="#{MbFormUnidadLegal.abrirFormularioActualizarDatos(fila.id.id)}" ajax="false">
+                                            <p:commandLink action="#{MbFormUnidadLegal.abrirFormularioActualizarDatos(fila.id.id)}" ajax="false"
+                                                           rendered="#{MbLogin.usuarioLogueado.nivelPermiso=='ESCRITURA'}">
                                                 <!--h:outputText value="Formulario actualización datos" /-->
                                                 <i class="fa fa-fw fa-edit"></i>Formulario
                                             </p:commandLink>
                                         </p:column>
                                     </p:dataTable>
                                 </p:outputPanel>
+
                             </div>
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
-                                <h4 class="titulo-left-h3">Actualizar información desde archivo XLS</h4>
-                                <p>En esta sección el usuario puede descargar un archivo XLS, que contiene el listado de unidades legales del grupo empresarial, la cual podra
-                                    actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
-                                <p:commandButton id="btnGenerarXlsUnidadLelgal" value="Generar Excel" ajax="false" 
-                                                 actionListener="#{MbEscribirExcelUnidadLegal.generarArchivoXls()}"
-                                                 onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                                    <p:fileDownload value="#{MbEscribirExcelUnidadLegal.file}" />
-                                </p:commandButton>
-                                <p>Subir el archivo con la ifnromación de las unidades legales diligenciada para actualizar los datos.</p>
-                                <ui:include src="../utilidades/cpt-cargar-archivo-xls.xhtml">
-                                    <ui:param name="frmPadre" value="frmInfUnidadLegal" />
-                                    <ui:param name="formulario" value="UNIDAD_LEGAL" />
-                                </ui:include>
+                                <p:outputPanel rendered="#{MbLogin.usuarioLogueado.nivelPermiso=='ESCRITURA'}">
+
+                                    <h4 class="titulo-left-h3">Actualizar información desde archivo XLS</h4>
+                                    <p>En esta sección el usuario puede descargar un archivo XLS, que contiene el listado de unidades legales del grupo empresarial, la cual podra
+                                        actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
+                                    <p:commandButton id="btnGenerarXlsUnidadLelgal" value="Generar Excel" ajax="false" 
+                                                     actionListener="#{MbEscribirExcelUnidadLegal.generarArchivoXls()}"
+                                                     onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                        <p:fileDownload value="#{MbEscribirExcelUnidadLegal.file}" />
+                                    </p:commandButton>
+                                    <p>Subir el archivo con la ifnromación de las unidades legales diligenciada para actualizar los datos.</p>
+                                    <ui:include src="../utilidades/cpt-cargar-archivo-xls.xhtml">
+                                        <ui:param name="frmPadre" value="frmInfUnidadLegal" />
+                                        <ui:param name="formulario" value="UNIDAD_LEGAL" />
+                                    </ui:include>
+
+                                </p:outputPanel>
                             </div>
                         </div>
                     </div>
@@ -103,8 +110,8 @@
                             <!--p:media value="#{MbReporteUnidadLegal.contenido}" cache="false" width="756" height="550" player="pdf">
                                 <br></br>
                                 <br></br>
-                                #{MbReporteUnidadLegal.listaErrores}
-                            </p:media-->
+                            #{MbReporteUnidadLegal.listaErrores}
+                        </p:media-->
                             <pe:documentViewer height="535" value="#{MbReporteUnidadLegal.contenido}"/>
                             #{MbReporteUnidadLegal.listaErrores}
                         </p:outputPanel>
@@ -122,7 +129,7 @@
                         Generando archivo...<br />
                         <p:graphicImage name="imagen/ajax-loading.gif"/>
                     </p:blockUI>
-                    
+
                     <p:notificationBar position="bottom" effect="slide" styleClass="top" autoDisplay="#{MbFormGrupoEmpresa.identificacionSeleccionada == null}" widgetVar="bar">
                         <h:outputText value="Atención!" style="font-size:20px;" />
                         <br></br>

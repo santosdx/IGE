@@ -110,6 +110,45 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
 
     /**
      * Método que permite obtener el listado de registros de identificación de
+     * todos los grupos empresariales
+     *
+     * @return List BodegaIdentificacion
+     */
+    @Override
+    public List<BodegaIdentificacion> obtenerListaIdentificacionTodosLosGrupos() {
+        List<BodegaIdentificacion> resultado = null;
+        try {
+            //Query query = em.createNamedQuery(BodegaIdentificacion.FINE_BYE_ID_GRUPO_RELACIONADO);
+            //query.setParameter("idGrupoRelacionado", idGrupoRelacionado);
+            //query.setParameter("tipoOrganizacion", tipoOrganizacion);
+
+            String sql = "SELECT * FROM IGE_IDENTIFICACION "
+                    + "WHERE ID_ORGANIZACION ||'-'||TO_CHAR(FECHA_ACTUALIZA_IDEN,'dd/MM/yyyy HH24:MI:SS') in ( "
+                    + "SELECT ID_ORGANIZACION ||'-'||TO_CHAR(FECHA,'dd/MM/yyyy HH24:MI:SS') AS ID FROM ( "
+                    + "SELECT ID_ORGANIZACION, MAX (FECHA_ACTUALIZA_IDEN) AS FECHA "
+                    + "FROM IGE_IDENTIFICACION "
+                    + "WHERE TIPO_ORGANIZACION='GRUPO' "
+                    + "GROUP BY ID_ORGANIZACION ORDER BY 1 "
+                    + ") "
+                    + ")ORDER BY NOMBRE_REGISTRADO ";
+
+            Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
+
+            List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }
+        } catch (Exception e) {
+            LOGGER.warn(e.getMessage());
+        }
+        return resultado;
+    }
+    
+    /**
+     * Método que permite obtener el listado de registros de identificación de
      * unidad legal pasando como parametro el ID del grupo empresarial.
      *
      * @param idGrupoRelacionado

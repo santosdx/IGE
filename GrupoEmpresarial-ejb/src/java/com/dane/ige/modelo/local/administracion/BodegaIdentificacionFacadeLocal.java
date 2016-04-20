@@ -33,6 +33,8 @@ public interface BodegaIdentificacionFacadeLocal {
 
     Map<String, String> obtenerMapIdentificacionByIdTipoOrganizacion(Long id, String tipoOrganizacion);
 
+    List<BodegaIdentificacion> obtenerListaIdentificacionTodosLosGrupos();
+
     List<BodegaIdentificacion> obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado);
 
     List<BodegaIdentificacion> obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(Long idUnidadLegallacionada);

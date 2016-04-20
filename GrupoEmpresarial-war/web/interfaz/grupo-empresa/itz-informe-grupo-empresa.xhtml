@@ -34,11 +34,13 @@
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
-                                <h4 class="titulo-left-h3">Actualizar información desde formulario</h4>
-                                <p>En esta sección el usuario puede actualizar los datos en linea directamente desde un formulario electronico, el cual
-                                    presenta los datos del grupo empresarial prediligenciados.</p>
-                                <p:commandButton value="Formulario" action="/interfaz/grupo-empresa/itz-formulario-grupo-empresa.xhtml" 
-                                                 disabled="#{MbFormGrupoEmpresa.identificacionSeleccionada == null}" ajax="false"/>
+                                <p:outputPanel rendered="#{MbLogin.usuarioLogueado.nivelPermiso=='ESCRITURA'}">
+                                    <h4 class="titulo-left-h3">Actualizar información desde formulario</h4>
+                                    <p>En esta sección el usuario puede actualizar los datos en linea directamente desde un formulario electronico, el cual
+                                        presenta los datos del grupo empresarial prediligenciados.</p>
+                                    <p:commandButton value="Formulario" action="/interfaz/grupo-empresa/itz-formulario-grupo-empresa.xhtml" ajax="false"
+                                                     disabled="#{MbFormGrupoEmpresa.identificacionSeleccionada == null}" />
+                                </p:outputPanel>
                             </div>
                         </div>
                         <!--div class="ui-grid-row">

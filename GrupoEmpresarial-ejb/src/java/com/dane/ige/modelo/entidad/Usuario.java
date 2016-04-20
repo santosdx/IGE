@@ -65,12 +65,14 @@ public class Usuario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_fin_actividad")
     private Date fechaFinActividad;
+    @Column(name = "nivel_permiso")
+    private String nivelPermiso;
+
     /*
      @OneToOne
      @JoinColumn(name = "id_ige_usuario", referencedColumnName = "id_ige_usuario", insertable = false, updatable = false)
      private Perfil perfil;
      */
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "ige_usuario_perfil",
@@ -171,6 +173,14 @@ public class Usuario implements Serializable {
 
     public void setFechaFinActividad(Date fechaFinActividad) {
         this.fechaFinActividad = fechaFinActividad;
+    }
+
+    public String getNivelPermiso() {
+        return nivelPermiso;
+    }
+
+    public void setNivelPermiso(String nivelPermiso) {
+        this.nivelPermiso = nivelPermiso;
     }
 
     /*

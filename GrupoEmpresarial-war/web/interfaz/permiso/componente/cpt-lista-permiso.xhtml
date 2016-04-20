@@ -1,9 +1,9 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <!--p:outputLabel value="Lista de Permisos" styleClass="titulo-center-h3"/-->
     <h:form id="formCptListPermiso">
@@ -16,7 +16,8 @@
                 <f:setPropertyActionListener value="#{permiso}" target="#{MbAdministrarPermiso.permisoSeleccionado}" />
             </p:commandLink>        
             <p:outputLabel value="#{permiso.permiso} "/>
-            <!--p:outputLabel value="- #{permiso.descripcion}"/-->      
+            <!--p:outputLabel value="- #{permiso.descripcion}"/-->
+            <p:outputLabel value=" [No visible]" rendered="#{permiso.visible=='false'}" style="color: red;"/>
         </p:dataList>
     </h:form>
 </ui:composition>
