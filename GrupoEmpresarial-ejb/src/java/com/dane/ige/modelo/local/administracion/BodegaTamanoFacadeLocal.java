@@ -32,4 +32,6 @@ public interface BodegaTamanoFacadeLocal {
     BodegaTamano obtenerTamanoGrupoEmpresaById(Long id);
 
     Map<String, String> obtenerMapTamanoGrupoEmpresaById(Long id);
+
+    BodegaTamano obtenerRegistroByLlaveCompuesta(String llave);
 }

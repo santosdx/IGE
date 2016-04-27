@@ -22,7 +22,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.imageio.ImageIO;
 import net.sf.jasperreports.engine.JRException;
@@ -63,14 +62,15 @@ public class InformeGrupoEmpresarial {
     @ManagedProperty("#{MbLogin}")
     private Login servicioLogin;
 
-    private StreamedContent contenido;
+    private StreamedContent contenidoPDF;
     private Long idIdentificacionSeleccionada;
     private BodegaIdentificacion identificacionSeleccionada;
     private List<BodegaIdentificacion> listaIdentificacion;
     private String resenaConglomerado;
+    private String analisis1;
 
     private PieChartModel pieModeUnidadLegalDepartamento;
-    private StreamedContent chart;
+    private StreamedContent chartUnidadLegalDepartamento;
 
     /**
      * Creates a new instance of InformeGrupoEmpresarial
@@ -86,11 +86,11 @@ public class InformeGrupoEmpresarial {
     }
 
     public void mySelectionMethodListener(AjaxBehaviorEvent event) {
-        // cargarIndicadores();
+
         for (BodegaIdentificacion bodegaIdentificacion : getListaIdentificacion()) {
             if (bodegaIdentificacion.getId().getId().compareTo(getIdIdentificacionSeleccionada()) == 0) {
                 setIdentificacionSeleccionada(bodegaIdentificacion);
-                //setChart(converterCharToImage("Unidad Legal por Departamento",createDatasetDepartamento()));
+                //setChartUnidadLegalDepartamento(converterCharToImage("Unidad Legal por Departamento",createDatasetDepartamento()));
 
                 List<ObjetoIndicador> datosIndicadorUnidadLegalDepartamento;
                 setPieModeUnidadLegalDepartamento(new PieChartModel());
@@ -108,7 +108,11 @@ public class InformeGrupoEmpresarial {
         }
     }
 
+    /**
+     * Método que permite generar el Documetno PDF del informe ejecutivo.
+     */
     public void generarInformeEjecutivoGrupoEmpresarialPdf() {
+
         String urlArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("informe.grupoEmpresarial.path");
         String nombreArchivo = ArchivoProperties.obtenerPropertieFilePathProperties("informe.grupoEmpresarial.archivo");
         //LOGGER.info(urlArchivo);
@@ -124,13 +128,14 @@ public class InformeGrupoEmpresarial {
             Map parameters = new HashMap();
             parameters.put("id_grupo", getIdIdentificacionSeleccionada());
             parameters.put("RESENA_CONGLOMERADO", getResenaConglomerado());
-            parameters.put("chartUnidadLegalDepartamento", renderedImage);
+            parameters.put("chartUnidadLegalDepartamento", convertirBase64StrToRenderdImage(getBase64StrChartDepartamento()));
+            parameters.put("ANALISIS1", getAnalisis1());
 
             reporteJasper = JasperCompileManager.compileReport(urlArchivo + nombreArchivo);
             print = JasperFillManager.fillReport(reporteJasper, parameters, connection.getConexion());
             byte[] bites = JasperExportManager.exportReportToPdf(print);
 
-            setContenido(new DefaultStreamedContent(new ByteArrayInputStream(bites), "application/pdf", "Informe Ejecutivo Grupo Empresarial.pdf"));
+            setContenidoPDF(new DefaultStreamedContent(new ByteArrayInputStream(bites), "application/pdf", "Informe Ejecutivo Grupo Empresarial.pdf"));
         } catch (JRException e) {
             LOGGER.warn(e);
         } finally {
@@ -145,6 +150,50 @@ public class InformeGrupoEmpresarial {
         //LOGGER.info("Fin");
     }
 
+    // Métodos convertir Chart to Imagen 
+    private String base64StrChartDepartamento;
+
+    public String getBase64StrChartDepartamento() {
+        return base64StrChartDepartamento;
+    }
+
+    public void setBase64StrChartDepartamento(String base64StrChartDepartamento) {
+        this.base64StrChartDepartamento = base64StrChartDepartamento;
+    }
+
+    /**
+     * Método que permite convertir una cadena String en base 64 en un objeto
+     * RenderedImage
+     *
+     * @param base64Str
+     * @return RenderedImage
+     */
+    public RenderedImage convertirBase64StrToRenderdImage(String base64Str) {
+        RenderedImage renderedImage = null;
+        // You probably want to have a more comprehensive check here. 
+        // In this example I only use a simple check
+        if (base64Str.split(",").length > 1) {
+            String encoded = base64Str.split(",")[1];
+            //byte[] decoded = org.apache.commons.codec.binary.Base64.decodeBase64(encoded);
+            byte[] decoded = Base64.decodeBase64(encoded);
+            // Write to a .png file
+            try {
+                renderedImage = ImageIO.read(new ByteArrayInputStream(decoded));
+                //ImageIO.write(renderedImage, "png", new File("C:\\out.png")); // use a proper path & file name here.
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return renderedImage;
+    }
+
+    /**
+     * Método que permite crear en PieDataset de la consulta para generar el
+     * indicador Chart de Unidad Legal pro Departamento
+     *
+     * @deprecated
+     * @return PieDataset
+     */
     private PieDataset createDatasetDepartamento() {
         List<ObjetoIndicador> datosIndicadorUnidadLegalDepartamento;
         DefaultPieDataset dataset = new DefaultPieDataset();
@@ -155,6 +204,15 @@ public class InformeGrupoEmpresarial {
         return dataset;
     }
 
+    /**
+     * Método que permite convertir un PieDataset en un StreamedContent para
+     * visualizarlo como imagen en la interfaz
+     *
+     * @deprecated
+     * @param titulo
+     * @param dataset
+     * @return StreamedContent
+     */
     private StreamedContent converterCharToImage(String titulo, PieDataset dataset) {
         //Chart
         StreamedContent chart = null;
@@ -169,53 +227,7 @@ public class InformeGrupoEmpresarial {
         return chart;
     }
 
-    private String base64Str;
-
-    public String getBase64Str() {
-        return base64Str;
-    }
-
-    public void setBase64Str(String base64Str) {
-        this.base64Str = base64Str;
-    }
-    
-    private RenderedImage renderedImage;
-            
-    public void submittedBase64Str(ActionEvent event){
-    // You probably want to have a more comprehensive check here. 
-    // In this example I only use a simple check
-    if(base64Str.split(",").length > 1){
-        String encoded = base64Str.split(",")[1];
-        //byte[] decoded = org.apache.commons.codec.binary.Base64.decodeBase64(encoded);
-        byte[] decoded = Base64.decodeBase64(encoded);
-        // Write to a .png file
-        try {
-            renderedImage = ImageIO.read(new ByteArrayInputStream(decoded));
-            ImageIO.write(renderedImage, "png", new File("C:\\out.png")); // use a proper path & file name here.
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-    
-    
-    
-    public StreamedContent getChart() {
-        return chart;
-    }
-
-    public void setChart(StreamedContent chart) {
-        this.chart = chart;
-    }
-
-    public String getResenaConglomerado() {
-        return resenaConglomerado;
-    }
-
-    public void setResenaConglomerado(String resenaConglomerado) {
-        this.resenaConglomerado = resenaConglomerado;
-    }
-
+    // Metodos Sett y Gett
     public Long getIdIdentificacionSeleccionada() {
         return idIdentificacionSeleccionada;
     }
@@ -240,12 +252,36 @@ public class InformeGrupoEmpresarial {
         this.listaIdentificacion = listaIdentificacion;
     }
 
-    public StreamedContent getContenido() {
-        return contenido;
+    public String getResenaConglomerado() {
+        return resenaConglomerado;
     }
 
-    public void setContenido(StreamedContent contenido) {
-        this.contenido = contenido;
+    public void setResenaConglomerado(String resenaConglomerado) {
+        this.resenaConglomerado = resenaConglomerado;
+    }
+
+    public StreamedContent getChartUnidadLegalDepartamento() {
+        return chartUnidadLegalDepartamento;
+    }
+
+    public void setChartUnidadLegalDepartamento(StreamedContent chartUnidadLegalDepartamento) {
+        this.chartUnidadLegalDepartamento = chartUnidadLegalDepartamento;
+    }
+
+    public String getAnalisis1() {
+        return analisis1;
+    }
+
+    public void setAnalisis1(String analisis1) {
+        this.analisis1 = analisis1;
+    }
+
+    public StreamedContent getContenidoPDF() {
+        return contenidoPDF;
+    }
+
+    public void setContenidoPDF(StreamedContent contenidoPDF) {
+        this.contenidoPDF = contenidoPDF;
     }
 
     public Login getServicioLogin() {

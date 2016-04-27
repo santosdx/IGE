@@ -101,4 +101,31 @@ public class BodegaRelacionFacade extends AbstractFacade<BodegaRelacion> impleme
         }
         return resultado;
     }
+
+    /**
+     * Método que permite consultar el registro de relacion enviando como
+     * parametro la llave compuesta por el ID y la Fecha de actualizacion
+     *
+     * @param llave
+     * @return BodegaRelacion
+     */
+    @Override
+    public BodegaRelacion obtenerRegistroByLlaveCompuesta(String llave) {
+        BodegaRelacion resultado = null;
+        try {
+
+            String sql = "SELECT * "
+                    + "FROM ige_relacion "
+                    + "WHERE r_id_organizacion ||''|| to_char(r_fecha_actualiza,'dd/MM/yyyy HH24:MI:SS') =" + llave + " ";
+            //'1530/08/2015 00:00:00','1530/11/2015 16:12:17'
+            LOGGER.info(sql);
+            Query query = em.createNativeQuery(sql, BodegaRelacion.class);
+
+            resultado = (BodegaRelacion) query.getSingleResult();
+
+        } catch (Exception e) {
+            LOGGER.warn(e.getMessage());
+        }
+        return resultado;
+    }
 }

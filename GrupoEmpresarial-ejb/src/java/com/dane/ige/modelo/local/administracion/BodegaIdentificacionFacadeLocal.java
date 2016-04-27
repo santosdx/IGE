@@ -38,4 +38,10 @@ public interface BodegaIdentificacionFacadeLocal {
     List<BodegaIdentificacion> obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(Long idGrupoRelacionado);
 
     List<BodegaIdentificacion> obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(Long idUnidadLegallacionada);
+
+    List<BodegaIdentificacion> obtenerListaPeriodoActualizadoUnidadByIdUnidad(Long idUnidad);
+
+    BodegaIdentificacion obtenerRegistroByLlaveCompuesta(String llave);
+
+    List<BodegaIdentificacion> obtenerListaRegistrosByLlaveCompuesta(String llaves);
 }

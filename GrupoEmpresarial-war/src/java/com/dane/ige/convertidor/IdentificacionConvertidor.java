@@ -1,7 +1,7 @@
 package com.dane.ige.convertidor;
 
 import com.dane.ige.modelo.entidad.BodegaIdentificacion;
-import java.util.Map;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -22,9 +22,14 @@ public class IdentificacionConvertidor implements Converter {
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
         if (value != null && value.trim().length() > 0) {
             try {
-                //FacesContext context = FacesContext.getCurrentInstance();
-                //AdministrarPerfil service = (AdministrarPerfil) context.getApplication().evaluateExpressionGet(context, "#{MbAdministrarPerfil}", AdministrarPerfil.class);
-                return null;//service.getPerfilById(Integer.parseInt(value));
+                List<BodegaIdentificacion> lista = (List<BodegaIdentificacion>) uic.getAttributes().get("listaItem");
+                for (BodegaIdentificacion bodegaIdentificacion : lista) {
+                    String llaveCompuesta = bodegaIdentificacion.getId().getId() +""+bodegaIdentificacion.getId().getFecha();
+                    if(llaveCompuesta.equals(value)){
+                        return bodegaIdentificacion;
+                    }
+                }
+                return null;
             } catch (NumberFormatException e) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid list."));
             }
@@ -36,7 +41,8 @@ public class IdentificacionConvertidor implements Converter {
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
         if (o != null && !o.equals("")) {
-            return String.valueOf(((BodegaIdentificacion) o).getId().getId());
+            //Se crea una llave compuesta entre el ID y la fecha de actualizacion
+            return String.valueOf(((BodegaIdentificacion) o).getId().getId()+""+((BodegaIdentificacion) o).getId().getFecha());
         } else {
             return null;
         }

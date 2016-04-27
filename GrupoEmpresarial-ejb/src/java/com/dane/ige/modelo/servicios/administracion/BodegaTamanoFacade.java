@@ -102,4 +102,31 @@ public class BodegaTamanoFacade extends AbstractFacade<BodegaTamano> implements 
         }
         return resultado;
     }
+
+    /**
+     * Método que permite consultar el registro de tamaño enviando como
+     * parametro la llave compuesta por el ID y la Fecha de actualizacion
+     *
+     * @param llave
+     * @return BodegaTamano
+     */
+    @Override
+    public BodegaTamano obtenerRegistroByLlaveCompuesta(String llave) {
+        BodegaTamano resultado = null;
+        try {
+
+            String sql = "SELECT * "
+                    + "FROM ige_tamano "
+                    + "WHERE t_id_organizacion ||''|| to_char(t_fecha_actualiza,'dd/MM/yyyy HH24:MI:SS') =" + llave + " ";
+            //'1530/08/2015 00:00:00','1530/11/2015 16:12:17'
+            LOGGER.info(sql);
+            Query query = em.createNativeQuery(sql, BodegaTamano.class);
+
+            resultado = (BodegaTamano) query.getSingleResult();
+
+        } catch (Exception e) {
+            LOGGER.warn(e.getMessage());
+        }
+        return resultado;
+    }
 }

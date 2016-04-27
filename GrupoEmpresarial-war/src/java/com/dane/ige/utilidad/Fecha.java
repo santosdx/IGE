@@ -86,15 +86,16 @@ public class Fecha {
     /**
      * *
      * Método que recibe una fecha en Date y se convierte en String con el
-     * formato: dd-MM-yyyy
+     * formato que sea necesario dd-MM-yyyy  dd/MM/yyyy
      *
      * @param fecha
+     * @param formato
      * @return String
      */
-    public static String formatFechaDateToStringOther(Date fecha) {
+    public static String formatFechaDateToStringOtherFormat(Date fecha, String formato) {
         String resultado = null;
         if (fecha != null) {
-            SimpleDateFormat sdfFecha = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat sdfFecha = new SimpleDateFormat(formato);
             resultado = sdfFecha.format(fecha);
         }
         return resultado;

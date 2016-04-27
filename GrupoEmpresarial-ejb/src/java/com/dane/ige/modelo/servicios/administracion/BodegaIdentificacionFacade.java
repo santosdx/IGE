@@ -109,8 +109,8 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
     }
 
     /**
-     * Método que permite obtener el listado de registros de identificación de
-     * todos los grupos empresariales
+     * Método que permite obtener el listado de registros de identificación mas
+     * actualizados de todos los grupos empresariales
      *
      * @return List BodegaIdentificacion
      */
@@ -146,10 +146,11 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
         }
         return resultado;
     }
-    
+
     /**
      * Método que permite obtener el listado de registros de identificación de
-     * unidad legal pasando como parametro el ID del grupo empresarial.
+     * unidad legal más actualizados pasando como parametro el ID del grupo
+     * empresarial.
      *
      * @param idGrupoRelacionado
      * @return List BodegaIdentificacion
@@ -189,8 +190,8 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
 
     /**
      * Método que permite obtener el listado de registros de identificación de
-     * la unidad establecimiento pasando como parametro el ID del grupo
-     * empresarial.
+     * la unidad establecimiento más actualizados pasando como parametro el ID
+     * del grupo empresarial.
      *
      * @param idUnidadLegallacionada
      * @return List-BodegaIdentificacion
@@ -217,6 +218,101 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
 
             List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }
+        } catch (Exception e) {
+            LOGGER.warn(e.getMessage());
+        }
+        return resultado;
+    }
+
+    /**
+     * Método que permite consultar el listado de los periodos de actualización
+     * de una unidad.
+     *
+     * @param idUnidad
+     * @return List<BodegaIdentificacion>
+     */
+    @Override
+    public List<BodegaIdentificacion> obtenerListaPeriodoActualizadoUnidadByIdUnidad(Long idUnidad) {
+        List<BodegaIdentificacion> resultado = null;
+        try {
+
+            //String sql = "SELECT ID_ORGANIZACION , FECHA_ACTUALIZA_IDEN, ORIGEN_ACTUALIZACION , PERSONA_ACTUALIZA , NOMBRE_COMERCIAL, NOMBRE_REGISTRADO "
+            String sql = "SELECT * "
+                    + "FROM IGE_IDENTIFICACION "
+                    + "WHERE ID_ORGANIZACION= " + idUnidad + " "
+                    + "ORDER BY FECHA_ACTUALIZA_IDEN ASC ";
+            //LOGGER.info(sql);
+            Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
+
+            List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }
+        } catch (Exception e) {
+            LOGGER.warn(e.getMessage());
+        }
+        return resultado;
+    }
+
+    /**
+     * Método que permite consultar el registro de identificación enviando como
+     * parametro la llave compuesta por el ID y la Fecha de actualizacion
+     *
+     * @param llave
+     * @return BodegaIdentificacion
+     */
+    @Override
+    public BodegaIdentificacion obtenerRegistroByLlaveCompuesta(String llave) {
+        BodegaIdentificacion resultado = null;
+        try {
+
+            String sql = "SELECT * "
+                    + "FROM ige_identificacion "
+                    + "WHERE id_organizacion ||''|| to_char(fecha_actualiza_iden,'dd/MM/yyyy HH24:MI:SS') =" + llave + " ";
+            //'1530/08/2015 00:00:00','1530/11/2015 16:12:17'
+            LOGGER.info(sql);
+            Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
+
+            resultado = (BodegaIdentificacion) query.getSingleResult();
+
+        } catch (Exception e) {
+            LOGGER.warn(e.getMessage());
+        }
+        return resultado;
+    }
+
+    /**
+     * Método que permite consultar el listado de los registros de
+     * identificación enviando como parametro la llave compuesta por el ID y la
+     * Fecha de actualizacion
+     *
+     * @param llaves
+     * @return List<BodegaIdentificacion>
+     */
+    @Override
+    public List<BodegaIdentificacion> obtenerListaRegistrosByLlaveCompuesta(String llaves) {
+        List<BodegaIdentificacion> resultado = null;
+        try {
+
+            String sql = "SELECT * "
+                    + "FROM ige_identificacion "
+                    + "WHERE id_organizacion ||''|| to_char(fecha_actualiza_iden,'dd/MM/yyyy HH24:MI:SS') IN (" + llaves + ") ";
+            //'1530/08/2015 00:00:00','1530/11/2015 16:12:17'
+            LOGGER.info(sql);
+            Query query = em.createNativeQuery(sql, BodegaIdentificacion.class
+            );
+
+            List<BodegaIdentificacion> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+
             if (listaResultado.isEmpty()) {
                 return null;
             } else {

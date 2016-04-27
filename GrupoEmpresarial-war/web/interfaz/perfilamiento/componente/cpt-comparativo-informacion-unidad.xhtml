@@ -1,0 +1,214 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <style>
+        .ui-selectlistbox-listcontainer{
+            height: 150px !important;
+        }
+    </style>
+
+    <!--p:panel-->
+    <p:tooltip />
+    <h:form id="forComparativoInformacionUnidad" style="width: 100%;">
+
+        <!--div class="ui-grid ui-grid-responsive">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4" >
+                    <h3>Grupo Empresarial:</h3>
+                    <p:selectOneListbox id="lstBoxGrupo" style="width: 300px;" filter="true" filterMatchMode="contains"
+                                        value="#{MbComparativoInformacionUnidad.idIdentificacionGrupoSeleccionada}">
+                        <p:ajax event="change" listener="#{MbComparativoInformacionUnidad.mySelectionMethodListenerGrupo}" update="lstBoxUnidadLegal"/>
+                        <f:selectItems value="#{MbInformeGrupoEmpresarial.listaIdentificacion}" var="grupo" itemLabel="#{grupo.nombreRegistrado}" itemValue="#{grupo.id.id}"/>
+                    </p:selectOneListbox>
+                    <p:commandButton value="Comparar" actionListener="#{MbComparativoInformacionUnidad.consultarPeriodosActualizacionGrupo}" 
+                                     onclick="PF('dlgPeriodosActualizacion').show()" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
+                </div>
+                <div class="ui-grid-col-4">
+                    <h3>Unidad Legal:</h3>
+                    <p:selectOneListbox id="lstBoxUnidadLegal" style="width: 300px;" filter="true" filterMatchMode="contains"
+                                        value="#{MbComparativoInformacionUnidad.idIdentificacionUnidadLegalSeleccionada}">
+                        <p:ajax event="change" listener="#{MbComparativoInformacionUnidad.mySelectionMethodListenerUnidadLegal}"  update="lstBoxEstablecimiento"/>
+                        <f:selectItems value="#{MbComparativoInformacionUnidad.listaIdentificacionUnidadLegal}" var="unidadLegal" itemLabel="#{unidadLegal.nombreRegistrado}" itemValue="#{unidadLegal.id.id}"/>
+                    </p:selectOneListbox>
+                    <p:commandButton value="Comparar" actionListener="#{MbComparativoInformacionUnidad.consultarPeriodosActualizacionUnidadLegal()}" 
+                                     onclick="PF('dlgPeriodosActualizacion').show()" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
+                </div>
+                <div class="ui-grid-col-4">
+                    <h3>Establecimiento:</h3>
+                    <p:selectOneListbox id="lstBoxEstablecimiento" style="width: 300px;" filter="true" filterMatchMode="contains" 
+                                        value="#{MbComparativoInformacionUnidad.idIdentificacionEstablecimientoSeleccionado}">
+                        <p:ajax event="change" listener="#{MbComparativoInformacionUnidad.mySelectionMethodListenerEstablecimiento}"/>
+                        <f:selectItems value="#{MbComparativoInformacionUnidad.listaIdentificacionEstablecimiento}" var="establecimiento" itemLabel="#{establecimiento.nombreRegistrado}" itemValue="#{establecimiento.id.id}"/>
+                    </p:selectOneListbox>
+                    <p:commandButton value="Comparar" actionListener="#{MbComparativoInformacionUnidad.consultarPeriodosActualizacionEstablecimiento()}"
+                                     onclick="PF('dlgPeriodosActualizacion').show()" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
+                </div>
+            </div>
+        </div-->
+        <h:panelGrid  columns="3" >
+            <h:panelGrid  columns="1" >
+                <h3>Grupo Empresarial:</h3>
+                <p:selectOneListbox id="lstBoxGrupo" style="width: 300px;" filter="true" filterMatchMode="contains"
+                                    value="#{MbComparativoInformacionUnidad.idIdentificacionGrupoSeleccionada}">
+                    <p:ajax event="change" listener="#{MbComparativoInformacionUnidad.mySelectionMethodListenerGrupo}" update="lstBoxUnidadLegal"/>
+                    <f:selectItems value="#{MbInformeGrupoEmpresarial.listaIdentificacion}" var="grupo" itemLabel="#{grupo.nombreRegistrado}" itemValue="#{grupo.id.id}"/>
+                </p:selectOneListbox>
+                <p:commandButton value="Comparar" actionListener="#{MbComparativoInformacionUnidad.consultarPeriodosActualizacionGrupo}" 
+                                 onclick="PF('dlgPeriodosActualizacion').show()" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
+            </h:panelGrid>
+            <h:panelGrid  columns="1" >
+                <h3>Unidad Legal:</h3>
+                <p:selectOneListbox id="lstBoxUnidadLegal" style="width: 300px;" filter="true" filterMatchMode="contains"
+                                    value="#{MbComparativoInformacionUnidad.idIdentificacionUnidadLegalSeleccionada}">
+                    <p:ajax event="change" listener="#{MbComparativoInformacionUnidad.mySelectionMethodListenerUnidadLegal}"  update="lstBoxEstablecimiento"/>
+                    <f:selectItems value="#{MbComparativoInformacionUnidad.listaIdentificacionUnidadLegal}" var="unidadLegal" itemLabel="#{unidadLegal.nombreRegistrado}" itemValue="#{unidadLegal.id.id}"/>
+                </p:selectOneListbox>
+                <p:commandButton value="Comparar" actionListener="#{MbComparativoInformacionUnidad.consultarPeriodosActualizacionUnidadLegal()}" 
+                                 onclick="PF('dlgPeriodosActualizacion').show()" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
+            </h:panelGrid>
+            <h:panelGrid  columns="1" >
+                <h3>Establecimiento:</h3>
+                <p:selectOneListbox id="lstBoxEstablecimiento" style="width: 300px;" filter="true" filterMatchMode="contains" 
+                                    value="#{MbComparativoInformacionUnidad.idIdentificacionEstablecimientoSeleccionado}">
+                    <p:ajax event="change" listener="#{MbComparativoInformacionUnidad.mySelectionMethodListenerEstablecimiento}"/>
+                    <f:selectItems value="#{MbComparativoInformacionUnidad.listaIdentificacionEstablecimiento}" var="establecimiento" itemLabel="#{establecimiento.nombreRegistrado}" itemValue="#{establecimiento.id.id}"/>
+                </p:selectOneListbox>
+                <p:commandButton value="Comparar" actionListener="#{MbComparativoInformacionUnidad.consultarPeriodosActualizacionEstablecimiento()}"
+                                 onclick="PF('dlgPeriodosActualizacion').show()" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
+            </h:panelGrid>
+        </h:panelGrid>
+        <br></br>
+        <br></br>
+        <p:outputPanel id="pnlPrincipalComparacion" >
+            <div style="width: 100%; display: -moz-grid-group;">
+                <p:panelGrid  columns="1" style="margin-bottom: 18px;">
+                    <p:outputLabel value="&nbsp;" />
+                    <p:outputLabel value="ID" style="font-weight: bold;"/>
+                    <p:outputLabel value="FECHA" style="font-weight: bold;"/>
+                    <p:outputLabel value="NOMBRE COMERCIAL" style="font-weight: bold;"/>
+                    <p:outputLabel value="NOMBRE REGISTRADO" style="font-weight: bold;"/>
+                    <p:outputLabel value="PRESIDENTE" style="font-weight: bold;"/>
+                    <p:outputLabel value="PAÍS DE LA CONTROLANTE" style="font-weight: bold;"/>
+                    <p:outputLabel value="TIPO DE CONGLOMERADO" style="font-weight: bold;"/>
+                    <p:outputLabel value="SITUACIÓN DE CONTROL" style="font-weight: bold;"/>
+                    <p:outputLabel value="TIPO DE CONTROL" style="font-weight: bold;"/>
+                    <p:outputLabel value="TIPO DE EMPRESA (CONTROLANTE)" style="font-weight: bold;"/>
+                    <p:outputLabel value="CONSORCIOS - UNIONES TEMPORALES" style="font-weight: bold;"/>
+                    <p:outputLabel value="PÁGINA WEB" style="font-weight: bold;"/>
+                    <p:outputLabel value="NIT" style="font-weight: bold;"/>
+                    <p:outputLabel value="DIGITO DE VERIFICACIÓN" style="font-weight: bold;"/>
+                    <p:outputLabel value="SUCURSALES EN EL EXTRAJERO" style="font-weight: bold;"/>
+                    <p:outputLabel value="DEPARTAMENTO SEDE PRINCIPAL" style="font-weight: bold;"/>
+                    <p:outputLabel value="CIUDAD SEDE PRINCIPAL" style="font-weight: bold;"/>
+                    <p:outputLabel value="DIRECCIÓN SEDE PRINCIPAL" style="font-weight: bold;"/>
+                    <p:outputLabel value="INDICATIVO SEDE PRINCIPAL" style="font-weight: bold;"/>
+                    <p:outputLabel value="TELÉFONO SEDE PRINCIPAL" style="font-weight: bold;"/>
+                    <p:outputLabel value="NOMBRE DE CONTACTO" style="font-weight: bold;"/>
+                    <p:outputLabel value="CARGO DE CONTACTO" style="font-weight: bold;"/>
+                    <p:outputLabel value="TELÉFONO DE CONTACTO" style="font-weight: bold;"/>
+                    <p:outputLabel value="CORREO ELECTRÓNICO DE CONTACTO" style="font-weight: bold;"/>
+                    <p:outputLabel value="NOMBRE DE CONTACTO 2" style="font-weight: bold;"/>
+                    <p:outputLabel value="CARGO DE CONTACTO 2" style="font-weight: bold;"/>
+                    <p:outputLabel value="TELÉFONO DE CONTACTO 2" style="font-weight: bold;"/>
+                    <p:outputLabel value="CORREO ELECTRÓNICO DE CONTACTO 2" style="font-weight: bold;"/>
+                    <p:outputLabel value="NOMBRE DE CONTACTO 3" style="font-weight: bold;"/>
+                    <p:outputLabel value="CARGO DE CONTACTO 3" style="font-weight: bold;"/>
+                    <p:outputLabel value="TELÉFONO DE CONTACTO 3" style="font-weight: bold;"/>
+                    <p:outputLabel value="CORREO ELECTRÓNICO DE CONTACTO 3" style="font-weight: bold;"/>
+                    <p:outputLabel value="ACTIVO" style="font-weight: bold;"/>
+                    <p:outputLabel value="PASIVO" style="font-weight: bold;"/>
+                    <p:outputLabel value="PATRIMONIO" style="font-weight: bold;"/>
+                    <p:outputLabel value="INGRESOS OPERACIONALES" style="font-weight: bold;"/>
+                    <p:outputLabel value="GASTOS OPERACIONALES" style="font-weight: bold;"/>
+                    <p:outputLabel value="UNIDAD NETA" style="font-weight: bold;"/>
+                    <p:outputLabel value="EBITDA" style="font-weight: bold;"/>
+                    <p:outputLabel value="PERSONAL OCUPADO" style="font-weight: bold;"/>
+                    <p:outputLabel value="NÚMERO DE HOMBRES OCUPADOS" style="font-weight: bold;"/>
+                    <p:outputLabel value="NÚMERO DE MUJERES OCUPADAS" style="font-weight: bold;"/>
+                </p:panelGrid>
+                <div style="width: 650px; display: -moz-grid-group; overflow: auto;">
+                    <ui:repeat value="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar}" var="grupo" >
+                        <p:panelGrid  columns="1">
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.origenActualizacion.toUpperCase()}" style="font-weight: bold;"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.id.id}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.id.fecha}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.id.fecha==grupo.identificacion.id.fecha ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.nombreComercial}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.nombreComercial==grupo.identificacion.nombreComercial ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.nombreRegistrado}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.nombreRegistrado==grupo.identificacion.nombreRegistrado ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.representanteLegal}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.representanteLegal==grupo.identificacion.representanteLegal ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.relacion.paisControlante}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.paisControlante==grupo.relacion.paisControlante ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.relacion.tipoCongromelado}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.tipoCongromelado==grupo.relacion.tipoCongromelado ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.relacion.situacionControl}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.situacionControl==grupo.relacion.situacionControl ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.relacion.tipoControl}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.tipoControl==grupo.relacion.tipoControl ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.relacion.tipoEmpresaControlante}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.tipoEmpresaControlante==grupo.relacion.tipoEmpresaControlante ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.relacion.consorcioUnidadesTempGe}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.consorcioUnidadesTempGe==grupo.relacion.consorcioUnidadesTempGe ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.paginaWeb}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.paginaWeb==grupo.identificacion.paginaWeb ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.nit}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.nit==grupo.identificacion.nit ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.digitoVerificacion}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.digitoVerificacion==grupo.identificacion.digitoVerificacion ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.relacion.sucursalesExtranjeroGe}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.sucursalesExtranjeroGe==grupo.relacion.sucursalesExtranjeroGe ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.departamento}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.departamento==grupo.identificacion.departamento ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.municipio}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.municipio==grupo.identificacion.municipio ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.direccion}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.direccion==grupo.identificacion.direccion ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.indicativo}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.indicativo==grupo.identificacion.indicativo ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.telefono}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.telefono==grupo.identificacion.telefono ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.nombreContacto}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.nombreContacto==grupo.identificacion.nombreContacto ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.cargoContacto}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.cargoContacto==grupo.identificacion.cargoContacto ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.telefonoContacto}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.telefonoContacto==grupo.identificacion.telefonoContacto ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.mailContacto}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.mailContacto==grupo.identificacion.mailContacto ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.nombreContacto2}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.nombreContacto2==grupo.identificacion.nombreContacto2 ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.cargoContacto2}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.cargoContacto2==grupo.identificacion.cargoContacto2 ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.telefonoContacto2}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.telefonoContacto2==grupo.identificacion.telefonoContacto2 ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.mailContacto2}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.mailContacto2==grupo.identificacion.mailContacto2 ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.nombreContacto3}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.nombreContacto3==grupo.identificacion.nombreContacto3 ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.cargoContacto3}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.cargoContacto3==grupo.identificacion.cargoContacto3 ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.telefonoContacto3}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.telefonoContacto3==grupo.identificacion.telefonoContacto3 ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.identificacion.mailContacto3}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.mailContacto3==grupo.identificacion.mailContacto3 ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.activo}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.activo==grupo.tamano.activo ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.pasivo}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.pasivo==grupo.tamano.pasivo ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.patrimonio}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.patrimonio==grupo.tamano.patrimonio ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.ingresosOperacionales}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.ingresosOperacionales==grupo.tamano.ingresosOperacionales ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.gastosOperacionales}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.gastosOperacionales==grupo.tamano.gastosOperacionales ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.utilidadNeta}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.utilidadNeta==grupo.tamano.utilidadNeta ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.ebitda}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.ebitda==grupo.tamano.ebitda ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.personalOcupado}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.personalOcupado==grupo.tamano.personalOcupado ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.hombresOcupados}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.hombresOcupados==grupo.tamano.hombresOcupados ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.tamano.mujeresOcupadas}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].tamano.mujeresOcupadas==grupo.tamano.mujeresOcupadas ? '':'background-color: rgb(245, 240, 208);'}"/>
+                        </p:panelGrid>
+                    </ui:repeat>
+                </div>
+            </div>
+        </p:outputPanel>
+    </h:form>
+    <!--/p:panel-->
+
+    <p:dialog header="Periodos de Actualización" widgetVar="dlgPeriodosActualizacion" 
+              resizable="false" modal="true" width="450" height="300" appendTo="@(body)">
+        <h:form id="frmPeriodoActualizacion">
+            <h:panelGrid id="pnlPeriodoActualizacion" columns="1">
+                <p>Se presenta el listado de periodos en el cual el registro de unidad seleccionado se ha actualizado mediante diferentes mecanismos.</p>
+
+                <p:selectManyMenu id="lstPeriodosActualizacion" style="width: 400px;" converter="identificacionConverter"
+                                  value="#{MbComparativoInformacionUnidad.listaPeriodosActualizacionSeleccionados}"
+                                  var="periodo" filter="false" filterMatchMode="contains" showCheckbox="true">
+                    <f:attribute name="listaItem" value="#{MbComparativoInformacionUnidad.listaPeriodosActualizacion}" />
+                    <p:ajax listener="#{MbComparativoInformacionUnidad.seleccionPeriodoActualizacion}" />
+                    <f:selectItems value="#{MbComparativoInformacionUnidad.listaPeriodosActualizacion}" var="item" itemLabel="#{item.origenActualizacion}" itemValue="#{item}" />
+                    <p:column>
+                        <h:outputText value="#{periodo.id.fecha}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{periodo.origenActualizacion}" />
+                    </p:column>
+                </p:selectManyMenu>
+                <p:commandButton value="Aceptar" actionListener="#{MbComparativoInformacionUnidad.lanzarProcesoComparacion}" onchange="submit()"
+                                 onsuccess="PF('dlgPeriodosActualizacion').hide()" update="forComparativoInformacionUnidad:pnlPrincipalComparacion"/>
+            </h:panelGrid>
+        </h:form>
+    </p:dialog>
+    <script type="text/javascript">
+
+    </script>
+</ui:composition>

@@ -32,4 +32,6 @@ public interface BodegaRelacionFacadeLocal {
     BodegaRelacion obtenerRelacionGrupoEmpresaById(Long id);
 
     Map<String, String> obtenerMapRelacionGrupoEmpresaById(Long id);
+
+    BodegaRelacion obtenerRegistroByLlaveCompuesta(String llave);
 }
