@@ -7,13 +7,16 @@
 
     <p:panel>
         <p:tooltip />
-
+            <!--
+            Esta sección de código onblur="value = value.toUpperCase().trim()" añadida a los componentes inputText, 
+            permite capturar el texto y transformarlo automaticamente en MAYUSCULA sostenida.
+            -->
         <h:panelGrid columns="3" columnClasses="label, value" >
 
             <p:outputLabel for="txtNombreEstablecimiento" value="Nombre registrado:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreEstablecimiento" label="Nombre registrado" required="true" maxlength="299"
                          value="#{MbFormEstablecimiento.identificacionSeleccionada.nombreRegistrado}" styleClass="valorEtiquetaFormulario" 
-                         onblur="value = value.toUpperCase().trim()" requiredMessage="El nombre registrado es requerido." />
+                          requiredMessage="El nombre registrado es requerido." />
             <p:message for="txtNombreEstablecimiento" />
 
             <p:outputLabel for="txtMatriculaMercantil" value="Martícula mercantil del establecimiento:" styleClass="etiquetaFormulario"/>
@@ -57,7 +60,7 @@
             <p:outputLabel for="txtDireccion" value="Dirección del establecimiento:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtDireccion" label="Dirección del establecimiento" required="true" maxlength="299"
                          value="#{MbFormEstablecimiento.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario"
-                         onblur="value = value.toUpperCase().trim()" requiredMessage="La dirección es requerida."/>
+                          requiredMessage="La dirección es requerida."/>
             <p:message for="txtDireccion" />
 
             <p:outputLabel for="txtIndicativoTelefono" value="Indicativo" styleClass="etiquetaFormulario"/>
@@ -91,7 +94,7 @@
 
             <p:outputLabel value="Otras actividades:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtOtrasActividades" label="Otras actividades" required="false" maxlength="39" 
-                         value="#{MbFormEstablecimiento.identificacionSeleccionada.otrasActividadesEst}" styleClass="valorEtiquetaFormulario" 
+                         value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadSecundaria}" styleClass="valorEtiquetaFormulario" 
                          validatorMessage="Caracteres numericos [0-9] y la [,] para separara cada actividad.">
                 <f:validateRegex pattern="(^[0-9,]+$)?" />
             </p:inputText>

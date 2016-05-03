@@ -69,7 +69,7 @@ public class Login implements Serializable {
 
     /**
      * Metodo que permite iniciar una sesion para el usuario en la aplicacion.
-     * 
+     *
      */
     //public void login(ActionEvent event) {
     public void login() {
@@ -81,16 +81,12 @@ public class Login implements Serializable {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage message = null;
 
-        //setUsuarioLogueado(geteJBServicioUsuario().buscarUsuarioByNicknamePassword(username, password));
-        Usuario usuarioResultado = geteJBServicioUsuario().buscarUsuarioByNickname(username);
-
         String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
         ClaseDESBase64 obj = new ClaseDESBase64(key);
-        String contrasenDesencriptada = obj.desencriptar(usuarioResultado.getPassword());
+        String contrasenaEncriptada = obj.encriptar(getPassword());
 
-        if (contrasenDesencriptada != null && contrasenDesencriptada.equals(password)) {
-            setUsuarioLogueado(usuarioResultado);
-        }
+        setUsuarioLogueado(geteJBServicioUsuario().buscarUsuarioByNicknamePassword(getUsername(), contrasenaEncriptada));
+
         if (getUsuarioLogueado() != null) {
             if (getUsuarioLogueado().getEstado().equals("ACTIVO")) {
                 if (getUsuarioLogueado().getPerfil() == null) {

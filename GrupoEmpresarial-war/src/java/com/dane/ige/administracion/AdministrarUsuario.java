@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 @ManagedBean(name = "MbAdministrarUsuario")
 @ViewScoped
-public class AdministrarUsuario  implements Serializable{
+public class AdministrarUsuario implements Serializable {
 
     final static Logger LOGGER = Logger.getLogger(AdministrarUsuario.class);
 
@@ -41,6 +41,7 @@ public class AdministrarUsuario  implements Serializable{
 
     private List<Usuario> listaUsuarios;
     private Usuario usuarioSeleccionado;
+    private String contrasenaActualizarUsuario;
 
     public AdministrarUsuario() {
 
@@ -56,10 +57,11 @@ public class AdministrarUsuario  implements Serializable{
      * funcionamiento de los metos de crear y actualiar.
      */
     private void inicializarVariables() {
-        setListaUsuarios(geteJBServicioUsuario().findAll());
+        setListaUsuarios(geteJBServicioUsuario().listarTodosLosUsuariosEnOrdenNombre());
         setUsuarioSeleccionado(new Usuario(null, null, null, null));
         getServicioPerfil().setPerfilSeleccionado(null);
         setEsNuevoUsuario(true);
+        setContrasenaActualizarUsuario(null);
     }
 
     /**
@@ -108,10 +110,12 @@ public class AdministrarUsuario  implements Serializable{
                 getUsuarioSeleccionado().setFechaFinActividad(null);
             }
 
-            String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
-            ClaseDESBase64 obj = new ClaseDESBase64(key);
-            String contrasenDesencriptada = obj.encriptar(getUsuarioSeleccionado().getPassword());
-            getUsuarioSeleccionado().setPassword(contrasenDesencriptada);
+            if (!getContrasenaActualizarUsuario().equals(getUsuarioSeleccionado().getPassword())) {
+                String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
+                ClaseDESBase64 obj = new ClaseDESBase64(key);
+                String contrasenEncriptada = obj.encriptar(getContrasenaActualizarUsuario());
+                getUsuarioSeleccionado().setPassword(contrasenEncriptada);
+            }
 
             geteJBServicioUsuario().edit(getUsuarioSeleccionado());
 
@@ -165,12 +169,12 @@ public class AdministrarUsuario  implements Serializable{
      * tiene el usuario
      */
     public void seleccionarUsuario() {
-
         if (getUsuarioSeleccionado().getPerfil() != null) {
             getServicioPerfil().setPerfilSeleccionado(getServicioPerfil().getPerfilById(getUsuarioSeleccionado().getPerfil().getId()));
         } else {
             getServicioPerfil().setPerfilSeleccionado(null);
         }
+        setContrasenaActualizarUsuario(getUsuarioSeleccionado().getPassword());
         //getUsuarioSeleccionado().getId();
         //LOGGER.info("Usuario seleccionado: "+getUsuarioSeleccionado().getId());
     }
@@ -223,6 +227,14 @@ public class AdministrarUsuario  implements Serializable{
 
     public void setServicioPerfil(AdministrarPerfil servicioPerfil) {
         this.servicioPerfil = servicioPerfil;
+    }
+
+    public String getContrasenaActualizarUsuario() {
+        return contrasenaActualizarUsuario;
+    }
+
+    public void setContrasenaActualizarUsuario(String contrasenaActualizarUsuario) {
+        this.contrasenaActualizarUsuario = contrasenaActualizarUsuario;
     }
 
 }

@@ -13,6 +13,11 @@
 
     <!--p:panel-->
     <p:tooltip />
+
+    <p:dialog modal="true" widgetVar="statusDialog" header="Estado" draggable="false" closable="false" resizable="false" appendTo="@(body)">
+        <p:graphicImage name="imagen/ajax-donwload.gif" />
+    </p:dialog>
+
     <h:form id="forComparativoInformacionUnidad" style="width: 100%;">
 
         <!--div class="ui-grid ui-grid-responsive">
@@ -55,10 +60,10 @@
                 <p:selectOneListbox id="lstBoxGrupo" style="width: 300px;" filter="true" filterMatchMode="contains"
                                     value="#{MbComparativoInformacionUnidad.idIdentificacionGrupoSeleccionada}">
                     <p:ajax event="change" listener="#{MbComparativoInformacionUnidad.mySelectionMethodListenerGrupo}" update="lstBoxUnidadLegal"/>
-                    <f:selectItems value="#{MbInformeGrupoEmpresarial.listaIdentificacion}" var="grupo" itemLabel="#{grupo.nombreRegistrado}" itemValue="#{grupo.id.id}"/>
+                    <f:selectItems value="#{MbInformeGrupoEmpresarial.listaIdentificacion}" var="grupo" itemLabel="#{grupo.nombreComercial}" itemValue="#{grupo.id.id}"/>
                 </p:selectOneListbox>
                 <p:commandButton value="Comparar" actionListener="#{MbComparativoInformacionUnidad.consultarPeriodosActualizacionGrupo}" 
-                                 onclick="PF('dlgPeriodosActualizacion').show()" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
+                                 onclick="PF('dlgPeriodosActualizacion').show();" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
             </h:panelGrid>
             <h:panelGrid  columns="1" >
                 <h3>Unidad Legal:</h3>
@@ -68,7 +73,7 @@
                     <f:selectItems value="#{MbComparativoInformacionUnidad.listaIdentificacionUnidadLegal}" var="unidadLegal" itemLabel="#{unidadLegal.nombreRegistrado}" itemValue="#{unidadLegal.id.id}"/>
                 </p:selectOneListbox>
                 <p:commandButton value="Comparar" actionListener="#{MbComparativoInformacionUnidad.consultarPeriodosActualizacionUnidadLegal()}" 
-                                 onclick="PF('dlgPeriodosActualizacion').show()" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
+                                 onclick="PF('dlgPeriodosActualizacion').show();" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
             </h:panelGrid>
             <h:panelGrid  columns="1" >
                 <h3>Establecimiento:</h3>
@@ -78,13 +83,13 @@
                     <f:selectItems value="#{MbComparativoInformacionUnidad.listaIdentificacionEstablecimiento}" var="establecimiento" itemLabel="#{establecimiento.nombreRegistrado}" itemValue="#{establecimiento.id.id}"/>
                 </p:selectOneListbox>
                 <p:commandButton value="Comparar" actionListener="#{MbComparativoInformacionUnidad.consultarPeriodosActualizacionEstablecimiento()}"
-                                 onclick="PF('dlgPeriodosActualizacion').show()" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
+                                 onclick="PF('dlgPeriodosActualizacion').show();" update="frmPeriodoActualizacion:pnlPeriodoActualizacion"/>
             </h:panelGrid>
         </h:panelGrid>
         <br></br>
         <br></br>
         <p:outputPanel id="pnlPrincipalComparacion" >
-            <div style="width: 100%; display: -moz-grid-group;">
+            <div style="width: 100%; display: -moz-grid-group; display: -webkit-box;">
                 <p:panelGrid  columns="1" style="margin-bottom: 18px;">
                     <p:outputLabel value="&nbsp;" />
                     <p:outputLabel value="ID" style="font-weight: bold;"/>
@@ -130,7 +135,7 @@
                     <p:outputLabel value="NÚMERO DE HOMBRES OCUPADOS" style="font-weight: bold;"/>
                     <p:outputLabel value="NÚMERO DE MUJERES OCUPADAS" style="font-weight: bold;"/>
                 </p:panelGrid>
-                <div style="width: 650px; display: -moz-grid-group; overflow: auto;">
+                <div style="width: 650px; display: -moz-grid-group; display: -webkit-box; overflow: auto;">
                     <ui:repeat value="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar}" var="grupo" >
                         <p:panelGrid  columns="1">
                             <p:outputLabel value="&nbsp;#{grupo.identificacion.origenActualizacion.toUpperCase()}" style="font-weight: bold;"/>
@@ -140,7 +145,7 @@
                             <p:outputLabel value="&nbsp;#{grupo.identificacion.nombreRegistrado}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.nombreRegistrado==grupo.identificacion.nombreRegistrado ? '':'background-color: rgb(245, 240, 208);'}"/>
                             <p:outputLabel value="&nbsp;#{grupo.identificacion.representanteLegal}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].identificacion.representanteLegal==grupo.identificacion.representanteLegal ? '':'background-color: rgb(245, 240, 208);'}"/>
                             <p:outputLabel value="&nbsp;#{grupo.relacion.paisControlante}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.paisControlante==grupo.relacion.paisControlante ? '':'background-color: rgb(245, 240, 208);'}"/>
-                            <p:outputLabel value="&nbsp;#{grupo.relacion.tipoCongromelado}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.tipoCongromelado==grupo.relacion.tipoCongromelado ? '':'background-color: rgb(245, 240, 208);'}"/>
+                            <p:outputLabel value="&nbsp;#{grupo.relacion.tipoConglomerado}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.tipoConglomerado==grupo.relacion.tipoConglomerado ? '':'background-color: rgb(245, 240, 208);'}"/>
                             <p:outputLabel value="&nbsp;#{grupo.relacion.situacionControl}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.situacionControl==grupo.relacion.situacionControl ? '':'background-color: rgb(245, 240, 208);'}"/>
                             <p:outputLabel value="&nbsp;#{grupo.relacion.tipoControl}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.tipoControl==grupo.relacion.tipoControl ? '':'background-color: rgb(245, 240, 208);'}"/>
                             <p:outputLabel value="&nbsp;#{grupo.relacion.tipoEmpresaControlante}" style="#{MbComparativoInformacionUnidad.listaGrupoEmpresaComparar[0].relacion.tipoEmpresaControlante==grupo.relacion.tipoEmpresaControlante ? '':'background-color: rgb(245, 240, 208);'}"/>
@@ -209,6 +214,12 @@
         </h:form>
     </p:dialog>
     <script type="text/javascript">
+        function start() {
+            PF('statusDialog').show();
+        }
 
+        function stop() {
+            PF('statusDialog').hide();
+        }
     </script>
-</ui:composition>
+</ui:composition> 

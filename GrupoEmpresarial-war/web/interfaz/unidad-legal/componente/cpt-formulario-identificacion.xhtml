@@ -7,7 +7,10 @@
 
     <p:panel>
         <p:tooltip />
-
+            <!--
+            Esta sección de código onblur="value = value.toUpperCase().trim()" añadida a los componentes inputText, 
+            permite capturar el texto y transformarlo automaticamente en MAYUSCULA sostenida.
+            -->
         <h:panelGrid id="pnFormIdentificacionUnidadLelgal" columns="3">
 
             <!--p:outputLabel  value="Tipo de unidad: *" styleClass="etiquetaFormulario" />
@@ -23,7 +26,7 @@
             <p:outputLabel for="txtNombreRegistrado" value="Nombre registrado:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreRegistrado" label="Nombre registrado" required="true" maxlength="299"
                          value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreRegistrado}" styleClass="valorEtiquetaFormulario" 
-                         requiredMessage="El nombre registrado es requerido." onblur="value = value.toUpperCase().trim()"/>
+                         requiredMessage="El nombre registrado es requerido." />
             <p:message for="txtNombreRegistrado" />
 
             <p:outputLabel for="cboPais" value="País:" styleClass="etiquetaFormulario" />
@@ -122,7 +125,7 @@
 
             <p:outputLabel for="txtDireccion" value="Dirección:" styleClass="etiquetaFormulario" />
             <p:inputText id="txtDireccion" label="Dirección" maxlength="299" styleClass="valorEtiquetaFormulario" 
-                         value="#{MbFormUnidadLegal.identificacionSeleccionada.direccion}" onblur="value = value.toUpperCase().trim()" 
+                         value="#{MbFormUnidadLegal.identificacionSeleccionada.direccion}"  
                          required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
                          requiredMessage="La dirección es requerido." />
             <p:message for="txtDireccion"/>
@@ -171,14 +174,14 @@
             <p:outputLabel for="txtNombreContacto" value="Nombre de contacto:" styleClass="etiquetaFormulario" />
             <p:inputText id="txtNombreContacto" label="Nombre de contacto" required="true" maxlength="99"
                          value="#{MbFormUnidadLegal.identificacionSeleccionada.nombreContacto}" 
-                         onblur="value = value.toUpperCase().trim()" styleClass="valorEtiquetaFormulario"
+                          styleClass="valorEtiquetaFormulario"
                          requiredMessage="El nombre de contacto es requerido."/>
             <p:message for="txtNombreContacto"/>
 
             <p:outputLabel for="txtCargoContacto" value="Cargo:" styleClass="etiquetaFormulario" />
             <p:inputText id="txtCargoContacto" label="Cargo" required="true" maxlength="79" 
                          value="#{MbFormUnidadLegal.identificacionSeleccionada.cargoContacto}" 
-                         onblur="value = value.toUpperCase().trim()" styleClass="valorEtiquetaFormulario" 
+                          styleClass="valorEtiquetaFormulario" 
                          requiredMessage="El cargo es requerido." />
             <p:message for="txtCargoContacto"/>
 

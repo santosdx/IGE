@@ -53,8 +53,7 @@
 
             <p:outputLabel for="txtNombreControlante" value="Nombre de la controlante:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreControlante" label="Nombre de la controlante" required="true" maxlength="900"
-                         value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}" 
-                         onblur="value = value.toUpperCase()" styleClass="valorEtiquetaFormulario"
+                         value="#{MbFormUnidadLegal.relacionSeleccionada.nombreControlante}"  styleClass="valorEtiquetaFormulario"
                          requiredMessage="El nombre es requerido."/>
             <h:panelGrid columns="2" cellpadding="0">
                 <p:message for="txtNombreControlante" />

@@ -79,8 +79,8 @@ public class BodegaIdentificacion implements Serializable {
     private String unidadAuxiliarUl;
     @Column(name = "actividad_auxiliar_est")
     private String actividadAuxiliarEst;
-    @Column(name = "otras_actividades_est")
-    private String otrasActividadesEst;
+//    @Column(name = "otras_actividades_est")
+//    private String otrasActividadesEst;
     @Column(name = "estado_est")
     private String estadoEst;
     @Column(name = "tipo_organizacion_ul")
@@ -327,6 +327,7 @@ public class BodegaIdentificacion implements Serializable {
         this.actividadAuxiliarEst = actividadAuxiliarEst;
     }
 
+/* SE ELIMINARA EL CAMPO "OTRAS_ACTIVIDADES_EST"
     public String getOtrasActividadesEst() {
         return otrasActividadesEst;
     }
@@ -334,7 +335,7 @@ public class BodegaIdentificacion implements Serializable {
     public void setOtrasActividadesEst(String otrasActividadesEst) {
         this.otrasActividadesEst = otrasActividadesEst;
     }
-
+*/
     public String getEstadoEst() {
         return estadoEst;
     }
@@ -543,7 +544,7 @@ public class BodegaIdentificacion implements Serializable {
         resultado.put("ACTIVIDAD_SECUNDARIA", Texto.blankText(actividadSecundaria + ""));
         resultado.put("UNIDAD_AUXILIAR_UL", Texto.blankText(unidadAuxiliarUl + ""));
         resultado.put("ACTIVIDAD_AUXILIAR_EST", Texto.blankText(actividadAuxiliarEst + ""));
-        resultado.put("OTRAS_ACTIVIDADES_EST", Texto.blankText(otrasActividadesEst + ""));
+//        resultado.put("OTRAS_ACTIVIDADES_EST", Texto.blankText(otrasActividadesEst + ""));
         resultado.put("ESTADO_EST", Texto.blankText(estadoEst + ""));
         resultado.put("TIPO_ORGANIZACION_UL", Texto.blankText(tipoOrganizacionUl + ""));
         resultado.put("SECTOR_INSTITUCIONAL_UL", Texto.blankText(sectorInstitucionalUl + ""));
@@ -594,7 +595,7 @@ public class BodegaIdentificacion implements Serializable {
          + "~actividad_secundaria^" + actividadSecundaria
          + "~unidad_auxiliar_ul^" + unidadAuxiliarUl
          + "~actividad_auxiliar_est^" + actividadAuxiliarEst
-         + "~otras_actividades_est^" + otrasActividadesEst
+//         + "~otras_actividades_est^" + otrasActividadesEst
          + "~estado_est^" + estadoEst
          + "~tipo_organizacion_ul^" + tipoOrganizacionUl
          + "~sector_institucional_ul^" + sectorInstitucionalUl

@@ -37,6 +37,31 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     }
 
     /**
+     * Método que permite buscar y obtener el listado de todos los usuarios en
+     * orden por el nombre.
+     *
+     * @return List<Usuario>
+     */
+    @Override
+    public List<Usuario> listarTodosLosUsuariosEnOrdenNombre() {
+        List<Usuario> resultado = null;
+        try {
+            Query query = em.createNamedQuery(Usuario.FINE_ALL_ORDER);
+
+            List<Usuario> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }
+        } catch (Exception e) {
+            LOGGER.warn(e.getMessage());
+        }
+        return resultado;
+    }
+
+    /**
      * Método que permite crear un registro en la entidad Usuario y retorna el
      * id o llave con el cual se ingreso a la base de datos ese registro. En
      * caso de error, u otra inconsistencia, retornara -1.

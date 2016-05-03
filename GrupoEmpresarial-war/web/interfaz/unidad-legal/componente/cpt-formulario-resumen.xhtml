@@ -206,7 +206,7 @@
                 </p:outputLabel>
 
                 <p:outputLabel value="Gastos operacionales: " />
-                <p:outputLabel value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionales}" style="display: block; text-align: right; width: 180px;">
+                <p:outputLabel value="#{(MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesAdmon + MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesVenta)}" style="display: block; text-align: right; width: 180px;">
                     <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
                 </p:outputLabel>
 

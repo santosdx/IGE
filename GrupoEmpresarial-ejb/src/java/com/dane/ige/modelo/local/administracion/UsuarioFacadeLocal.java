@@ -29,6 +29,8 @@ public interface UsuarioFacadeLocal {
 
     int count();
 
+    List<Usuario> listarTodosLosUsuariosEnOrdenNombre();
+
     Usuario buscarUsuarioByNickname(String nickname);
 
     Usuario buscarUsuarioByNicknamePassword(String nickname, String password);

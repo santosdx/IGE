@@ -31,8 +31,8 @@ public class BodegaRelacion implements Serializable {
 
     @EmbeddedId
     private PkRelacion id;
-    @Column(name = "tipo_congromelado")
-    private String tipoCongromelado;
+    @Column(name = "tipo_conglomerado")
+    private String tipoConglomerado;
     @Column(name = "situacion_control")
     private String situacionControl;
     @Column(name = "tipo_control")
@@ -65,12 +65,12 @@ public class BodegaRelacion implements Serializable {
         this.id = id;
     }
 
-    public String getTipoCongromelado() {
-        return tipoCongromelado;
+    public String getTipoConglomerado() {
+        return tipoConglomerado;
     }
 
-    public void setTipoCongromelado(String tipoCongromelado) {
-        this.tipoCongromelado = tipoCongromelado;
+    public void setTipoConglomerado(String tipoConglomerado) {
+        this.tipoConglomerado = tipoConglomerado;
     }
 
     public String getSituacionControl() {
@@ -193,7 +193,7 @@ public class BodegaRelacion implements Serializable {
         Map<String, String> resultado = new HashMap<String, String>();
         resultado.put("R_ID_ORGANIZACION", id.getId() + "");
         resultado.put("R_FECHA_ACTUALIZA", id.getFecha() + "");
-        resultado.put("TIPO_CONGROMELADO", Texto.blankText(tipoCongromelado + ""));
+        resultado.put("TIPO_CONGLOMERADO", Texto.blankText(tipoConglomerado + ""));
         resultado.put("SITUACION_CONTROL", Texto.blankText(situacionControl + ""));
         resultado.put("TIPO_CONTROL", Texto.blankText(tipoControl + ""));
         resultado.put("TIPO_EMPRESA_CONTROLANTE", Texto.blankText(tipoEmpresaControlante + ""));

@@ -7,13 +7,13 @@
 
     <p:panel>
         <p:tooltip />
+
         <h:form id="forInformeEjecutivoGrupoEmpresarial" style="width: 100%;">
 
             <p:outputLabel value="Grupo Empresarial para la generación del informe ejecutivo:"/>
             <br></br>
-            <p:selectOneMenu id="cboGrupo" value="#{MbInformeGrupoEmpresarial.idIdentificacionSeleccionada}" 
-                             filter="true" filterMatchMode="contains" >
-                <p:ajax event="change" listener="#{MbInformeGrupoEmpresarial.mySelectionMethodListener}" update="pnlFormularioInformeEjecutivoGrupo"/>
+            <p:selectOneMenu id="cboGrupo" value="#{MbInformeGrupoEmpresarial.idIdentificacionSeleccionada}"  filter="true" filterMatchMode="contains" >
+                <p:ajax event="change" listener="#{MbInformeGrupoEmpresarial.mySelectionMethodListener}" update="pnlFormularioInformeEjecutivoGrupo" />
                 <f:selectItem itemLabel="Seleccione un ítem..." itemValue="" />
                 <f:selectItems value="#{MbInformeGrupoEmpresarial.listaIdentificacion}" var="grupo" itemLabel="#{grupo.nombreRegistrado}" itemValue="#{grupo.id.id}"/>
             </p:selectOneMenu>
@@ -190,15 +190,22 @@
                     <p:commandButton id="btnDescargarReporteGrupoEmpresa" value="Descargar" ajax="false"  style="float: right;"
                                      actionListener="#{MbInformeGrupoEmpresarial.generarInformeEjecutivoGrupoEmpresarialPdf}"
                                      onclick="exportChartDepartamentoToImage();
-                                                         PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                        <p:fileDownload value="#{MbInformeGrupoEmpresarial.contenidoPDF}" />
+                                             PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                        <p:fileDownload id="fDonwDescargarReporteGrupoEmpresa" value="#{MbInformeGrupoEmpresarial.contenidoPDF}" />
                     </p:commandButton>
                 </h:panelGrid>
             </center>
 
-
         </h:form>
     </p:panel>
+
+    <p:blockUI block="contenedorCentral" widgetVar="blockUIlistaGrupos" trigger="forInformeEjecutivoGrupoEmpresarial:cboGrupo">
+        Consultando datos...<br />
+        <p:graphicImage name="imagen/ajax-loading.gif"/>
+    </p:blockUI>
+    <p:dialog modal="true" widgetVar="statusDialog" header="Generando informe..." draggable="false" closable="false" resizable="false" appendTo="@(body)">
+        <p:graphicImage name="imagen/ajax-loading.gif" />
+    </p:dialog>
 
     <script type="text/javascript">
         function handleTextChangeEdtResenaConglomerado()
@@ -219,8 +226,15 @@
         }
         function exportChartDepartamentoToImage() {
             // exportAsImage() will return a base64 png encoded string
-            img = PF('wVchrDepartamento').exportAsImage()
+            img = PF('wVchrDepartamento').exportAsImage();
             document.getElementById('forInformeEjecutivoGrupoEmpresarial:ipHdb64CartDepartamento').value = img.src;
+        }
+        function start() {
+            PF('statusDialog').show();
+        }
+
+        function stop() {
+            PF('statusDialog').hide();
         }
     </script>
 </ui:composition>

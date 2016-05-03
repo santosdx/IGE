@@ -10,22 +10,26 @@
 
         <h:panelGrid id="pnFormIdentificacionGrupoEmpresa" columns="3">
 
+            <!--
+            Esta sección de código onblur="value = value.toUpperCase().trim()" añadida a los componentes inputText, 
+            permite capturar el texto y transformarlo automaticamente en MAYUSCULA sostenida.
+            -->
             <p:outputLabel for="txtNombreComercial" value="Nombre Comercial:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreComercial" label = "Nombre Comercial" required="true" maxlength="299"
                          value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreComercial}" styleClass="valorEtiquetaFormulario" 
-                         onblur="value = value.toUpperCase().trim()" requiredMessage="El nombre comercial es requerido."/>
+                          requiredMessage="El nombre comercial es requerido."/>
             <p:message for="txtNombreComercial" />
 
             <p:outputLabel for="txtNombreRegistrado" value="Nombre registrado:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreRegistrado" label ="Nombre registrado" required="false" maxlength="299"
                          value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreRegistrado}" styleClass="valorEtiquetaFormulario" 
-                         onblur="value = value.toUpperCase().trim()" requiredMessage="El nombre registrado es requerido."/>
+                          requiredMessage="El nombre registrado es requerido."/>
             <p:message for="txtNombreRegistrado"/>
 
             <p:outputLabel for="txtPresidente" value="Presidente:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtPresidente" label ="Presidente" required="true" maxlength="99" 
                          value="#{MbFormGrupoEmpresa.identificacionSeleccionada.representanteLegal}" styleClass="valorEtiquetaFormulario" 
-                         onblur="value = value.toUpperCase().trim()" requiredMessage="El presidente es requerido."/>
+                          requiredMessage="El presidente es requerido."/>
             <p:message for="txtPresidente" />
 
             <p:outputLabel for="cboPais" value="País de la controlante:" styleClass="etiquetaFormulario"/>
@@ -39,7 +43,7 @@
 
             <p:outputLabel for="cboTipoConglomerado" value="Tipo de conglomerado:" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboTipoConglomerado" required="true" requiredMessage="El tipo conglomerado es requerido."
-                             value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoCongromelado}" style="width:430px">
+                             value="#{MbFormGrupoEmpresa.relacionSeleccionada.tipoConglomerado}" style="width:430px">
                 <f:selectItem itemLabel="Conglomerado..." itemValue="" />
                 <f:selectItems value="#{MbListaDesplegable.listaConglomerados}" var="conglomerado" 
                                itemLabel="#{conglomerado.tipo}" itemValue="#{conglomerado.tipo}"/>

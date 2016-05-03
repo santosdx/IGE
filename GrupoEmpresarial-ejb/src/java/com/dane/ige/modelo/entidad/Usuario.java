@@ -34,11 +34,12 @@ import org.apache.commons.lang3.text.WordUtils;
     @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
     @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
     @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE UPPER(u.correo) = :correo"),
-    @NamedQuery(name = "Usuario.findByNicknamePassword", query = "SELECT u FROM Usuario u WHERE u.nickname = :nickname AND u.password = :password")})
+    @NamedQuery(name = "Usuario.findByNicknamePassword", query = "SELECT u FROM Usuario u WHERE LOWER(u.nickname) = LOWER(:nickname) AND u.password = :password")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final String FINE_ALL_ORDER = "Usuario.findAll";
     public static final String FINE_BYE_NICKNAME = "Usuario.findByNickname";
     public static final String FINE_BYE_NICKNAME_PASSWORD = "Usuario.findByNicknamePassword";
     public static final String FINE_BYE_CORREO = "Usuario.findByCorreo";

@@ -18,18 +18,6 @@
             <div class="ui-grid ui-grid-responsive">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-3">
-                        <p:outputLabel for="txtEstado" value="Estado:" styleClass="etiquetaFormularioAdministracion"/>
-                    </div>
-                    <div class="ui-grid-col-9">
-                        <p:selectOneMenu id="txtEstado" value="#{MbAdministrarUsuario.usuarioSeleccionado.estado}" >
-                            <f:selectItem itemLabel="Seleccione uno" itemValue="" />
-                            <f:selectItem itemLabel="Activo" itemValue="ACTIVO" />
-                            <f:selectItem itemLabel="Inactivo" itemValue="INACTIVO" />
-                        </p:selectOneMenu>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-3">
                         <p:outputLabel for="txtNickname" value="Usuario:" styleClass="etiquetaFormularioAdministracion"/>
                     </div>
                     <div class="ui-grid-col-9">
@@ -41,7 +29,7 @@
                         <p:outputLabel for="txtPassword" value="Contraseña:" styleClass="etiquetaFormularioAdministracion"/>
                     </div>
                     <div class="ui-grid-col-9">
-                        <p:password id="txtPassword" value="#{MbAdministrarUsuario.usuarioSeleccionado.password}"  redisplay="true"
+                        <p:password id="txtPassword" value="#{MbAdministrarUsuario.contrasenaActualizarUsuario}"  redisplay="true"
                                     goodLabel="Media!" strongLabel="Fuerte!" weakLabel="Debil!" requiredMessage="Contraseña requerida." promptLabel="Porfavor, ingrese la contraseña."
                                     feedback="true" required="true" style="width: 90%;"/>
                     </div>
@@ -72,18 +60,6 @@
                 </div>
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-3">
-                        <p:outputLabel value="Perfil" styleClass="etiquetaFormularioAdministracion"/>
-                    </div>
-                    <div class="ui-grid-col-9">
-                        <p:selectOneMenu id="ccCboUniSelePerfilId" converter="perfilConverter"
-                                         value="#{MbAdministrarPerfil.perfilSeleccionado}" >
-                            <f:selectItem itemLabel="Seleccione un item" />
-                            <f:selectItems value="#{MbAdministrarPerfil.listaPerfiles}" var="perfil" itemLabel="#{perfil.perfil}" itemValue="#{perfil}" />
-                        </p:selectOneMenu>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-3">
                         <p:outputLabel for="txtIdGrupo" value="ID Grupo: " styleClass="etiquetaFormularioAdministracion"/>
                     </div>
                     <div class="ui-grid-col-9">
@@ -92,11 +68,35 @@
                 </div>
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-3">
+                        <p:outputLabel for="txtEstado" value="Estado:" styleClass="etiquetaFormularioAdministracion"/>
+                    </div>
+                    <div class="ui-grid-col-9">
+                        <p:selectOneMenu id="txtEstado" value="#{MbAdministrarUsuario.usuarioSeleccionado.estado}" style="width: 160px;">
+                            <f:selectItem itemLabel="Seleccione un item" itemValue="" />
+                            <f:selectItem itemLabel="Activo" itemValue="ACTIVO" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="INACTIVO" />
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                        <p:outputLabel value="Perfil" styleClass="etiquetaFormularioAdministracion"/>
+                    </div>
+                    <div class="ui-grid-col-9">
+                        <p:selectOneMenu id="ccCboUniSelePerfilId" converter="perfilConverter"  style="width: 160px;"
+                                         value="#{MbAdministrarPerfil.perfilSeleccionado}" >
+                            <f:selectItem itemLabel="Seleccione un item" />
+                            <f:selectItems value="#{MbAdministrarPerfil.listaPerfiles}" var="perfil" itemLabel="#{perfil.perfil}" itemValue="#{perfil}" />
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
                         <p:outputLabel value="Nivel Permiso" styleClass="etiquetaFormularioAdministracion"/>
                     </div>
                     <div class="ui-grid-col-9">
-                        <p:selectOneMenu id="cboNivelPermiso" value="#{MbAdministrarUsuario.usuarioSeleccionado.nivelPermiso}" >
-                            <f:selectItem itemLabel="Seleccione uno" itemValue="" />
+                        <p:selectOneMenu id="cboNivelPermiso" value="#{MbAdministrarUsuario.usuarioSeleccionado.nivelPermiso}"  style="width: 160px;">
+                            <f:selectItem itemLabel="Seleccione un item" itemValue="" />
                             <f:selectItem itemLabel="Escritura" itemValue="ESCRITURA" />
                             <f:selectItem itemLabel="Lectura" itemValue="LECTURA" />
                         </p:selectOneMenu>

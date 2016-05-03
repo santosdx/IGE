@@ -7,19 +7,22 @@
 
     <p:panel>
         <p:tooltip />
-
+            <!--
+            Esta sección de código onblur="value = value.toUpperCase().trim()" añadida a los componentes inputText, 
+            permite capturar el texto y transformarlo automaticamente en MAYUSCULA sostenida.
+            -->
         <h:panelGrid columns="3" columnClasses="label, value" >
 
             <p:outputLabel for="txtNombreContacto" value="Nombre de contacto:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreContacto" label ="Nombre de contacto" required="true" maxlength="99"
                          value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto}" styleClass="valorEtiquetaFormulario" 
-                         onblur="value = value.toUpperCase().trim()" requiredMessage="El nombre de contacto es requerido."/>
+                          requiredMessage="El nombre de contacto es requerido."/>
             <p:message for="txtNombreContacto"/>
 
             <p:outputLabel for="txtCargoContacto" value="Cargo de contacto:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtCargoContacto" required="true" label ="Cargo de contacto" maxlength="80"
                          value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto}" styleClass="valorEtiquetaFormulario"
-                         onblur="value = value.toUpperCase().trim()" requiredMessage="El cargo del contacto es requerido."/>
+                          requiredMessage="El cargo del contacto es requerido."/>
             <p:message for="txtCargoContacto"/>
 
             <p:outputLabel for="txtTelefonoContacto" value="Teléfono contacto:" styleClass="etiquetaFormulario"/>
@@ -52,13 +55,13 @@
             <p:outputLabel value="Nombre de contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText label ="Nombre de contacto 2" maxlength="99" styleClass="valorEtiquetaFormulario"
                          value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto2}" 
-                         onblur="value = value.toUpperCase().trim()"/>
+                         />
             <p:spacer/>
 
             <p:outputLabel value="Cargo de contacto 2: " styleClass="etiquetaFormulario"/>
             <p:inputText label ="Cargo de contacto 2" maxlength="79" styleClass="valorEtiquetaFormulario"
                          value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto2}" 
-                         onblur="value = value.toUpperCase().trim()"/>
+                         />
             <p:spacer/>
 
             <p:outputLabel value="Teléfono de contacto 2: " styleClass="etiquetaFormulario"/>
@@ -87,12 +90,12 @@
             <p:message for="txtCorreoContacto2"/>
 
             <p:outputLabel value="Nombre de contacto 3: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto3}" onblur="value = value.toUpperCase().trim()" 
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.nombreContacto3}"  
                          styleClass="valorEtiquetaFormulario" label ="Nombre de contacto 3" maxlength="99"/>
             <p:spacer/>
 
             <p:outputLabel value="Cargo de contacto 3: " styleClass="etiquetaFormulario"/>
-            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto3}" onblur="value = value.toUpperCase().trim()" 
+            <p:inputText value="#{MbFormGrupoEmpresa.identificacionSeleccionada.cargoContacto3}"  
                          styleClass="valorEtiquetaFormulario" label ="Cargo de contacto 3" maxlength="79"/>
             <p:spacer/>
 
