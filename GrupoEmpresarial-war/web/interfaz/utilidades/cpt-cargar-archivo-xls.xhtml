@@ -9,15 +9,20 @@
     <h:form id="frmCargarArchivoXls">
         <p:growl id="msnInforGruEmp" showDetail="true" life="8000" />
 
+        <p:dialog modal="true" widgetVar="statusDialog" header="Analizando datos..." draggable="false" closable="false" resizable="false" appendTo="@(body)">
+            <p:graphicImage name="imagen/ajax-donwload.gif" />
+        </p:dialog>
+
         <p:fileUpload id="btnCargarXlsGrupoEmpresa" fileUploadListener="#{MbLeerExcel.subirArchivoGrupoEmpresarial}" style="width: 50%"
                       multiple="false" mode="advanced" dragDropSupport="false" label="Seleccionar" cancelLabel="Cancelar" uploadLabel="Subir" 
-                      invalidFileMessage="Tipo de archivo no soportado"  oncomplete="PF('dlgCargarXls').show()"
+                      invalidFileMessage="Tipo de archivo no soportado"  oncomplete="PF('dlgCargarXls').show(); PF('statusDialog').hide();" onstart="PF('statusDialog').show();"
                       update="msnInforGruEmp,dlReporteCargue" allowTypes="/(\.|\/)(xls)$/" >
             <f:attribute name="formulario" value="#{formulario}" />
         </p:fileUpload>
 
         <p:dialog id="dlReporteCargue" header="Reporte Cargar Información" widgetVar="dlgCargarXls"  appendTo="@(body)"
-                  resizable="false" modal="false" width="800" height="550" >
+                  resizable="false" modal="true" width="800" height="550" dynamic="true">
+
             <p:outputPanel  rendered="#{MbLeerExcel.archivoValidoPorIdentidad}">
                 <p:outputPanel  rendered="#{!MbLeerExcel.sePuedeInsertarDatos}">
                     <p:dataTable id="dtInconsistenciasXls" var="fila" value="#{MbLeerExcel.listaInconsistencias}"
@@ -72,7 +77,7 @@
                     <p:outputLabel value="Se ha realizado la validación de completitud en las variables requeridas de los registros del archivo. Como resultado, la información se encuentra lista para ser actualizada."/>
                     <p:commandButton value="Actualizar Datos" action="#{MbLeerExcel.insertarRegistrosBodega}" oncomplete="PF('dlgCargarXls').hide();"
                                      update="#{frmPadre}:frmCargarArchivoXls:msnInforGruEmp" process="@this" style="float: right; top: 3px;">
-                        <p:confirm header="Confirmación" icon="ui-icon-alert" message="Esta a punto de actualizar la información, desea continuar?"/>
+                        <p:confirm header="Confirmación" icon="ui-icon-alert" message="Está a punto de actualizar la información, desea continuar?"/>
                     </p:commandButton>
 
                     <p:confirmDialog global="true" showEffect="fade" >
@@ -106,5 +111,13 @@
         </p:blockUI>
 
     </h:form>
+    <script type="text/javascript">
+        function start() {
+            PF('statusDialog').show();
+        }
 
+        function stop() {
+            PF('statusDialog').hide();
+        }
+    </script>
 </ui:composition>

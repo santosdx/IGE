@@ -77,7 +77,7 @@ public class Fecha {
     public static String formatFechaDateToString(Date fecha) {
         String resultado = null;
         if (fecha != null) {
-            SimpleDateFormat sdfFecha = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdfFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
             resultado = sdfFecha.format(fecha);
         }
         return resultado;

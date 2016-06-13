@@ -158,6 +158,9 @@ public class Filtro implements Filter {
         if (urlStr.indexOf("/GrupoEmpresarial/index.xhtml") != -1) {
             return true;
         }
+        if (urlStr.indexOf("/GrupoEmpresarial/inicio.xhtml") != -1) {
+            return true;
+        }
         if (urlStr.indexOf("/GrupoEmpresarial/login.xhtml") != -1) {
             return true;
         }
@@ -182,6 +185,7 @@ public class Filtro implements Filter {
         if (urlStr.indexOf("/GrupoEmpresarial/pagina-error/") != -1) {
             return true;
         }
+
         return false;
     }
 }

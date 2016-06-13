@@ -5,7 +5,7 @@
                  xmlns:f="http://java.sun.com/jsf/core"
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:p="http://primefaces.org/ui"
-                 template="/plantilla/plantilla.xhtml">
+                 template="#{MbLogin.versionPlantilla == 'V1' ? '/plantilla/plantilla.xhtml': '/plantilla/plantilla_sin_menu.xhtml'}">
 
     <ui:define name="content">
 

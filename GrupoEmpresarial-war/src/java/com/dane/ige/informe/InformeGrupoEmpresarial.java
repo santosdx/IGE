@@ -1,18 +1,27 @@
 package com.dane.ige.informe;
 
+import com.dane.ige.dto.GrupoEmpresa;
 import com.dane.ige.modelo.connection.ConexionBd;
 import com.dane.ige.modelo.entidad.BodegaIdentificacion;
+import com.dane.ige.modelo.entidad.BodegaNovedad;
+import com.dane.ige.modelo.entidad.BodegaRelacion;
+import com.dane.ige.modelo.entidad.BodegaTamano;
 import com.dane.ige.modelo.entidad.ObjetoIndicador;
 import com.dane.ige.modelo.local.administracion.BodegaIdentificacionFacadeLocal;
+import com.dane.ige.modelo.local.administracion.BodegaNovedadFacadeLocal;
+import com.dane.ige.modelo.local.administracion.BodegaRelacionFacadeLocal;
+import com.dane.ige.modelo.local.administracion.BodegaTamanoFacadeLocal;
 import com.dane.ige.modelo.servicios.administracion.BodegaIndicadorGrupo;
 import com.dane.ige.reporte.ReporteGrupoEmpresa;
 import com.dane.ige.seguridad.Login;
 import com.dane.ige.utilidad.ArchivoProperties;
+import com.dane.ige.utilidad.Fecha;
 import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,13 +66,18 @@ public class InformeGrupoEmpresarial {
     @EJB
     private BodegaIdentificacionFacadeLocal eJBServicioBodegaIdentificacion;
     @EJB
+    private BodegaRelacionFacadeLocal eJBServicioBodegaRelacion;
+    @EJB
+    private BodegaNovedadFacadeLocal eJBServicioBodegaNovedad;
+    @EJB
+    private BodegaTamanoFacadeLocal eJBServicioBodegaTamano;
+    @EJB
     private BodegaIndicadorGrupo eJBservicioBodegaIndicadorGrupo;
 
     @ManagedProperty("#{MbLogin}")
     private Login servicioLogin;
 
     private StreamedContent contenidoPDF;
-    private Long idIdentificacionSeleccionada;
     private BodegaIdentificacion identificacionSeleccionada;
     private List<BodegaIdentificacion> listaIdentificacion;
     private String resenaConglomerado;
@@ -71,6 +85,8 @@ public class InformeGrupoEmpresarial {
 
     private PieChartModel pieModeUnidadLegalDepartamento;
     private StreamedContent chartUnidadLegalDepartamento;
+
+    private GrupoEmpresa grupoSeleccionado;
 
     /**
      * Creates a new instance of InformeGrupoEmpresarial
@@ -87,25 +103,31 @@ public class InformeGrupoEmpresarial {
 
     public void mySelectionMethodListener(AjaxBehaviorEvent event) {
 
-        for (BodegaIdentificacion bodegaIdentificacion : getListaIdentificacion()) {
-            if (bodegaIdentificacion.getId().getId().compareTo(getIdIdentificacionSeleccionada()) == 0) {
-                setIdentificacionSeleccionada(bodegaIdentificacion);
-                //setChartUnidadLegalDepartamento(converterCharToImage("Unidad Legal por Departamento",createDatasetDepartamento()));
-
-                List<ObjetoIndicador> datosIndicadorUnidadLegalDepartamento;
-                setPieModeUnidadLegalDepartamento(new PieChartModel());
-                datosIndicadorUnidadLegalDepartamento = eJBservicioBodegaIndicadorGrupo.indicadorUnidadLegalPorDepartamentoDelGrpupo(getIdIdentificacionSeleccionada());
-                for (ObjetoIndicador objetoIndicador : datosIndicadorUnidadLegalDepartamento) {
-                    getPieModeUnidadLegalDepartamento().set(objetoIndicador.getItem(), objetoIndicador.getValor());
-                }
-
-                getPieModeUnidadLegalDepartamento().setTitle("Unidad Legal por Departamento");
-                getPieModeUnidadLegalDepartamento().setLegendPosition("ne");
-                getPieModeUnidadLegalDepartamento().setShowDataLabels(true);
-                getPieModeUnidadLegalDepartamento().setMouseoverHighlight(true);
-
-            }
+        //setChartUnidadLegalDepartamento(converterCharToImage("Unidad Legal por Departamento",createDatasetDepartamento()));
+        List<ObjetoIndicador> datosIndicadorUnidadLegalDepartamento;
+        setPieModeUnidadLegalDepartamento(new PieChartModel());
+        datosIndicadorUnidadLegalDepartamento = eJBservicioBodegaIndicadorGrupo.indicadorUnidadLegalPorDepartamentoDelGrpupo(getIdentificacionSeleccionada().getId().getId());
+        for (ObjetoIndicador objetoIndicador : datosIndicadorUnidadLegalDepartamento) {
+            getPieModeUnidadLegalDepartamento().set(objetoIndicador.getItem(), objetoIndicador.getValor());
         }
+
+        getPieModeUnidadLegalDepartamento().setTitle("Unidad Legal por Departamento");
+        getPieModeUnidadLegalDepartamento().setLegendPosition("ne");
+        getPieModeUnidadLegalDepartamento().setShowDataLabels(true);
+        getPieModeUnidadLegalDepartamento().setMouseoverHighlight(true);
+
+        String llaveCompuesta = "";
+        String fecha = Fecha.formatFechaDateToStringOtherFormat(getIdentificacionSeleccionada().getId().getFecha(), "dd/MM/yyyy HH:mm:ss");
+        llaveCompuesta = "'" + getIdentificacionSeleccionada().getId().getId() + fecha + "'";
+        System.out.println("Llave:" + llaveCompuesta);
+
+        BodegaIdentificacion identificacion = eJBServicioBodegaIdentificacion.obtenerRegistroByLlaveCompuesta(llaveCompuesta);
+        BodegaRelacion relacion = eJBServicioBodegaRelacion.obtenerRegistroByLlaveCompuesta(llaveCompuesta);
+        BodegaNovedad novedad = eJBServicioBodegaNovedad.obtenerRegistroByLlaveCompuesta(llaveCompuesta);
+        BodegaTamano tamano = eJBServicioBodegaTamano.obtenerRegistroByLlaveCompuesta(llaveCompuesta);
+
+        setGrupoSeleccionado(new GrupoEmpresa(identificacion, relacion, novedad, tamano));
+
     }
 
     /**
@@ -126,7 +148,7 @@ public class InformeGrupoEmpresarial {
             connection = new ConexionBd(ConexionBd.getJndi_Sid_Desarrollo());
 
             Map parameters = new HashMap();
-            parameters.put("id_grupo", getIdIdentificacionSeleccionada());
+            parameters.put("id_grupo", getIdentificacionSeleccionada().getId().getId());
             parameters.put("RESENA_CONGLOMERADO", getResenaConglomerado());
             parameters.put("chartUnidadLegalDepartamento", convertirBase64StrToRenderdImage(getBase64StrChartDepartamento()));
             parameters.put("ANALISIS1", getAnalisis1());
@@ -197,7 +219,7 @@ public class InformeGrupoEmpresarial {
     private PieDataset createDatasetDepartamento() {
         List<ObjetoIndicador> datosIndicadorUnidadLegalDepartamento;
         DefaultPieDataset dataset = new DefaultPieDataset();
-        datosIndicadorUnidadLegalDepartamento = eJBservicioBodegaIndicadorGrupo.indicadorUnidadLegalPorDepartamentoDelGrpupo(getIdIdentificacionSeleccionada());
+        datosIndicadorUnidadLegalDepartamento = eJBservicioBodegaIndicadorGrupo.indicadorUnidadLegalPorDepartamentoDelGrpupo(getIdentificacionSeleccionada().getId().getId());
         for (ObjetoIndicador objetoIndicador : datosIndicadorUnidadLegalDepartamento) {
             dataset.setValue(objetoIndicador.getItem(), objetoIndicador.getValor());
         }
@@ -228,14 +250,6 @@ public class InformeGrupoEmpresarial {
     }
 
     // Metodos Sett y Gett
-    public Long getIdIdentificacionSeleccionada() {
-        return idIdentificacionSeleccionada;
-    }
-
-    public void setIdIdentificacionSeleccionada(Long idIdentificacionSeleccionada) {
-        this.idIdentificacionSeleccionada = idIdentificacionSeleccionada;
-    }
-
     public BodegaIdentificacion getIdentificacionSeleccionada() {
         return identificacionSeleccionada;
     }
@@ -250,6 +264,14 @@ public class InformeGrupoEmpresarial {
 
     public void setListaIdentificacion(List<BodegaIdentificacion> listaIdentificacion) {
         this.listaIdentificacion = listaIdentificacion;
+    }
+
+    public GrupoEmpresa getGrupoSeleccionado() {
+        return grupoSeleccionado;
+    }
+
+    public void setGrupoSeleccionado(GrupoEmpresa grupoSeleccionado) {
+        this.grupoSeleccionado = grupoSeleccionado;
     }
 
     public String getResenaConglomerado() {

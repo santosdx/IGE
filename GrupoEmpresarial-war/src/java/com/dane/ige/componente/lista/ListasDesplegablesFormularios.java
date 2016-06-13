@@ -43,7 +43,7 @@ import org.apache.log4j.Logger;
  */
 @ManagedBean(name = "MbListaDesplegable")
 @ViewScoped
-public class ListasDesplegablesFormularios  implements Serializable{
+public class ListasDesplegablesFormularios implements Serializable {
 
     final static Logger LOGGER = Logger.getLogger(FormularioGrupoEmpresa.class);
 
@@ -75,6 +75,8 @@ public class ListasDesplegablesFormularios  implements Serializable{
     private List<EstadoMatricula> listaMatriculas;
     private List<Municipio> listaMunicipios;
     private List<SituacionControl> listaSituaciones;
+    private List<SituacionControl> listaSituacionesControlGrupo;
+    private List<SituacionControl> listaSituacionesControlUnidadLegal;
     private List<TipoRelacion> listaRelaciones;
     private List<TipoControl> listaControles;
     private List<TipoConglomerado> listaConglomerados;
@@ -100,6 +102,8 @@ public class ListasDesplegablesFormularios  implements Serializable{
         setListaMunicipios(eJBServicioMunicipio.findAllInOrderByNameAsc());
         setListaRelaciones(eJBServicioRelacion.findAllInOrderByNameAsc());
         setListaSituaciones(eJBServicioSituacion.findAllInOrderByNameAsc());
+        setListaSituacionesControlGrupo(eJBServicioSituacion.findAllByUnidadInOrderByNameAsc("GRUPO"));
+        setListaSituacionesControlUnidadLegal(eJBServicioSituacion.findAllByUnidadInOrderByNameAsc("UNIDAD LEGAL"));
         setListaConglomerados(eJBServicioConglomerado.findAllInOrderByNameAsc());
         setListaControles(eJBServicioControl.findAllInOrderByNameAsc());
         setListaEmpresas(eJBServicioEmpresa.findAllInOrderByNameAsc());
@@ -351,6 +355,22 @@ public class ListasDesplegablesFormularios  implements Serializable{
 
     public void setListaSituaciones(List<SituacionControl> listaSituaciones) {
         this.listaSituaciones = listaSituaciones;
+    }
+
+    public List<SituacionControl> getListaSituacionesControlGrupo() {
+        return listaSituacionesControlGrupo;
+    }
+
+    public void setListaSituacionesControlGrupo(List<SituacionControl> listaSituacionesControlGrupo) {
+        this.listaSituacionesControlGrupo = listaSituacionesControlGrupo;
+    }
+
+    public List<SituacionControl> getListaSituacionesControlUnidadLegal() {
+        return listaSituacionesControlUnidadLegal;
+    }
+
+    public void setListaSituacionesControlUnidadLegal(List<SituacionControl> listaSituacionesControlUnidadLegal) {
+        this.listaSituacionesControlUnidadLegal = listaSituacionesControlUnidadLegal;
     }
 
     public List<TipoControl> getListaControles() {

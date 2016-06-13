@@ -89,7 +89,7 @@ public class EmailUtils implements Serializable {
     private void envioFinalEmail(Mail mensagem) throws EmailException {
         Email email = new SimpleEmail();
         email = conectaEmail();
-        email.setFrom("directorio_sid@dane.gov.co", "SID");
+        email.setFrom(EMAILORIGEM, "SID");
         email.setSubject(mensagem.getTitulo());
         email.setMsg(mensagem.getMensagem());
         // Imprimimos el Map con un Iterador
@@ -150,7 +150,7 @@ public class EmailUtils implements Serializable {
         try {
             HtmlEmail email = new HtmlEmail();
             email = conectaHtmlEmail();
-            email.setFrom("directorio_sid@dane.gov.co", "SID");
+            email.setFrom(EMAILORIGEM, "SID");
             email.setSubject(titulo);
             email.setHtmlMsg(cuerpo);
             //email.setDebug(true);

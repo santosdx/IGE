@@ -8,14 +8,14 @@
     <p:panel>
         <p:tooltip />
 
-        <h:panelGrid columns="3" columnClasses="label, value" >
+        <h:panelGrid columns="3" columnClasses="label, value" cellpadding="0" cellspacing="0">
 
             <p:outputLabel for="cboSituacionControl" value="Situación de control:" styleClass="etiquetaFormulario"/>
             <p:selectOneMenu id="cboSituacionControl" required="true" style="width:430px"
                              value="#{MbFormUnidadLegal.relacionSeleccionada.situacionControl}" 
                              requiredMessage="La situación de control es requerido.">
                 <f:selectItem itemLabel="Relación..." itemValue="" />
-                <f:selectItems value="#{MbListaDesplegable.listaSituaciones}" var="SituacionControl" 
+                <f:selectItems value="#{MbListaDesplegable.listaSituacionesControlUnidadLegal}" var="SituacionControl" 
                                itemLabel="#{SituacionControl.situacion}" itemValue="#{SituacionControl.situacion}"/>
             </p:selectOneMenu>
             <p:message for="cboSituacionControl" />
@@ -69,8 +69,8 @@
             <p:inputText id="txtPorcentajeParticipacionControlanteDirecta" required="true" label="Porcentaje de participación" maxlength="59"
                          value="#{MbFormUnidadLegal.relacionSeleccionada.porcentajeControlanteul}" styleClass="valorEtiquetaFormulario"
                          requiredMessage="El porcentaje de participación es requerido." 
-                         validatorMessage="Formato de datos incorrecto, Ejemplo: 0,5-0,5">
-                <f:validateRegex pattern="^[0-9,-]+$" />
+                         validatorMessage="Formato de datos incorrecto, Ejemplo: 50%-50%">
+                <f:validateRegex pattern="^[0-9-%>]+$" />
             </p:inputText>
             <h:panelGrid columns="2" cellpadding="0">
                 <p:message for="txtPorcentajeParticipacionControlanteDirecta" />
@@ -78,7 +78,7 @@
                 <p:tooltip for="imgAyudaPorcentajeControlante">
                     <p>Si la unidad legal es controlada por más de un Grupo Empresarial,<br></br>
                         puede ingresar los porcentajes de participación de cada uno.</p>
-                    <p>Ejemplo: 0,5-0,5 </p>
+                    <p>Ejemplo: 50%-50% </p>
                 </p:tooltip>
             </h:panelGrid>
 

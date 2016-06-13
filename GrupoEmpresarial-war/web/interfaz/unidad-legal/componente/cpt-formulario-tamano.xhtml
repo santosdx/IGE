@@ -8,7 +8,7 @@
     <p:panel>
         <p:tooltip />
 
-        <h:panelGrid id="pnFormTamanoUnidadLelgal" columns="3" >
+        <h:panelGrid id="pnFormTamanoUnidadLelgal" columns="3" cellpadding="0" cellspacing="0">
 
             <!--<h:outputText value="Información con corte a: " styleClass="etiquetaFormulario" />
             <p:inputText id="txtInforCorteA" value="#{MbFormUnidadLegal.tamanoSeleccionado.infoCorte}" styleClass="valorEtiquetaFormulario" label="Información con corte a"/>
@@ -26,7 +26,7 @@
             <p:outputLabel for="txtActivo" value="Activo: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtActivo" label="Activo" maxlength="19" styleClass="valorEtiquetaFormulario" 
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.activo}" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="Los activos son requeridos." >
                 <f:convertNumber locale="es_CO" minFractionDigits="0" />
             </p:inputText>
@@ -44,7 +44,7 @@
             <p:outputLabel for="txtPasivo" value="Pasivo: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtPasivo" label="Pasivo"  maxlength="19" styleClass="valorEtiquetaFormulario" 
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.pasivo}" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="El pasivo es requerido." >
                 <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
             </p:inputText>
@@ -53,7 +53,7 @@
             <p:outputLabel for="txtPatrimonio" value="Patrimonio: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtPatrimonio" label="Patrimonio"  maxlength="19" styleClass="valorEtiquetaFormulario" 
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.patrimonio}" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="El patrimonio es requerido." >
                 <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
             </p:inputText>
@@ -62,7 +62,7 @@
             <p:outputLabel for="txtIngresosOperacionales" value="Ingresos operacionales: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtIngresosOperacionales" label="Ingresos operacionales"  maxlength="19" styleClass="valorEtiquetaFormulario" 
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.ingresosOperacionales}"
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="Los ingresos operacionales son requeridos." >
                 <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
             </p:inputText>
@@ -71,7 +71,7 @@
             <p:outputLabel for="txtUtilidadBruta" value="Utilidad bruta: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtUtilidadBruta" label="Utilidad bruta"  maxlength="19" styleClass="valorEtiquetaFormulario" 
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadBruta}" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="La Utilidad bruta es requerido." >
                 <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
             </p:inputText>
@@ -80,7 +80,7 @@
             <p:outputLabel for="txtGastosOperacionalesAdminitracion" value="Gastos operacionales de administración: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtGastosOperacionalesAdminitracion" label="Gastos operacionales de administración"  maxlength="18"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesAdmon}" styleClass="valorEtiquetaFormulario" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="Los gastos operacionales de administración son requeridos." >
                 <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
                 <p:ajax event="keyup" update="txtGastosOperacionales"/>
@@ -90,7 +90,7 @@
             <p:outputLabel for="txtGastosOperacionalesVenta" value="Gastos operacionales de venta: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtGastosOperacionalesVenta" label="Gastos operacionales de venta"  maxlength="18"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesVenta}" styleClass="valorEtiquetaFormulario" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="Los gastos operacionales de venta son requeridos." >
                 <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
                 <p:ajax event="keyup" update="txtGastosOperacionales"/>
@@ -100,7 +100,7 @@
             <p:outputLabel for="txtGastosOperacionales" value="Gastos operacionales: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtGastosOperacionales" styleClass="valorEtiquetaFormulario" disabled="true" label="Gastos operacionales"  maxlength="19"
                          value="#{(MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesAdmon + MbFormUnidadLegal.tamanoSeleccionado.gastosOperacionalesVenta)}" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="Los gastos operacionales son requeridos." >
                 <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
             </p:inputText>
@@ -109,7 +109,7 @@
             <p:outputLabel for="txtUtilidadOperativa" value="Utilidad operativa: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtUtilidadOperativa" label="Utilidad operativa"  maxlength="19"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadOperativa}" styleClass="valorEtiquetaFormulario" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="La utilidad operativa es requerida." >
                 <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
             </p:inputText>
@@ -118,7 +118,7 @@
             <p:outputLabel for="txtUtilidadNeta" value="Utilidad neta: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtUtilidadNeta" label="Utilidad neta"  maxlength="19"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.utilidadNeta}" styleClass="valorEtiquetaFormulario" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="La utilidad neta es requerido." >
                 <f:convertNumber  locale="es_CO" minFractionDigits="0"/>
             </p:inputText>
@@ -127,7 +127,7 @@
             <p:outputLabel for="txtEbitda" value="EBITDA: $" styleClass="etiquetaFormulario" />
             <p:inputText id="txtEbitda" label="EBITDA"  maxlength="19"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.ebitda}" styleClass="valorEtiquetaFormulario" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="El EBITDA es requerido." >
                 <f:convertNumber locale="es_CO" minFractionDigits="0" />
             </p:inputText>
@@ -136,7 +136,7 @@
             <p:outputLabel for="txtPersonalOcupado" value="Personal ocupado:" styleClass="etiquetaFormulario" />
             <p:inputText id="txtPersonalOcupado" label="Personal ocupado"  maxlength="9"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.personalOcupado}" styleClass="valorEtiquetaFormulario" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}"
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}"
                          requiredMessage="El personal ocupado es requerido.">
             </p:inputText>
             <p:message for="txtPersonalOcupado" />
@@ -144,7 +144,7 @@
             <p:outputLabel for="txtPersonalEmpleado" value="Personal empleado:" styleClass="etiquetaFormulario" />
             <p:inputText id="txtPersonalEmpleado" label="Personal empleado"  maxlength="9"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.personalEmpleado}" styleClass="valorEtiquetaFormulario" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="El Personal empleado es requerido." >
             </p:inputText>
             <p:message for="txtPersonalEmpleado" />
@@ -152,19 +152,19 @@
             <p:outputLabel for="txtPersonalCotizante" value="Personal cotizante:" styleClass="etiquetaFormulario" />
             <p:inputText id="txtPersonalCotizante" label="Personal cotizante" maxlength="9"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.personalCotizante}" styleClass="valorEtiquetaFormulario" 
-                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='COLOMBIA' ? true : false}" 
+                         required="#{MbFormUnidadLegal.identificacionSeleccionada.pais =='Colombia' ? true : false}" 
                          requiredMessage="El personal cotizante es requerido." >
             </p:inputText>
             <p:message for="txtPersonalCotizante" />
 
-            <p:outputLabel for="txtNumeroHombres" value="Número de hombres: " styleClass="etiquetaFormulario" />
+            <p:outputLabel for="txtNumeroHombres" value="Número de hombres ocupados: " styleClass="etiquetaFormulario" />
             <p:inputText id="txtNumeroHombres" required="true" label="Número de hombres" maxlength="9"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.hombresOcupados}" styleClass="valorEtiquetaFormulario" 
                          requiredMessage="El número de hombres es requerido." >
             </p:inputText>
             <p:message for="txtNumeroHombres" />
 
-            <p:outputLabel for="txtNumeroMujeres" value="Número de mujeres: " styleClass="etiquetaFormulario" />
+            <p:outputLabel for="txtNumeroMujeres" value="Número de mujeres ocpadas: " styleClass="etiquetaFormulario" />
             <p:inputText id="txtNumeroMujeres"  required="true" label="Número de mujeres"  maxlength="9"
                          value="#{MbFormUnidadLegal.tamanoSeleccionado.mujeresOcupadas}" styleClass="valorEtiquetaFormulario" 
                          requiredMessage="El número de mujeres es requerido.">

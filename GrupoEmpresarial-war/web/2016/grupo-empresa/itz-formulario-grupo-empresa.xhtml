@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/plantilla/plantilla_sin_menu.xhtml">
+            <ui:define name="content">
+                <center>
+                    <h:form id="frmRegistroGrupoEmpresa" style="padding-right: 2%; padding-left: 2%;">
+                        <h3 class="titulo-center-h3">FORMULARIO DE ACTUALIZACIÓN DEL GRUPO EMPRESARIAL</h3>
+                        <p:spacer  height="10"/>
+                        <p:growl id="gwFormGrupoEmpresa" sticky="true" showDetail="true" life="6000" />
+
+                        <p:wizard flowListener="#{MbFormGrupoEmpresa.onFlowProcess}" backLabel="anterior" nextLabel="siguiente">
+
+                            <p:tab id="identificacion" title="Información de Identificación">
+                                <hr class="lineaGradian"/>
+                                <ui:include src="componente/cpt-formulario-identificacion.xhtml"/>
+                            </p:tab>
+
+                            <!--p:tab id="relacion" title="Información de relación">
+                                <hr class="lineaGradian"/>
+                                <ui:include src="componente/cpt-formulario-relacion.xhtml"/>
+                                <hr class="lineaGradian"/>
+                            </p:tab-->
+
+                            <p:tab id="relacion" title="Información de Contacto">
+                                <hr class="lineaGradian"/>
+                                <ui:include src="componente/cpt-formulario-contacto.xhtml"/>
+                            </p:tab>
+
+                            <!--p:tab id="historia" title="Información de Historia">
+                                <hr class="lineaGradian"/>
+                                <ui:include src="componente/cpt-formulario-historia.xhtml"/>
+                            </p:tab-->
+
+                            <p:tab id="tamano" title="Información de Tamaño">
+                                <hr class="lineaGradian"/>
+                                <ui:include src="componente/cpt-formulario-tamano.xhtml"/>
+                            </p:tab>
+
+                            <p:tab id="confirm" title="Confirmar Datos">
+                                <hr class="lineaGradian"/>
+                                <ui:include src="componente/cpt-formulario-resumen.xhtml"/>
+                                <p:commandButton id="btnActualizar" value="Actualizar Datos" action="#{MbFormGrupoEmpresa.actualizarGrupoEmpresa}" styleClass="ui-wizard-nav-update-date">
+                                    <p:confirm header="Confirmación" icon="ui-icon-alert" message="Esta a punto de actualizar la información, desea continuar?"/>
+                                </p:commandButton>
+                            </p:tab>
+
+                        </p:wizard>
+
+                        <p:confirmDialog global="true" showEffect="fade" >
+                            <p:commandButton value="Aceptar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+
+                    </h:form>
+                </center>
+                <p:blockUI block="frmRegistroGrupoEmpresa" widgetVar="blockUI" trigger="frmRegistroGrupoEmpresa:btnActualizar">
+                    Guardando datos...<br />
+                    <p:graphicImage name="imagen/ajax-loading.gif"/>
+                </p:blockUI>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

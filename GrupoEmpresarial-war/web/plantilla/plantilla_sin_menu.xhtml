@@ -23,9 +23,15 @@
             <ui:debug/>
             <p:layout fullPage="true">
                 <!--ui:include src="../interfaz/utilidades/cpt-ExceptionHandler.xhtml"/-->
+                <p:layoutUnit position="north" size="100" closable="true" collapsible="false">
+                    <ui:include src="encabezado.xhtml" />
+                </p:layoutUnit>
                 <ui:include src="../interfaz/utilidades/cpt-IdleMonitor.xhtml"/>
                 <p:layoutUnit id="contenedorCentral" position="center">
                     <ui:insert name="content" />
+                </p:layoutUnit>
+                <p:layoutUnit position="south" closable="true" collapsible="true" styleClass="cajaPiePagina">
+                    <ui:include src="pie-pagina.xhtml" />
                 </p:layoutUnit>
             </p:layout>
         </h:body>

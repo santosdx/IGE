@@ -3,6 +3,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+
     <h:body>
         <ui:composition template="/plantilla/plantilla.xhtml">
             <ui:define name="content">
@@ -13,34 +14,41 @@
 
                     <p:wizard flowListener="#{MbFormGrupoEmpresa.onFlowProcess}" backLabel="anterior" nextLabel="siguiente">
 
-                        <p:tab id="identificacion" title="Información de identificación">
+                        <p:tab id="identificacion" title="Información de Identificación">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-identificacion.xhtml"/>
                             <hr class="lineaGradian"/>
                         </p:tab>
 
                         <!--p:tab id="relacion" title="Información de relación">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-relacion.xhtml"/>
                             <hr class="lineaGradian"/>
                         </p:tab-->
 
-                        <p:tab id="relacion" title="Información de contacto">
+                        <p:tab id="relacion" title="Información de Contacto">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-contacto.xhtml"/>
                             <hr class="lineaGradian"/>
                         </p:tab>
 
-                        <!--p:tab id="historia" title="Historia">
+                        <!--p:tab id="historia" title="Información de Historia">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-historia.xhtml"/>
+                            <hr class="lineaGradian"/>
                         </p:tab-->
 
-                        <p:tab id="tamano" title="Información de tamaño">
+                        <p:tab id="tamano" title="Información de Tamaño">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-tamano.xhtml"/>
                             <hr class="lineaGradian"/>
                         </p:tab>
 
-                        <p:tab id="confirm" title="Confirmar datos">
+                        <p:tab id="confirm" title="Confirmar Datos">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-resumen.xhtml"/>
                             <hr class="lineaGradian"/>
-                            <p:commandButton id="btnActualizar" value="Actualizar Datos" action="#{MbFormGrupoEmpresa.actualizarGrupoEmpresa}" style="float: right; top: 3px;">
+                            <p:commandButton id="btnActualizar" value="Actualizar Datos" action="#{MbFormGrupoEmpresa.actualizarGrupoEmpresa}" styleClass="ui-wizard-nav-update-date">
                                 <p:confirm header="Confirmación" icon="ui-icon-alert" message="Esta a punto de actualizar la información, desea continuar?"/>
                             </p:commandButton>
                         </p:tab>

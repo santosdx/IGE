@@ -5,199 +5,298 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <p:panel>
-        <p:tooltip />
+    <style>
+        .etiquetaItemInformeEjecutivo{
+            font-weight: bold; 
+            color: #77797b; 
+            font-style: italic;
+            margin-right: 15px;
+            /*text-decoration: underline;*/
+        }
+    </style>
 
-        <h:form id="forInformeEjecutivoGrupoEmpresarial" style="width: 100%;">
+    <p:tooltip />
 
-            <p:outputLabel value="Grupo Empresarial para la generación del informe ejecutivo:"/>
-            <br></br>
-            <p:selectOneMenu id="cboGrupo" value="#{MbInformeGrupoEmpresarial.idIdentificacionSeleccionada}"  filter="true" filterMatchMode="contains" >
-                <p:ajax event="change" listener="#{MbInformeGrupoEmpresarial.mySelectionMethodListener}" update="pnlFormularioInformeEjecutivoGrupo" />
-                <f:selectItem itemLabel="Seleccione un ítem..." itemValue="" />
-                <f:selectItems value="#{MbInformeGrupoEmpresarial.listaIdentificacion}" var="grupo" itemLabel="#{grupo.nombreRegistrado}" itemValue="#{grupo.id.id}"/>
-            </p:selectOneMenu>
-            <br></br><br></br>
+    <h:form id="forInformeEjecutivoGrupoEmpresarial" style="width: 100%;">
 
-            <!--div class="ui-grid ui-grid-responsive">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">&nbsp;</div>
-                    <div class="ui-grid-col-8">
+        <h:outputText value="Grupo Empresarial para la generación del informe ejecutivo:"/>
+        <br></br>
+        <p:selectOneMenu id="cboGrupo" value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada}" 
+                         filter="true" filterMatchMode="contains" converter="identificacionConverter">
+            <f:attribute name="listaItem" value="#{MbInformeGrupoEmpresarial.listaIdentificacion}" />
+            <p:ajax event="change" listener="#{MbInformeGrupoEmpresarial.mySelectionMethodListener}" update="pnlFormularioInformeEjecutivoGrupo" />
+            <f:selectItem itemLabel="Seleccione un ítem..." itemValue="" />
+            <f:selectItems value="#{MbInformeGrupoEmpresarial.listaIdentificacion}" var="grupo" itemLabel="#{grupo.nombreRegistrado}" itemValue="#{grupo}"/>
+        </p:selectOneMenu>
+        <br></br><br></br>
 
-                    </div>
-                    <div class="ui-grid-col-2">&nbsp;</div>
-                </div>
-            </div-->
-
-            <center style="border-color: #d9b19d; border-style: ridge; border-width: 3px; margin: auto; width: 80%; min-width: 800px; padding: 10px;">
-                <h:panelGrid id="pnlFormularioInformeEjecutivoGrupo" columns="1" cellpadding="0" cellspacing="0">
-                    <p:graphicImage value="/resources/imagen-reporte/encabezado-informe-ejecutivo.png" width="800"/>
-                    <hr class="lineaGradian"/>
-                    <h3 style="text-align: center;">#{MbInformeGrupoEmpresarial.identificacionSeleccionada.nombreRegistrado}</h3>
-                    <h3 style="text-align: center;">Reseña Conglomerado</h3>
-                    <hr class="lineaGradian"/>
-                    <br></br>
-                    <p:editor id="edtResenaConglomerado" widgetVar="editorWidget" style=" margin-left: 40px;" maxlength="1500"
-                              value="#{MbInformeGrupoEmpresarial.resenaConglomerado}" width="705"  validatorMessage="Solo se permite 1500 caracteres"
-                              onchange="handleTextChangeEdtResenaConglomerado()">
-                        <f:validateLength maximum="1500" />
-                    </p:editor>
-                    <p:remoteCommand name="chageEdtResenaConglomerado" process="@parent" update="lblLentResena" />
-                    <p:outputLabel id="lblLentResena" style=" margin-left: 40px; color: #c0c0c4;" 
-                                   value="#{MbInformeGrupoEmpresarial.resenaConglomerado.length()}/1500"/>
-                    <br></br>
-                    <hr class="lineaGradian"/>
-                    <h3 style="text-align: center;">Información de identificación del conglomerado</h3>
-                    <hr class="lineaGradian"/>
-                    <h:panelGrid columns="2">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Sector: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Nombre comercial: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.nombreComercial}"/>
-                            <p:outputLabel value="Nombre registrado: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.nombreRegistrado}"/>
-                            <p:outputLabel value="NIT: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.nit}"/>
-                            <p:outputLabel value="Departamento sede principal: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.departamento}"/>
-                            <p:outputLabel value="Dirección sede principal: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.direccion}"/>
-                            <p:outputLabel value="Teléfono sede principal: " style="font-weight: bold;"/>
-                            <p:outputLabel value="(#{MbInformeGrupoEmpresarial.identificacionSeleccionada.indicativo}) #{MbInformeGrupoEmpresarial.identificacionSeleccionada.telefonoContacto}"/>
-                        </h:panelGrid>
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Página web: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.paginaWeb}"/>
-                            <p:outputLabel value="Representante legal: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.representanteLegal}"/>
-                            <p:outputLabel value="Nombre de contacto: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.nombreContacto}"/>
-                            <p:outputLabel value="Cargo: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.cargoContacto}"/>
-                            <p:outputLabel value="Teléfono de contacto: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.telefonoContacto}"/>
-                            <p:outputLabel value="Correo eléctronico de contacto: " style="font-weight: bold;"/>
-                            <p:outputLabel value="#{MbInformeGrupoEmpresarial.identificacionSeleccionada.correoElectronico}"/>
-                        </h:panelGrid>
+        <center style="border-color: #d9b19d; border-style: ridge; border-width: 3px; margin: auto; width: 80%; min-width: 800px; padding: 10px;">
+            <h:panelGrid id="pnlFormularioInformeEjecutivoGrupo" columns="1" cellpadding="0" cellspacing="0">
+                <p:graphicImage value="/resources/imagen-reporte/encabezado-informe-ejecutivo.png" width="800"/>
+                <hr class="lineaGradian"/>
+                <h3 style="text-align: center;">#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.nombreRegistrado}</h3>
+                <h3 style="text-align: center;">Reseña Conglomerado</h3>
+                <hr class="lineaGradian"/>
+                <br></br>
+                <p:editor id="edtResenaConglomerado" widgetVar="editorWidget" style=" margin-left: 40px;" 
+                          value="#{MbInformeGrupoEmpresarial.resenaConglomerado}" width="705"  validatorMessage="Solo se permite 1500 caracteres"
+                          onchange="handleTextChangeEdtResenaConglomerado()">
+                    <f:validateLength maximum="1500" />
+                </p:editor>
+                <p:remoteCommand name="chageEdtResenaConglomerado" process="@parent" update="lblLentResena" />
+                <h:outputText id="lblLentResena" style=" margin-left: 40px; color: #c0c0c4;" 
+                               value="#{MbInformeGrupoEmpresarial.resenaConglomerado.length()}/1500"/>
+                <br></br>
+                <hr class="lineaGradian"/>
+                <h3 style="text-align: center;">Información de identificación del conglomerado</h3>
+                <hr class="lineaGradian"/>
+                <h:panelGrid columns="2" style="width: 100%;">
+                    <h:panelGrid columns="1" style="width: 100%;">
+                        <p:outputPanel>
+                            <h:outputText value="Sector:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Nombre comercial:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.nombreComercial}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Representante legal:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.representanteLegal}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Ciudad sede principal:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.municipio}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Página web:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.paginaWeb}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Nombre de contacto:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.nombreContacto}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Teléfono de contacto:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.telefonoContacto}"/>
+                        </p:outputPanel>
                     </h:panelGrid>
-                    <br></br>
-                    <hr class="lineaGradian"/>
-                    <h3 style="text-align: center;">Información de estructura legal y operativa del conglomerado</h3>
-                    <hr class="lineaGradian"/>
-                    <h:panelGrid columns="2">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Tipo de conglomerado: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Tipo de control: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de unidades legales: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de filiales: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de subsidiarias: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-
-                        </h:panelGrid>
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Número de Unidades Legales a nivel nacional: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de establecimientos: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Matriz: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="NIT: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="País de la matriz: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                        </h:panelGrid>
+                    <h:panelGrid columns="1" style="width: 100%;">
+                        <p:outputPanel>
+                            <h:outputText value="NIT: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.nit}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Nombre registrado:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.nombreRegistrado}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Departamento sede principal:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.departamento}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Dirección sede principal:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.direccion}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Teléfono sede principal:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="(#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.indicativo}) #{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.telefonoContacto}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Cargo:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.cargoContacto}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Correo eléctronico de contacto:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.identificacion.correoElectronico}"/>
+                        </p:outputPanel>
+                    </h:panelGrid>  
+                </h:panelGrid>
+                <br></br>
+                <hr class="lineaGradian"/>
+                <h3 style="text-align: center;">Información de estructura legal y operativa del conglomerado</h3>
+                <hr class="lineaGradian"/>
+                <h:panelGrid  columns="2" style="width: 100%;">
+                    <h:panelGrid  columns="1" style="width: 100%;">
+                        <p:outputPanel>
+                            <h:outputText value="Tipo de conglomerado: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.relacion.tipoConglomerado}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Tipo de control: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.relacion.tipoControl}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de unidades legales: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de filiales: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de subsidiarias: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
                     </h:panelGrid>
-                    <br></br>
-                    <hr class="lineaGradian"/>
-                    <h3 style="text-align: center;">Información económica y de tamaño del conglomerado *</h3>
-                    <hr class="lineaGradian"/>
-                    <h:panelGrid columns="2">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Ingresos operacionales: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Utilidad operacional: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Ebitda: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Utilidad neta: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Activos: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-
-                        </h:panelGrid>
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Pasivos: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Patrimonio: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Personal ocupado en Colombia: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de hombres ocupados: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de mujeres ocupadas: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                        </h:panelGrid>
+                    <h:panelGrid  columns="1" style="width: 100%;">
+                        <p:outputPanel>
+                            <h:outputText value="Número de Unidades Legales a nivel nacional: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de establecimientos: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Matriz: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="NIT: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="País de la matriz: " styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
                     </h:panelGrid>
-                    <br></br>
-                    <hr class="lineaGradian"/>
-                    <h3 style="text-align: center;">Información económica y de tamaño del conglomerado *</h3>
-                    <hr class="lineaGradian"/>
-                    <h:panelGrid columns="2">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Fecha de configuración del grupo: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de unidades legales creadas: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de unidades legales que cerraron: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de unidades legales liquidadas: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-
-                        </h:panelGrid>
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Número de establecimientos creados: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de establecimientos que cerraron: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                            <p:outputLabel value="Número de establecimientos liquidados: " style="font-weight: bold;"/>
-                            <p:outputLabel value=""/>
-                        </h:panelGrid>
+                </h:panelGrid>
+                <br></br>
+                <hr class="lineaGradian"/>
+                <h3 style="text-align: center;">Información económica y de tamaño del conglomerado *</h3>
+                <hr class="lineaGradian"/>
+                <h:panelGrid  columns="2" style="width: 100%;">
+                    <h:panelGrid  columns="1" style="width: 100%;">
+                        <p:outputPanel>
+                            <h:outputText value="Ingresos operacionales:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.tamano.ingresosOperacionales}">
+                                <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                            </h:outputText>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Utilidad operacional:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.tamano.utilidadOperativa}">
+                                <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                            </h:outputText>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Ebitda:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.tamano.ebitda}">
+                                <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                            </h:outputText>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Utilidad neta:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.tamano.utilidadNeta}">
+                                <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                            </h:outputText>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Activos:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.tamano.activo}">
+                                <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                            </h:outputText>
+                        </p:outputPanel>
                     </h:panelGrid>
-                    <hr class="lineaGradian"/>
-                    <h3 style="text-align: center;">Análisis del conglomerado</h3>
-                    <hr class="lineaGradian"/>
-                    <br></br>
-                    <p:editor id="edtAnalisis1Conglomerado" widgetVar="editorWidget" style=" margin-left: 40px;" maxlength="1500"
-                              value="#{MbInformeGrupoEmpresarial.analisis1}" width="705"  validatorMessage="Solo se permite 1500 caracteres"
-                              onchange="handleTextChangeEdtAnalisis1Conglomerado()">
-                        <f:validateLength maximum="1500" />
-                    </p:editor>
-                    <p:remoteCommand name="chageEdtAnalisis1Conglomerado" process="@parent" update="lblLentAnalisis1" />
-                    <p:outputLabel id="lblLentAnalisis1" style=" margin-left: 40px; color: #c0c0c4;" 
-                                   value="#{MbInformeGrupoEmpresarial.resenaConglomerado.length()}/1500"/>
+                    <h:panelGrid  columns="1" style="width: 100%;">
+                        <p:outputPanel>
+                            <h:outputText value="Pasivos:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.tamano.pasivo}">
+                                <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                            </h:outputText>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Patrimonio:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.tamano.patrimonio}">
+                                <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                            </h:outputText>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Personal ocupado en Colombia:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="">
+                                <f:convertNumber currencySymbol="$"  type="currency" locale="es_CO" minFractionDigits="0"/>
+                            </h:outputText>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de hombres ocupados:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.tamano.hombresOcupados}"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de mujeres ocupadas:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="#{MbInformeGrupoEmpresarial.grupoSeleccionado.tamano.mujeresOcupadas}"/>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </h:panelGrid>
+                <br></br>
+                <hr class="lineaGradian"/>
+                <h3 style="text-align: center;">Información económica y de tamaño del conglomerado *</h3>
+                <hr class="lineaGradian"/>
+                <h:panelGrid  columns="2" style="width: 100%;">
+                    <h:panelGrid columns="1" style="width: 100%;">
+                        <p:outputPanel>
+                            <h:outputText value="Fecha de configuración del grupo:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de unidades legales creadas:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de unidades legales que cerraron:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de unidades legales liquidadas:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1" style="width: 100%;">
+                        <p:outputPanel>
+                            <h:outputText value="Número de establecimientos creados:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de establecimientos que cerraron:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <h:outputText value="Número de establecimientos liquidados:" styleClass="etiquetaItemInformeEjecutivo"/>
+                            <h:outputText value="##"/>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </h:panelGrid>
+
+                <hr class="lineaGradian"/>
+                <h3 style="text-align: center;">Análisis del conglomerado</h3>
+                <hr class="lineaGradian"/>
+                <br></br>
+                <p:editor id="edtAnalisis1Conglomerado" widgetVar="editorWidget" style=" margin-left: 40px;" 
+                          value="#{MbInformeGrupoEmpresarial.analisis1}" width="705"  validatorMessage="Solo se permite 1500 caracteres"
+                          onchange="handleTextChangeEdtAnalisis1Conglomerado()">
+                    <f:validateLength maximum="1500" />
+                </p:editor>
+                <p:remoteCommand name="chageEdtAnalisis1Conglomerado" process="@parent" update="lblLentAnalisis1" />
+                <h:outputText id="lblLentAnalisis1" style=" margin-left: 40px; color: #c0c0c4;" 
+                               value="#{MbInformeGrupoEmpresarial.resenaConglomerado.length()}/1500"/>
 
                                 <!--p:graphicImage value="#{MbInformeGrupoEmpresarial.chartUnidadLegalDepartamento}"/-->
-                    <p:chart id="chrDepartamento" widgetVar="wVchrDepartamento" type="pie" style="width:500px;height:350px;  margin: 0 auto;" 
-                             model="#{MbInformeGrupoEmpresarial.pieModeUnidadLegalDepartamento}" />
-                    <h:inputHidden id="ipHdb64CartDepartamento" value="#{MbInformeGrupoEmpresarial.base64StrChartDepartamento}" />
+                <p:chart id="chrDepartamento" widgetVar="wVchrDepartamento" type="pie" style="width:500px;height:350px;  margin: 0 auto;" 
+                         model="#{MbInformeGrupoEmpresarial.pieModeUnidadLegalDepartamento}" />
+                <h:inputHidden id="ipHdb64CartDepartamento" value="#{MbInformeGrupoEmpresarial.base64StrChartDepartamento}" />
 
-                    <br></br><br></br>
-                    <p:commandButton id="btnDescargarReporteGrupoEmpresa" value="Descargar" ajax="false"  style="float: right;"
-                                     actionListener="#{MbInformeGrupoEmpresarial.generarInformeEjecutivoGrupoEmpresarialPdf}"
-                                     onclick="exportChartDepartamentoToImage();
-                                             PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                        <p:fileDownload id="fDonwDescargarReporteGrupoEmpresa" value="#{MbInformeGrupoEmpresarial.contenidoPDF}" />
-                    </p:commandButton>
-                </h:panelGrid>
-            </center>
+                <br></br><br></br>
+                <p:commandButton id="btnDescargarReporteGrupoEmpresa" value="Descargar" ajax="false"  style="float: right;"
+                                 actionListener="#{MbInformeGrupoEmpresarial.generarInformeEjecutivoGrupoEmpresarialPdf}"
+                                 onclick="exportChartDepartamentoToImage();
+                                         PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                    <p:fileDownload id="fDonwDescargarReporteGrupoEmpresa" value="#{MbInformeGrupoEmpresarial.contenidoPDF}" />
+                </p:commandButton>
+            </h:panelGrid>
+        </center>
 
-        </h:form>
-    </p:panel>
+    </h:form>
+
 
     <p:blockUI block="contenedorCentral" widgetVar="blockUIlistaGrupos" trigger="forInformeEjecutivoGrupoEmpresarial:cboGrupo">
         Consultando datos...<br />

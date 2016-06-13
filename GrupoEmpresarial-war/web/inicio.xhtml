@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>   
+        <ui:composition template="/plantilla/plantilla_sin_menu.xhtml">
+            <ui:define name="content" >
+                <h:form>
+                    <p:growl id="growl" life="2000" />
+                    <div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">&nbsp;</div>
+                            <div class="ui-grid-col-8">
+                                <center>
+                                    <p:link outcome="/2016/grupo-empresa/itz-informe-grupo-empresa.xhtml" value="Informe Grupo Empresarial">
+                                        <f:param name="productIdB" value="10" />
+                                    </p:link>
+                                    <br></br>
+                                    <br></br>
+                                    <p:link outcome="/2016/grupo-empresa/itz-formulario-grupo-empresa.xhtml" value="Formulario Grupo Empresarial">
+                                        <f:param name="productIdA" value="10" />
+                                    </p:link>
+                                </center>
+                            </div>
+                            <div class="ui-grid-col-2">&nbsp;</div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -46,7 +46,7 @@ public class DepartamentoFacade extends AbstractFacade<Departamento> implements 
     public List<Departamento> findAllInOrderByNameAsc() {
         List<Departamento> resultado = new ArrayList<Departamento>();
         try {
-            String sql = "SELECT id_departamento, REPLACE(departamento_nombre,'_',' ') as departamento_nombre  FROM ige_departamento ORDER BY departamento_nombre ASC";
+            String sql = "SELECT id_departamento, departamento_nombre  FROM ige_departamento ORDER BY departamento_nombre ASC";
             //Query query = em.createNamedQuery(Departamento.FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC);
             Query query = em.createNativeQuery(sql, Departamento.class);
             List<Departamento> listaResultado = Collections.EMPTY_LIST;

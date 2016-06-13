@@ -35,7 +35,7 @@ html{
 }
 /*Propiedades para la barra de estado del componente wizar*/
 .ui-wizard-step-titles.ui-helper-reset.ui-helper-clearfix{
-    background-color: #F5F5F5;
+    /*background-color: #F5F5F5;*/
 }
 
 /*#wzFormulario .ui-state-default, .ui-widget-content .ui-state-default{*/
@@ -48,7 +48,8 @@ html{
     text-decoration: none;
     box-shadow:none;
     text-shadow:none;
-    border: none;
+    /*border: none;*/
+    border-bottom: none;
     border-radius: 0px;
     cursor: default;
 }
@@ -63,7 +64,7 @@ html{
     text-decoration: none;
     box-shadow:none;
     text-shadow:none;
-    border: none;
+    /*border: none;*/
     border-radius: 0px;
     cursor: default;
 }
@@ -85,4 +86,25 @@ html{
     border: 0; 
     height: 1px; 
     background-image: linear-gradient(to right, rgba(179, 179, 179, 0), rgba(179, 179, 179, 0.75), rgba(179, 179, 179, 0));
+}
+
+
+.ui-wizard-nav-next{ 
+    bottom: 35px !important;
+    float: right !important;
+    position: fixed !important;
+    right: 35px !important;
+}
+
+.ui-wizard-nav-back {
+    bottom: 35px !important;
+    float: left !important;
+    position: fixed !important;
+}
+
+.ui-wizard-nav-update-date {
+    bottom: 35px !important;
+    float: right !important;
+    position: fixed !important;
+    right: 35px !important;
 }

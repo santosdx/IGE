@@ -46,7 +46,7 @@ public class MunicipioFacade extends AbstractFacade<Municipio> implements Munici
     public List<Municipio> findAllInOrderByNameAsc() {
         List<Municipio> resultado = new ArrayList<Municipio>();
         try {
-            String sql = "SELECT id_municipio, REPLACE(municipio_nombre,'_',' ') as municipio_nombre, departamento_nombre  "
+            String sql = "SELECT id_municipio, municipio_nombre, departamento_nombre  "
                     + "FROM ige_municipio ORDER BY municipio_nombre ASC";
             //Query query = em.createNamedQuery(Municipio.FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC);
             Query query = em.createNativeQuery(sql, Municipio.class);

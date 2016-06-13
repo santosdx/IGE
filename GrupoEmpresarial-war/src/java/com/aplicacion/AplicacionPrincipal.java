@@ -1,8 +1,10 @@
+package com.aplicacion;
+
 
 import com.dane.ige.modelo.entidad.SistemaInfo;
 import com.dane.ige.modelo.local.administracion.SistemaInfoFacadeLocal;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -12,7 +14,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.resource.ResourceException;
-import org.hibernate.exception.GenericJDBCException;
 
 /**
  * Clase que administra el bean de la ventana principal de la aplicación.
@@ -21,7 +22,7 @@ import org.hibernate.exception.GenericJDBCException;
  */
 @ManagedBean(name = "aplicacionPrincipal")
 @SessionScoped
-public class AplicacionPrincipal {
+public class AplicacionPrincipal implements Serializable{
 
     @EJB
     private SistemaInfoFacadeLocal eJBServicioSistemaInfo;
@@ -29,7 +30,6 @@ public class AplicacionPrincipal {
     private SistemaInfo sistemaInfo;
 
     public AplicacionPrincipal() {
-
     }
 
     @PostConstruct
@@ -85,6 +85,11 @@ public class AplicacionPrincipal {
         return "Unknown";
     }
 
+    public SistemaInfo consultarInformacionSistema(){
+        SistemaInfo resultado = geteJBServicioSistemaInfo().obtenerUltimaVersion();
+        return resultado;
+    }
+    
     // Lista de métodos Set y Get de la clase
     public SistemaInfoFacadeLocal geteJBServicioSistemaInfo() {
         return eJBServicioSistemaInfo;

@@ -70,6 +70,10 @@ public class FormularioEstablecimiento implements Serializable {
         setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(getIdIdentificacionSeleccionada()));
     }
 
+    public void refrescarListaEstablecimientos(){
+        setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(getIdIdentificacionSeleccionada()));
+    }
+    
     /**
      * Método que permite seleccionar un establecimietno y abrir la pagina del
      * formulario con los datos prediligenciados con el establecimiento
@@ -108,6 +112,8 @@ public class FormularioEstablecimiento implements Serializable {
         getTamanoSeleccionado().getId().setFecha(fechaActualizacion);
         geteJBServicioBodegaTamano().create(tamanoSeleccionado);
 
+        setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionEstablecimientoByIdGrupoRelacionadoTipoOrganizacion(getIdIdentificacionSeleccionada()));
+        
         Mensaje.agregarMensajeGrowlInfo("Exito!", "Información actualizada del establecimiento.");
 
         return "/interfaz/establecimiento/itz-informe-establecimiento.xhtml";

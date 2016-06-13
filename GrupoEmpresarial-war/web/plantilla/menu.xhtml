@@ -3,8 +3,21 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:body>   
+    <h:body>
         <ui:composition>
+            <script type="text/javascript">
+                $(document).ready(function() {
+
+                    $('.ui-menuitem-link').each(function() {
+                        if (window.location.pathname.indexOf($(this).attr('href')) != -1) {
+                            $(this).css('background', '#b6014c');//or add class
+                            $(this).css('opacity', '0.8');//or add class
+                            $(this).css('color', '#ffffff');//or add class
+                        }
+                    });
+
+                })
+            </script>
             <h:form id="frmMenu">
                 <p:growl id="messagesMenu" showDetail="false"/>
                 <!--p:menu toggleable="true">

@@ -28,4 +28,6 @@ public interface SituacionControlFacadeLocal {
     int count();
 
     List<SituacionControl> findAllInOrderByNameAsc();
+
+    List<SituacionControl> findAllByUnidadInOrderByNameAsc(String unidad);
 }

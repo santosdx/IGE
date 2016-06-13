@@ -50,6 +50,8 @@ public class ComparativoInformacionUnidad implements Serializable {
     private List<BodegaIdentificacion> listaPeriodosActualizacionSeleccionados;
     private List<GrupoEmpresa> listaGrupoEmpresaComparar;
 
+    private String tipoUnidadSeleccionada;
+
     /**
      * Creates a new instance of ComparativoInformacionUnidad
      */
@@ -103,6 +105,7 @@ public class ComparativoInformacionUnidad implements Serializable {
      */
     public void consultarPeriodosActualizacionGrupo() {
         if (getIdIdentificacionGrupoSeleccionada() != null) {
+            setTipoUnidadSeleccionada("GRUPO");
             setListaPeriodosActualizacion(eJBServicioBodegaIdentificacion.obtenerListaPeriodoActualizadoUnidadByIdUnidad(getIdIdentificacionGrupoSeleccionada()));
         }
     }
@@ -113,6 +116,7 @@ public class ComparativoInformacionUnidad implements Serializable {
      */
     public void consultarPeriodosActualizacionUnidadLegal() {
         if (getIdIdentificacionUnidadLegalSeleccionada() != null) {
+            setTipoUnidadSeleccionada("UNIDAD-LEGAL");
             setListaPeriodosActualizacion(eJBServicioBodegaIdentificacion.obtenerListaPeriodoActualizadoUnidadByIdUnidad(getIdIdentificacionUnidadLegalSeleccionada()));
         }
     }
@@ -123,6 +127,7 @@ public class ComparativoInformacionUnidad implements Serializable {
      */
     public void consultarPeriodosActualizacionEstablecimiento() {
         if (getIdIdentificacionEstablecimientoSeleccionado() != null) {
+            setTipoUnidadSeleccionada("ESTABLECIMIENTO");
             setListaPeriodosActualizacion(eJBServicioBodegaIdentificacion.obtenerListaPeriodoActualizadoUnidadByIdUnidad(getIdIdentificacionEstablecimientoSeleccionado()));
         }
     }
@@ -240,6 +245,14 @@ public class ComparativoInformacionUnidad implements Serializable {
 
     public void setListaGrupoEmpresaComparar(List<GrupoEmpresa> listaGrupoEmpresaComparar) {
         this.listaGrupoEmpresaComparar = listaGrupoEmpresaComparar;
+    }
+
+    public String getTipoUnidadSeleccionada() {
+        return tipoUnidadSeleccionada;
+    }
+
+    public void setTipoUnidadSeleccionada(String tipoUnidadSeleccionada) {
+        this.tipoUnidadSeleccionada = tipoUnidadSeleccionada;
     }
 
 }

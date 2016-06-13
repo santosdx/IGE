@@ -1,7 +1,9 @@
 package com.dane.ige.administracion;
 
+import com.dane.ige.modelo.entidad.BodegaIdentificacion;
 import com.dane.ige.modelo.entidad.Usuario;
 import com.dane.ige.modelo.entidad.UsuarioPerfil;
+import com.dane.ige.modelo.local.administracion.BodegaIdentificacionFacadeLocal;
 import com.dane.ige.modelo.local.administracion.UsuarioFacadeLocal;
 import com.dane.ige.modelo.local.administracion.UsuarioPerfilFacadeLocal;
 import com.dane.ige.seguridad.ClaseDESBase64;
@@ -34,6 +36,9 @@ public class AdministrarUsuario implements Serializable {
     @EJB
     private UsuarioPerfilFacadeLocal eJBServicioUsuarioPerfil;
 
+    @EJB
+    private BodegaIdentificacionFacadeLocal eJBServicioBodegaIdentificacion;
+
     @ManagedProperty("#{MbAdministrarPerfil}")
     private AdministrarPerfil servicioPerfil;
 
@@ -42,9 +47,9 @@ public class AdministrarUsuario implements Serializable {
     private List<Usuario> listaUsuarios;
     private Usuario usuarioSeleccionado;
     private String contrasenaActualizarUsuario;
+    private List<BodegaIdentificacion> listaIdentificacionGrupos;
 
     public AdministrarUsuario() {
-
     }
 
     @PostConstruct
@@ -62,6 +67,7 @@ public class AdministrarUsuario implements Serializable {
         getServicioPerfil().setPerfilSeleccionado(null);
         setEsNuevoUsuario(true);
         setContrasenaActualizarUsuario(null);
+        setListaIdentificacionGrupos(eJBServicioBodegaIdentificacion.obtenerListaIdentificacionTodosLosGrupos());
     }
 
     /**
@@ -155,10 +161,20 @@ public class AdministrarUsuario implements Serializable {
      * @param usuario
      */
     public void actualziarUsuarioPerfil(Usuario usuario) {
+
         String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
         ClaseDESBase64 obj = new ClaseDESBase64(key);
-        String contrasenDesencriptada = obj.encriptar(usuario.getPassword());
-        usuario.setPassword(contrasenDesencriptada);
+        String contrasenEncriptada = null;
+
+        for (Usuario usuarioLista : getListaUsuarios()) {
+            if (usuarioLista.getId().compareTo(usuario.getId()) == 0) {
+                if (!usuarioLista.getPassword().equals(usuario.getPassword())) {
+                    contrasenEncriptada = obj.encriptar(usuario.getPassword());
+                    usuario.setPassword(contrasenEncriptada);
+                }
+            }
+        }
+
         geteJBServicioUsuario().edit(usuario);
         //LOGGER.info("actualizo usuario");
         Mensaje.agregarMensajeGrowlInfo("Exito!", "Usuario actualizado.");
@@ -235,6 +251,14 @@ public class AdministrarUsuario implements Serializable {
 
     public void setContrasenaActualizarUsuario(String contrasenaActualizarUsuario) {
         this.contrasenaActualizarUsuario = contrasenaActualizarUsuario;
+    }
+
+    public List<BodegaIdentificacion> getListaIdentificacionGrupos() {
+        return listaIdentificacionGrupos;
+    }
+
+    public void setListaIdentificacionGrupos(List<BodegaIdentificacion> listaIdentificacionGrupos) {
+        this.listaIdentificacionGrupos = listaIdentificacionGrupos;
     }
 
 }

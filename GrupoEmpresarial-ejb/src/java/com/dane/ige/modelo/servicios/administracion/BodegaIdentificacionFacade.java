@@ -130,7 +130,7 @@ public class BodegaIdentificacionFacade extends AbstractFacade<BodegaIdentificac
                     + "WHERE TIPO_ORGANIZACION='GRUPO' "
                     + "GROUP BY ID_ORGANIZACION ORDER BY 1 "
                     + ") "
-                    + ")ORDER BY NOMBRE_REGISTRADO ";
+                    + ")ORDER BY NOMBRE_COMERCIAL ";
 
             Query query = em.createNativeQuery(sql, BodegaIdentificacion.class);
 

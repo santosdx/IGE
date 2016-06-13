@@ -13,30 +13,35 @@
 
                     <p:wizard flowListener="#{MbFormEstablecimiento.onFlowProcess}" backLabel="anterior" nextLabel="siguiente">
 
-                        <p:tab id="identificacion" title="Información de indentificación">
+                        <p:tab id="identificacion" title="Información de Indentificación">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-identificacion.xhtml"/>
                             <hr class="lineaGradian"/>
                         </p:tab>
 
-                        <!--p:tab id="relacion" title="Información de relación">
+                        <!--p:tab id="relacion" title="Información de Relación">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-relacion.xhtml"/>
                             <hr class="lineaGradian"/>
                         </p:tab-->
 
-                        <!--p:tab id="historia" title="Información de historia">
+                        <!--p:tab id="historia" title="Información de Historia">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-historia.xhtml"/>
                             <hr class="lineaGradian"/>
                         </p:tab-->
 
-                        <p:tab id="tamano" title="Información de tamaño">
+                        <p:tab id="tamano" title="Información de Tamaño">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-tamano.xhtml"/>
                             <hr class="lineaGradian"/>
                         </p:tab>
 
-                        <p:tab id="confirm" title="Confirmar datos">
+                        <p:tab id="confirm" title="Confirmar Datos">
+                            <hr class="lineaGradian"/>
                             <ui:include src="componente/cpt-formulario-resumen.xhtml"/>
                             <hr class="lineaGradian"/>
-                            <p:commandButton  id="btnActualizar" value="Actualizar Datos" action="#{MbFormEstablecimiento.actualizarEstablecimiento}" style="float: right; top: 3px;">
+                            <p:commandButton  id="btnActualizar" value="Actualizar Datos" action="#{MbFormEstablecimiento.actualizarEstablecimiento}" styleClass="ui-wizard-nav-update-date">
                                 <p:confirm header="Confirmación" icon="ui-icon-alert" message="Esta a punto de actualizar la información, desea continuar?"/>
                             </p:commandButton>
                         </p:tab>

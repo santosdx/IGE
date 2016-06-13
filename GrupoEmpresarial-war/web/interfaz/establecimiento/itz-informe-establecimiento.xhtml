@@ -49,7 +49,7 @@
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
                                 <h4 class="titulo-left-h3">Actualizar información desde formulario</h4>
-                                <p:outputPanel id="outPnlEstablecimiento" deferred="true">
+                                <p:outputPanel id="outPnlEstablecimiento">
                                     <p:dataTable id="dtEstablecimiento" var="fila" value="#{MbFormEstablecimiento.listaIdentificacion}"
                                                  rowIndexVar="rowIndex"
                                                  emptyMessage="La consulta no genero resultados..." paginatorPosition="bottom" 
@@ -63,6 +63,10 @@
                                         </p:column>
                                         <p:column headerText="Establecimiento">
                                             <p:outputLabel value="#{fila.nombreRegistrado}"/>
+                                        </p:column>
+                                        <p:column headerText="Actualización" width="100">
+                                            <p:outputLabel rendered="#{(fila.origenActualizacion=='Formulario Web'  or fila.origenActualizacion=='Archivo XLS')}" 
+                                                           value="#{fila.id.fecha}"/>
                                         </p:column>
                                         <p:column headerText="" style="width:190px;">
                                             <p:commandLink update="frmInfEstablecimiento:dlgReportePdf" oncomplete="PF('dlg').show();" 
@@ -93,14 +97,14 @@
                                 <p:outputPanel rendered="#{MbLogin.usuarioLogueado.nivelPermiso=='ESCRITURA'}">
 
                                     <h4 class="titulo-left-h3">Actualizar información desde archivo XLS</h4>
-                                    <p>En esta sección el usuario puede descargar un archivo XLS, que contiene la información del grupo empresarial, la cual podra
+                                    <p>En esta sección el usuario puede descargar un archivo XLS, que contiene la información del grupo empresarial, la cual podrá
                                         actualizar de forma local y al terminar subir el archivo para actualizar los datos.</p>
                                     <p:commandButton id="btnGenerarXlsEstablecimiento" value="Generar Excel" ajax="false"  disabled="#{empty MbFormEstablecimiento.listaIdentificacion}" 
                                                      actionListener="#{MbEscribirExcelEstablecimiento.generarArchivoXls()}"
                                                      onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s" update="msnInforUnidadLegal">
                                         <p:fileDownload value="#{MbEscribirExcelEstablecimiento.file}" />
                                     </p:commandButton>
-                                    <p>Subir el archivo con la ifnromación de los establecimientos diligenciados para actualizar los datos.</p>
+                                    <p>Subir el archivo con la información de los establecimientos diligenciados para actualizar los datos.</p>
                                     <ui:include src="../utilidades/cpt-cargar-archivo-xls.xhtml" >
                                         <ui:param name="frmPadre" value="frmInfEstablecimiento" />
                                         <ui:param name="formulario" value="ESTABLECIMIENTO" />
@@ -112,7 +116,7 @@
                     </div>
 
                     <p:dialog id="dlgReportePdf" header="Reporte Establecimiento" widgetVar="dlg" appendTo="@(body)"
-                              resizable="false" modal="true" width="800" height="550">
+                              resizable="false" modal="true" width="880" height="550">
                         <!--p:panelGrid id="pnlReportePdf" columns="1" style="width: 100%; height: 100%">
                             </p:panelGrid-->
                         <p:outputPanel deferred="true">

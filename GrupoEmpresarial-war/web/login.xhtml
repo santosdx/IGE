@@ -58,45 +58,43 @@
                         </div>
                     </div-->
 
-                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                    <p:growl id="growl" sticky="false" showDetail="true" life="3000" />
                     <div class="ui-grid ui-grid-responsive">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">&nbsp;</div>
                             <div class="ui-grid-col-8">
                                 <p:outputLabel value="#{aplicacionPrincipal.sistemaInfo.textoBienvenida}" escape="false"/>
                                 <center>
-                                    <p:commandButton value="Ingresar" id="btnIngresar" onclick="PF('dlg').show()" icon="fa-share"/>
+                                    <p:commandButton value="Ingresar" id="btnIngresar" onclick="PF('dlgLogin').show()"/>
                                 </center>
                             </div>
                             <div class="ui-grid-col-2">&nbsp;</div>
                         </div>
                     </div>
 
-                    <p:dialog header="Datos de acceso" widgetVar="dlg" resizable="false" modal="false">
+                    <p:dialog  widgetVar="dlgLogin" header="Datos de ingreso" width="370" 
+                               resizable="false" modal="false" >
 
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputLabel for="username" value="Usuario:" style="display: block; margin-bottom: 10px; margin-top: 5px; padding-right: 10px;  text-align: right;"/>
-                            <p:inputText id="username" value="#{MbLogin.username}" 
-                                         required="true" label="username" requiredMessage="Usuario requerido"/>
+                        <h:panelGrid columns="2" cellpadding="5" >
+                            <h:outputLabel for="username" value="Nombre de usuario" style="float: right;"/>
+                            <p:inputText id="username" value="#{MbLogin.username}" />
 
-                            <h:outputLabel for="password" value="Contraseña:" style="display: block; margin-bottom: 10px; margin-top: 5px; padding-right: 10px;  text-align: right;"/>
-                            <p:password id="password" value="#{MbLogin.password}" 
-                                        required="true" label="password" requiredMessage="Contraseña requerida" />
-
-                            <f:facet name="footer">
-                                <p:link  outcome="/recuperar-credenciales.xhtml"  value="Recuperar credenciales"
-                                        style="text-decoration: none; outline: none; color: #25AAE1;" />
-                                <p:commandButton id="btnLogin" value="Aceptar" update="growl" style="float: right;"
-                                                 action="#{MbLogin.login}" oncomplete="manejarLogin(xhr, status, args)"/>
-                            </f:facet>  
+                            <h:outputLabel for="password" value="Contraseña" style="float: right;"/>
+                            <p:password id="password" value="#{MbLogin.password}" />
+                            <p:spacer /><p:spacer />
+                            <p:link  outcome="/recuperar-credenciales.xhtml"  value="Recuperar contraseña"
+                                     style="text-decoration: none; outline: none; color: #25AAE1;" />
+                            <p:commandButton id="btnLogin" value="Aceptar" update="growl" style="float: right;"
+                                             action="#{MbLogin.login}" oncomplete="manejarLogin(xhr, status, args)"/>
                         </h:panelGrid>
 
                     </p:dialog>
                 </h:form>
+
                 <script type="text/javascript">
                     function manejarLogin(xhr, status, args) {
                         if (args.loggedIn) {
-                            PF('dlg').hide();
+                            PF('dlgLogin').hide();
                             setTimeout(function() {
                                 window.location = args.view;
                             }, 500);

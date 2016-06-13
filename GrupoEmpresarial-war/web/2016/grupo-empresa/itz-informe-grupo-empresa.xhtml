@@ -6,7 +6,7 @@
       xmlns:pe="http://primefaces.org/ui/extensions">
 
     <h:body>
-        <ui:composition template="/plantilla/plantilla.xhtml">
+        <ui:composition template="/plantilla/plantilla_sin_menu.xhtml">
             <ui:define name="content">
                 <p:dialog modal="true" widgetVar="statusDialog" header="Estado" draggable="false" closable="false" resizable="false" appendTo="@(body)">
                     <p:graphicImage name="imagen/ajax-donwload.gif" />
@@ -38,7 +38,7 @@
                                     <h4 class="titulo-left-h3">Actualizar información desde formulario</h4>
                                     <p>En esta sección el usuario puede actualizar los datos en línea directamente desde un formulario electrónico, el cual
                                         presenta los datos del grupo empresarial prediligenciados.</p>
-                                    <p:commandButton value="Formulario" action="/interfaz/grupo-empresa/itz-formulario-grupo-empresa.xhtml" ajax="false"
+                                    <p:commandButton value="Formulario" action="/2016/grupo-empresa/itz-formulario-grupo-empresa.xhtml" ajax="false"
                                                      disabled="#{MbFormGrupoEmpresa.identificacionSeleccionada == null}" />
                                     <br></br><br></br>
                                     <p:outputPanel rendered="#{MbFormGrupoEmpresa.identificacionSeleccionada.origenActualizacion=='Formulario Web'}">

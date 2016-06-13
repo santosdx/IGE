@@ -4,7 +4,7 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
-    <ui:composition template="/plantilla/plantilla.xhtml">
+    <ui:composition template="#{MbLogin.versionPlantilla == 'V1' ? '/plantilla/plantilla.xhtml': '/plantilla/plantilla_sin_menu.xhtml'}">
         <ui:define name="content">
             
             <ui:param name="ccFormUsuarioId" value="formCptFormUsuario:ccFormUsuarioId" />
@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </ui:define>
     </ui:composition>
 </h:body>

@@ -18,20 +18,24 @@ import org.apache.commons.lang3.text.WordUtils;
 @Table(name = "ige_situacion_control")
 @NamedQueries({
     @NamedQuery(name = "SituacionControl.findAllInOrderByNameAsc", query = "SELECT u FROM SituacionControl u order by u.situacion"),
+    @NamedQuery(name = "SituacionControl.findAllByeUunidadInOrderByNameAsc", query = "SELECT u FROM SituacionControl u WHERE UPPER(u.unidad) = UPPER(:unidad) order by u.situacion"),
     @NamedQuery(name = "SituacionControl.findById", query = "SELECT u FROM SituacionControl u WHERE u.id = :id")})
 
 public class SituacionControl implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final String FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC = "SituacionControl.findAllInOrderByNameAsc";
+    public static final String FINE_BYE_ALL_IN_ORDER_BY_NAME_ASC = "SituacionControl.findAllInOrderByNameAsc";
+    public static final String FINE_BYE_ALL_BYE_UNIDAD_IN_ORDER_BY_NAME_ASC = "SituacionControl.findAllByeUunidadInOrderByNameAsc";
 
     @Id
     @Column(name = "ID_SITUA", unique = true, nullable = false)
     private Integer id;
     @Column(name = "SITUACION_CONTROL")
     private String situacion;
-
+    @Column(name = "UNIDAD")
+    private String unidad;
+ 
     public SituacionControl() {
     }
 
@@ -61,6 +65,15 @@ public class SituacionControl implements Serializable {
         this.situacion = WordUtils.capitalize(situacion.trim());
     }
 
+    public String getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -99,6 +99,9 @@ public class FormularioUnidadLegal implements Serializable {
         getTamanoSeleccionado().getId().setFecha(fechaActualizacion);
         geteJBServicioBodegaTamano().create(tamanoSeleccionado);
 
+        Long id = getServicioLogin().getUsuarioLogueado().getIdIdentificacion();
+        setListaIdentificacion(geteJBServicioBodegaIdentificacion().obtenerListaIdentificacionUnidadLegalByIdGrupoRelacionadoTipoOrganizacion(id));
+
         Mensaje.agregarMensajeGrowlInfo("Exito!", "Información actualizada de la unidad legal.");
 
         return "/interfaz/unidad-legal/itz-informe-unidad-legal.xhtml";

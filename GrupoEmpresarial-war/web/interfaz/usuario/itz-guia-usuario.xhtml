@@ -4,7 +4,7 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>   
-    <ui:composition template="/plantilla/plantilla.xhtml">
+    <ui:composition template="#{MbLogin.versionPlantilla == 'V1' ? '/plantilla/plantilla.xhtml': '/plantilla/plantilla_sin_menu.xhtml'}">
         <ui:define name="content">
 
             <p:outputLabel value="Guía de usuario" styleClass="titulo-right-h2"/>

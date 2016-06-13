@@ -5,8 +5,10 @@ import com.dane.ige.modelo.entidad.Permiso;
 import com.dane.ige.modelo.entidad.Usuario;
 import com.dane.ige.modelo.local.administracion.ModuloFacadeLocal;
 import com.dane.ige.modelo.local.administracion.ModuloPermisoFacadeLocal;
+import com.dane.ige.modelo.local.administracion.SistemaInfoFacadeLocal;
 import com.dane.ige.modelo.local.administracion.UsuarioFacadeLocal;
 import com.dane.ige.utilidad.ArchivoProperties;
+import com.dane.ige.utilidad.Mensaje;
 import com.dane.ige.utilidad.Ventana;
 import java.io.IOException;
 import java.io.Serializable;
@@ -35,7 +37,6 @@ import org.primefaces.model.menu.MenuModel;
  *
  * @author srojasm
  */
-//@ManagedBean(name = "MbLogin")
 @SessionScoped
 public class Login implements Serializable {
 
@@ -51,6 +52,9 @@ public class Login implements Serializable {
     @EJB
     private ModuloPermisoFacadeLocal eJBServicioModuloPermiso;
 
+    @EJB
+    private SistemaInfoFacadeLocal eJBServicioSistemaInfo;
+
     private final String pathSistema = "#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}";
     private Usuario usuarioLogueado;
     private String username;
@@ -58,6 +62,7 @@ public class Login implements Serializable {
     private boolean loggedIn;
     private List<Modulo> listaModulos;
     private MenuModel modeloMenu;
+    private String versionPlantilla;
 
     public Login() {
     }
@@ -74,47 +79,70 @@ public class Login implements Serializable {
     //public void login(ActionEvent event) {
     public void login() {
 
-        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
-        String ctxPath = ((ServletContext) ctx.getContext()).getContextPath();
-        //LOGGER.info("ctxPath:"+ctxPath);
+        if ((getUsername() != null && !getUsername().equals("")) && (getPassword() != null && !getPassword().equals(""))) {
+            ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+            String ctxPath = ((ServletContext) ctx.getContext()).getContextPath();
+            //LOGGER.info("ctxPath:"+ctxPath);
 
-        RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage message = null;
+            RequestContext context = RequestContext.getCurrentInstance();
+            FacesMessage message = null;
 
-        String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
-        ClaseDESBase64 obj = new ClaseDESBase64(key);
-        String contrasenaEncriptada = obj.encriptar(getPassword());
+            String key = ArchivoProperties.obtenerPropertieFilePathProperties("login.password.keyEncrypt");
+            ClaseDESBase64 obj = new ClaseDESBase64(key);
+            String contrasenaEncriptada = obj.encriptar(getPassword());
 
-        setUsuarioLogueado(geteJBServicioUsuario().buscarUsuarioByNicknamePassword(getUsername(), contrasenaEncriptada));
+            setUsuarioLogueado(geteJBServicioUsuario().buscarUsuarioByNicknamePassword(getUsername(), contrasenaEncriptada));
 
-        if (getUsuarioLogueado() != null) {
-            if (getUsuarioLogueado().getEstado().equals("ACTIVO")) {
-                if (getUsuarioLogueado().getPerfil() == null) {
-                    message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un perfil");
-                } else if (getUsuarioLogueado().getIdIdentificacion() == null) {
-                    message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atención", "El usuario no tiene asignado un grupo empresarial");
+            if (getUsuarioLogueado() != null) {
+                if (getUsuarioLogueado().getEstado().equals("ACTIVO")) {
+                    if (getUsuarioLogueado().getPerfil() == null) {
+                        Mensaje.agregarMensajeGrowlWarn("Atención", "El usuario no tiene asignado un perfil");
+                    } else if (getUsuarioLogueado().getIdIdentificacion() == null) {
+                        Mensaje.agregarMensajeGrowlWarn("Atención", "El usuario no tiene asignado un grupo empresarial");
+                    } else {
+                        setLoggedIn(true);
+                        message = construirMenuLogin();
+                        FacesContext.getCurrentInstance().addMessage(null, message);
+                    }
                 } else {
-                    setLoggedIn(true);
-                    message = construirMenuLogin();
+                    setLoggedIn(false);
+                    context.addCallbackParam("loggedIn", isLoggedIn());
+                    Mensaje.agregarMensajeGrowlError("Error de acceso", "El usuario esta " + getUsuarioLogueado().getEstado());
                 }
             } else {
                 setLoggedIn(false);
                 context.addCallbackParam("loggedIn", isLoggedIn());
-                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de acceso", "El usuario esta " + getUsuarioLogueado().getEstado());
+                Mensaje.agregarMensajeGrowlError("Error de acceso", "Error al ingresar el nombre de usuario y contraseña");
             }
-        } else {
-            setLoggedIn(false);
+
             context.addCallbackParam("loggedIn", isLoggedIn());
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de acceso", "Credenciales invalidas");
-        }
 
-        context.addCallbackParam("loggedIn", isLoggedIn());
-        FacesContext.getCurrentInstance().addMessage(null, message);
+            if (isLoggedIn()) {
+                //LOGGER.info("Login-OK");
+                LOGGER.info("El usuario (" + getUsuarioLogueado().getNickname() + ") " + getUsuarioLogueado().getNombres() + " " + getUsuarioLogueado().getApellidos() + ", ingreso al sistema");
 
-        if (isLoggedIn()) {
-            //LOGGER.info("Login-OK");
-            LOGGER.info("El usuario (" + getUsuarioLogueado().getNickname() + ") " + getUsuarioLogueado().getNombres() + " " + getUsuarioLogueado().getApellidos() + ", ingreso al sistema");
-            context.addCallbackParam("view", ctxPath + "/index.xhtml");
+                //Validamos que versión del aplicativo esta activa
+                if (eJBServicioSistemaInfo.obtenerUltimaVersion().getVersion().equals("2")) {
+                    if (getUsuarioLogueado().getPerfil().getId().equals(5) || // Perfil: Grupo Empresarial v.2
+                            getUsuarioLogueado().getPerfil().getId().equals(6) || // Perfil: Unidad Legal v.2
+                            getUsuarioLogueado().getPerfil().getId().equals(7)) { // Perfil: Establecimiento v.2
+                        setVersionPlantilla("V2");
+                        context.addCallbackParam("view", ctxPath + "/inicio.xhtml");
+                    } else {
+                        setVersionPlantilla("V1");
+                        context.addCallbackParam("view", ctxPath + "/index.xhtml");
+                    }
+                } else {
+                    setVersionPlantilla("V1");
+                    context.addCallbackParam("view", ctxPath + "/index.xhtml");
+                }
+            }
+        } else if ((getUsername() == null || getUsername().equals("")) && (getPassword() == null || getPassword().equals(""))) {
+            Mensaje.agregarMensajeGrowlError("Atención", "Debe ingresa el nombre de usuario y la contraseña");
+        } else if (getUsername() == null || getUsername().equals("")) {
+            Mensaje.agregarMensajeGrowlError("Atención", "Debe ingresa el nombre de usuario");
+        } else if (getPassword() == null || getPassword().equals("")) {
+            Mensaje.agregarMensajeGrowlError("Atención", "Debe ingresa la contraseña");
         }
     }
 
@@ -135,11 +163,12 @@ public class Login implements Serializable {
             DefaultMenuItem itemHome = new DefaultMenuItem("Inicio");
             itemHome.setUrl("/index.xhtml");
             itemHome.setIcon("ui-icon-home");
-            //itemHome.setStyle("#{view.viewId == '/index.xhtml' ? 'background:#B6014C !important; color:#FFFFFF;' : ''}");
+            //itemHome.setStyle("#{view.viewId eq '/index.xhtml' ? 'background:#B6014C !important; color:#FFFFFF;' : ''}");
             getModeloMenu().addElement(itemHome);
 
             DefaultMenuItem itemGuia = new DefaultMenuItem("Guía de Usuario");
             itemGuia.setUrl("/interfaz/usuario/itz-guia-usuario.xhtml");
+            //itemGuia.setStyle("#{view.viewId == '/interfaz/usuario/itz-guia-usuario.xhtml' ? 'background:#B6014C !important; color:#FFFFFF;' : ''}");
             itemGuia.setIcon("fa fa-book");
             //itemGuia.setStyle("#{view.viewId == '/interfaz/usuario/itz-guial-usuario.xhtml' ? 'background:#B6014C !important; color:#FFFFFF;' : ''}");
             getModeloMenu().addElement(itemGuia);
@@ -355,6 +384,14 @@ public class Login implements Serializable {
 
     public void setModeloMenu(MenuModel modeloMenu) {
         this.modeloMenu = modeloMenu;
+    }
+
+    public String getVersionPlantilla() {
+        return versionPlantilla;
+    }
+
+    public void setVersionPlantilla(String versionPlantilla) {
+        this.versionPlantilla = versionPlantilla;
     }
 
 }

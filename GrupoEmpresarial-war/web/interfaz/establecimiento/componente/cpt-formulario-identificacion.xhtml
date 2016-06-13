@@ -11,7 +11,7 @@
             Esta sección de código onblur="value = value.toUpperCase().trim()" añadida a los componentes inputText, 
             permite capturar el texto y transformarlo automaticamente en MAYUSCULA sostenida.
             -->
-        <h:panelGrid columns="3" columnClasses="label, value" >
+        <h:panelGrid columns="3" columnClasses="label, value"  cellpadding="0" cellspacing="0">
 
             <p:outputLabel for="txtNombreEstablecimiento" value="Nombre registrado:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtNombreEstablecimiento" label="Nombre registrado" required="true" maxlength="299"
@@ -19,8 +19,8 @@
                           requiredMessage="El nombre registrado es requerido." />
             <p:message for="txtNombreEstablecimiento" />
 
-            <p:outputLabel for="txtMatriculaMercantil" value="Martícula mercantil del establecimiento:" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtMatriculaMercantil" label="Martícula mercantil del establecimiento" required="true" maxlength="19"
+            <p:outputLabel for="txtMatriculaMercantil" value="Martícula mercantil:" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtMatriculaMercantil" label="Martícula mercantil" required="true" maxlength="19"
                          value="#{MbFormEstablecimiento.identificacionSeleccionada.matriculaMercantil}" styleClass="valorEtiquetaFormulario"  
                          requiredMessage="La martícula mercantil del establecimiento es requerida."
                          onblur="value = value.trim()"/>
@@ -37,7 +37,7 @@
             <p:message for="cboTipoEstablecimiento" />
 
             <p:outputLabel for="cboDepartamento" value="Departamento:" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboDepartamento" required="true" 
+            <p:selectOneMenu id="cboDepartamento" required="true"  filter="true" filterMatchMode="contains"
                              value="#{MbFormEstablecimiento.identificacionSeleccionada.departamento}" style="width:430px" 
                              requiredMessage="El departamento es requerido.">
                 <f:selectItem itemLabel="Departamento..." itemValue="" />
@@ -48,7 +48,7 @@
             <p:message for="cboDepartamento" />
 
             <p:outputLabel for="cboMunicipio" value="Municipio:" styleClass="etiquetaFormulario"/>
-            <p:selectOneMenu id="cboMunicipio" required="true" 
+            <p:selectOneMenu id="cboMunicipio" required="true"  filter="true" filterMatchMode="contains"
                              value="#{MbFormEstablecimiento.identificacionSeleccionada.municipio}" style="width:430px" 
                              requiredMessage="El municipio es requerido.">
                 <f:selectItem itemLabel="Municipio..." itemValue="" />
@@ -57,8 +57,8 @@
             </p:selectOneMenu>
             <p:message for="cboMunicipio" />
 
-            <p:outputLabel for="txtDireccion" value="Dirección del establecimiento:" styleClass="etiquetaFormulario"/>
-            <p:inputText id="txtDireccion" label="Dirección del establecimiento" required="true" maxlength="299"
+            <p:outputLabel for="txtDireccion" value="Dirección:" styleClass="etiquetaFormulario"/>
+            <p:inputText id="txtDireccion" label="Dirección" required="true" maxlength="299"
                          value="#{MbFormEstablecimiento.identificacionSeleccionada.direccion}" styleClass="valorEtiquetaFormulario"
                           requiredMessage="La dirección es requerida."/>
             <p:message for="txtDireccion" />
@@ -83,7 +83,7 @@
             </p:selectOneMenu>
             <p:message for="cboEstado" /-->
 
-            <p:outputLabel for="txtCodigoActividadEconomica" value="Código de la actividad económica:" styleClass="etiquetaFormulario"/>
+            <p:outputLabel for="txtCodigoActividadEconomica" value="Actividad principal:" styleClass="etiquetaFormulario"/>
             <p:inputText id="txtCodigoActividadEconomica" required="true" label="Código de la actividad económica"  maxlength="4"
                          value="#{MbFormEstablecimiento.identificacionSeleccionada.actividadPrincipal}" styleClass="valorEtiquetaFormulario" 
                          requiredMessage="El código de la actividad económica es requerido." 

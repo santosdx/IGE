@@ -46,7 +46,31 @@ public class SituacionControlFacade extends AbstractFacade<SituacionControl> imp
     public List<SituacionControl> findAllInOrderByNameAsc() {
         List<SituacionControl> resultado = new ArrayList<SituacionControl>();
         try {
-            Query query = em.createNamedQuery(SituacionControl.FINE_BYE_FIND_ALL_IN_ORDER_BY_NAME_ASC);
+            Query query = em.createNamedQuery(SituacionControl.FINE_BYE_ALL_IN_ORDER_BY_NAME_ASC);
+            List<SituacionControl> listaResultado = Collections.EMPTY_LIST;
+            listaResultado = query.getResultList();
+            if (listaResultado.isEmpty()) {
+                return null;
+            } else {
+                resultado = listaResultado;
+            }
+        } catch (Exception e) {
+            LOGGER.warn(e.getMessage());
+        }
+        return resultado;
+    }
+    
+    /**
+     * Método que permite realizar la consulta a la base de datos y retornar el
+     * listado de las situaciones de control ordenado por el nombre.
+     *
+     * @return List[SituacionControl]
+     */
+    public List<SituacionControl> findAllByUnidadInOrderByNameAsc(String unidad) {
+        List<SituacionControl> resultado = new ArrayList<SituacionControl>();
+        try {
+            Query query = em.createNamedQuery(SituacionControl.FINE_BYE_ALL_BYE_UNIDAD_IN_ORDER_BY_NAME_ASC);
+            query.setParameter("unidad", unidad);
             List<SituacionControl> listaResultado = Collections.EMPTY_LIST;
             listaResultado = query.getResultList();
             if (listaResultado.isEmpty()) {
